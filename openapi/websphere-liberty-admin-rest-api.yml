@@ -1,0 +1,940 @@
+openapi: 3.1.0
+info:
+  title: WebSphere Liberty Admin REST API
+  description: >-
+    RESTful administrative API for WebSphere Liberty servers, providing
+    configuration and runtime management capabilities. The Admin REST Connector
+    enables secure remote access through HTTPS calls or Java clients. Supports
+    server configuration, application management, and feature provisioning.
+  version: 24.0.0
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  contact:
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+externalDocs:
+  description: WebSphere Liberty Admin REST API Documentation
+  url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+servers:
+  - url: https://localhost:9443/ibm/api
+    description: Default Liberty Admin API Server
+security:
+  - basicAuth: []
+tags:
+  - name: Server
+    description: Server runtime management
+  - name: Applications
+    description: Application deployment and lifecycle
+  - name: Configuration
+    description: Server configuration management
+  - name: Features
+    description: Liberty feature management
+  - name: Logging
+    description: Log access and configuration
+  - name: Monitoring
+    description: Server monitoring and metrics
+  - name: File Transfer
+    description: File upload and download operations
+paths:
+  /config:
+    get:
+      operationId: getServerConfig
+      summary: Get server configuration
+      description: Returns the current server configuration in JSON format.
+      tags:
+        - Configuration
+      parameters:
+        - name: depth
+          in: query
+          description: Depth of nested configuration elements to include
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Server configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerConfig'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateServerConfig
+      summary: Update server configuration
+      description: Updates the server configuration. Changes may require a server restart.
+      tags:
+        - Configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerConfig'
+      responses:
+        '200':
+          description: Configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerConfig'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /config/{elementName}:
+    get:
+      operationId: getConfigElement
+      summary: Get a specific configuration element
+      description: Returns the configuration for a specific element type.
+      tags:
+        - Configuration
+      parameters:
+        - name: elementName
+          in: path
+          required: true
+          description: Configuration element name (e.g., httpEndpoint, dataSource, application)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Configuration element details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigElement'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createConfigElement
+      summary: Create a configuration element
+      description: Adds a new configuration element to the server configuration.
+      tags:
+        - Configuration
+      parameters:
+        - name: elementName
+          in: path
+          required: true
+          description: Configuration element name
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigElement'
+      responses:
+        '201':
+          description: Configuration element created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigElement'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /config/{elementName}/{uid}:
+    get:
+      operationId: getConfigElementById
+      summary: Get a specific configuration element instance
+      description: Returns a specific configuration element instance by its unique identifier.
+      tags:
+        - Configuration
+      parameters:
+        - name: elementName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: uid
+          in: path
+          required: true
+          description: Unique identifier of the configuration element
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Configuration element instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigElement'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateConfigElement
+      summary: Update a configuration element instance
+      description: Updates a specific configuration element.
+      tags:
+        - Configuration
+      parameters:
+        - name: elementName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigElement'
+      responses:
+        '200':
+          description: Configuration element updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigElement'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteConfigElement
+      summary: Delete a configuration element instance
+      description: Removes a specific configuration element from the server configuration.
+      tags:
+        - Configuration
+      parameters:
+        - name: elementName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Configuration element deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /server:
+    get:
+      operationId: getServerInfo
+      summary: Get server information
+      description: Returns runtime information about the Liberty server.
+      tags:
+        - Server
+      responses:
+        '200':
+          description: Server information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibertyServer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /server/dump:
+    post:
+      operationId: createServerDump
+      summary: Create a server dump
+      description: Creates a server dump for diagnostic purposes.
+      tags:
+        - Server
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                include:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - heap
+                      - system
+                      - thread
+                  description: Types of diagnostic information to include
+      responses:
+        '200':
+          description: Server dump created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dumpFile:
+                    type: string
+                    description: Path to the created dump file
+                  timestamp:
+                    type: string
+                    format: date-time
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /server/javadump:
+    post:
+      operationId: createJavaDump
+      summary: Create a Java dump
+      description: Creates a Java core dump for thread analysis.
+      tags:
+        - Server
+      responses:
+        '200':
+          description: Java dump created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dumpFile:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications:
+    get:
+      operationId: listApplications
+      summary: List deployed applications
+      description: Returns a list of applications deployed on the Liberty server.
+      tags:
+        - Applications
+      responses:
+        '200':
+          description: List of applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LibertyApplication'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{appName}:
+    get:
+      operationId: getApplication
+      summary: Get application details
+      description: Returns details of a specific deployed application.
+      tags:
+        - Applications
+      parameters:
+        - name: appName
+          in: path
+          required: true
+          description: Application name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibertyApplication'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/start:
+    post:
+      operationId: startApplication
+      summary: Start an application
+      description: Starts a deployed application.
+      tags:
+        - Applications
+      parameters:
+        - name: appName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibertyApplicationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/stop:
+    post:
+      operationId: stopApplication
+      summary: Stop an application
+      description: Stops a running application.
+      tags:
+        - Applications
+      parameters:
+        - name: appName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibertyApplicationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/restart:
+    post:
+      operationId: restartApplication
+      summary: Restart an application
+      description: Restarts a deployed application.
+      tags:
+        - Applications
+      parameters:
+        - name: appName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application restarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibertyApplicationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /features:
+    get:
+      operationId: listFeatures
+      summary: List installed features
+      description: Returns a list of all Liberty features installed on the server.
+      tags:
+        - Features
+      responses:
+        '200':
+          description: List of installed features
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feature'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /features/{featureName}:
+    get:
+      operationId: getFeature
+      summary: Get feature details
+      description: Returns details of a specific Liberty feature.
+      tags:
+        - Features
+      parameters:
+        - name: featureName
+          in: path
+          required: true
+          description: Feature symbolic name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Feature details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /logging:
+    get:
+      operationId: getLogConfig
+      summary: Get logging configuration
+      description: Returns the current logging configuration.
+      tags:
+        - Logging
+      responses:
+        '200':
+          description: Logging configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggingConfig'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateLogConfig
+      summary: Update logging configuration
+      description: Updates the logging configuration dynamically.
+      tags:
+        - Logging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoggingConfig'
+      responses:
+        '200':
+          description: Logging configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggingConfig'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /logging/messages:
+    get:
+      operationId: getLogMessages
+      summary: Get log messages
+      description: Returns recent log messages from the server.
+      tags:
+        - Logging
+      parameters:
+        - name: maxMessages
+          in: query
+          description: Maximum number of messages to return
+          schema:
+            type: integer
+            default: 100
+        - name: level
+          in: query
+          description: Minimum log level
+          schema:
+            type: string
+            enum:
+              - AUDIT
+              - INFO
+              - WARNING
+              - ERROR
+              - FATAL
+      responses:
+        '200':
+          description: Log messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /monitoring/metrics:
+    get:
+      operationId: getMetrics
+      summary: Get server metrics
+      description: Returns MicroProfile Metrics data from the server.
+      tags:
+        - Monitoring
+      parameters:
+        - name: scope
+          in: query
+          description: Metrics scope
+          schema:
+            type: string
+            enum:
+              - base
+              - vendor
+              - application
+      responses:
+        '200':
+          description: Server metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /monitoring/health:
+    get:
+      operationId: getHealth
+      summary: Get health check status
+      description: Returns MicroProfile Health check results.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+        '503':
+          description: Server is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+  /file:
+    get:
+      operationId: downloadFile
+      summary: Download a file
+      description: Downloads a file from the Liberty server.
+      tags:
+        - File Transfer
+      parameters:
+        - name: path
+          in: query
+          required: true
+          description: Path to the file on the server
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: uploadFile
+      summary: Upload a file
+      description: Uploads a file to the Liberty server.
+      tags:
+        - File Transfer
+      parameters:
+        - name: path
+          in: query
+          required: true
+          description: Destination path on the server
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: File uploaded
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteFile
+      summary: Delete a file
+      description: Deletes a file from the Liberty server.
+      tags:
+        - File Transfer
+      parameters:
+        - name: path
+          in: query
+          required: true
+          description: Path to the file on the server
+          schema:
+            type: string
+      responses:
+        '204':
+          description: File deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Liberty administrative credentials
+    ltpaToken:
+      type: apiKey
+      in: cookie
+      name: LtpaToken2
+      description: LTPA token-based authentication
+  schemas:
+    ServerConfig:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Server description
+        featureManager:
+          type: object
+          properties:
+            feature:
+              type: array
+              items:
+                type: string
+              description: List of enabled features
+        httpEndpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              host:
+                type: string
+              httpPort:
+                type: integer
+              httpsPort:
+                type: integer
+        application:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibertyApplication'
+      additionalProperties: true
+    ConfigElement:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier
+        configElementName:
+          type: string
+          description: Configuration element type name
+      additionalProperties: true
+    LibertyServer:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Server name
+        wlpVersion:
+          type: string
+          description: Liberty version
+        productEdition:
+          type: string
+          description: Product edition
+        javaVersion:
+          type: string
+          description: Java version
+        javaVendor:
+          type: string
+          description: Java vendor
+        serverStatus:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - STARTING
+            - STOPPING
+        uptime:
+          type: integer
+          description: Server uptime in milliseconds
+        installDirectory:
+          type: string
+          description: Liberty installation directory
+        serverDirectory:
+          type: string
+          description: Server configuration directory
+    LibertyApplication:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application name
+        location:
+          type: string
+          description: Application file location
+        type:
+          type: string
+          enum:
+            - war
+            - ear
+            - eba
+            - rar
+          description: Application type
+        contextRoot:
+          type: string
+          description: Context root for web application
+        state:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - INSTALLED
+            - STARTING
+            - STOPPING
+        autoStart:
+          type: boolean
+          description: Whether the application starts automatically
+    LibertyApplicationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        state:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - STARTING
+            - STOPPING
+        message:
+          type: string
+    Feature:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Feature symbolic name
+        displayName:
+          type: string
+          description: Human-readable feature name
+        version:
+          type: string
+          description: Feature version
+        description:
+          type: string
+          description: Feature description
+        enabled:
+          type: boolean
+          description: Whether the feature is currently enabled
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: List of dependent feature names
+    LoggingConfig:
+      type: object
+      properties:
+        logDirectory:
+          type: string
+          description: Log output directory
+        consoleLogLevel:
+          type: string
+          enum:
+            - AUDIT
+            - INFO
+            - WARNING
+            - ERROR
+            - OFF
+        messageFileName:
+          type: string
+          description: Name of the messages log file
+        traceFileName:
+          type: string
+          description: Name of the trace log file
+        traceSpecification:
+          type: string
+          description: Trace specification string
+        maxFileSize:
+          type: integer
+          description: Maximum log file size in MB
+        maxFiles:
+          type: integer
+          description: Maximum number of log files
+    LogMessage:
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+        level:
+          type: string
+        message:
+          type: string
+        logger:
+          type: string
+        thread:
+          type: string
+        sequence:
+          type: string
+    Metrics:
+      type: object
+      properties:
+        scope:
+          type: string
+        metrics:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              displayName:
+                type: string
+              description:
+                type: string
+              unit:
+                type: string
+              value:
+                type: number
+              type:
+                type: string
+                enum:
+                  - counter
+                  - gauge
+                  - timer
+                  - histogram
+    HealthCheck:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - UP
+            - DOWN
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                  - UP
+                  - DOWN
+              data:
+                type: object
+                additionalProperties: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

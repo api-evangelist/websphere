@@ -1,0 +1,1182 @@
+openapi: 3.1.0
+info:
+  title: WebSphere Application Server Admin REST API
+  description: >-
+    REST API for administrative operations on IBM WebSphere Application Server
+    including deployment, configuration, monitoring, and server management.
+    Starting with version 9.0.0.1, Swagger documentation can be discovered
+    and exposed for deployed RESTful endpoints.
+  version: 9.0.5
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  contact:
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+externalDocs:
+  description: IBM WebSphere Application Server Documentation
+  url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+servers:
+  - url: https://localhost:9443/ibm/api
+    description: Default WebSphere Admin API Server
+security:
+  - basicAuth: []
+tags:
+  - name: Applications
+    description: Application deployment and lifecycle management
+  - name: Servers
+    description: Server configuration and management
+  - name: Clusters
+    description: Cluster management operations
+  - name: Nodes
+    description: Node management operations
+  - name: Configuration
+    description: Server configuration management
+  - name: Monitoring
+    description: Performance monitoring and health checks
+  - name: Security
+    description: Security configuration and management
+  - name: Resources
+    description: Resource management including data sources and JMS
+paths:
+  /explorer:
+    get:
+      operationId: getApiExplorer
+      summary: Access the API Explorer
+      description: Returns the API Explorer interface for discovering available REST API endpoints.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: API Explorer HTML interface
+          content:
+            text/html:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /config:
+    get:
+      operationId: listConfigResources
+      summary: List configuration resource types
+      description: Returns a list of available configuration resource types that can be managed through the REST API.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: List of configuration resource types
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resourceTypes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ResourceType'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /config/{resourceType}:
+    get:
+      operationId: getConfigResources
+      summary: List resources of a specific type
+      description: Returns a collection of configuration resources of the specified type.
+      tags:
+        - Configuration
+      parameters:
+        - $ref: '#/components/parameters/resourceType'
+        - $ref: '#/components/parameters/depth'
+      responses:
+        '200':
+          description: Collection of configuration resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigResource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createConfigResource
+      summary: Create a new configuration resource
+      description: Creates a new configuration resource of the specified type.
+      tags:
+        - Configuration
+      parameters:
+        - $ref: '#/components/parameters/resourceType'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigResource'
+      responses:
+        '201':
+          description: Configuration resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResource'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /config/{resourceType}/{resourceId}:
+    get:
+      operationId: getConfigResource
+      summary: Get a specific configuration resource
+      description: Returns the configuration details for a specific resource.
+      tags:
+        - Configuration
+      parameters:
+        - $ref: '#/components/parameters/resourceType'
+        - $ref: '#/components/parameters/resourceId'
+        - $ref: '#/components/parameters/depth'
+      responses:
+        '200':
+          description: Configuration resource details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateConfigResource
+      summary: Update a configuration resource
+      description: Updates an existing configuration resource.
+      tags:
+        - Configuration
+      parameters:
+        - $ref: '#/components/parameters/resourceType'
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigResource'
+      responses:
+        '200':
+          description: Configuration resource updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResource'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteConfigResource
+      summary: Delete a configuration resource
+      description: Deletes a specific configuration resource.
+      tags:
+        - Configuration
+      parameters:
+        - $ref: '#/components/parameters/resourceType'
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '204':
+          description: Configuration resource deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications:
+    get:
+      operationId: listApplications
+      summary: List deployed applications
+      description: Returns a list of all applications deployed on the server or cell.
+      tags:
+        - Applications
+      parameters:
+        - name: status
+          in: query
+          description: Filter by application status
+          schema:
+            type: string
+            enum:
+              - started
+              - stopped
+              - unknown
+      responses:
+        '200':
+          description: List of deployed applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: deployApplication
+      summary: Deploy a new application
+      description: Deploys a new application to the server or cluster.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The application archive (EAR, WAR, or JAR)
+                name:
+                  type: string
+                  description: Application name
+                contextRoot:
+                  type: string
+                  description: Context root for web modules
+                targetServer:
+                  type: string
+                  description: Target server or cluster name
+              required:
+                - file
+                - name
+      responses:
+        '201':
+          description: Application deployed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Application already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /applications/{appName}:
+    get:
+      operationId: getApplication
+      summary: Get application details
+      description: Returns details of a specific deployed application.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateApplication
+      summary: Update application configuration
+      description: Updates the configuration of a deployed application.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: Application updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: uninstallApplication
+      summary: Uninstall an application
+      description: Uninstalls and removes a deployed application.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '204':
+          description: Application uninstalled
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/start:
+    post:
+      operationId: startApplication
+      summary: Start an application
+      description: Starts a deployed application.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Application started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Application is already started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /applications/{appName}/stop:
+    post:
+      operationId: stopApplication
+      summary: Stop an application
+      description: Stops a running application.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Application stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /servers:
+    get:
+      operationId: listServers
+      summary: List servers
+      description: Returns a list of all servers in the cell.
+      tags:
+        - Servers
+      responses:
+        '200':
+          description: List of servers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Server'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /servers/{serverName}:
+    get:
+      operationId: getServer
+      summary: Get server details
+      description: Returns details of a specific server.
+      tags:
+        - Servers
+      parameters:
+        - $ref: '#/components/parameters/serverName'
+      responses:
+        '200':
+          description: Server details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /servers/{serverName}/start:
+    post:
+      operationId: startServer
+      summary: Start a server
+      description: Starts the specified application server.
+      tags:
+        - Servers
+      parameters:
+        - $ref: '#/components/parameters/serverName'
+      responses:
+        '200':
+          description: Server started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /servers/{serverName}/stop:
+    post:
+      operationId: stopServer
+      summary: Stop a server
+      description: Stops the specified application server.
+      tags:
+        - Servers
+      parameters:
+        - $ref: '#/components/parameters/serverName'
+      responses:
+        '200':
+          description: Server stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: List clusters
+      description: Returns a list of all clusters in the cell.
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cluster'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /clusters/{clusterName}:
+    get:
+      operationId: getCluster
+      summary: Get cluster details
+      description: Returns details of a specific cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters/{clusterName}/start:
+    post:
+      operationId: startCluster
+      summary: Start a cluster
+      description: Starts all members of the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters/{clusterName}/stop:
+    post:
+      operationId: stopCluster
+      summary: Stop a cluster
+      description: Stops all members of the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /nodes:
+    get:
+      operationId: listNodes
+      summary: List nodes
+      description: Returns a list of all nodes in the cell.
+      tags:
+        - Nodes
+      responses:
+        '200':
+          description: List of nodes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /nodes/{nodeName}:
+    get:
+      operationId: getNode
+      summary: Get node details
+      description: Returns details of a specific node.
+      tags:
+        - Nodes
+      parameters:
+        - $ref: '#/components/parameters/nodeName'
+      responses:
+        '200':
+          description: Node details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /nodes/{nodeName}/sync:
+    post:
+      operationId: syncNode
+      summary: Synchronize a node
+      description: Triggers configuration synchronization for the specified node.
+      tags:
+        - Nodes
+      parameters:
+        - $ref: '#/components/parameters/nodeName'
+      responses:
+        '200':
+          description: Node synchronization initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /monitoring/performance:
+    get:
+      operationId: getPerformanceData
+      summary: Get performance monitoring data
+      description: Returns performance monitoring information for the server.
+      tags:
+        - Monitoring
+      parameters:
+        - name: module
+          in: query
+          description: Performance module name
+          schema:
+            type: string
+            enum:
+              - threadPool
+              - webApplication
+              - jvm
+              - connectionPool
+              - servlet
+              - session
+      responses:
+        '200':
+          description: Performance data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerformanceData'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /monitoring/health:
+    get:
+      operationId: getHealthStatus
+      summary: Get health status
+      description: Returns the health status of the server.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Server health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /security/users:
+    get:
+      operationId: listUsers
+      summary: List security users
+      description: Returns a list of users in the security registry.
+      tags:
+        - Security
+      parameters:
+        - name: pattern
+          in: query
+          description: Search pattern for user names
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of users to return
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /security/roles:
+    get:
+      operationId: listRoles
+      summary: List security roles
+      description: Returns a list of administrative security roles.
+      tags:
+        - Security
+      responses:
+        '200':
+          description: List of security roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SecurityRole'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /resources/datasources:
+    get:
+      operationId: listDataSources
+      summary: List data sources
+      description: Returns a list of configured JDBC data sources.
+      tags:
+        - Resources
+      responses:
+        '200':
+          description: List of data sources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataSource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /resources/datasources/{dsName}:
+    get:
+      operationId: getDataSource
+      summary: Get data source details
+      description: Returns configuration details for a specific data source.
+      tags:
+        - Resources
+      parameters:
+        - name: dsName
+          in: path
+          required: true
+          description: Data source name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Data source details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /resources/datasources/{dsName}/test:
+    post:
+      operationId: testDataSourceConnection
+      summary: Test data source connection
+      description: Tests the connection for a specific data source.
+      tags:
+        - Resources
+      parameters:
+        - name: dsName
+          in: path
+          required: true
+          description: Data source name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Connection test result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using WebSphere administrative credentials
+    ltpaToken:
+      type: apiKey
+      in: cookie
+      name: LtpaToken2
+      description: LTPA token-based authentication
+  parameters:
+    resourceType:
+      name: resourceType
+      in: path
+      required: true
+      description: The type of configuration resource
+      schema:
+        type: string
+    resourceId:
+      name: resourceId
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    appName:
+      name: appName
+      in: path
+      required: true
+      description: Application name
+      schema:
+        type: string
+    serverName:
+      name: serverName
+      in: path
+      required: true
+      description: Server name
+      schema:
+        type: string
+    clusterName:
+      name: clusterName
+      in: path
+      required: true
+      description: Cluster name
+      schema:
+        type: string
+    nodeName:
+      name: nodeName
+      in: path
+      required: true
+      description: Node name
+      schema:
+        type: string
+    depth:
+      name: depth
+      in: query
+      description: Depth of nested resource retrieval
+      schema:
+        type: integer
+        default: 1
+        minimum: 0
+        maximum: 10
+  schemas:
+    Application:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application name
+        status:
+          type: string
+          enum:
+            - started
+            - stopped
+            - unknown
+          description: Current application status
+        contextRoot:
+          type: string
+          description: Context root for web modules
+        targetServer:
+          type: string
+          description: Target server or cluster
+        deployedModules:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+                enum:
+                  - web
+                  - ejb
+                  - connector
+              uri:
+                type: string
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+    ApplicationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+        message:
+          type: string
+    Server:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Server name
+        nodeName:
+          type: string
+          description: Node where the server resides
+        clusterName:
+          type: string
+          description: Cluster membership
+        status:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - STARTING
+            - STOPPING
+            - UNKNOWN
+        serverType:
+          type: string
+          enum:
+            - APPLICATION_SERVER
+            - WEB_SERVER
+            - PROXY_SERVER
+            - GENERIC_SERVER
+        pid:
+          type: integer
+          description: Process ID
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              port:
+                type: integer
+              host:
+                type: string
+    ServerStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - STARTING
+            - STOPPING
+        message:
+          type: string
+    Cluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cluster name
+        status:
+          type: string
+          enum:
+            - running
+            - stopped
+            - partial
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              serverName:
+                type: string
+              nodeName:
+                type: string
+              status:
+                type: string
+              weight:
+                type: integer
+        preferLocal:
+          type: boolean
+          description: Whether to prefer local routing
+    ClusterStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+        membersStarted:
+          type: integer
+        membersTotal:
+          type: integer
+        message:
+          type: string
+    Node:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Node name
+        hostName:
+          type: string
+          description: Hostname of the node
+        platformOS:
+          type: string
+          description: Operating system platform
+        servers:
+          type: array
+          items:
+            type: string
+        synchronized:
+          type: boolean
+          description: Whether the node configuration is synchronized
+    ConfigResource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Resource identifier
+        type:
+          type: string
+          description: Resource type
+        name:
+          type: string
+          description: Resource display name
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Resource attributes
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+                format: uri
+    ResourceType:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        href:
+          type: string
+          format: uri
+    PerformanceData:
+      type: object
+      properties:
+        module:
+          type: string
+          description: Performance module name
+        timestamp:
+          type: string
+          format: date-time
+        metrics:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: number
+              unit:
+                type: string
+              type:
+                type: string
+                enum:
+                  - counter
+                  - gauge
+                  - average
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - UP
+            - DOWN
+            - DEGRADED
+        serverName:
+          type: string
+        uptime:
+          type: integer
+          description: Server uptime in milliseconds
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                  - UP
+                  - DOWN
+              data:
+                type: object
+                additionalProperties: true
+    User:
+      type: object
+      properties:
+        uid:
+          type: string
+        displayName:
+          type: string
+        email:
+          type: string
+          format: email
+        groups:
+          type: array
+          items:
+            type: string
+    SecurityRole:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        users:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+    DataSource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Data source name
+        jndiName:
+          type: string
+          description: JNDI name
+        databaseType:
+          type: string
+          description: Database type
+        jdbcProvider:
+          type: string
+          description: JDBC provider name
+        connectionPool:
+          type: object
+          properties:
+            minConnections:
+              type: integer
+            maxConnections:
+              type: integer
+            connectionTimeout:
+              type: integer
+              description: Timeout in seconds
+            reapTime:
+              type: integer
+              description: Reap time in seconds
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

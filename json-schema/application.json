@@ -1,0 +1,168 @@
+{
+  "$id": "application.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSphere Application",
+  "description": "Represents a deployed application in IBM WebSphere Application Server or Liberty, including its configuration, modules, deployment targets, and runtime status.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the application within the server or cell."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name for the application."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the application purpose and functionality."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["started", "stopped", "starting", "stopping", "installed", "unknown"],
+      "description": "Current runtime status of the application."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["ear", "war", "jar", "eba", "rar"],
+      "description": "Application archive type."
+    },
+    "contextRoot": {
+      "type": "string",
+      "description": "Context root for web modules within the application.",
+      "examples": ["/myapp"]
+    },
+    "location": {
+      "type": "string",
+      "description": "File system location of the application archive or directory."
+    },
+    "autoStart": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the application starts automatically when the server starts."
+    },
+    "targetServer": {
+      "type": "string",
+      "description": "Name of the server where the application is deployed."
+    },
+    "targetCluster": {
+      "type": "string",
+      "description": "Name of the cluster where the application is deployed."
+    },
+    "modules": {
+      "type": "array",
+      "description": "Application modules contained within the deployment.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Module name."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["web", "ejb", "connector", "client", "utility"],
+            "description": "Module type."
+          },
+          "uri": {
+            "type": "string",
+            "description": "URI of the module within the application archive."
+          },
+          "contextRoot": {
+            "type": "string",
+            "description": "Context root for web modules."
+          },
+          "targetServer": {
+            "type": "string",
+            "description": "Target server for this module."
+          }
+        },
+        "required": ["name", "type"]
+      }
+    },
+    "classloaderPolicy": {
+      "type": "string",
+      "enum": ["SINGLE", "MULTIPLE"],
+      "description": "Class loader policy for the application."
+    },
+    "classloaderMode": {
+      "type": "string",
+      "enum": ["PARENT_FIRST", "PARENT_LAST"],
+      "description": "Class loading delegation mode."
+    },
+    "securityRoles": {
+      "type": "array",
+      "description": "Security roles defined in the application.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Security role name."
+          },
+          "description": {
+            "type": "string"
+          },
+          "mappedUsers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Users mapped to this role."
+          },
+          "mappedGroups": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Groups mapped to this role."
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    "sessionManagement": {
+      "type": "object",
+      "description": "Session management configuration.",
+      "properties": {
+        "sessionTimeout": {
+          "type": "integer",
+          "description": "Session timeout in minutes."
+        },
+        "enableCookies": {
+          "type": "boolean",
+          "default": true
+        },
+        "enableURLRewriting": {
+          "type": "boolean",
+          "default": false
+        },
+        "persistenceMode": {
+          "type": "string",
+          "enum": ["NONE", "DATABASE", "MEMORY_TO_MEMORY", "DATA_REPLICATION"],
+          "description": "Session persistence mode."
+        }
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "Application version identifier."
+    },
+    "deployedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the application was deployed."
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the application was last modified."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Additional metadata associated with the application."
+    }
+  },
+  "required": ["name", "type"]
+}

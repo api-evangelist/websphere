@@ -1,0 +1,234 @@
+{
+  "$id": "server.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSphere Server",
+  "description": "Represents an IBM WebSphere Application Server or Liberty server instance, including its configuration, runtime status, resource allocations, and management properties.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the server instance."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name for the server."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the server purpose."
+    },
+    "serverType": {
+      "type": "string",
+      "enum": [
+        "APPLICATION_SERVER",
+        "WEB_SERVER",
+        "PROXY_SERVER",
+        "GENERIC_SERVER",
+        "LIBERTY"
+      ],
+      "description": "Type of server."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["STARTED", "STOPPED", "STARTING", "STOPPING", "UNKNOWN"],
+      "description": "Current runtime status of the server."
+    },
+    "nodeName": {
+      "type": "string",
+      "description": "Name of the node where this server resides."
+    },
+    "cellName": {
+      "type": "string",
+      "description": "Name of the cell this server belongs to."
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Name of the cluster this server is a member of, if any."
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Hostname or IP address of the machine running this server."
+    },
+    "version": {
+      "type": "string",
+      "description": "WebSphere product version.",
+      "examples": ["9.0.5.14", "24.0.0.3"]
+    },
+    "productEdition": {
+      "type": "string",
+      "description": "Product edition (e.g., Base, Network Deployment, Liberty).",
+      "enum": ["BASE", "NETWORK_DEPLOYMENT", "EXPRESS", "LIBERTY_BASE", "LIBERTY_CORE", "LIBERTY_ND", "OPEN_LIBERTY"]
+    },
+    "pid": {
+      "type": "integer",
+      "description": "Operating system process ID of the running server."
+    },
+    "uptime": {
+      "type": "integer",
+      "description": "Server uptime in milliseconds."
+    },
+    "installDirectory": {
+      "type": "string",
+      "description": "Installation directory path."
+    },
+    "serverDirectory": {
+      "type": "string",
+      "description": "Server-specific configuration directory path."
+    },
+    "ports": {
+      "type": "array",
+      "description": "Network ports configured for this server.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Port name (e.g., WC_defaulthost, WC_defaulthost_secure, BOOTSTRAP_ADDRESS)."
+          },
+          "port": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535,
+            "description": "Port number."
+          },
+          "host": {
+            "type": "string",
+            "description": "Host binding for this port."
+          },
+          "protocol": {
+            "type": "string",
+            "enum": ["HTTP", "HTTPS", "IIOP", "IIOPS", "SIB", "SIB_SSL", "BOOTSTRAP", "SOAP", "RMI"],
+            "description": "Protocol used on this port."
+          }
+        },
+        "required": ["name", "port"]
+      }
+    },
+    "jvmConfig": {
+      "type": "object",
+      "description": "JVM configuration for this server.",
+      "properties": {
+        "javaVersion": {
+          "type": "string",
+          "description": "Java runtime version."
+        },
+        "javaVendor": {
+          "type": "string",
+          "description": "Java vendor (e.g., IBM, Eclipse Adoptium)."
+        },
+        "javaHome": {
+          "type": "string",
+          "description": "Java home directory."
+        },
+        "initialHeapSize": {
+          "type": "integer",
+          "description": "Initial JVM heap size in MB."
+        },
+        "maximumHeapSize": {
+          "type": "integer",
+          "description": "Maximum JVM heap size in MB."
+        },
+        "genericJvmArguments": {
+          "type": "string",
+          "description": "Additional JVM arguments."
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "description": "Enabled Liberty features (Liberty servers only).",
+      "items": {
+        "type": "string"
+      },
+      "examples": [["webProfile-10.0", "restConnector-2.0", "mpHealth-4.0"]]
+    },
+    "webContainer": {
+      "type": "object",
+      "description": "Web container configuration.",
+      "properties": {
+        "threadPool": {
+          "type": "object",
+          "properties": {
+            "minimumSize": {
+              "type": "integer"
+            },
+            "maximumSize": {
+              "type": "integer"
+            }
+          }
+        },
+        "sessionTimeout": {
+          "type": "integer",
+          "description": "Default session timeout in minutes."
+        }
+      }
+    },
+    "logging": {
+      "type": "object",
+      "description": "Logging configuration.",
+      "properties": {
+        "logDirectory": {
+          "type": "string",
+          "description": "Log output directory."
+        },
+        "consoleLogLevel": {
+          "type": "string",
+          "enum": ["AUDIT", "INFO", "WARNING", "ERROR", "OFF"]
+        },
+        "traceSpecification": {
+          "type": "string",
+          "description": "Trace specification string."
+        },
+        "maxFileSize": {
+          "type": "integer",
+          "description": "Maximum log file size in MB."
+        },
+        "maxFiles": {
+          "type": "integer",
+          "description": "Maximum number of log files to retain."
+        }
+      }
+    },
+    "applications": {
+      "type": "array",
+      "description": "Applications deployed on this server.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataSources": {
+      "type": "array",
+      "description": "Data sources configured on this server.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "jndiName": {
+            "type": "string"
+          },
+          "databaseType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the server was created."
+    },
+    "lastStarted": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the server was last started."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Additional metadata associated with the server."
+    }
+  },
+  "required": ["name", "serverType"]
+}

@@ -1,0 +1,714 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs
+  description: >-
+    Open Liberty provides application programming interfaces that extend and
+    complement Jakarta EE and MicroProfile APIs. Includes APIs for security,
+    admin connectors, batch processing, messaging, health checking, metrics,
+    OpenAPI documentation, and more. Open Liberty is the open-source foundation
+    for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+servers:
+  - url: https://localhost:9443
+    description: Default Open Liberty Server
+security:
+  - basicAuth: []
+tags:
+  - name: Health
+    description: MicroProfile Health Check API
+  - name: Metrics
+    description: MicroProfile Metrics API
+  - name: OpenAPI
+    description: MicroProfile OpenAPI documentation endpoints
+  - name: Config
+    description: Server configuration API
+  - name: Batch
+    description: Jakarta Batch job management
+  - name: JWT
+    description: MicroProfile JWT authentication
+  - name: Fault Tolerance
+    description: MicroProfile Fault Tolerance status
+  - name: REST Client
+    description: MicroProfile REST Client metadata
+paths:
+  /health:
+    get:
+      operationId: getOverallHealth
+      summary: Get overall health status
+      description: Returns the overall health check status including all readiness and liveness checks.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: All health checks passed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '503':
+          description: One or more health checks failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /health/ready:
+    get:
+      operationId: getReadiness
+      summary: Get readiness status
+      description: Returns readiness check results indicating whether the server is ready to accept traffic.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Server is ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '503':
+          description: Server is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /health/live:
+    get:
+      operationId: getLiveness
+      summary: Get liveness status
+      description: Returns liveness check results indicating whether the server is alive and running.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Server is alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '503':
+          description: Server is not alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /health/started:
+    get:
+      operationId: getStarted
+      summary: Get startup status
+      description: Returns startup check results indicating whether the server has completed startup.
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Server has started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '503':
+          description: Server has not started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /metrics:
+    get:
+      operationId: getAllMetrics
+      summary: Get all metrics
+      description: Returns all available metrics in Prometheus or JSON format.
+      tags:
+        - Metrics
+      parameters:
+        - name: Accept
+          in: header
+          description: Response format
+          schema:
+            type: string
+            enum:
+              - application/json
+              - text/plain
+            default: text/plain
+        - name: scope
+          in: query
+          description: Metrics scope filter
+          schema:
+            type: string
+            enum:
+              - base
+              - vendor
+              - application
+      responses:
+        '200':
+          description: Metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Prometheus format metrics
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /metrics/base:
+    get:
+      operationId: getBaseMetrics
+      summary: Get base metrics
+      description: Returns base metrics defined by the MicroProfile Metrics specification.
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: Base metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /metrics/vendor:
+    get:
+      operationId: getVendorMetrics
+      summary: Get vendor metrics
+      description: Returns Liberty-specific vendor metrics.
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: Vendor metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /metrics/application:
+    get:
+      operationId: getApplicationMetrics
+      summary: Get application metrics
+      description: Returns application-defined custom metrics.
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: Application metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /openapi:
+    get:
+      operationId: getOpenApiDocument
+      summary: Get OpenAPI document
+      description: Returns the OpenAPI document describing all deployed REST endpoints.
+      tags:
+        - OpenAPI
+      security: []
+      parameters:
+        - name: format
+          in: query
+          description: Output format
+          schema:
+            type: string
+            enum:
+              - json
+              - yaml
+            default: yaml
+      responses:
+        '200':
+          description: OpenAPI document
+          content:
+            application/yaml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: object
+  /openapi/ui:
+    get:
+      operationId: getOpenApiUi
+      summary: Access the OpenAPI UI
+      description: Returns the Swagger UI for exploring and testing deployed REST endpoints.
+      tags:
+        - OpenAPI
+      security: []
+      responses:
+        '200':
+          description: OpenAPI UI HTML page
+          content:
+            text/html:
+              schema:
+                type: string
+  /ibm/api/config:
+    get:
+      operationId: getServerConfig
+      summary: Get server configuration
+      description: Returns the current Open Liberty server configuration.
+      tags:
+        - Config
+      responses:
+        '200':
+          description: Server configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerConfig'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ibm/api/config/{elementName}:
+    get:
+      operationId: getConfigElement
+      summary: Get configuration element
+      description: Returns a specific configuration element type.
+      tags:
+        - Config
+      parameters:
+        - name: elementName
+          in: path
+          required: true
+          description: Configuration element name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Configuration element details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ibm/api/batch/jobinstances:
+    get:
+      operationId: listBatchJobInstances
+      summary: List batch job instances
+      description: Returns a list of Jakarta Batch job instances.
+      tags:
+        - Batch
+      parameters:
+        - name: jobName
+          in: query
+          description: Filter by job name
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            default: 0
+        - name: pageSize
+          in: query
+          description: Number of items per page
+          schema:
+            type: integer
+            default: 50
+        - name: sortBy
+          in: query
+          description: Sort field
+          schema:
+            type: string
+            enum:
+              - jobInstanceId
+              - createTime
+              - instanceState
+      responses:
+        '200':
+          description: List of job instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchJobInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ibm/api/batch/jobinstances/{jobInstanceId}:
+    get:
+      operationId: getBatchJobInstance
+      summary: Get batch job instance
+      description: Returns details of a specific batch job instance.
+      tags:
+        - Batch
+      parameters:
+        - name: jobInstanceId
+          in: path
+          required: true
+          description: Job instance identifier
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Job instance details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ibm/api/batch/jobinstances/{jobInstanceId}/jobexecutions:
+    get:
+      operationId: listBatchJobExecutions
+      summary: List job executions for an instance
+      description: Returns a list of executions for a specific batch job instance.
+      tags:
+        - Batch
+      parameters:
+        - name: jobInstanceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of job executions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchJobExecution'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ibm/api/batch/jobexecutions/{executionId}:
+    get:
+      operationId: getBatchJobExecution
+      summary: Get batch job execution
+      description: Returns details of a specific batch job execution.
+      tags:
+        - Batch
+      parameters:
+        - name: executionId
+          in: path
+          required: true
+          description: Job execution identifier
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Job execution details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobExecution'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ibm/api/batch/jobexecutions/{executionId}/stop:
+    put:
+      operationId: stopBatchJobExecution
+      summary: Stop a batch job execution
+      description: Stops a running batch job execution.
+      tags:
+        - Batch
+      parameters:
+        - name: executionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Job execution stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobExecution'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ibm/api/batch/jobexecutions/{executionId}/restart:
+    put:
+      operationId: restartBatchJobExecution
+      summary: Restart a batch job execution
+      description: Restarts a failed or stopped batch job execution.
+      tags:
+        - Batch
+      parameters:
+        - name: executionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jobParameters:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Job parameters for the restart
+      responses:
+        '200':
+          description: Job execution restarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobExecution'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+  schemas:
+    HealthCheckResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - UP
+            - DOWN
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Health check name
+              status:
+                type: string
+                enum:
+                  - UP
+                  - DOWN
+              data:
+                type: object
+                additionalProperties: true
+                description: Additional health check data
+    MetricsResponse:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          displayName:
+            type: string
+          description:
+            type: string
+          unit:
+            type: string
+          type:
+            type: string
+            enum:
+              - counter
+              - gauge
+              - timer
+              - histogram
+              - simple_timer
+              - concurrent_gauge
+          value:
+            type: number
+          tags:
+            type: object
+            additionalProperties:
+              type: string
+    ServerConfig:
+      type: object
+      properties:
+        description:
+          type: string
+        featureManager:
+          type: object
+          properties:
+            feature:
+              type: array
+              items:
+                type: string
+        httpEndpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              host:
+                type: string
+              httpPort:
+                type: integer
+              httpsPort:
+                type: integer
+      additionalProperties: true
+    BatchJobInstance:
+      type: object
+      properties:
+        jobInstanceId:
+          type: integer
+        jobName:
+          type: string
+        appName:
+          type: string
+        submitter:
+          type: string
+        batchStatus:
+          type: string
+          enum:
+            - STARTING
+            - STARTED
+            - STOPPING
+            - STOPPED
+            - FAILED
+            - COMPLETED
+            - ABANDONED
+        createTime:
+          type: string
+          format: date-time
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        jobParameters:
+          type: object
+          additionalProperties:
+            type: string
+        _links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+                format: uri
+    BatchJobExecution:
+      type: object
+      properties:
+        executionId:
+          type: integer
+        jobInstanceId:
+          type: integer
+        jobName:
+          type: string
+        batchStatus:
+          type: string
+          enum:
+            - STARTING
+            - STARTED
+            - STOPPING
+            - STOPPED
+            - FAILED
+            - COMPLETED
+            - ABANDONED
+        exitStatus:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        jobParameters:
+          type: object
+          additionalProperties:
+            type: string
+        stepExecutions:
+          type: array
+          items:
+            type: object
+            properties:
+              stepExecutionId:
+                type: integer
+              stepName:
+                type: string
+              batchStatus:
+                type: string
+              exitStatus:
+                type: string
+              startTime:
+                type: string
+                format: date-time
+              endTime:
+                type: string
+                format: date-time
+              readCount:
+                type: integer
+              writeCount:
+                type: integer
+              commitCount:
+                type: integer
+              rollbackCount:
+                type: integer
+              filterCount:
+                type: integer
+              processSkipCount:
+                type: integer
+              readSkipCount:
+                type: integer
+              writeSkipCount:
+                type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

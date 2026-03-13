@@ -1,0 +1,852 @@
+openapi: 3.1.0
+info:
+  title: WebSphere Automation REST API
+  description: >-
+    API for WebSphere Automation capabilities including vulnerability management,
+    automated patching, health monitoring, and compliance tracking. Accessible
+    through the Swagger UI on OpenShift Container Platform deployments.
+    Provides centralized management of WebSphere Application Server and Liberty
+    environments with automated security vulnerability remediation.
+  version: 1.0.0
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  contact:
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+externalDocs:
+  description: WebSphere Automation Documentation
+  url: https://www.ibm.com/docs/en/ws-automation
+servers:
+  - url: https://automation-api.example.com/v1
+    description: WebSphere Automation API Server
+security:
+  - bearerAuth: []
+tags:
+  - name: Servers
+    description: Managed server inventory and registration
+  - name: Vulnerabilities
+    description: Security vulnerability tracking and remediation
+  - name: Fixes
+    description: Fix management and automated patching
+  - name: Health
+    description: Health monitoring and status
+  - name: Compliance
+    description: Compliance and configuration drift detection
+  - name: Notifications
+    description: Alert and notification management
+paths:
+  /servers:
+    get:
+      operationId: listManagedServers
+      summary: List managed servers
+      description: Returns a list of all servers registered with WebSphere Automation.
+      tags:
+        - Servers
+      parameters:
+        - name: type
+          in: query
+          description: Filter by server type
+          schema:
+            type: string
+            enum:
+              - was-traditional
+              - liberty
+        - name: status
+          in: query
+          description: Filter by server status
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+              - unknown
+      responses:
+        '200':
+          description: List of managed servers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  servers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ManagedServer'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: registerServer
+      summary: Register a server
+      description: Registers a new server with WebSphere Automation for monitoring and management.
+      tags:
+        - Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - type
+                - connectionInfo
+              properties:
+                name:
+                  type: string
+                  description: Server name
+                type:
+                  type: string
+                  enum:
+                    - was-traditional
+                    - liberty
+                connectionInfo:
+                  type: object
+                  required:
+                    - host
+                    - port
+                  properties:
+                    host:
+                      type: string
+                    port:
+                      type: integer
+                    protocol:
+                      type: string
+                      enum:
+                        - https
+                        - http
+                      default: https
+                credentials:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+                      format: password
+      responses:
+        '201':
+          description: Server registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /servers/{serverId}:
+    get:
+      operationId: getManagedServer
+      summary: Get managed server details
+      description: Returns details of a specific managed server.
+      tags:
+        - Servers
+      parameters:
+        - $ref: '#/components/parameters/serverId'
+      responses:
+        '200':
+          description: Server details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedServer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deregisterServer
+      summary: Deregister a server
+      description: Removes a server from WebSphere Automation management.
+      tags:
+        - Servers
+      parameters:
+        - $ref: '#/components/parameters/serverId'
+      responses:
+        '204':
+          description: Server deregistered
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /vulnerabilities:
+    get:
+      operationId: listVulnerabilities
+      summary: List vulnerabilities
+      description: Returns a list of known security vulnerabilities affecting managed servers.
+      tags:
+        - Vulnerabilities
+      parameters:
+        - name: severity
+          in: query
+          description: Filter by severity
+          schema:
+            type: string
+            enum:
+              - critical
+              - high
+              - medium
+              - low
+        - name: status
+          in: query
+          description: Filter by remediation status
+          schema:
+            type: string
+            enum:
+              - open
+              - resolved
+              - in-progress
+              - accepted-risk
+        - name: serverId
+          in: query
+          description: Filter by affected server
+          schema:
+            type: string
+        - name: cveId
+          in: query
+          description: Filter by CVE identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of vulnerabilities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vulnerabilities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Vulnerability'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /vulnerabilities/{vulnerabilityId}:
+    get:
+      operationId: getVulnerability
+      summary: Get vulnerability details
+      description: Returns details of a specific vulnerability.
+      tags:
+        - Vulnerabilities
+      parameters:
+        - name: vulnerabilityId
+          in: path
+          required: true
+          description: Vulnerability identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vulnerability details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vulnerability'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /vulnerabilities/{vulnerabilityId}/resolve:
+    post:
+      operationId: resolveVulnerability
+      summary: Resolve a vulnerability
+      description: Initiates the resolution of a vulnerability by applying fixes.
+      tags:
+        - Vulnerabilities
+      parameters:
+        - name: vulnerabilityId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - apply-fix
+                    - accept-risk
+                  description: Resolution action
+                fixId:
+                  type: string
+                  description: Specific fix to apply
+                serverIds:
+                  type: array
+                  items:
+                    type: string
+                  description: Target servers for the fix
+      responses:
+        '202':
+          description: Resolution initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                  status:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /fixes:
+    get:
+      operationId: listFixes
+      summary: List available fixes
+      description: Returns a list of available fixes and patches.
+      tags:
+        - Fixes
+      parameters:
+        - name: serverId
+          in: query
+          description: Filter by applicable server
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Filter by fix type
+          schema:
+            type: string
+            enum:
+              - security
+              - ifix
+              - fixpack
+      responses:
+        '200':
+          description: List of fixes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fixes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Fix'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /fixes/{fixId}:
+    get:
+      operationId: getFix
+      summary: Get fix details
+      description: Returns details of a specific fix.
+      tags:
+        - Fixes
+      parameters:
+        - name: fixId
+          in: path
+          required: true
+          description: Fix identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Fix details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fix'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /fixes/{fixId}/apply:
+    post:
+      operationId: applyFix
+      summary: Apply a fix
+      description: Applies a fix to one or more managed servers.
+      tags:
+        - Fixes
+      parameters:
+        - name: fixId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - serverIds
+              properties:
+                serverIds:
+                  type: array
+                  items:
+                    type: string
+                  description: Target servers
+                schedule:
+                  type: string
+                  format: date-time
+                  description: Scheduled time for applying the fix
+                restartAfterApply:
+                  type: boolean
+                  default: true
+                  description: Whether to restart servers after applying the fix
+      responses:
+        '202':
+          description: Fix application initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                  status:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /health:
+    get:
+      operationId: getOverallHealth
+      summary: Get overall health status
+      description: Returns the overall health status of all managed servers.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Overall health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverallHealth'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /health/servers/{serverId}:
+    get:
+      operationId: getServerHealth
+      summary: Get server health status
+      description: Returns health information for a specific managed server.
+      tags:
+        - Health
+      parameters:
+        - $ref: '#/components/parameters/serverId'
+      responses:
+        '200':
+          description: Server health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerHealth'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /compliance/reports:
+    get:
+      operationId: listComplianceReports
+      summary: List compliance reports
+      description: Returns a list of compliance reports.
+      tags:
+        - Compliance
+      responses:
+        '200':
+          description: List of compliance reports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComplianceReport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /compliance/reports/{reportId}:
+    get:
+      operationId: getComplianceReport
+      summary: Get compliance report details
+      description: Returns a specific compliance report.
+      tags:
+        - Compliance
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Compliance report details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplianceReport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /notifications:
+    get:
+      operationId: listNotifications
+      summary: List notifications
+      description: Returns a list of notifications and alerts.
+      tags:
+        - Notifications
+      parameters:
+        - name: type
+          in: query
+          description: Filter by notification type
+          schema:
+            type: string
+            enum:
+              - vulnerability
+              - health
+              - compliance
+              - fix
+        - name: read
+          in: query
+          description: Filter by read status
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /notifications/{notificationId}/read:
+    post:
+      operationId: markNotificationRead
+      summary: Mark notification as read
+      description: Marks a notification as read.
+      tags:
+        - Notifications
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Notification marked as read
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token authentication
+  parameters:
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
+  schemas:
+    ManagedServer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique server identifier
+        name:
+          type: string
+          description: Server name
+        type:
+          type: string
+          enum:
+            - was-traditional
+            - liberty
+        version:
+          type: string
+          description: WebSphere version
+        host:
+          type: string
+          description: Server hostname
+        port:
+          type: integer
+          description: Server port
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+            - unknown
+        vulnerabilityCount:
+          type: integer
+          description: Number of open vulnerabilities
+        lastScanDate:
+          type: string
+          format: date-time
+        registeredDate:
+          type: string
+          format: date-time
+        installedFixes:
+          type: array
+          items:
+            type: string
+          description: List of installed fix IDs
+    Vulnerability:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Vulnerability identifier
+        cveIds:
+          type: array
+          items:
+            type: string
+          description: Associated CVE identifiers
+        severity:
+          type: string
+          enum:
+            - critical
+            - high
+            - medium
+            - low
+        cvssScore:
+          type: number
+          description: CVSS base score
+        description:
+          type: string
+        affectedServers:
+          type: array
+          items:
+            type: string
+          description: List of affected server IDs
+        status:
+          type: string
+          enum:
+            - open
+            - resolved
+            - in-progress
+            - accepted-risk
+        availableFixes:
+          type: array
+          items:
+            type: string
+          description: List of available fix IDs
+        publishedDate:
+          type: string
+          format: date-time
+        discoveredDate:
+          type: string
+          format: date-time
+    Fix:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Fix identifier
+        name:
+          type: string
+          description: Fix name
+        type:
+          type: string
+          enum:
+            - security
+            - ifix
+            - fixpack
+        description:
+          type: string
+        resolvedCVEs:
+          type: array
+          items:
+            type: string
+          description: CVEs resolved by this fix
+        applicableVersions:
+          type: array
+          items:
+            type: string
+          description: WebSphere versions this fix applies to
+        downloadURL:
+          type: string
+          format: uri
+        releaseDate:
+          type: string
+          format: date-time
+        size:
+          type: integer
+          description: Fix size in bytes
+    OverallHealth:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - healthy
+            - warning
+            - critical
+        totalServers:
+          type: integer
+        activeServers:
+          type: integer
+        inactiveServers:
+          type: integer
+        openVulnerabilities:
+          type: integer
+        criticalVulnerabilities:
+          type: integer
+        pendingFixes:
+          type: integer
+    ServerHealth:
+      type: object
+      properties:
+        serverId:
+          type: string
+        serverName:
+          type: string
+        status:
+          type: string
+          enum:
+            - healthy
+            - warning
+            - critical
+        uptime:
+          type: integer
+          description: Uptime in seconds
+        cpuUsage:
+          type: number
+          description: CPU usage percentage
+        memoryUsage:
+          type: number
+          description: Memory usage percentage
+        openVulnerabilities:
+          type: integer
+        lastHealthCheck:
+          type: string
+          format: date-time
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                  - pass
+                  - warn
+                  - fail
+              message:
+                type: string
+    ComplianceReport:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        generatedDate:
+          type: string
+          format: date-time
+        overallCompliance:
+          type: number
+          description: Overall compliance percentage
+        servers:
+          type: array
+          items:
+            type: object
+            properties:
+              serverId:
+                type: string
+              serverName:
+                type: string
+              complianceScore:
+                type: number
+              findings:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    rule:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                        - compliant
+                        - non-compliant
+                    description:
+                      type: string
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - vulnerability
+            - health
+            - compliance
+            - fix
+        severity:
+          type: string
+          enum:
+            - info
+            - warning
+            - critical
+        title:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        relatedResourceId:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

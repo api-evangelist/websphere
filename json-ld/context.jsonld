@@ -1,0 +1,220 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "websphere": "https://www.ibm.com/docs/en/was/schema/",
+    "mq": "https://www.ibm.com/docs/en/ibm-mq/schema/",
+    "liberty": "https://openliberty.io/schema/",
+    "jee": "https://jakarta.ee/schema/",
+
+    "Application": {
+      "@id": "websphere:Application",
+      "@context": {
+        "name": "schema:name",
+        "displayName": "schema:alternateName",
+        "description": "schema:description",
+        "status": "websphere:applicationStatus",
+        "type": "websphere:applicationType",
+        "contextRoot": "websphere:contextRoot",
+        "location": "websphere:fileLocation",
+        "autoStart": "websphere:autoStart",
+        "targetServer": {
+          "@id": "websphere:targetServer",
+          "@type": "@id"
+        },
+        "targetCluster": {
+          "@id": "websphere:targetCluster",
+          "@type": "@id"
+        },
+        "modules": "websphere:hasModule",
+        "classloaderPolicy": "websphere:classloaderPolicy",
+        "classloaderMode": "websphere:classloaderMode",
+        "securityRoles": "websphere:hasSecurityRole",
+        "version": "schema:version",
+        "deployedDate": {
+          "@id": "websphere:deployedDate",
+          "@type": "schema:DateTime"
+        },
+        "lastModified": {
+          "@id": "schema:dateModified",
+          "@type": "schema:DateTime"
+        }
+      }
+    },
+
+    "Server": {
+      "@id": "websphere:Server",
+      "@context": {
+        "name": "schema:name",
+        "displayName": "schema:alternateName",
+        "description": "schema:description",
+        "serverType": "websphere:serverType",
+        "status": "websphere:serverStatus",
+        "nodeName": "websphere:nodeName",
+        "cellName": "websphere:cellName",
+        "clusterName": {
+          "@id": "websphere:memberOfCluster",
+          "@type": "@id"
+        },
+        "hostName": "schema:url",
+        "version": "schema:version",
+        "productEdition": "websphere:productEdition",
+        "pid": "websphere:processId",
+        "uptime": "websphere:uptime",
+        "installDirectory": "websphere:installDirectory",
+        "serverDirectory": "websphere:serverDirectory",
+        "ports": "websphere:hasPort",
+        "jvmConfig": "websphere:jvmConfiguration",
+        "features": "liberty:enabledFeature",
+        "applications": "websphere:hasDeployedApplication",
+        "dataSources": "websphere:hasDataSource",
+        "lastStarted": {
+          "@id": "websphere:lastStartedDate",
+          "@type": "schema:DateTime"
+        }
+      }
+    },
+
+    "Cluster": {
+      "@id": "websphere:Cluster",
+      "@context": {
+        "name": "schema:name",
+        "displayName": "schema:alternateName",
+        "description": "schema:description",
+        "status": "websphere:clusterStatus",
+        "clusterType": "websphere:clusterType",
+        "cellName": "websphere:cellName",
+        "members": "websphere:hasClusterMember",
+        "memberCount": "websphere:memberCount",
+        "membersStarted": "websphere:membersStartedCount",
+        "preferLocal": "websphere:preferLocalRouting",
+        "loadBalancingPolicy": "websphere:loadBalancingPolicy",
+        "scalingPolicy": "websphere:scalingPolicy",
+        "applications": "websphere:hasDeployedApplication",
+        "createdDate": {
+          "@id": "schema:dateCreated",
+          "@type": "schema:DateTime"
+        },
+        "lastModified": {
+          "@id": "schema:dateModified",
+          "@type": "schema:DateTime"
+        }
+      }
+    },
+
+    "MessageQueue": {
+      "@id": "mq:MessageQueue",
+      "@context": {
+        "name": "schema:name",
+        "displayName": "schema:alternateName",
+        "description": "schema:description",
+        "type": "mq:queueType",
+        "queueManager": {
+          "@id": "mq:managedByQueueManager",
+          "@type": "@id"
+        },
+        "maxDepth": "mq:maximumDepth",
+        "maxMessageLength": "mq:maximumMessageLength",
+        "currentDepth": "mq:currentDepth",
+        "persistence": "mq:persistenceConfig",
+        "inhibitPut": "mq:putInhibited",
+        "inhibitGet": "mq:getInhibited",
+        "triggerControl": "mq:triggerConfiguration",
+        "cluster": "mq:clusterConfig",
+        "deadLetterQueue": {
+          "@id": "mq:deadLetterQueue",
+          "@type": "@id"
+        },
+        "backoutThreshold": "mq:backoutThreshold",
+        "backoutQueue": {
+          "@id": "mq:backoutRequeueQueue",
+          "@type": "@id"
+        },
+        "shareability": "mq:shareability",
+        "status": "mq:runtimeStatus",
+        "createdDate": {
+          "@id": "schema:dateCreated",
+          "@type": "schema:DateTime"
+        },
+        "lastModified": {
+          "@id": "schema:dateModified",
+          "@type": "schema:DateTime"
+        }
+      }
+    },
+
+    "QueueManager": {
+      "@id": "mq:QueueManager",
+      "@context": {
+        "name": "schema:name",
+        "state": "mq:queueManagerState",
+        "version": "schema:version",
+        "platform": "mq:platform",
+        "commandLevel": "mq:commandLevel",
+        "connectionCount": "mq:activeConnections",
+        "description": "schema:description",
+        "maximumMessageLength": "mq:maximumMessageLength"
+      }
+    },
+
+    "LibertyServer": {
+      "@id": "liberty:Server",
+      "@context": {
+        "name": "schema:name",
+        "wlpVersion": "schema:version",
+        "productEdition": "liberty:productEdition",
+        "serverStatus": "liberty:serverStatus",
+        "features": "liberty:enabledFeature",
+        "uptime": "liberty:uptime",
+        "installDirectory": "liberty:installDirectory",
+        "serverDirectory": "liberty:serverDirectory"
+      }
+    },
+
+    "CollectiveMember": {
+      "@id": "liberty:CollectiveMember",
+      "@context": {
+        "name": "schema:name",
+        "hostName": "schema:url",
+        "status": "liberty:memberStatus",
+        "clusterName": {
+          "@id": "liberty:memberOfCluster",
+          "@type": "@id"
+        },
+        "wlpVersion": "schema:version"
+      }
+    },
+
+    "Vulnerability": {
+      "@id": "websphere:Vulnerability",
+      "@context": {
+        "cveIds": "websphere:cveIdentifier",
+        "severity": "websphere:vulnerabilitySeverity",
+        "cvssScore": "websphere:cvssBaseScore",
+        "description": "schema:description",
+        "affectedServers": "websphere:affectsServer",
+        "status": "websphere:remediationStatus",
+        "availableFixes": "websphere:hasAvailableFix",
+        "publishedDate": {
+          "@id": "schema:datePublished",
+          "@type": "schema:DateTime"
+        }
+      }
+    },
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "version": "schema:version",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "dateCreated": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:DateTime"
+    },
+    "dateModified": {
+      "@id": "schema:dateModified",
+      "@type": "schema:DateTime"
+    }
+  }
+}

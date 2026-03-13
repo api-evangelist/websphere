@@ -1,0 +1,543 @@
+openapi: 3.1.0
+info:
+  title: WebSphere Liberty REST Connector API
+  description: >-
+    Secure REST-based JMX connector for remote administration of Liberty servers.
+    Provides file transfer and JMX MBean access through HTTPS endpoints, requiring
+    TLS for confidential communication. Supports MBean operations, attribute
+    access, and notification subscriptions.
+  version: 2.0.0
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  contact:
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+externalDocs:
+  description: REST Connector Feature Documentation
+  url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+servers:
+  - url: https://localhost:9443/IBMJMXConnectorREST/api
+    description: Default Liberty JMX REST Connector
+security:
+  - basicAuth: []
+tags:
+  - name: MBeans
+    description: JMX MBean operations and attribute access
+  - name: Notifications
+    description: JMX notification subscription management
+  - name: File Transfer
+    description: File upload and download operations
+  - name: Connectors
+    description: JMX connector management
+paths:
+  /mbeans:
+    get:
+      operationId: listMBeans
+      summary: List registered MBeans
+      description: Returns a list of all MBeans registered in the MBean server.
+      tags:
+        - MBeans
+      parameters:
+        - name: objectName
+          in: query
+          description: ObjectName pattern to filter MBeans
+          schema:
+            type: string
+        - name: className
+          in: query
+          description: Filter by MBean class name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of registered MBeans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MBeanInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /mbeans/{objectName}:
+    get:
+      operationId: getMBeanInfo
+      summary: Get MBean information
+      description: Returns metadata about a specific MBean including attributes, operations, and notifications.
+      tags:
+        - MBeans
+      parameters:
+        - $ref: '#/components/parameters/objectName'
+      responses:
+        '200':
+          description: MBean metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MBeanDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /mbeans/{objectName}/attributes:
+    get:
+      operationId: getMBeanAttributes
+      summary: Get MBean attributes
+      description: Returns the current values of all readable attributes for the specified MBean.
+      tags:
+        - MBeans
+      parameters:
+        - $ref: '#/components/parameters/objectName'
+      responses:
+        '200':
+          description: MBean attribute values
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /mbeans/{objectName}/attributes/{attributeName}:
+    get:
+      operationId: getMBeanAttribute
+      summary: Get a specific MBean attribute
+      description: Returns the value of a specific attribute for the specified MBean.
+      tags:
+        - MBeans
+      parameters:
+        - $ref: '#/components/parameters/objectName'
+        - name: attributeName
+          in: path
+          required: true
+          description: Name of the MBean attribute
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Attribute value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: setMBeanAttribute
+      summary: Set a specific MBean attribute
+      description: Sets the value of a writable attribute for the specified MBean.
+      tags:
+        - MBeans
+      parameters:
+        - $ref: '#/components/parameters/objectName'
+        - name: attributeName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeValue'
+      responses:
+        '200':
+          description: Attribute value updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeValue'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /mbeans/{objectName}/operations/{operationName}:
+    post:
+      operationId: invokeMBeanOperation
+      summary: Invoke an MBean operation
+      description: Invokes an operation on the specified MBean with optional parameters.
+      tags:
+        - MBeans
+      parameters:
+        - $ref: '#/components/parameters/objectName'
+        - name: operationName
+          in: path
+          required: true
+          description: Name of the MBean operation to invoke
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                params:
+                  type: array
+                  items: {}
+                  description: Operation parameters
+                signature:
+                  type: array
+                  items:
+                    type: string
+                  description: Parameter type signatures
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /notifications:
+    get:
+      operationId: listNotificationSubscriptions
+      summary: List notification subscriptions
+      description: Returns a list of active notification subscriptions.
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: List of notification subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationSubscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNotificationSubscription
+      summary: Create a notification subscription
+      description: Subscribes to notifications from a specific MBean.
+      tags:
+        - Notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - objectName
+              properties:
+                objectName:
+                  type: string
+                  description: ObjectName of the MBean to subscribe to
+                filters:
+                  type: array
+                  items:
+                    type: string
+                  description: Notification type filters
+      responses:
+        '201':
+          description: Notification subscription created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationSubscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /notifications/{subscriptionId}:
+    get:
+      operationId: getNotifications
+      summary: Get pending notifications
+      description: Returns pending notifications for a subscription.
+      tags:
+        - Notifications
+      parameters:
+        - name: subscriptionId
+          in: path
+          required: true
+          description: Subscription identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pending notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNotificationSubscription
+      summary: Delete a notification subscription
+      description: Unsubscribes from notifications.
+      tags:
+        - Notifications
+      parameters:
+        - name: subscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Subscription deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /file/upload:
+    post:
+      operationId: uploadFile
+      summary: Upload a file
+      description: Uploads a file to the Liberty server file system.
+      tags:
+        - File Transfer
+      parameters:
+        - name: targetPath
+          in: query
+          required: true
+          description: Target file path on the server
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: File uploaded successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /file/download:
+    get:
+      operationId: downloadFile
+      summary: Download a file
+      description: Downloads a file from the Liberty server file system.
+      tags:
+        - File Transfer
+      parameters:
+        - name: sourcePath
+          in: query
+          required: true
+          description: Source file path on the server
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /file/delete:
+    delete:
+      operationId: deleteFile
+      summary: Delete a file
+      description: Deletes a file from the Liberty server file system.
+      tags:
+        - File Transfer
+      parameters:
+        - name: path
+          in: query
+          required: true
+          description: File path on the server
+          schema:
+            type: string
+      responses:
+        '204':
+          description: File deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication with administrator role
+  parameters:
+    objectName:
+      name: objectName
+      in: path
+      required: true
+      description: JMX ObjectName (URL-encoded)
+      schema:
+        type: string
+  schemas:
+    MBeanInfo:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: JMX ObjectName
+        className:
+          type: string
+          description: MBean implementation class
+        description:
+          type: string
+          description: MBean description
+        URL:
+          type: string
+          format: uri
+          description: URL for accessing this MBean's details
+    MBeanDetail:
+      type: object
+      properties:
+        objectName:
+          type: string
+        className:
+          type: string
+        description:
+          type: string
+        attributes:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              description:
+                type: string
+              readable:
+                type: boolean
+              writable:
+                type: boolean
+        operations:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              returnType:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                    description:
+                      type: string
+              impact:
+                type: string
+                enum:
+                  - ACTION
+                  - ACTION_INFO
+                  - INFO
+                  - UNKNOWN
+        notifications:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              notifTypes:
+                type: array
+                items:
+                  type: string
+    AttributeValue:
+      type: object
+      properties:
+        name:
+          type: string
+        value: {}
+        type:
+          type: string
+    NotificationSubscription:
+      type: object
+      properties:
+        id:
+          type: string
+        objectName:
+          type: string
+        filters:
+          type: array
+          items:
+            type: string
+        created:
+          type: string
+          format: date-time
+    Notification:
+      type: object
+      properties:
+        type:
+          type: string
+        source:
+          type: string
+        message:
+          type: string
+        sequenceNumber:
+          type: integer
+        timestamp:
+          type: integer
+        userData:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

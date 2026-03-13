@@ -1,0 +1,817 @@
+openapi: 3.1.0
+info:
+  title: WebSphere Liberty Collective Controller REST API
+  description: >-
+    API for managing Liberty collective environments, including member
+    management, scaling, centralized administration, and cluster operations.
+    Supports subscription-based notifications for API changes across collective
+    members. The collective controller coordinates multiple Liberty servers for
+    centralized management and workload distribution.
+  version: 24.0.0
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  contact:
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+externalDocs:
+  description: Liberty Collective REST API Documentation
+  url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+servers:
+  - url: https://localhost:9443/ibm/api/collective
+    description: Default Liberty Collective Controller
+security:
+  - basicAuth: []
+tags:
+  - name: Members
+    description: Collective member management
+  - name: Clusters
+    description: Cluster management within the collective
+  - name: Hosts
+    description: Host management
+  - name: Controller
+    description: Collective controller operations
+  - name: Repositories
+    description: Shared configuration repository management
+  - name: Scaling
+    description: Scaling policy and auto-scaling management
+paths:
+  /members:
+    get:
+      operationId: listMembers
+      summary: List collective members
+      description: Returns a list of all servers that are members of this collective.
+      tags:
+        - Members
+      parameters:
+        - name: status
+          in: query
+          description: Filter by member status
+          schema:
+            type: string
+            enum:
+              - STARTED
+              - STOPPED
+              - UNKNOWN
+        - name: hostName
+          in: query
+          description: Filter by hostname
+          schema:
+            type: string
+        - name: clusterName
+          in: query
+          description: Filter by cluster membership
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of collective members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CollectiveMember'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /members/{memberName}:
+    get:
+      operationId: getMember
+      summary: Get member details
+      description: Returns details of a specific collective member.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/memberName'
+      responses:
+        '200':
+          description: Member details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectiveMember'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /members/{memberName}/start:
+    post:
+      operationId: startMember
+      summary: Start a collective member
+      description: Starts a stopped collective member server.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/memberName'
+      responses:
+        '200':
+          description: Member start initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /members/{memberName}/stop:
+    post:
+      operationId: stopMember
+      summary: Stop a collective member
+      description: Stops a running collective member server.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/memberName'
+      responses:
+        '200':
+          description: Member stop initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /members/{memberName}/transfer:
+    post:
+      operationId: transferFiles
+      summary: Transfer files to a member
+      description: Transfers configuration or application files to a collective member.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/memberName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourcePath:
+                  type: string
+                  description: Source file path on the controller
+                targetPath:
+                  type: string
+                  description: Target file path on the member
+              required:
+                - sourcePath
+                - targetPath
+      responses:
+        '200':
+          description: File transfer initiated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: List clusters
+      description: Returns a list of all clusters defined in the collective.
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CollectiveCluster'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createCluster
+      summary: Create a cluster
+      description: Creates a new cluster in the collective.
+      tags:
+        - Clusters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Cluster name
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Cluster created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectiveCluster'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Cluster already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /clusters/{clusterName}:
+    get:
+      operationId: getCluster
+      summary: Get cluster details
+      description: Returns details of a specific cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectiveCluster'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteCluster
+      summary: Delete a cluster
+      description: Deletes a cluster from the collective.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '204':
+          description: Cluster deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters/{clusterName}/members:
+    get:
+      operationId: listClusterMembers
+      summary: List cluster members
+      description: Returns a list of members in the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: List of cluster members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CollectiveMember'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addClusterMember
+      summary: Add a member to a cluster
+      description: Adds an existing collective member to the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - memberName
+              properties:
+                memberName:
+                  type: string
+                  description: Name of the collective member to add
+      responses:
+        '200':
+          description: Member added to cluster
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters/{clusterName}/members/{memberName}:
+    delete:
+      operationId: removeClusterMember
+      summary: Remove a member from a cluster
+      description: Removes a member from the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+        - $ref: '#/components/parameters/memberName'
+      responses:
+        '204':
+          description: Member removed from cluster
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters/{clusterName}/start:
+    post:
+      operationId: startCluster
+      summary: Start all cluster members
+      description: Starts all stopped members in the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster start initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /clusters/{clusterName}/stop:
+    post:
+      operationId: stopCluster
+      summary: Stop all cluster members
+      description: Stops all running members in the specified cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster stop initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /hosts:
+    get:
+      operationId: listHosts
+      summary: List hosts
+      description: Returns a list of hosts registered in the collective.
+      tags:
+        - Hosts
+      responses:
+        '200':
+          description: List of hosts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Host'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /hosts/{hostName}:
+    get:
+      operationId: getHost
+      summary: Get host details
+      description: Returns details about a specific host in the collective.
+      tags:
+        - Hosts
+      parameters:
+        - name: hostName
+          in: path
+          required: true
+          description: Hostname
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Host details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Host'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /controller:
+    get:
+      operationId: getControllerInfo
+      summary: Get controller information
+      description: Returns information about the collective controller.
+      tags:
+        - Controller
+      responses:
+        '200':
+          description: Controller information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ControllerInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repository/config:
+    get:
+      operationId: listSharedConfigs
+      summary: List shared configurations
+      description: Returns a list of shared configurations in the collective repository.
+      tags:
+        - Repositories
+      responses:
+        '200':
+          description: List of shared configurations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedConfig'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSharedConfig
+      summary: Create a shared configuration
+      description: Creates a new shared configuration in the repository.
+      tags:
+        - Repositories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedConfig'
+      responses:
+        '201':
+          description: Shared configuration created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedConfig'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /scaling/policies:
+    get:
+      operationId: listScalingPolicies
+      summary: List scaling policies
+      description: Returns a list of auto-scaling policies.
+      tags:
+        - Scaling
+      responses:
+        '200':
+          description: List of scaling policies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScalingPolicy'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createScalingPolicy
+      summary: Create a scaling policy
+      description: Creates a new auto-scaling policy for a cluster.
+      tags:
+        - Scaling
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalingPolicy'
+      responses:
+        '201':
+          description: Scaling policy created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicy'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /scaling/policies/{policyName}:
+    get:
+      operationId: getScalingPolicy
+      summary: Get scaling policy details
+      description: Returns details of a specific auto-scaling policy.
+      tags:
+        - Scaling
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          description: Scaling policy name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Scaling policy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicy'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateScalingPolicy
+      summary: Update a scaling policy
+      description: Updates an existing auto-scaling policy.
+      tags:
+        - Scaling
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalingPolicy'
+      responses:
+        '200':
+          description: Scaling policy updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicy'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteScalingPolicy
+      summary: Delete a scaling policy
+      description: Deletes an auto-scaling policy.
+      tags:
+        - Scaling
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Scaling policy deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication with administrator role
+  parameters:
+    memberName:
+      name: memberName
+      in: path
+      required: true
+      description: Collective member server name
+      schema:
+        type: string
+    clusterName:
+      name: clusterName
+      in: path
+      required: true
+      description: Cluster name
+      schema:
+        type: string
+  schemas:
+    CollectiveMember:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Member server name
+        hostName:
+          type: string
+          description: Host where the member is located
+        userDir:
+          type: string
+          description: User directory path
+        status:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - UNKNOWN
+          description: Member status
+        clusterName:
+          type: string
+          description: Cluster the member belongs to
+        httpsPort:
+          type: integer
+          description: HTTPS port
+        wlpVersion:
+          type: string
+          description: Liberty version
+        javaVersion:
+          type: string
+          description: Java version
+    MemberStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - STARTED
+            - STOPPED
+            - STARTING
+            - STOPPING
+        message:
+          type: string
+    CollectiveCluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cluster name
+        description:
+          type: string
+          description: Cluster description
+        memberCount:
+          type: integer
+          description: Number of members in the cluster
+        membersStarted:
+          type: integer
+          description: Number of started members
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member server names
+    ClusterStatus:
+      type: object
+      properties:
+        name:
+          type: string
+        membersStarted:
+          type: integer
+        membersTotal:
+          type: integer
+        message:
+          type: string
+    Host:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Hostname
+        os:
+          type: string
+          description: Operating system
+        arch:
+          type: string
+          description: Architecture
+        processors:
+          type: integer
+          description: Number of processors
+        members:
+          type: array
+          items:
+            type: string
+          description: Members on this host
+    ControllerInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Controller server name
+        hostName:
+          type: string
+          description: Controller hostname
+        httpsPort:
+          type: integer
+          description: HTTPS port
+        version:
+          type: string
+          description: Liberty version
+        memberCount:
+          type: integer
+          description: Total number of collective members
+        clusterCount:
+          type: integer
+          description: Total number of clusters
+        hostCount:
+          type: integer
+          description: Total number of hosts
+    SharedConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Configuration name
+        description:
+          type: string
+        content:
+          type: string
+          description: Configuration XML content
+        lastModified:
+          type: string
+          format: date-time
+    ScalingPolicy:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Policy name
+        clusterName:
+          type: string
+          description: Target cluster
+        enabled:
+          type: boolean
+          description: Whether the policy is active
+        minMembers:
+          type: integer
+          description: Minimum number of cluster members
+        maxMembers:
+          type: integer
+          description: Maximum number of cluster members
+        scaleUpTrigger:
+          type: object
+          properties:
+            metric:
+              type: string
+              enum:
+                - cpuUtilization
+                - memoryUtilization
+                - responseTime
+            threshold:
+              type: number
+            duration:
+              type: integer
+              description: Duration in seconds before triggering
+        scaleDownTrigger:
+          type: object
+          properties:
+            metric:
+              type: string
+              enum:
+                - cpuUtilization
+                - memoryUtilization
+                - responseTime
+            threshold:
+              type: number
+            duration:
+              type: integer
+        cooldownPeriod:
+          type: integer
+          description: Cooldown period in seconds between scaling events
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

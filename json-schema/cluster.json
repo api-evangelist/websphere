@@ -1,0 +1,189 @@
+{
+  "$id": "cluster.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSphere Cluster",
+  "description": "Represents a cluster of IBM WebSphere Application Server instances or Liberty collective members that work together to provide high availability, workload distribution, and failover capabilities.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The unique name of the cluster."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name for the cluster."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the cluster purpose and configuration."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["running", "stopped", "partial", "unknown"],
+      "description": "Overall cluster status based on member states."
+    },
+    "clusterType": {
+      "type": "string",
+      "enum": ["APPLICATION_SERVER", "PROXY_SERVER", "LIBERTY_COLLECTIVE"],
+      "description": "Type of cluster."
+    },
+    "cellName": {
+      "type": "string",
+      "description": "Name of the cell this cluster belongs to."
+    },
+    "members": {
+      "type": "array",
+      "description": "Server instances that are members of this cluster.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "serverName": {
+            "type": "string",
+            "description": "Name of the member server."
+          },
+          "nodeName": {
+            "type": "string",
+            "description": "Node where the member resides."
+          },
+          "hostName": {
+            "type": "string",
+            "description": "Hostname of the member."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["STARTED", "STOPPED", "STARTING", "STOPPING", "UNKNOWN"],
+            "description": "Current status of the cluster member."
+          },
+          "weight": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20,
+            "default": 2,
+            "description": "Workload management weight for this member."
+          },
+          "uniqueId": {
+            "type": "string",
+            "description": "Unique identifier for the cluster member."
+          }
+        },
+        "required": ["serverName"]
+      }
+    },
+    "memberCount": {
+      "type": "integer",
+      "description": "Total number of members in the cluster."
+    },
+    "membersStarted": {
+      "type": "integer",
+      "description": "Number of currently running members."
+    },
+    "preferLocal": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to prefer routing requests to local cluster members."
+    },
+    "loadBalancingPolicy": {
+      "type": "object",
+      "description": "Load balancing configuration for the cluster.",
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["ROUND_ROBIN", "WEIGHTED", "RANDOM"],
+          "description": "Load balancing algorithm."
+        },
+        "stickySession": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to enable session affinity."
+        }
+      }
+    },
+    "scalingPolicy": {
+      "type": "object",
+      "description": "Auto-scaling policy for the cluster.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether auto-scaling is enabled."
+        },
+        "minMembers": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Minimum number of cluster members."
+        },
+        "maxMembers": {
+          "type": "integer",
+          "description": "Maximum number of cluster members."
+        },
+        "scaleUpThreshold": {
+          "type": "number",
+          "description": "CPU or memory utilization percentage to trigger scale-up."
+        },
+        "scaleDownThreshold": {
+          "type": "number",
+          "description": "CPU or memory utilization percentage to trigger scale-down."
+        },
+        "cooldownPeriod": {
+          "type": "integer",
+          "description": "Cooldown period in seconds between scaling events."
+        }
+      }
+    },
+    "servicePolicy": {
+      "type": "object",
+      "description": "Service policy configuration.",
+      "properties": {
+        "matchCriteria": {
+          "type": "string",
+          "description": "Criteria for matching requests to this cluster."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "Priority of this service policy."
+        }
+      }
+    },
+    "replicationDomain": {
+      "type": "object",
+      "description": "Data replication configuration for the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Replication domain name."
+        },
+        "numberOfReplicas": {
+          "type": "integer",
+          "description": "Number of replicas for session data."
+        },
+        "requestTimeout": {
+          "type": "integer",
+          "description": "Replication request timeout in seconds."
+        }
+      }
+    },
+    "applications": {
+      "type": "array",
+      "description": "Applications deployed to this cluster.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the cluster was created."
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the cluster was last modified."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Additional metadata associated with the cluster."
+    }
+  },
+  "required": ["name"]
+}

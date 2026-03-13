@@ -1,0 +1,256 @@
+{
+  "$id": "message-queue.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IBM MQ Message Queue",
+  "description": "Represents an IBM MQ message queue including its configuration, runtime status, depth, and messaging properties for point-to-point and publish-subscribe messaging patterns.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 48,
+      "description": "The unique name of the queue within the queue manager."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name for the queue."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "Description of the queue purpose."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["local", "alias", "remote", "model", "cluster"],
+      "description": "Queue type."
+    },
+    "queueManager": {
+      "type": "string",
+      "description": "Name of the queue manager that owns this queue."
+    },
+    "maxDepth": {
+      "type": "integer",
+      "default": 5000,
+      "minimum": 0,
+      "maximum": 999999999,
+      "description": "Maximum number of messages that can be held on the queue."
+    },
+    "maxMessageLength": {
+      "type": "integer",
+      "default": 4194304,
+      "minimum": 0,
+      "maximum": 104857600,
+      "description": "Maximum length of a message in bytes."
+    },
+    "currentDepth": {
+      "type": "integer",
+      "description": "Current number of messages on the queue.",
+      "readOnly": true
+    },
+    "persistence": {
+      "type": "object",
+      "description": "Message persistence configuration.",
+      "properties": {
+        "default": {
+          "type": "string",
+          "enum": ["persistent", "nonPersistent"],
+          "default": "persistent",
+          "description": "Default persistence for messages put on this queue."
+        }
+      }
+    },
+    "inhibitPut": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether put operations are inhibited on this queue."
+    },
+    "inhibitGet": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether get operations are inhibited on this queue."
+    },
+    "triggerControl": {
+      "type": "object",
+      "description": "Triggering configuration for the queue.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether triggering is enabled."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["NONE", "FIRST", "EVERY", "DEPTH"],
+          "description": "Trigger type."
+        },
+        "depth": {
+          "type": "integer",
+          "description": "Trigger depth threshold."
+        },
+        "messageType": {
+          "type": "integer",
+          "description": "Message type for triggering."
+        },
+        "processName": {
+          "type": "string",
+          "description": "Process to initiate when triggered."
+        },
+        "initializationQueue": {
+          "type": "string",
+          "description": "Initiation queue name."
+        }
+      }
+    },
+    "cluster": {
+      "type": "object",
+      "description": "Cluster queue properties (for cluster queues).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Cluster name."
+        },
+        "workloadRank": {
+          "type": "integer",
+          "description": "Cluster workload rank."
+        },
+        "workloadPriority": {
+          "type": "integer",
+          "description": "Cluster workload priority."
+        },
+        "workloadUseQueue": {
+          "type": "string",
+          "enum": ["local", "any"],
+          "description": "Cluster workload queue usage."
+        }
+      }
+    },
+    "deadLetterQueue": {
+      "type": "string",
+      "description": "Name of the dead letter queue for undeliverable messages."
+    },
+    "backoutThreshold": {
+      "type": "integer",
+      "description": "Number of times a message can be backed out before being moved to the backout queue."
+    },
+    "backoutQueue": {
+      "type": "string",
+      "description": "Name of the backout requeue queue."
+    },
+    "shareability": {
+      "type": "string",
+      "enum": ["shareable", "notShareable"],
+      "default": "shareable",
+      "description": "Whether the queue can be opened for input by multiple applications."
+    },
+    "defaultInputOpenOption": {
+      "type": "string",
+      "enum": ["shared", "exclusive"],
+      "default": "shared",
+      "description": "Default input open option."
+    },
+    "messagePriority": {
+      "type": "object",
+      "description": "Message priority settings.",
+      "properties": {
+        "default": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9,
+          "description": "Default message priority."
+        },
+        "deliverySequence": {
+          "type": "string",
+          "enum": ["priority", "fifo"],
+          "default": "priority",
+          "description": "Message delivery sequence."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Runtime status information.",
+      "readOnly": true,
+      "properties": {
+        "currentDepth": {
+          "type": "integer",
+          "description": "Current number of messages."
+        },
+        "openInputCount": {
+          "type": "integer",
+          "description": "Number of applications with the queue open for input."
+        },
+        "openOutputCount": {
+          "type": "integer",
+          "description": "Number of applications with the queue open for output."
+        },
+        "lastGetDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the last successful get operation."
+        },
+        "lastPutDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the last successful put operation."
+        },
+        "uncommittedMessages": {
+          "type": "integer",
+          "description": "Number of uncommitted messages."
+        },
+        "oldestMessageAge": {
+          "type": "integer",
+          "description": "Age of the oldest message in seconds."
+        }
+      }
+    },
+    "alias": {
+      "type": "object",
+      "description": "Alias queue properties (for alias queues).",
+      "properties": {
+        "targetQueue": {
+          "type": "string",
+          "description": "Target queue name that this alias resolves to."
+        },
+        "targetType": {
+          "type": "string",
+          "enum": ["queue", "topic"],
+          "description": "Target object type."
+        }
+      }
+    },
+    "remote": {
+      "type": "object",
+      "description": "Remote queue properties (for remote queues).",
+      "properties": {
+        "remoteQueueName": {
+          "type": "string",
+          "description": "Name of the queue on the remote queue manager."
+        },
+        "remoteQueueManager": {
+          "type": "string",
+          "description": "Name of the remote queue manager."
+        },
+        "transmissionQueue": {
+          "type": "string",
+          "description": "Name of the transmission queue."
+        }
+      }
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the queue was created."
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the queue was last modified."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Additional metadata associated with the queue."
+    }
+  },
+  "required": ["name", "type"]
+}
