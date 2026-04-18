@@ -1,0 +1,7 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "generatedDate": "example_value",
+  "overallCompliance": 42.5,
+  "servers": []
+}

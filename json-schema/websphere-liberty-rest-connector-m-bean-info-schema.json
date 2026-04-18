@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MBeanInfo",
+  "type": "object",
+  "properties": {
+    "objectName": {
+      "type": "string",
+      "description": "JMX ObjectName"
+    },
+    "className": {
+      "type": "string",
+      "description": "MBean implementation class"
+    },
+    "description": {
+      "type": "string",
+      "description": "MBean description"
+    },
+    "URL": {
+      "type": "string",
+      "description": "URL for accessing this MBean's details"
+    }
+  }
+}

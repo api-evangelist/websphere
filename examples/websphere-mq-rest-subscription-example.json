@@ -1,0 +1,8 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "topicString": "example_value",
+  "destination": "example_value",
+  "type": "example_value",
+  "durability": "example_value"
+}

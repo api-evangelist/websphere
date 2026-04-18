@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Topic",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Administrative topic object name"
+    },
+    "topicString": {
+      "type": "string",
+      "description": "Topic string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "durableSubscriptions": {
+      "type": "string"
+    },
+    "publish": {
+      "type": "string"
+    },
+    "subscribe": {
+      "type": "string"
+    }
+  }
+}

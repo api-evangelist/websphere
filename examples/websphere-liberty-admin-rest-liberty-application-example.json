@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "location": "example_value",
+  "type": "example_value",
+  "contextRoot": "example_value",
+  "state": "example_value",
+  "autoStart": true
+}

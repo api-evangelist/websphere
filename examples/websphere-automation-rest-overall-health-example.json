@@ -1,0 +1,9 @@
+{
+  "status": "example_value",
+  "totalServers": 10,
+  "activeServers": 10,
+  "inactiveServers": 10,
+  "openVulnerabilities": 10,
+  "criticalVulnerabilities": 10,
+  "pendingFixes": 10
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BatchJobExecution",
+  "type": "object",
+  "properties": {
+    "executionId": {
+      "type": "integer"
+    },
+    "jobInstanceId": {
+      "type": "integer"
+    },
+    "jobName": {
+      "type": "string"
+    },
+    "batchStatus": {
+      "type": "string"
+    },
+    "exitStatus": {
+      "type": "string"
+    },
+    "createTime": {
+      "type": "string"
+    },
+    "startTime": {
+      "type": "string"
+    },
+    "endTime": {
+      "type": "string"
+    },
+    "lastUpdatedTime": {
+      "type": "string"
+    },
+    "jobParameters": {
+      "type": "object"
+    },
+    "stepExecutions": {
+      "type": "array"
+    }
+  }
+}

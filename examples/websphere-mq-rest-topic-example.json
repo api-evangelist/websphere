@@ -1,0 +1,9 @@
+{
+  "name": "Example Title",
+  "topicString": "example_value",
+  "description": "A sample description.",
+  "type": "example_value",
+  "durableSubscriptions": "example_value",
+  "publish": "example_value",
+  "subscribe": "example_value"
+}

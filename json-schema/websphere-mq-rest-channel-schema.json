@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Channel",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Channel name"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "connectionName": {
+      "type": "string",
+      "description": "Connection name (host and port)"
+    },
+    "transmissionQueue": {
+      "type": "string",
+      "description": "Transmission queue name"
+    },
+    "status": {
+      "type": "object"
+    }
+  }
+}

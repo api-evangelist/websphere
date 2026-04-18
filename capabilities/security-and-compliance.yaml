@@ -1,0 +1,184 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "WebSphere Security and Compliance"
+  description: "Workflow for security vulnerability management, automated patching, compliance reporting, and health monitoring across WebSphere environments for security engineers and compliance teams."
+  tags:
+    - IBM WebSphere
+    - Security
+    - Compliance
+    - Vulnerability Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      WEBSPHERE_AUTOMATION_TOKEN: WEBSPHERE_AUTOMATION_TOKEN
+      WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
+      WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
+
+capability:
+  consumes:
+    - import: automation
+      location: ./shared/automation.yaml
+    - import: admin-rest
+      location: ./shared/admin-rest.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: security-compliance-api
+      description: "Unified REST API for WebSphere security and compliance operations."
+      resources:
+        - path: /v1/vulnerabilities
+          name: vulnerabilities
+          description: "Vulnerability tracking and remediation"
+          operations:
+            - method: GET
+              name: list-vulnerabilities
+              description: "List known vulnerabilities"
+              call: "automation.list-vulnerabilities"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: get-vulnerability
+              description: "Get vulnerability details"
+              call: "automation.get-vulnerability"
+              with:
+                vulnerabilityId: "rest.vulnerabilityId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/fixes
+          name: fixes
+          description: "Fix and patch management"
+          operations:
+            - method: GET
+              name: list-fixes
+              description: "List available fixes"
+              call: "automation.list-fixes"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/compliance
+          name: compliance
+          description: "Compliance reporting"
+          operations:
+            - method: GET
+              name: list-compliance-reports
+              description: "List compliance reports"
+              call: "automation.list-compliance-reports"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/health
+          name: health
+          description: "Health monitoring"
+          operations:
+            - method: GET
+              name: get-overall-health
+              description: "Get overall health status"
+              call: "automation.get-overall-health"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/security-users
+          name: security-users
+          description: "Security user management"
+          operations:
+            - method: GET
+              name: list-users
+              description: "List security users"
+              call: "admin-rest.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9092
+      namespace: security-compliance-mcp
+      transport: http
+      description: "MCP server for AI-assisted WebSphere security and compliance."
+      tools:
+        - name: list-vulnerabilities
+          description: "List known security vulnerabilities"
+          hints:
+            readOnly: true
+          call: "automation.list-vulnerabilities"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-vulnerability
+          description: "Get vulnerability details"
+          hints:
+            readOnly: true
+          call: "automation.get-vulnerability"
+          with:
+            vulnerabilityId: "tools.vulnerabilityId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: resolve-vulnerability
+          description: "Initiate vulnerability resolution"
+          hints:
+            readOnly: false
+          call: "automation.resolve-vulnerability"
+          with:
+            vulnerabilityId: "tools.vulnerabilityId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-fixes
+          description: "List available security fixes"
+          hints:
+            readOnly: true
+          call: "automation.list-fixes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: apply-fix
+          description: "Apply a fix to managed servers"
+          hints:
+            readOnly: false
+          call: "automation.apply-fix"
+          with:
+            fixId: "tools.fixId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-overall-health
+          description: "Get overall environment health"
+          hints:
+            readOnly: true
+          call: "automation.get-overall-health"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-server-health
+          description: "Get individual server health"
+          hints:
+            readOnly: true
+          call: "automation.get-server-health"
+          with:
+            serverId: "tools.serverId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-compliance-reports
+          description: "List compliance reports"
+          hints:
+            readOnly: true
+          call: "automation.list-compliance-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-managed-servers
+          description: "List servers managed by WebSphere Automation"
+          hints:
+            readOnly: true
+          call: "automation.list-managed-servers"
+          outputParameters:
+            - type: object
+              mapping: "$."

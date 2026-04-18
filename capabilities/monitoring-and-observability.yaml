@@ -1,0 +1,194 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "WebSphere Monitoring and Observability"
+  description: "Workflow for monitoring WebSphere environments combining health checks, metrics, performance data, logging, and batch job tracking from Open Liberty and traditional WAS APIs for operations teams."
+  tags:
+    - IBM WebSphere
+    - Monitoring
+    - Observability
+    - Metrics
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
+      WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
+      LIBERTY_USERNAME: LIBERTY_USERNAME
+      LIBERTY_PASSWORD: LIBERTY_PASSWORD
+
+capability:
+  consumes:
+    - import: open-liberty
+      location: ./shared/open-liberty.yaml
+    - import: admin-rest
+      location: ./shared/admin-rest.yaml
+    - import: liberty-admin
+      location: ./shared/liberty-admin.yaml
+
+  exposes:
+    - type: rest
+      port: 8083
+      namespace: monitoring-api
+      description: "Unified REST API for WebSphere monitoring and observability."
+      resources:
+        - path: /v1/health
+          name: health
+          description: "Health check endpoints"
+          operations:
+            - method: GET
+              name: get-liberty-health
+              description: "Get Open Liberty overall health"
+              call: "open-liberty.get-overall-health"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: get-was-health
+              description: "Get WAS server health"
+              call: "admin-rest.get-health-status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/metrics
+          name: metrics
+          description: "Metrics collection"
+          operations:
+            - method: GET
+              name: get-all-metrics
+              description: "Get all Open Liberty metrics"
+              call: "open-liberty.get-all-metrics"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: get-liberty-metrics
+              description: "Get Liberty admin metrics"
+              call: "liberty-admin.get-metrics"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/performance
+          name: performance
+          description: "Performance data"
+          operations:
+            - method: GET
+              name: get-performance-data
+              description: "Get WAS performance monitoring data"
+              call: "admin-rest.get-performance-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/logs
+          name: logs
+          description: "Log management"
+          operations:
+            - method: GET
+              name: get-log-messages
+              description: "Get Liberty log messages"
+              call: "liberty-admin.get-log-messages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/batch-jobs
+          name: batch-jobs
+          description: "Batch job monitoring"
+          operations:
+            - method: GET
+              name: list-batch-jobs
+              description: "List batch job instances"
+              call: "open-liberty.list-batch-job-instances"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9093
+      namespace: monitoring-mcp
+      transport: http
+      description: "MCP server for AI-assisted WebSphere monitoring."
+      tools:
+        - name: get-liberty-health
+          description: "Get Open Liberty overall health status"
+          hints:
+            readOnly: true
+          call: "open-liberty.get-overall-health"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-readiness
+          description: "Check if Liberty server is ready for traffic"
+          hints:
+            readOnly: true
+          call: "open-liberty.get-readiness"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-liveness
+          description: "Check if Liberty server is alive"
+          hints:
+            readOnly: true
+          call: "open-liberty.get-liveness"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-was-health
+          description: "Get WAS server health status"
+          hints:
+            readOnly: true
+          call: "admin-rest.get-health-status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-all-metrics
+          description: "Get all Open Liberty metrics"
+          hints:
+            readOnly: true
+          call: "open-liberty.get-all-metrics"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-performance-data
+          description: "Get WAS performance monitoring data"
+          hints:
+            readOnly: true
+          call: "admin-rest.get-performance-data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-log-messages
+          description: "Get recent Liberty log messages"
+          hints:
+            readOnly: true
+          call: "liberty-admin.get-log-messages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-log-config
+          description: "Get Liberty logging configuration"
+          hints:
+            readOnly: true
+          call: "liberty-admin.get-log-config"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-batch-jobs
+          description: "List Jakarta Batch job instances"
+          hints:
+            readOnly: true
+          call: "open-liberty.list-batch-job-instances"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-batch-job
+          description: "Get batch job instance details"
+          hints:
+            readOnly: true
+          call: "open-liberty.get-batch-job-instance"
+          with:
+            jobInstanceId: "tools.jobInstanceId"
+          outputParameters:
+            - type: object
+              mapping: "$."

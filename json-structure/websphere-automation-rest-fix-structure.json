@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Fix",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "resolvedCVEs": {
+      "type": "array"
+    },
+    "applicableVersions": {
+      "type": "array"
+    },
+    "downloadURL": {
+      "type": "string"
+    },
+    "releaseDate": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer"
+    }
+  }
+}

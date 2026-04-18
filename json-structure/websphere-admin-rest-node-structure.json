@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Node",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "hostName": {
+      "type": "string"
+    },
+    "platformOS": {
+      "type": "string"
+    },
+    "servers": {
+      "type": "array"
+    },
+    "synchronized": {
+      "type": "boolean"
+    }
+  }
+}

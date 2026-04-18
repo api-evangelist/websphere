@@ -1,0 +1,7 @@
+{
+  "description": "A sample description.",
+  "maxDepth": 10,
+  "maxMessageLength": 10,
+  "inhibitPut": true,
+  "inhibitGet": true
+}

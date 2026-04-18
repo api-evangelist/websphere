@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Server",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "nodeName": {
+      "type": "string"
+    },
+    "clusterName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "serverType": {
+      "type": "string"
+    },
+    "pid": {
+      "type": "integer"
+    },
+    "ports": {
+      "type": "array"
+    }
+  }
+}

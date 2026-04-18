@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LoggingConfig",
+  "type": "object",
+  "properties": {
+    "logDirectory": {
+      "type": "string",
+      "description": "Log output directory"
+    },
+    "consoleLogLevel": {
+      "type": "string"
+    },
+    "messageFileName": {
+      "type": "string",
+      "description": "Name of the messages log file"
+    },
+    "traceFileName": {
+      "type": "string",
+      "description": "Name of the trace log file"
+    },
+    "traceSpecification": {
+      "type": "string",
+      "description": "Trace specification string"
+    },
+    "maxFileSize": {
+      "type": "integer",
+      "description": "Maximum log file size in MB"
+    },
+    "maxFiles": {
+      "type": "integer",
+      "description": "Maximum number of log files"
+    }
+  }
+}

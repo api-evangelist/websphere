@@ -1,0 +1,11 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "type": "example_value",
+  "description": "A sample description.",
+  "resolvedCVEs": [],
+  "applicableVersions": [],
+  "downloadURL": "https://www.example.com",
+  "releaseDate": "example_value",
+  "size": 10
+}

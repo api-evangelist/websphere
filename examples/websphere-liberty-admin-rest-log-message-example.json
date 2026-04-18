@@ -1,0 +1,8 @@
+{
+  "datetime": "example_value",
+  "level": "example_value",
+  "message": "example_value",
+  "logger": "example_value",
+  "thread": "example_value",
+  "sequence": "example_value"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CollectiveCluster",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "memberCount": {
+      "type": "integer"
+    },
+    "membersStarted": {
+      "type": "integer"
+    },
+    "members": {
+      "type": "array"
+    }
+  }
+}

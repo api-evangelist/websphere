@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QueueManager",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Queue manager name"
+    },
+    "state": {
+      "type": "string",
+      "description": "Queue manager state"
+    },
+    "version": {
+      "type": "string",
+      "description": "MQ version"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Platform type"
+    },
+    "commandLevel": {
+      "type": "integer",
+      "description": "Command level"
+    },
+    "connectionCount": {
+      "type": "integer",
+      "description": "Number of active connections"
+    },
+    "description": {
+      "type": "string"
+    },
+    "maximumMessageLength": {
+      "type": "integer",
+      "description": "Maximum message length in bytes"
+    }
+  }
+}

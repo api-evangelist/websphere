@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Host",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "arch": {
+      "type": "string"
+    },
+    "processors": {
+      "type": "integer"
+    },
+    "members": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "executionId": "500123",
+  "jobInstanceId": "500123",
+  "jobName": "example_value",
+  "batchStatus": "example_value",
+  "exitStatus": "example_value",
+  "createTime": "example_value",
+  "startTime": "example_value",
+  "endTime": "example_value",
+  "lastUpdatedTime": "example_value",
+  "jobParameters": "example_value",
+  "stepExecutions": []
+}

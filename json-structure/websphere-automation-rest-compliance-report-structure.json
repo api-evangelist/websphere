@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ComplianceReport",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "generatedDate": {
+      "type": "string"
+    },
+    "overallCompliance": {
+      "type": "number"
+    },
+    "servers": {
+      "type": "array"
+    }
+  }
+}

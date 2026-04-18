@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PerformanceData",
+  "type": "object",
+  "properties": {
+    "module": {
+      "type": "string",
+      "description": "Performance module name"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "metrics": {
+      "type": "array"
+    }
+  }
+}

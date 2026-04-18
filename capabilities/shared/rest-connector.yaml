@@ -1,0 +1,178 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "WebSphere Liberty REST Connector API"
+  description: "Secure REST-based JMX connector for remote administration of Liberty servers with MBean access and file transfer."
+  tags:
+    - IBM WebSphere
+    - JMX
+    - Liberty
+    - Remote Administration
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      LIBERTY_USERNAME: LIBERTY_USERNAME
+      LIBERTY_PASSWORD: LIBERTY_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: rest-connector
+      baseUri: https://localhost:9443/IBMJMXConnectorREST/api
+      description: "JMX REST Connector for Liberty server MBean access"
+      authentication:
+        type: basic
+        username: "{{LIBERTY_USERNAME}}"
+        password: "{{LIBERTY_PASSWORD}}"
+      resources:
+        - name: mbeans
+          path: /mbeans
+          description: "JMX MBean operations"
+          operations:
+            - name: list-mbeans
+              method: GET
+              description: "List registered MBeans"
+              inputParameters:
+                - name: objectName
+                  in: query
+                  type: string
+                  required: false
+                  description: "ObjectName pattern filter"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-mbean-info
+              method: GET
+              description: "Get MBean metadata"
+              inputParameters:
+                - name: objectName
+                  in: path
+                  type: string
+                  required: true
+                  description: "JMX ObjectName"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-mbean-attributes
+              method: GET
+              description: "Get MBean attribute values"
+              inputParameters:
+                - name: objectName
+                  in: path
+                  type: string
+                  required: true
+                  description: "JMX ObjectName"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: invoke-mbean-operation
+              method: POST
+              description: "Invoke an MBean operation"
+              inputParameters:
+                - name: objectName
+                  in: path
+                  type: string
+                  required: true
+                  description: "JMX ObjectName"
+                - name: operationName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Operation name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: notifications
+          path: /notifications
+          description: "JMX notification subscriptions"
+          operations:
+            - name: list-notification-subscriptions
+              method: GET
+              description: "List notification subscriptions"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-notification-subscription
+              method: POST
+              description: "Subscribe to MBean notifications"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  objectName: "{{tools.objectName}}"
+            - name: get-notifications
+              method: GET
+              description: "Get pending notifications"
+              inputParameters:
+                - name: subscriptionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Subscription ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-notification-subscription
+              method: DELETE
+              description: "Delete a notification subscription"
+              inputParameters:
+                - name: subscriptionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Subscription ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: rest-connector-api
+      resources:
+        - path: /v1/mbeans
+          name: mbeans
+          description: "JMX MBean access"
+          operations:
+            - method: GET
+              name: list-mbeans
+              description: "List registered MBeans"
+              call: "rest-connector.list-mbeans"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: rest-connector-mcp
+      transport: http
+      tools:
+        - name: list-mbeans
+          description: "List registered MBeans"
+          hints:
+            readOnly: true
+          call: "rest-connector.list-mbeans"
+          outputParameters:
+            - type: object
+              mapping: "$."

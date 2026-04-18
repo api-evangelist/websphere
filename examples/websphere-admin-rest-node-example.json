@@ -1,0 +1,7 @@
+{
+  "name": "Example Title",
+  "hostName": "example_value",
+  "platformOS": "example_value",
+  "servers": [],
+  "synchronized": true
+}

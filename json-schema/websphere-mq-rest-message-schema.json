@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Message",
+  "type": "object",
+  "properties": {
+    "messageId": {
+      "type": "string",
+      "description": "Message identifier"
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Correlation identifier"
+    },
+    "putDateTime": {
+      "type": "string",
+      "description": "Time the message was put"
+    },
+    "persistence": {
+      "type": "string"
+    },
+    "replyToQueue": {
+      "type": "string",
+      "description": "Reply-to queue name"
+    },
+    "replyToQueueManager": {
+      "type": "string",
+      "description": "Reply-to queue manager name"
+    },
+    "expiry": {
+      "type": "integer",
+      "description": "Message expiry in tenths of a second"
+    },
+    "body": {
+      "type": "string",
+      "description": "Message body content"
+    },
+    "format": {
+      "type": "string",
+      "description": "Message format"
+    }
+  }
+}

@@ -18,51 +18,54 @@ externalDocs:
   description: Liberty Collective REST API Documentation
   url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
 servers:
-  - url: https://localhost:9443/ibm/api/collective
-    description: Default Liberty Collective Controller
+- url: https://localhost:9443/ibm/api/collective
+  description: Default Liberty Collective Controller
 security:
-  - basicAuth: []
+- basicAuth: []
 tags:
-  - name: Members
-    description: Collective member management
-  - name: Clusters
-    description: Cluster management within the collective
-  - name: Hosts
-    description: Host management
-  - name: Controller
-    description: Collective controller operations
-  - name: Repositories
-    description: Shared configuration repository management
-  - name: Scaling
-    description: Scaling policy and auto-scaling management
+- name: Members
+  description: Collective member management
+- name: Clusters
+  description: Cluster management within the collective
+- name: Hosts
+  description: Host management
+- name: Controller
+  description: Collective controller operations
+- name: Repositories
+  description: Shared configuration repository management
+- name: Scaling
+  description: Scaling policy and auto-scaling management
 paths:
   /members:
     get:
       operationId: listMembers
-      summary: List collective members
+      summary: List Collective Members
       description: Returns a list of all servers that are members of this collective.
       tags:
-        - Members
+      - Members
       parameters:
-        - name: status
-          in: query
-          description: Filter by member status
-          schema:
-            type: string
-            enum:
-              - STARTED
-              - STOPPED
-              - UNKNOWN
-        - name: hostName
-          in: query
-          description: Filter by hostname
-          schema:
-            type: string
-        - name: clusterName
-          in: query
-          description: Filter by cluster membership
-          schema:
-            type: string
+      - name: status
+        in: query
+        description: Filter by member status
+        schema:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - UNKNOWN
+        example: STARTED
+      - name: hostName
+        in: query
+        description: Filter by hostname
+        schema:
+          type: string
+        example: example_value
+      - name: clusterName
+        in: query
+        description: Filter by cluster membership
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: List of collective members
@@ -72,17 +75,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CollectiveMember'
+              examples:
+                Listmembers200Example:
+                  summary: Default listMembers 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    hostName: example_value
+                    userDir: example_value
+                    status: STARTED
+                    clusterName: example_value
+                    httpsPort: 10
+                    wlpVersion: example_value
+                    javaVersion: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /members/{memberName}:
     get:
       operationId: getMember
-      summary: Get member details
+      summary: Get Member Details
       description: Returns details of a specific collective member.
       tags:
-        - Members
+      - Members
       parameters:
-        - $ref: '#/components/parameters/memberName'
+      - $ref: '#/components/parameters/memberName'
       responses:
         '200':
           description: Member details
@@ -90,19 +109,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CollectiveMember'
+              examples:
+                Getmember200Example:
+                  summary: Default getMember 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    hostName: example_value
+                    userDir: example_value
+                    status: STARTED
+                    clusterName: example_value
+                    httpsPort: 10
+                    wlpVersion: example_value
+                    javaVersion: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /members/{memberName}/start:
     post:
       operationId: startMember
-      summary: Start a collective member
+      summary: Start a Collective Member
       description: Starts a stopped collective member server.
       tags:
-        - Members
+      - Members
       parameters:
-        - $ref: '#/components/parameters/memberName'
+      - $ref: '#/components/parameters/memberName'
       responses:
         '200':
           description: Member start initiated
@@ -110,19 +145,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemberStatus'
+              examples:
+                Startmember200Example:
+                  summary: Default startMember 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: STARTED
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /members/{memberName}/stop:
     post:
       operationId: stopMember
-      summary: Stop a collective member
+      summary: Stop a Collective Member
       description: Stops a running collective member server.
       tags:
-        - Members
+      - Members
       parameters:
-        - $ref: '#/components/parameters/memberName'
+      - $ref: '#/components/parameters/memberName'
       responses:
         '200':
           description: Member stop initiated
@@ -130,19 +176,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemberStatus'
+              examples:
+                Stopmember200Example:
+                  summary: Default stopMember 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: STARTED
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /members/{memberName}/transfer:
     post:
       operationId: transferFiles
-      summary: Transfer files to a member
+      summary: Transfer Files to a Member
       description: Transfers configuration or application files to a collective member.
       tags:
-        - Members
+      - Members
       parameters:
-        - $ref: '#/components/parameters/memberName'
+      - $ref: '#/components/parameters/memberName'
       requestBody:
         required: true
         content:
@@ -157,8 +214,15 @@ paths:
                   type: string
                   description: Target file path on the member
               required:
-                - sourcePath
-                - targetPath
+              - sourcePath
+              - targetPath
+            examples:
+              TransferfilesRequestExample:
+                summary: Default transferFiles request
+                x-microcks-default: true
+                value:
+                  sourcePath: example_value
+                  targetPath: example_value
       responses:
         '200':
           description: File transfer initiated
@@ -168,13 +232,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters:
     get:
       operationId: listClusters
-      summary: List clusters
+      summary: List Clusters
       description: Returns a list of all clusters defined in the collective.
       tags:
-        - Clusters
+      - Clusters
       responses:
         '200':
           description: List of clusters
@@ -184,14 +251,28 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CollectiveCluster'
+              examples:
+                Listclusters200Example:
+                  summary: Default listClusters 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    description: A sample description.
+                    memberCount: 10
+                    membersStarted: 10
+                    members:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createCluster
-      summary: Create a cluster
+      summary: Create a Cluster
       description: Creates a new cluster in the collective.
       tags:
-        - Clusters
+      - Clusters
       requestBody:
         required: true
         content:
@@ -199,13 +280,20 @@ paths:
             schema:
               type: object
               required:
-                - name
+              - name
               properties:
                 name:
                   type: string
                   description: Cluster name
                 description:
                   type: string
+            examples:
+              CreateclusterRequestExample:
+                summary: Default createCluster request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
       responses:
         '201':
           description: Cluster created
@@ -213,6 +301,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CollectiveCluster'
+              examples:
+                Createcluster201Example:
+                  summary: Default createCluster 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    description: A sample description.
+                    memberCount: 10
+                    membersStarted: 10
+                    members:
+                    - example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -223,15 +322,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createcluster409Example:
+                  summary: Default createCluster 409 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{clusterName}:
     get:
       operationId: getCluster
-      summary: Get cluster details
+      summary: Get Cluster Details
       description: Returns details of a specific cluster.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/clusterName'
       responses:
         '200':
           description: Cluster details
@@ -239,18 +348,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CollectiveCluster'
+              examples:
+                Getcluster200Example:
+                  summary: Default getCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    description: A sample description.
+                    memberCount: 10
+                    membersStarted: 10
+                    members:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteCluster
-      summary: Delete a cluster
+      summary: Delete a Cluster
       description: Deletes a cluster from the collective.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/clusterName'
       responses:
         '204':
           description: Cluster deleted
@@ -258,15 +381,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{clusterName}/members:
     get:
       operationId: listClusterMembers
-      summary: List cluster members
+      summary: List Cluster Members
       description: Returns a list of members in the specified cluster.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/clusterName'
       responses:
         '200':
           description: List of cluster members
@@ -276,18 +402,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CollectiveMember'
+              examples:
+                Listclustermembers200Example:
+                  summary: Default listClusterMembers 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    hostName: example_value
+                    userDir: example_value
+                    status: STARTED
+                    clusterName: example_value
+                    httpsPort: 10
+                    wlpVersion: example_value
+                    javaVersion: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: addClusterMember
-      summary: Add a member to a cluster
+      summary: Add a Member to a Cluster
       description: Adds an existing collective member to the specified cluster.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/clusterName'
       requestBody:
         required: true
         content:
@@ -295,11 +437,17 @@ paths:
             schema:
               type: object
               required:
-                - memberName
+              - memberName
               properties:
                 memberName:
                   type: string
                   description: Name of the collective member to add
+            examples:
+              AddclustermemberRequestExample:
+                summary: Default addClusterMember request
+                x-microcks-default: true
+                value:
+                  memberName: example_value
       responses:
         '200':
           description: Member added to cluster
@@ -309,16 +457,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{clusterName}/members/{memberName}:
     delete:
       operationId: removeClusterMember
-      summary: Remove a member from a cluster
+      summary: Remove a Member From a Cluster
       description: Removes a member from the specified cluster.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
-        - $ref: '#/components/parameters/memberName'
+      - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/memberName'
       responses:
         '204':
           description: Member removed from cluster
@@ -326,15 +477,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{clusterName}/start:
     post:
       operationId: startCluster
-      summary: Start all cluster members
+      summary: Start All Cluster Members
       description: Starts all stopped members in the specified cluster.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/clusterName'
       responses:
         '200':
           description: Cluster start initiated
@@ -342,19 +496,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClusterStatus'
+              examples:
+                Startcluster200Example:
+                  summary: Default startCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    membersStarted: 10
+                    membersTotal: 10
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /clusters/{clusterName}/stop:
     post:
       operationId: stopCluster
-      summary: Stop all cluster members
+      summary: Stop All Cluster Members
       description: Stops all running members in the specified cluster.
       tags:
-        - Clusters
+      - Clusters
       parameters:
-        - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/clusterName'
       responses:
         '200':
           description: Cluster stop initiated
@@ -362,17 +528,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClusterStatus'
+              examples:
+                Stopcluster200Example:
+                  summary: Default stopCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    membersStarted: 10
+                    membersTotal: 10
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /hosts:
     get:
       operationId: listHosts
-      summary: List hosts
+      summary: List Hosts
       description: Returns a list of hosts registered in the collective.
       tags:
-        - Hosts
+      - Hosts
       responses:
         '200':
           description: List of hosts
@@ -382,22 +560,37 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Host'
+              examples:
+                Listhosts200Example:
+                  summary: Default listHosts 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    os: example_value
+                    arch: example_value
+                    processors: 10
+                    members:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /hosts/{hostName}:
     get:
       operationId: getHost
-      summary: Get host details
+      summary: Get Host Details
       description: Returns details about a specific host in the collective.
       tags:
-        - Hosts
+      - Hosts
       parameters:
-        - name: hostName
-          in: path
-          required: true
-          description: Hostname
-          schema:
-            type: string
+      - name: hostName
+        in: path
+        required: true
+        description: Hostname
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Host details
@@ -405,17 +598,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Host'
+              examples:
+                Gethost200Example:
+                  summary: Default getHost 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    os: example_value
+                    arch: example_value
+                    processors: 10
+                    members:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /controller:
     get:
       operationId: getControllerInfo
-      summary: Get controller information
+      summary: Get Controller Information
       description: Returns information about the collective controller.
       tags:
-        - Controller
+      - Controller
       responses:
         '200':
           description: Controller information
@@ -423,15 +630,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ControllerInfo'
+              examples:
+                Getcontrollerinfo200Example:
+                  summary: Default getControllerInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    hostName: example_value
+                    httpsPort: 10
+                    version: example_value
+                    memberCount: 10
+                    clusterCount: 10
+                    hostCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repository/config:
     get:
       operationId: listSharedConfigs
-      summary: List shared configurations
+      summary: List Shared Configurations
       description: Returns a list of shared configurations in the collective repository.
       tags:
-        - Repositories
+      - Repositories
       responses:
         '200':
           description: List of shared configurations
@@ -441,20 +663,41 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SharedConfig'
+              examples:
+                Listsharedconfigs200Example:
+                  summary: Default listSharedConfigs 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    description: A sample description.
+                    content: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSharedConfig
-      summary: Create a shared configuration
+      summary: Create a Shared Configuration
       description: Creates a new shared configuration in the repository.
       tags:
-        - Repositories
+      - Repositories
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SharedConfig'
+            examples:
+              CreatesharedconfigRequestExample:
+                summary: Default createSharedConfig request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  content: example_value
+                  lastModified: '2026-01-15T10:30:00Z'
       responses:
         '201':
           description: Shared configuration created
@@ -462,17 +705,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SharedConfig'
+              examples:
+                Createsharedconfig201Example:
+                  summary: Default createSharedConfig 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    description: A sample description.
+                    content: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /scaling/policies:
     get:
       operationId: listScalingPolicies
-      summary: List scaling policies
+      summary: List Scaling Policies
       description: Returns a list of auto-scaling policies.
       tags:
-        - Scaling
+      - Scaling
       responses:
         '200':
           description: List of scaling policies
@@ -482,20 +737,61 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Listscalingpolicies200Example:
+                  summary: Default listScalingPolicies 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createScalingPolicy
-      summary: Create a scaling policy
+      summary: Create a Scaling Policy
       description: Creates a new auto-scaling policy for a cluster.
       tags:
-        - Scaling
+      - Scaling
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ScalingPolicy'
+            examples:
+              CreatescalingpolicyRequestExample:
+                summary: Default createScalingPolicy request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  clusterName: example_value
+                  enabled: true
+                  minMembers: 10
+                  maxMembers: 10
+                  scaleUpTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  scaleDownTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  cooldownPeriod: 10
       responses:
         '201':
           description: Scaling policy created
@@ -503,24 +799,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Createscalingpolicy201Example:
+                  summary: Default createScalingPolicy 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /scaling/policies/{policyName}:
     get:
       operationId: getScalingPolicy
-      summary: Get scaling policy details
+      summary: Get Scaling Policy Details
       description: Returns details of a specific auto-scaling policy.
       tags:
-        - Scaling
+      - Scaling
       parameters:
-        - name: policyName
-          in: path
-          required: true
-          description: Scaling policy name
-          schema:
-            type: string
+      - name: policyName
+        in: path
+        required: true
+        description: Scaling policy name
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Scaling policy details
@@ -528,28 +847,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Getscalingpolicy200Example:
+                  summary: Default getScalingPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateScalingPolicy
-      summary: Update a scaling policy
+      summary: Update a Scaling Policy
       description: Updates an existing auto-scaling policy.
       tags:
-        - Scaling
+      - Scaling
       parameters:
-        - name: policyName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: policyName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ScalingPolicy'
+            examples:
+              UpdatescalingpolicyRequestExample:
+                summary: Default updateScalingPolicy request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  clusterName: example_value
+                  enabled: true
+                  minMembers: 10
+                  maxMembers: 10
+                  scaleUpTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  scaleDownTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  cooldownPeriod: 10
       responses:
         '200':
           description: Scaling policy updated
@@ -557,24 +918,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Updatescalingpolicy200Example:
+                  summary: Default updateScalingPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteScalingPolicy
-      summary: Delete a scaling policy
+      summary: Delete a Scaling Policy
       description: Deletes an auto-scaling policy.
       tags:
-        - Scaling
+      - Scaling
       parameters:
-        - name: policyName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: policyName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Scaling policy deleted
@@ -582,6 +966,9 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -610,192 +997,238 @@ components:
         name:
           type: string
           description: Member server name
+          example: Example Title
         hostName:
           type: string
           description: Host where the member is located
+          example: example_value
         userDir:
           type: string
           description: User directory path
+          example: example_value
         status:
           type: string
           enum:
-            - STARTED
-            - STOPPED
-            - UNKNOWN
+          - STARTED
+          - STOPPED
+          - UNKNOWN
           description: Member status
+          example: STARTED
         clusterName:
           type: string
           description: Cluster the member belongs to
+          example: example_value
         httpsPort:
           type: integer
           description: HTTPS port
+          example: 10
         wlpVersion:
           type: string
           description: Liberty version
+          example: example_value
         javaVersion:
           type: string
           description: Java version
+          example: example_value
     MemberStatus:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         status:
           type: string
           enum:
-            - STARTED
-            - STOPPED
-            - STARTING
-            - STOPPING
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
         message:
           type: string
+          example: example_value
     CollectiveCluster:
       type: object
       properties:
         name:
           type: string
           description: Cluster name
+          example: Example Title
         description:
           type: string
           description: Cluster description
+          example: A sample description.
         memberCount:
           type: integer
           description: Number of members in the cluster
+          example: 10
         membersStarted:
           type: integer
           description: Number of started members
+          example: 10
         members:
           type: array
           items:
             type: string
           description: List of member server names
+          example: []
     ClusterStatus:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         membersStarted:
           type: integer
+          example: 10
         membersTotal:
           type: integer
+          example: 10
         message:
           type: string
+          example: example_value
     Host:
       type: object
       properties:
         name:
           type: string
           description: Hostname
+          example: Example Title
         os:
           type: string
           description: Operating system
+          example: example_value
         arch:
           type: string
           description: Architecture
+          example: example_value
         processors:
           type: integer
           description: Number of processors
+          example: 10
         members:
           type: array
           items:
             type: string
           description: Members on this host
+          example: []
     ControllerInfo:
       type: object
       properties:
         name:
           type: string
           description: Controller server name
+          example: Example Title
         hostName:
           type: string
           description: Controller hostname
+          example: example_value
         httpsPort:
           type: integer
           description: HTTPS port
+          example: 10
         version:
           type: string
           description: Liberty version
+          example: example_value
         memberCount:
           type: integer
           description: Total number of collective members
+          example: 10
         clusterCount:
           type: integer
           description: Total number of clusters
+          example: 10
         hostCount:
           type: integer
           description: Total number of hosts
+          example: 10
     SharedConfig:
       type: object
       properties:
         name:
           type: string
           description: Configuration name
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         content:
           type: string
           description: Configuration XML content
+          example: example_value
         lastModified:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     ScalingPolicy:
       type: object
       properties:
         name:
           type: string
           description: Policy name
+          example: Example Title
         clusterName:
           type: string
           description: Target cluster
+          example: example_value
         enabled:
           type: boolean
           description: Whether the policy is active
+          example: true
         minMembers:
           type: integer
           description: Minimum number of cluster members
+          example: 10
         maxMembers:
           type: integer
           description: Maximum number of cluster members
+          example: 10
         scaleUpTrigger:
           type: object
           properties:
             metric:
               type: string
               enum:
-                - cpuUtilization
-                - memoryUtilization
-                - responseTime
+              - cpuUtilization
+              - memoryUtilization
+              - responseTime
             threshold:
               type: number
             duration:
               type: integer
               description: Duration in seconds before triggering
+          example: example_value
         scaleDownTrigger:
           type: object
           properties:
             metric:
               type: string
               enum:
-                - cpuUtilization
-                - memoryUtilization
-                - responseTime
+              - cpuUtilization
+              - memoryUtilization
+              - responseTime
             threshold:
               type: number
             duration:
               type: integer
+          example: example_value
         cooldownPeriod:
           type: integer
           description: Cooldown period in seconds between scaling events
+          example: 10
     Error:
       type: object
       properties:
         code:
           type: string
+          example: example_value
         message:
           type: string
+          example: example_value
       required:
-        - code
-        - message
+      - code
+      - message
   responses:
     BadRequest:
       description: Bad request

@@ -18,35 +18,35 @@ externalDocs:
   description: Open Liberty API Reference
   url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
 servers:
-  - url: https://localhost:9443
-    description: Default Open Liberty Server
+- url: https://localhost:9443
+  description: Default Open Liberty Server
 security:
-  - basicAuth: []
+- basicAuth: []
 tags:
-  - name: Health
-    description: MicroProfile Health Check API
-  - name: Metrics
-    description: MicroProfile Metrics API
-  - name: OpenAPI
-    description: MicroProfile OpenAPI documentation endpoints
-  - name: Config
-    description: Server configuration API
-  - name: Batch
-    description: Jakarta Batch job management
-  - name: JWT
-    description: MicroProfile JWT authentication
-  - name: Fault Tolerance
-    description: MicroProfile Fault Tolerance status
-  - name: REST Client
-    description: MicroProfile REST Client metadata
+- name: Health
+  description: MicroProfile Health Check API
+- name: Metrics
+  description: MicroProfile Metrics API
+- name: OpenAPI
+  description: MicroProfile OpenAPI documentation endpoints
+- name: Config
+  description: Server configuration API
+- name: Batch
+  description: Jakarta Batch job management
+- name: JWT
+  description: MicroProfile JWT authentication
+- name: Fault Tolerance
+  description: MicroProfile Fault Tolerance status
+- name: REST Client
+  description: MicroProfile REST Client metadata
 paths:
   /health:
     get:
       operationId: getOverallHealth
-      summary: Get overall health status
+      summary: Get Overall Health Status
       description: Returns the overall health check status including all readiness and liveness checks.
       tags:
-        - Health
+      - Health
       security: []
       responses:
         '200':
@@ -55,19 +55,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getoverallhealth200Example:
+                  summary: Default getOverallHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
         '503':
           description: One or more health checks failed
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getoverallhealth503Example:
+                  summary: Default getOverallHealth 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /health/ready:
     get:
       operationId: getReadiness
-      summary: Get readiness status
+      summary: Get Readiness Status
       description: Returns readiness check results indicating whether the server is ready to accept traffic.
       tags:
-        - Health
+      - Health
       security: []
       responses:
         '200':
@@ -76,19 +99,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getreadiness200Example:
+                  summary: Default getReadiness 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
         '503':
           description: Server is not ready
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getreadiness503Example:
+                  summary: Default getReadiness 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /health/live:
     get:
       operationId: getLiveness
-      summary: Get liveness status
+      summary: Get Liveness Status
       description: Returns liveness check results indicating whether the server is alive and running.
       tags:
-        - Health
+      - Health
       security: []
       responses:
         '200':
@@ -97,19 +143,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getliveness200Example:
+                  summary: Default getLiveness 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
         '503':
           description: Server is not alive
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getliveness503Example:
+                  summary: Default getLiveness 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /health/started:
     get:
       operationId: getStarted
-      summary: Get startup status
+      summary: Get Startup Status
       description: Returns startup check results indicating whether the server has completed startup.
       tags:
-        - Health
+      - Health
       security: []
       responses:
         '200':
@@ -118,38 +187,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getstarted200Example:
+                  summary: Default getStarted 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
         '503':
           description: Server has not started
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getstarted503Example:
+                  summary: Default getStarted 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /metrics:
     get:
       operationId: getAllMetrics
-      summary: Get all metrics
+      summary: Get All Metrics
       description: Returns all available metrics in Prometheus or JSON format.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - name: Accept
-          in: header
-          description: Response format
-          schema:
-            type: string
-            enum:
-              - application/json
-              - text/plain
-            default: text/plain
-        - name: scope
-          in: query
-          description: Metrics scope filter
-          schema:
-            type: string
-            enum:
-              - base
-              - vendor
-              - application
+      - name: Accept
+        in: header
+        description: Response format
+        schema:
+          type: string
+          enum:
+          - application/json
+          - text/plain
+          default: text/plain
+        example: application/json
+      - name: scope
+        in: query
+        description: Metrics scope filter
+        schema:
+          type: string
+          enum:
+          - base
+          - vendor
+          - application
+        example: base
       responses:
         '200':
           description: Metrics data
@@ -158,18 +252,31 @@ paths:
               schema:
                 type: string
                 description: Prometheus format metrics
+              examples:
+                Getallmetrics200Example:
+                  summary: Default getAllMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getallmetrics200Example:
+                  summary: Default getAllMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /metrics/base:
     get:
       operationId: getBaseMetrics
-      summary: Get base metrics
+      summary: Get Base Metrics
       description: Returns base metrics defined by the MicroProfile Metrics specification.
       tags:
-        - Metrics
+      - Metrics
       responses:
         '200':
           description: Base metrics data
@@ -177,18 +284,31 @@ paths:
             text/plain:
               schema:
                 type: string
+              examples:
+                Getbasemetrics200Example:
+                  summary: Default getBaseMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getbasemetrics200Example:
+                  summary: Default getBaseMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /metrics/vendor:
     get:
       operationId: getVendorMetrics
-      summary: Get vendor metrics
+      summary: Get Vendor Metrics
       description: Returns Liberty-specific vendor metrics.
       tags:
-        - Metrics
+      - Metrics
       responses:
         '200':
           description: Vendor metrics data
@@ -196,18 +316,31 @@ paths:
             text/plain:
               schema:
                 type: string
+              examples:
+                Getvendormetrics200Example:
+                  summary: Default getVendorMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getvendormetrics200Example:
+                  summary: Default getVendorMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /metrics/application:
     get:
       operationId: getApplicationMetrics
-      summary: Get application metrics
+      summary: Get Application Metrics
       description: Returns application-defined custom metrics.
       tags:
-        - Metrics
+      - Metrics
       responses:
         '200':
           description: Application metrics data
@@ -215,29 +348,43 @@ paths:
             text/plain:
               schema:
                 type: string
+              examples:
+                Getapplicationmetrics200Example:
+                  summary: Default getApplicationMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
             application/json:
               schema:
                 $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getapplicationmetrics200Example:
+                  summary: Default getApplicationMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /openapi:
     get:
       operationId: getOpenApiDocument
-      summary: Get OpenAPI document
+      summary: Get Openapi Document
       description: Returns the OpenAPI document describing all deployed REST endpoints.
       tags:
-        - OpenAPI
+      - OpenAPI
       security: []
       parameters:
-        - name: format
-          in: query
-          description: Output format
-          schema:
-            type: string
-            enum:
-              - json
-              - yaml
-            default: yaml
+      - name: format
+        in: query
+        description: Output format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+          default: yaml
+        example: json
       responses:
         '200':
           description: OpenAPI document
@@ -245,16 +392,29 @@ paths:
             application/yaml:
               schema:
                 type: string
+              examples:
+                Getopenapidocument200Example:
+                  summary: Default getOpenApiDocument 200 response
+                  x-microcks-default: true
+                  value: example_value
             application/json:
               schema:
                 type: object
+              examples:
+                Getopenapidocument200Example:
+                  summary: Default getOpenApiDocument 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /openapi/ui:
     get:
       operationId: getOpenApiUi
-      summary: Access the OpenAPI UI
+      summary: Access the Openapi Ui
       description: Returns the Swagger UI for exploring and testing deployed REST endpoints.
       tags:
-        - OpenAPI
+      - OpenAPI
       security: []
       responses:
         '200':
@@ -263,13 +423,21 @@ paths:
             text/html:
               schema:
                 type: string
+              examples:
+                Getopenapiui200Example:
+                  summary: Default getOpenApiUi 200 response
+                  x-microcks-default: true
+                  value: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/config:
     get:
       operationId: getServerConfig
-      summary: Get server configuration
+      summary: Get Server Configuration
       description: Returns the current Open Liberty server configuration.
       tags:
-        - Config
+      - Config
       responses:
         '200':
           description: Server configuration
@@ -277,22 +445,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerConfig'
+              examples:
+                Getserverconfig200Example:
+                  summary: Default getServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    description: A sample description.
+                    featureManager:
+                      feature:
+                      - example_value
+                    httpEndpoint:
+                    - id: abc123
+                      host: example_value
+                      httpPort: 10
+                      httpsPort: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/config/{elementName}:
     get:
       operationId: getConfigElement
-      summary: Get configuration element
+      summary: Get Configuration Element
       description: Returns a specific configuration element type.
       tags:
-        - Config
+      - Config
       parameters:
-        - name: elementName
-          in: path
-          required: true
-          description: Configuration element name
-          schema:
-            type: string
+      - name: elementName
+        in: path
+        required: true
+        description: Configuration element name
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Configuration element details
@@ -303,44 +489,57 @@ paths:
                 items:
                   type: object
                   additionalProperties: true
+              examples:
+                Getconfigelement200Example:
+                  summary: Default getConfigElement 200 response
+                  x-microcks-default: true
+                  value:
+                  - {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/batch/jobinstances:
     get:
       operationId: listBatchJobInstances
-      summary: List batch job instances
+      summary: List Batch Job Instances
       description: Returns a list of Jakarta Batch job instances.
       tags:
-        - Batch
+      - Batch
       parameters:
-        - name: jobName
-          in: query
-          description: Filter by job name
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: Page number
-          schema:
-            type: integer
-            default: 0
-        - name: pageSize
-          in: query
-          description: Number of items per page
-          schema:
-            type: integer
-            default: 50
-        - name: sortBy
-          in: query
-          description: Sort field
-          schema:
-            type: string
-            enum:
-              - jobInstanceId
-              - createTime
-              - instanceState
+      - name: jobName
+        in: query
+        description: Filter by job name
+        schema:
+          type: string
+        example: example_value
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 50
+        example: 10
+      - name: sortBy
+        in: query
+        description: Sort field
+        schema:
+          type: string
+          enum:
+          - jobInstanceId
+          - createTime
+          - instanceState
+        example: jobInstanceId
       responses:
         '200':
           description: List of job instances
@@ -350,22 +549,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BatchJobInstance'
+              examples:
+                Listbatchjobinstances200Example:
+                  summary: Default listBatchJobInstances 200 response
+                  x-microcks-default: true
+                  value:
+                  - jobInstanceId: '500123'
+                    jobName: example_value
+                    appName: example_value
+                    submitter: example_value
+                    batchStatus: STARTING
+                    createTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    _links:
+                    - rel: example_value
+                      href: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/batch/jobinstances/{jobInstanceId}:
     get:
       operationId: getBatchJobInstance
-      summary: Get batch job instance
+      summary: Get Batch Job Instance
       description: Returns details of a specific batch job instance.
       tags:
-        - Batch
+      - Batch
       parameters:
-        - name: jobInstanceId
-          in: path
-          required: true
-          description: Job instance identifier
-          schema:
-            type: integer
+      - name: jobInstanceId
+        in: path
+        required: true
+        description: Job instance identifier
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '200':
           description: Job instance details
@@ -373,23 +592,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BatchJobInstance'
+              examples:
+                Getbatchjobinstance200Example:
+                  summary: Default getBatchJobInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    appName: example_value
+                    submitter: example_value
+                    batchStatus: STARTING
+                    createTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    _links:
+                    - rel: example_value
+                      href: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/batch/jobinstances/{jobInstanceId}/jobexecutions:
     get:
       operationId: listBatchJobExecutions
-      summary: List job executions for an instance
+      summary: List Job Executions for an Instance
       description: Returns a list of executions for a specific batch job instance.
       tags:
-        - Batch
+      - Batch
       parameters:
-        - name: jobInstanceId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: jobInstanceId
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '200':
           description: List of job executions
@@ -399,24 +638,58 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Listbatchjobexecutions200Example:
+                  summary: Default listBatchJobExecutions 200 response
+                  x-microcks-default: true
+                  value:
+                  - executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/batch/jobexecutions/{executionId}:
     get:
       operationId: getBatchJobExecution
-      summary: Get batch job execution
+      summary: Get Batch Job Execution
       description: Returns details of a specific batch job execution.
       tags:
-        - Batch
+      - Batch
       parameters:
-        - name: executionId
-          in: path
-          required: true
-          description: Job execution identifier
-          schema:
-            type: integer
+      - name: executionId
+        in: path
+        required: true
+        description: Job execution identifier
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '200':
           description: Job execution details
@@ -424,23 +697,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Getbatchjobexecution200Example:
+                  summary: Default getBatchJobExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/batch/jobexecutions/{executionId}/stop:
     put:
       operationId: stopBatchJobExecution
-      summary: Stop a batch job execution
+      summary: Stop a Batch Job Execution
       description: Stops a running batch job execution.
       tags:
-        - Batch
+      - Batch
       parameters:
-        - name: executionId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: executionId
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '200':
           description: Job execution stopped
@@ -448,23 +755,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Stopbatchjobexecution200Example:
+                  summary: Default stopBatchJobExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /ibm/api/batch/jobexecutions/{executionId}/restart:
     put:
       operationId: restartBatchJobExecution
-      summary: Restart a batch job execution
+      summary: Restart a Batch Job Execution
       description: Restarts a failed or stopped batch job execution.
       tags:
-        - Batch
+      - Batch
       parameters:
-        - name: executionId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: executionId
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       requestBody:
         content:
           application/json:
@@ -476,6 +817,12 @@ paths:
                   additionalProperties:
                     type: string
                   description: Job parameters for the restart
+            examples:
+              RestartbatchjobexecutionRequestExample:
+                summary: Default restartBatchJobExecution request
+                x-microcks-default: true
+                value:
+                  jobParameters: example_value
       responses:
         '200':
           description: Job execution restarted
@@ -483,10 +830,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Restartbatchjobexecution200Example:
+                  summary: Default restartBatchJobExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -505,8 +885,9 @@ components:
         status:
           type: string
           enum:
-            - UP
-            - DOWN
+          - UP
+          - DOWN
+          example: UP
         checks:
           type: array
           items:
@@ -518,12 +899,13 @@ components:
               status:
                 type: string
                 enum:
-                  - UP
-                  - DOWN
+                - UP
+                - DOWN
               data:
                 type: object
                 additionalProperties: true
                 description: Additional health check data
+          example: []
     MetricsResponse:
       type: object
       additionalProperties:
@@ -538,12 +920,12 @@ components:
           type:
             type: string
             enum:
-              - counter
-              - gauge
-              - timer
-              - histogram
-              - simple_timer
-              - concurrent_gauge
+            - counter
+            - gauge
+            - timer
+            - histogram
+            - simple_timer
+            - concurrent_gauge
           value:
             type: number
           tags:
@@ -555,6 +937,7 @@ components:
       properties:
         description:
           type: string
+          example: A sample description.
         featureManager:
           type: object
           properties:
@@ -562,6 +945,7 @@ components:
               type: array
               items:
                 type: string
+          example: example_value
         httpEndpoint:
           type: array
           items:
@@ -575,38 +959,47 @@ components:
                 type: integer
               httpsPort:
                 type: integer
+          example: []
       additionalProperties: true
     BatchJobInstance:
       type: object
       properties:
         jobInstanceId:
           type: integer
+          example: '500123'
         jobName:
           type: string
+          example: example_value
         appName:
           type: string
+          example: example_value
         submitter:
           type: string
+          example: example_value
         batchStatus:
           type: string
           enum:
-            - STARTING
-            - STARTED
-            - STOPPING
-            - STOPPED
-            - FAILED
-            - COMPLETED
-            - ABANDONED
+          - STARTING
+          - STARTED
+          - STOPPING
+          - STOPPED
+          - FAILED
+          - COMPLETED
+          - ABANDONED
+          example: STARTING
         createTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         lastUpdatedTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         jobParameters:
           type: object
           additionalProperties:
             type: string
+          example: example_value
         _links:
           type: array
           items:
@@ -617,43 +1010,54 @@ components:
               href:
                 type: string
                 format: uri
+          example: []
     BatchJobExecution:
       type: object
       properties:
         executionId:
           type: integer
+          example: '500123'
         jobInstanceId:
           type: integer
+          example: '500123'
         jobName:
           type: string
+          example: example_value
         batchStatus:
           type: string
           enum:
-            - STARTING
-            - STARTED
-            - STOPPING
-            - STOPPED
-            - FAILED
-            - COMPLETED
-            - ABANDONED
+          - STARTING
+          - STARTED
+          - STOPPING
+          - STOPPED
+          - FAILED
+          - COMPLETED
+          - ABANDONED
+          example: STARTING
         exitStatus:
           type: string
+          example: example_value
         createTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         startTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         endTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         lastUpdatedTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         jobParameters:
           type: object
           additionalProperties:
             type: string
+          example: example_value
         stepExecutions:
           type: array
           items:
@@ -689,16 +1093,19 @@ components:
                 type: integer
               writeSkipCount:
                 type: integer
+          example: []
     Error:
       type: object
       properties:
         code:
           type: string
+          example: example_value
         message:
           type: string
+          example: example_value
       required:
-        - code
-        - message
+      - code
+      - message
   responses:
     Unauthorized:
       description: Authentication required

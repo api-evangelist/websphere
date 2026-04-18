@@ -1,0 +1,10 @@
+{
+  "name": "Example Title",
+  "clusterName": "example_value",
+  "enabled": true,
+  "minMembers": 10,
+  "maxMembers": 10,
+  "scaleUpTrigger": "example_value",
+  "scaleDownTrigger": "example_value",
+  "cooldownPeriod": 10
+}

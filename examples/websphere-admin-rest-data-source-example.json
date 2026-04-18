@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "jndiName": "example_value",
+  "databaseType": "example_value",
+  "jdbcProvider": "example_value",
+  "connectionPool": "example_value",
+  "status": "example_value"
+}

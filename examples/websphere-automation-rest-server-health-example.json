@@ -1,0 +1,11 @@
+{
+  "serverId": "500123",
+  "serverName": "example_value",
+  "status": "example_value",
+  "uptime": 10,
+  "cpuUsage": 42.5,
+  "memoryUsage": 42.5,
+  "openVulnerabilities": 10,
+  "lastHealthCheck": "example_value",
+  "checks": []
+}

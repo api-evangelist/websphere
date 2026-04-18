@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HealthStatus",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "serverName": {
+      "type": "string"
+    },
+    "uptime": {
+      "type": "integer",
+      "description": "Server uptime in milliseconds"
+    },
+    "checks": {
+      "type": "array"
+    }
+  }
+}

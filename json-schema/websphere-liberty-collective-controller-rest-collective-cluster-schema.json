@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CollectiveCluster",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Cluster name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Cluster description"
+    },
+    "memberCount": {
+      "type": "integer",
+      "description": "Number of members in the cluster"
+    },
+    "membersStarted": {
+      "type": "integer",
+      "description": "Number of started members"
+    },
+    "members": {
+      "type": "array",
+      "description": "List of member server names"
+    }
+  }
+}

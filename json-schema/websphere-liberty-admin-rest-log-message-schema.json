@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LogMessage",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "logger": {
+      "type": "string"
+    },
+    "thread": {
+      "type": "string"
+    },
+    "sequence": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Example Title",
+  "nodeName": "example_value",
+  "clusterName": "example_value",
+  "status": "example_value",
+  "serverType": "example_value",
+  "pid": "500123",
+  "ports": []
+}

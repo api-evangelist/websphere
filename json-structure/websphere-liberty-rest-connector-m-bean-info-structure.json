@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MBeanInfo",
+  "type": "object",
+  "properties": {
+    "objectName": {
+      "type": "string"
+    },
+    "className": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "URL": {
+      "type": "string"
+    }
+  }
+}

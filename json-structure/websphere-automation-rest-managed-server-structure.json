@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ManagedServer",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "host": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string"
+    },
+    "vulnerabilityCount": {
+      "type": "integer"
+    },
+    "lastScanDate": {
+      "type": "string"
+    },
+    "registeredDate": {
+      "type": "string"
+    },
+    "installedFixes": {
+      "type": "array"
+    }
+  }
+}

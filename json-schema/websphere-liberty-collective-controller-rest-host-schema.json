@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Host",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Hostname"
+    },
+    "os": {
+      "type": "string",
+      "description": "Operating system"
+    },
+    "arch": {
+      "type": "string",
+      "description": "Architecture"
+    },
+    "processors": {
+      "type": "integer",
+      "description": "Number of processors"
+    },
+    "members": {
+      "type": "array",
+      "description": "Members on this host"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DataSource",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Data source name"
+    },
+    "jndiName": {
+      "type": "string",
+      "description": "JNDI name"
+    },
+    "databaseType": {
+      "type": "string",
+      "description": "Database type"
+    },
+    "jdbcProvider": {
+      "type": "string",
+      "description": "JDBC provider name"
+    },
+    "connectionPool": {
+      "type": "object"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

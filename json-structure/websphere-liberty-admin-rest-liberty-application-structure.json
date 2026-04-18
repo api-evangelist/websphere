@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "LibertyApplication",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "contextRoot": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "autoStart": {
+      "type": "boolean"
+    }
+  }
+}

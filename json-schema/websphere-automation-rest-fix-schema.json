@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fix",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Fix identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Fix name"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "resolvedCVEs": {
+      "type": "array",
+      "description": "CVEs resolved by this fix"
+    },
+    "applicableVersions": {
+      "type": "array",
+      "description": "WebSphere versions this fix applies to"
+    },
+    "downloadURL": {
+      "type": "string"
+    },
+    "releaseDate": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer",
+      "description": "Fix size in bytes"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Example Title",
+  "hostName": "example_value",
+  "httpsPort": 10,
+  "version": "example_value",
+  "memberCount": 10,
+  "clusterCount": 10,
+  "hostCount": 10
+}

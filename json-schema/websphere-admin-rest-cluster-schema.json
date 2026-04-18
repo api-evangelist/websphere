@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cluster",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Cluster name"
+    },
+    "status": {
+      "type": "string"
+    },
+    "members": {
+      "type": "array"
+    },
+    "preferLocal": {
+      "type": "boolean",
+      "description": "Whether to prefer local routing"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Channel",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "connectionName": {
+      "type": "string"
+    },
+    "transmissionQueue": {
+      "type": "string"
+    },
+    "status": {
+      "type": "object"
+    }
+  }
+}

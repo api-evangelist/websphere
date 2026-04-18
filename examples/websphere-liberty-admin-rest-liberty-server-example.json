@@ -1,0 +1,11 @@
+{
+  "name": "Example Title",
+  "wlpVersion": "example_value",
+  "productEdition": "example_value",
+  "javaVersion": "example_value",
+  "javaVendor": "example_value",
+  "serverStatus": "example_value",
+  "uptime": 10,
+  "installDirectory": "example_value",
+  "serverDirectory": "example_value"
+}

@@ -1,0 +1,310 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "WebSphere Application Server Admin REST API"
+  description: "REST API for administrative operations on WebSphere Application Server including deployment, configuration, and monitoring."
+  tags:
+    - IBM WebSphere
+    - Administration
+    - Configuration
+    - Deployment
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
+      WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: admin-rest
+      baseUri: https://localhost:9443/ibm/api
+      description: "REST API for WebSphere Application Server administration"
+      authentication:
+        type: basic
+        username: "{{WEBSPHERE_USERNAME}}"
+        password: "{{WEBSPHERE_PASSWORD}}"
+      resources:
+        - name: applications
+          path: /applications
+          description: "Application deployment and lifecycle management"
+          operations:
+            - name: list-applications
+              method: GET
+              description: "List deployed applications"
+              inputParameters:
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by application status"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-application
+              method: GET
+              description: "Get application details"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: deploy-application
+              method: POST
+              description: "Deploy a new application"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  contextRoot: "{{tools.contextRoot}}"
+                  targetServer: "{{tools.targetServer}}"
+            - name: start-application
+              method: POST
+              description: "Start a deployed application"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: stop-application
+              method: POST
+              description: "Stop a running application"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: uninstall-application
+              method: DELETE
+              description: "Uninstall a deployed application"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: servers
+          path: /servers
+          description: "Server configuration and management"
+          operations:
+            - name: list-servers
+              method: GET
+              description: "List all servers in the cell"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-server
+              method: GET
+              description: "Get server details"
+              inputParameters:
+                - name: serverName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Server name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: start-server
+              method: POST
+              description: "Start a server"
+              inputParameters:
+                - name: serverName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Server name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: stop-server
+              method: POST
+              description: "Stop a server"
+              inputParameters:
+                - name: serverName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Server name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: clusters
+          path: /clusters
+          description: "Cluster management operations"
+          operations:
+            - name: list-clusters
+              method: GET
+              description: "List all clusters"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-cluster
+              method: GET
+              description: "Get cluster details"
+              inputParameters:
+                - name: clusterName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: start-cluster
+              method: POST
+              description: "Start all members of a cluster"
+              inputParameters:
+                - name: clusterName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: stop-cluster
+              method: POST
+              description: "Stop all members of a cluster"
+              inputParameters:
+                - name: clusterName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: monitoring
+          path: /monitoring
+          description: "Performance monitoring and health checks"
+          operations:
+            - name: get-performance-data
+              method: GET
+              description: "Get performance monitoring data"
+              inputParameters:
+                - name: module
+                  in: query
+                  type: string
+                  required: false
+                  description: "Performance module name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-health-status
+              method: GET
+              description: "Get server health status"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: configuration
+          path: /config
+          description: "Server configuration management"
+          operations:
+            - name: list-config-resources
+              method: GET
+              description: "List configuration resource types"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-config-resources
+              method: GET
+              description: "List resources of a specific type"
+              inputParameters:
+                - name: resourceType
+                  in: path
+                  type: string
+                  required: true
+                  description: "Configuration resource type"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: admin-rest-api
+      resources:
+        - path: /v1/applications
+          name: applications
+          description: "Application management"
+          operations:
+            - method: GET
+              name: list-applications
+              description: "List deployed applications"
+              call: "admin-rest.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: admin-rest-mcp
+      transport: http
+      tools:
+        - name: list-applications
+          description: "List deployed applications"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "admin-rest.list-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."

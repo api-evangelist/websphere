@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Queue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Queue name"
+    },
+    "type": {
+      "type": "string",
+      "description": "Queue type"
+    },
+    "description": {
+      "type": "string"
+    },
+    "maxDepth": {
+      "type": "integer",
+      "description": "Maximum queue depth"
+    },
+    "maxMessageLength": {
+      "type": "integer",
+      "description": "Maximum message length in bytes"
+    },
+    "currentDepth": {
+      "type": "integer",
+      "description": "Current number of messages on the queue"
+    },
+    "inhibitPut": {
+      "type": "boolean",
+      "description": "Whether put operations are inhibited"
+    },
+    "inhibitGet": {
+      "type": "boolean",
+      "description": "Whether get operations are inhibited"
+    },
+    "persistence": {
+      "type": "object"
+    },
+    "cluster": {
+      "type": "object"
+    },
+    "status": {
+      "type": "object"
+    }
+  }
+}

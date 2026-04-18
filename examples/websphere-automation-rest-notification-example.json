@@ -1,0 +1,10 @@
+{
+  "id": "abc123",
+  "type": "example_value",
+  "severity": "example_value",
+  "title": "Example Title",
+  "message": "example_value",
+  "read": true,
+  "createdDate": "example_value",
+  "relatedResourceId": "500123"
+}

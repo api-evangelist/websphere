@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Queue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "maxDepth": {
+      "type": "integer"
+    },
+    "maxMessageLength": {
+      "type": "integer"
+    },
+    "currentDepth": {
+      "type": "integer"
+    },
+    "inhibitPut": {
+      "type": "boolean"
+    },
+    "inhibitGet": {
+      "type": "boolean"
+    },
+    "persistence": {
+      "type": "object"
+    },
+    "cluster": {
+      "type": "object"
+    },
+    "status": {
+      "type": "object"
+    }
+  }
+}

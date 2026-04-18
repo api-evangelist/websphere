@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConfigElement",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "type": "string",
+      "description": "Unique identifier"
+    },
+    "configElementName": {
+      "type": "string",
+      "description": "Configuration element type name"
+    }
+  }
+}

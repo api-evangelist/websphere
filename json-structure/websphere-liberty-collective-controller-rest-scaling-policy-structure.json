@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ScalingPolicy",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "clusterName": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "minMembers": {
+      "type": "integer"
+    },
+    "maxMembers": {
+      "type": "integer"
+    },
+    "scaleUpTrigger": {
+      "type": "object"
+    },
+    "scaleDownTrigger": {
+      "type": "object"
+    },
+    "cooldownPeriod": {
+      "type": "integer"
+    }
+  }
+}

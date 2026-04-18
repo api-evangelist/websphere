@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TopicCreate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "topicString": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

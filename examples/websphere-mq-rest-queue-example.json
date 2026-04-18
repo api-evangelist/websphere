@@ -1,0 +1,13 @@
+{
+  "name": "Example Title",
+  "type": "example_value",
+  "description": "A sample description.",
+  "maxDepth": 10,
+  "maxMessageLength": 10,
+  "currentDepth": 10,
+  "inhibitPut": true,
+  "inhibitGet": true,
+  "persistence": "example_value",
+  "cluster": "example_value",
+  "status": "example_value"
+}

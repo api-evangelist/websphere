@@ -17,40 +17,41 @@ externalDocs:
   description: WebSphere Liberty Admin REST API Documentation
   url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
 servers:
-  - url: https://localhost:9443/ibm/api
-    description: Default Liberty Admin API Server
+- url: https://localhost:9443/ibm/api
+  description: Default Liberty Admin API Server
 security:
-  - basicAuth: []
+- basicAuth: []
 tags:
-  - name: Server
-    description: Server runtime management
-  - name: Applications
-    description: Application deployment and lifecycle
-  - name: Configuration
-    description: Server configuration management
-  - name: Features
-    description: Liberty feature management
-  - name: Logging
-    description: Log access and configuration
-  - name: Monitoring
-    description: Server monitoring and metrics
-  - name: File Transfer
-    description: File upload and download operations
+- name: Server
+  description: Server runtime management
+- name: Applications
+  description: Application deployment and lifecycle
+- name: Configuration
+  description: Server configuration management
+- name: Features
+  description: Liberty feature management
+- name: Logging
+  description: Log access and configuration
+- name: Monitoring
+  description: Server monitoring and metrics
+- name: File Transfer
+  description: File upload and download operations
 paths:
   /config:
     get:
       operationId: getServerConfig
-      summary: Get server configuration
+      summary: Get Server Configuration
       description: Returns the current server configuration in JSON format.
       tags:
-        - Configuration
+      - Configuration
       parameters:
-        - name: depth
-          in: query
-          description: Depth of nested configuration elements to include
-          schema:
-            type: integer
-            default: 1
+      - name: depth
+        in: query
+        description: Depth of nested configuration elements to include
+        schema:
+          type: integer
+          default: 1
+        example: 10
       responses:
         '200':
           description: Server configuration
@@ -58,20 +59,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerConfig'
+              examples:
+                Getserverconfig200Example:
+                  summary: Default getServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    description: A sample description.
+                    featureManager:
+                      feature:
+                      - example_value
+                    httpEndpoint:
+                    - id: abc123
+                      host: example_value
+                      httpPort: 10
+                      httpsPort: 10
+                    application:
+                    - name: Example Title
+                      location: example_value
+                      type: war
+                      contextRoot: example_value
+                      state: STARTED
+                      autoStart: true
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateServerConfig
-      summary: Update server configuration
+      summary: Update Server Configuration
       description: Updates the server configuration. Changes may require a server restart.
       tags:
-        - Configuration
+      - Configuration
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ServerConfig'
+            examples:
+              UpdateserverconfigRequestExample:
+                summary: Default updateServerConfig request
+                x-microcks-default: true
+                value:
+                  description: A sample description.
+                  featureManager:
+                    feature:
+                    - example_value
+                  httpEndpoint:
+                  - id: abc123
+                    host: example_value
+                    httpPort: 10
+                    httpsPort: 10
+                  application:
+                  - name: Example Title
+                    location: example_value
+                    type: war
+                    contextRoot: example_value
+                    state: STARTED
+                    autoStart: true
       responses:
         '200':
           description: Configuration updated
@@ -79,24 +125,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerConfig'
+              examples:
+                Updateserverconfig200Example:
+                  summary: Default updateServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    description: A sample description.
+                    featureManager:
+                      feature:
+                      - example_value
+                    httpEndpoint:
+                    - id: abc123
+                      host: example_value
+                      httpPort: 10
+                      httpsPort: 10
+                    application:
+                    - name: Example Title
+                      location: example_value
+                      type: war
+                      contextRoot: example_value
+                      state: STARTED
+                      autoStart: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /config/{elementName}:
     get:
       operationId: getConfigElement
-      summary: Get a specific configuration element
+      summary: Get a Specific Configuration Element
       description: Returns the configuration for a specific element type.
       tags:
-        - Configuration
+      - Configuration
       parameters:
-        - name: elementName
-          in: path
-          required: true
-          description: Configuration element name (e.g., httpEndpoint, dataSource, application)
-          schema:
-            type: string
+      - name: elementName
+        in: path
+        required: true
+        description: Configuration element name (e.g., httpEndpoint, dataSource, application)
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Configuration element details
@@ -106,29 +177,47 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Getconfigelement200Example:
+                  summary: Default getConfigElement 200 response
+                  x-microcks-default: true
+                  value:
+                  - uid: '500123'
+                    configElementName: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createConfigElement
-      summary: Create a configuration element
+      summary: Create a Configuration Element
       description: Adds a new configuration element to the server configuration.
       tags:
-        - Configuration
+      - Configuration
       parameters:
-        - name: elementName
-          in: path
-          required: true
-          description: Configuration element name
-          schema:
-            type: string
+      - name: elementName
+        in: path
+        required: true
+        description: Configuration element name
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ConfigElement'
+            examples:
+              CreateconfigelementRequestExample:
+                summary: Default createConfigElement request
+                x-microcks-default: true
+                value:
+                  uid: '500123'
+                  configElementName: example_value
       responses:
         '201':
           description: Configuration element created
@@ -136,29 +225,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Createconfigelement201Example:
+                  summary: Default createConfigElement 201 response
+                  x-microcks-default: true
+                  value:
+                    uid: '500123'
+                    configElementName: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /config/{elementName}/{uid}:
     get:
       operationId: getConfigElementById
-      summary: Get a specific configuration element instance
+      summary: Get a Specific Configuration Element Instance
       description: Returns a specific configuration element instance by its unique identifier.
       tags:
-        - Configuration
+      - Configuration
       parameters:
-        - name: elementName
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: uid
-          in: path
-          required: true
-          description: Unique identifier of the configuration element
-          schema:
-            type: string
+      - name: elementName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: uid
+        in: path
+        required: true
+        description: Unique identifier of the configuration element
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Configuration element instance
@@ -166,33 +267,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Getconfigelementbyid200Example:
+                  summary: Default getConfigElementById 200 response
+                  x-microcks-default: true
+                  value:
+                    uid: '500123'
+                    configElementName: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateConfigElement
-      summary: Update a configuration element instance
+      summary: Update a Configuration Element Instance
       description: Updates a specific configuration element.
       tags:
-        - Configuration
+      - Configuration
       parameters:
-        - name: elementName
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: uid
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: elementName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ConfigElement'
+            examples:
+              UpdateconfigelementRequestExample:
+                summary: Default updateConfigElement request
+                x-microcks-default: true
+                value:
+                  uid: '500123'
+                  configElementName: example_value
       responses:
         '200':
           description: Configuration element updated
@@ -200,29 +320,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Updateconfigelement200Example:
+                  summary: Default updateConfigElement 200 response
+                  x-microcks-default: true
+                  value:
+                    uid: '500123'
+                    configElementName: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteConfigElement
-      summary: Delete a configuration element instance
+      summary: Delete a Configuration Element Instance
       description: Removes a specific configuration element from the server configuration.
       tags:
-        - Configuration
+      - Configuration
       parameters:
-        - name: elementName
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: uid
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: elementName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       responses:
         '204':
           description: Configuration element deleted
@@ -230,13 +362,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /server:
     get:
       operationId: getServerInfo
-      summary: Get server information
+      summary: Get Server Information
       description: Returns runtime information about the Liberty server.
       tags:
-        - Server
+      - Server
       responses:
         '200':
           description: Server information
@@ -244,15 +379,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LibertyServer'
+              examples:
+                Getserverinfo200Example:
+                  summary: Default getServerInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    wlpVersion: example_value
+                    productEdition: example_value
+                    javaVersion: example_value
+                    javaVendor: example_value
+                    serverStatus: STARTED
+                    uptime: 10
+                    installDirectory: example_value
+                    serverDirectory: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /server/dump:
     post:
       operationId: createServerDump
-      summary: Create a server dump
+      summary: Create a Server Dump
       description: Creates a server dump for diagnostic purposes.
       tags:
-        - Server
+      - Server
       requestBody:
         content:
           application/json:
@@ -264,10 +416,17 @@ paths:
                   items:
                     type: string
                     enum:
-                      - heap
-                      - system
-                      - thread
+                    - heap
+                    - system
+                    - thread
                   description: Types of diagnostic information to include
+            examples:
+              CreateserverdumpRequestExample:
+                summary: Default createServerDump request
+                x-microcks-default: true
+                value:
+                  include:
+                  - heap
       responses:
         '200':
           description: Server dump created
@@ -282,15 +441,25 @@ paths:
                   timestamp:
                     type: string
                     format: date-time
+              examples:
+                Createserverdump200Example:
+                  summary: Default createServerDump 200 response
+                  x-microcks-default: true
+                  value:
+                    dumpFile: example_value
+                    timestamp: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /server/javadump:
     post:
       operationId: createJavaDump
-      summary: Create a Java dump
+      summary: Create a Java Dump
       description: Creates a Java core dump for thread analysis.
       tags:
-        - Server
+      - Server
       responses:
         '200':
           description: Java dump created
@@ -304,15 +473,25 @@ paths:
                   timestamp:
                     type: string
                     format: date-time
+              examples:
+                Createjavadump200Example:
+                  summary: Default createJavaDump 200 response
+                  x-microcks-default: true
+                  value:
+                    dumpFile: example_value
+                    timestamp: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications:
     get:
       operationId: listApplications
-      summary: List deployed applications
+      summary: List Deployed Applications
       description: Returns a list of applications deployed on the Liberty server.
       tags:
-        - Applications
+      - Applications
       responses:
         '200':
           description: List of applications
@@ -322,22 +501,37 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LibertyApplication'
+              examples:
+                Listapplications200Example:
+                  summary: Default listApplications 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    location: example_value
+                    type: war
+                    contextRoot: example_value
+                    state: STARTED
+                    autoStart: true
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{appName}:
     get:
       operationId: getApplication
-      summary: Get application details
+      summary: Get Application Details
       description: Returns details of a specific deployed application.
       tags:
-        - Applications
+      - Applications
       parameters:
-        - name: appName
-          in: path
-          required: true
-          description: Application name
-          schema:
-            type: string
+      - name: appName
+        in: path
+        required: true
+        description: Application name
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Application details
@@ -345,23 +539,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LibertyApplication'
+              examples:
+                Getapplication200Example:
+                  summary: Default getApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    location: example_value
+                    type: war
+                    contextRoot: example_value
+                    state: STARTED
+                    autoStart: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{appName}/start:
     post:
       operationId: startApplication
-      summary: Start an application
+      summary: Start an Application
       description: Starts a deployed application.
       tags:
-        - Applications
+      - Applications
       parameters:
-        - name: appName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: appName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Application started
@@ -369,23 +578,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LibertyApplicationStatus'
+              examples:
+                Startapplication200Example:
+                  summary: Default startApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    state: STARTED
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{appName}/stop:
     post:
       operationId: stopApplication
-      summary: Stop an application
+      summary: Stop an Application
       description: Stops a running application.
       tags:
-        - Applications
+      - Applications
       parameters:
-        - name: appName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: appName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Application stopped
@@ -393,23 +614,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LibertyApplicationStatus'
+              examples:
+                Stopapplication200Example:
+                  summary: Default stopApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    state: STARTED
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{appName}/restart:
     post:
       operationId: restartApplication
-      summary: Restart an application
+      summary: Restart an Application
       description: Restarts a deployed application.
       tags:
-        - Applications
+      - Applications
       parameters:
-        - name: appName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: appName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Application restarted
@@ -417,17 +650,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LibertyApplicationStatus'
+              examples:
+                Restartapplication200Example:
+                  summary: Default restartApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    state: STARTED
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /features:
     get:
       operationId: listFeatures
-      summary: List installed features
+      summary: List Installed Features
       description: Returns a list of all Liberty features installed on the server.
       tags:
-        - Features
+      - Features
       responses:
         '200':
           description: List of installed features
@@ -437,22 +681,38 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Feature'
+              examples:
+                Listfeatures200Example:
+                  summary: Default listFeatures 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    displayName: example_value
+                    version: example_value
+                    description: A sample description.
+                    enabled: true
+                    dependencies:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /features/{featureName}:
     get:
       operationId: getFeature
-      summary: Get feature details
+      summary: Get Feature Details
       description: Returns details of a specific Liberty feature.
       tags:
-        - Features
+      - Features
       parameters:
-        - name: featureName
-          in: path
-          required: true
-          description: Feature symbolic name
-          schema:
-            type: string
+      - name: featureName
+        in: path
+        required: true
+        description: Feature symbolic name
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Feature details
@@ -460,17 +720,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Feature'
+              examples:
+                Getfeature200Example:
+                  summary: Default getFeature 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    displayName: example_value
+                    version: example_value
+                    description: A sample description.
+                    enabled: true
+                    dependencies:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /logging:
     get:
       operationId: getLogConfig
-      summary: Get logging configuration
+      summary: Get Logging Configuration
       description: Returns the current logging configuration.
       tags:
-        - Logging
+      - Logging
       responses:
         '200':
           description: Logging configuration
@@ -478,20 +753,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoggingConfig'
+              examples:
+                Getlogconfig200Example:
+                  summary: Default getLogConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    logDirectory: example_value
+                    consoleLogLevel: AUDIT
+                    messageFileName: example_value
+                    traceFileName: example_value
+                    traceSpecification: example_value
+                    maxFileSize: 10
+                    maxFiles: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateLogConfig
-      summary: Update logging configuration
+      summary: Update Logging Configuration
       description: Updates the logging configuration dynamically.
       tags:
-        - Logging
+      - Logging
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/LoggingConfig'
+            examples:
+              UpdatelogconfigRequestExample:
+                summary: Default updateLogConfig request
+                x-microcks-default: true
+                value:
+                  logDirectory: example_value
+                  consoleLogLevel: AUDIT
+                  messageFileName: example_value
+                  traceFileName: example_value
+                  traceSpecification: example_value
+                  maxFileSize: 10
+                  maxFiles: 10
       responses:
         '200':
           description: Logging configuration updated
@@ -499,35 +801,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoggingConfig'
+              examples:
+                Updatelogconfig200Example:
+                  summary: Default updateLogConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    logDirectory: example_value
+                    consoleLogLevel: AUDIT
+                    messageFileName: example_value
+                    traceFileName: example_value
+                    traceSpecification: example_value
+                    maxFileSize: 10
+                    maxFiles: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /logging/messages:
     get:
       operationId: getLogMessages
-      summary: Get log messages
+      summary: Get Log Messages
       description: Returns recent log messages from the server.
       tags:
-        - Logging
+      - Logging
       parameters:
-        - name: maxMessages
-          in: query
-          description: Maximum number of messages to return
-          schema:
-            type: integer
-            default: 100
-        - name: level
-          in: query
-          description: Minimum log level
-          schema:
-            type: string
-            enum:
-              - AUDIT
-              - INFO
-              - WARNING
-              - ERROR
-              - FATAL
+      - name: maxMessages
+        in: query
+        description: Maximum number of messages to return
+        schema:
+          type: integer
+          default: 100
+        example: 10
+      - name: level
+        in: query
+        description: Minimum log level
+        schema:
+          type: string
+          enum:
+          - AUDIT
+          - INFO
+          - WARNING
+          - ERROR
+          - FATAL
+        example: AUDIT
       responses:
         '200':
           description: Log messages
@@ -537,25 +856,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LogMessage'
+              examples:
+                Getlogmessages200Example:
+                  summary: Default getLogMessages 200 response
+                  x-microcks-default: true
+                  value:
+                  - datetime: '2026-01-15T10:30:00Z'
+                    level: example_value
+                    message: example_value
+                    logger: example_value
+                    thread: example_value
+                    sequence: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /monitoring/metrics:
     get:
       operationId: getMetrics
-      summary: Get server metrics
+      summary: Get Server Metrics
       description: Returns MicroProfile Metrics data from the server.
       tags:
-        - Monitoring
+      - Monitoring
       parameters:
-        - name: scope
-          in: query
-          description: Metrics scope
-          schema:
-            type: string
-            enum:
-              - base
-              - vendor
-              - application
+      - name: scope
+        in: query
+        description: Metrics scope
+        schema:
+          type: string
+          enum:
+          - base
+          - vendor
+          - application
+        example: base
       responses:
         '200':
           description: Server metrics
@@ -563,15 +897,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Metrics'
+              examples:
+                Getmetrics200Example:
+                  summary: Default getMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    scope: example_value
+                    metrics: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /monitoring/health:
     get:
       operationId: getHealth
-      summary: Get health check status
+      summary: Get Health Check Status
       description: Returns MicroProfile Health check results.
       tags:
-        - Monitoring
+      - Monitoring
       responses:
         '200':
           description: Server is healthy
@@ -579,26 +923,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheck'
+              examples:
+                Gethealth200Example:
+                  summary: Default getHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
         '503':
           description: Server is unhealthy
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheck'
+              examples:
+                Gethealth503Example:
+                  summary: Default getHealth 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /file:
     get:
       operationId: downloadFile
-      summary: Download a file
+      summary: Download a File
       description: Downloads a file from the Liberty server.
       tags:
-        - File Transfer
+      - File Transfer
       parameters:
-        - name: path
-          in: query
-          required: true
-          description: Path to the file on the server
-          schema:
-            type: string
+      - name: path
+        in: query
+        required: true
+        description: Path to the file on the server
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: File content
@@ -607,23 +975,32 @@ paths:
               schema:
                 type: string
                 format: binary
+              examples:
+                Downloadfile200Example:
+                  summary: Default downloadFile 200 response
+                  x-microcks-default: true
+                  value: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: uploadFile
-      summary: Upload a file
+      summary: Upload a File
       description: Uploads a file to the Liberty server.
       tags:
-        - File Transfer
+      - File Transfer
       parameters:
-        - name: path
-          in: query
-          required: true
-          description: Destination path on the server
-          schema:
-            type: string
+      - name: path
+        in: query
+        required: true
+        description: Destination path on the server
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
@@ -631,6 +1008,11 @@ paths:
             schema:
               type: string
               format: binary
+            examples:
+              UploadfileRequestExample:
+                summary: Default uploadFile request
+                x-microcks-default: true
+                value: example_value
       responses:
         '201':
           description: File uploaded
@@ -638,19 +1020,23 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteFile
-      summary: Delete a file
+      summary: Delete a File
       description: Deletes a file from the Liberty server.
       tags:
-        - File Transfer
+      - File Transfer
       parameters:
-        - name: path
-          in: query
-          required: true
-          description: Path to the file on the server
-          schema:
-            type: string
+      - name: path
+        in: query
+        required: true
+        description: Path to the file on the server
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: File deleted
@@ -658,6 +1044,9 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -676,6 +1065,7 @@ components:
         description:
           type: string
           description: Server description
+          example: A sample description.
         featureManager:
           type: object
           properties:
@@ -684,6 +1074,7 @@ components:
               items:
                 type: string
               description: List of enabled features
+          example: example_value
         httpEndpoint:
           type: array
           items:
@@ -697,10 +1088,12 @@ components:
                 type: integer
               httpsPort:
                 type: integer
+          example: []
         application:
           type: array
           items:
             $ref: '#/components/schemas/LibertyApplication'
+          example: []
       additionalProperties: true
     ConfigElement:
       type: object
@@ -708,9 +1101,11 @@ components:
         uid:
           type: string
           description: Unique identifier
+          example: '500123'
         configElementName:
           type: string
           description: Configuration element type name
+          example: example_value
       additionalProperties: true
     LibertyServer:
       type: object
@@ -718,152 +1113,190 @@ components:
         name:
           type: string
           description: Server name
+          example: Example Title
         wlpVersion:
           type: string
           description: Liberty version
+          example: example_value
         productEdition:
           type: string
           description: Product edition
+          example: example_value
         javaVersion:
           type: string
           description: Java version
+          example: example_value
         javaVendor:
           type: string
           description: Java vendor
+          example: example_value
         serverStatus:
           type: string
           enum:
-            - STARTED
-            - STOPPED
-            - STARTING
-            - STOPPING
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
         uptime:
           type: integer
           description: Server uptime in milliseconds
+          example: 10
         installDirectory:
           type: string
           description: Liberty installation directory
+          example: example_value
         serverDirectory:
           type: string
           description: Server configuration directory
+          example: example_value
     LibertyApplication:
       type: object
       properties:
         name:
           type: string
           description: Application name
+          example: Example Title
         location:
           type: string
           description: Application file location
+          example: example_value
         type:
           type: string
           enum:
-            - war
-            - ear
-            - eba
-            - rar
+          - war
+          - ear
+          - eba
+          - rar
           description: Application type
+          example: war
         contextRoot:
           type: string
           description: Context root for web application
+          example: example_value
         state:
           type: string
           enum:
-            - STARTED
-            - STOPPED
-            - INSTALLED
-            - STARTING
-            - STOPPING
+          - STARTED
+          - STOPPED
+          - INSTALLED
+          - STARTING
+          - STOPPING
+          example: STARTED
         autoStart:
           type: boolean
           description: Whether the application starts automatically
+          example: true
     LibertyApplicationStatus:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         state:
           type: string
           enum:
-            - STARTED
-            - STOPPED
-            - STARTING
-            - STOPPING
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
         message:
           type: string
+          example: example_value
     Feature:
       type: object
       properties:
         name:
           type: string
           description: Feature symbolic name
+          example: Example Title
         displayName:
           type: string
           description: Human-readable feature name
+          example: example_value
         version:
           type: string
           description: Feature version
+          example: example_value
         description:
           type: string
           description: Feature description
+          example: A sample description.
         enabled:
           type: boolean
           description: Whether the feature is currently enabled
+          example: true
         dependencies:
           type: array
           items:
             type: string
           description: List of dependent feature names
+          example: []
     LoggingConfig:
       type: object
       properties:
         logDirectory:
           type: string
           description: Log output directory
+          example: example_value
         consoleLogLevel:
           type: string
           enum:
-            - AUDIT
-            - INFO
-            - WARNING
-            - ERROR
-            - OFF
+          - AUDIT
+          - INFO
+          - WARNING
+          - ERROR
+          - OFF
+          example: AUDIT
         messageFileName:
           type: string
           description: Name of the messages log file
+          example: example_value
         traceFileName:
           type: string
           description: Name of the trace log file
+          example: example_value
         traceSpecification:
           type: string
           description: Trace specification string
+          example: example_value
         maxFileSize:
           type: integer
           description: Maximum log file size in MB
+          example: 10
         maxFiles:
           type: integer
           description: Maximum number of log files
+          example: 10
     LogMessage:
       type: object
       properties:
         datetime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         level:
           type: string
+          example: example_value
         message:
           type: string
+          example: example_value
         logger:
           type: string
+          example: example_value
         thread:
           type: string
+          example: example_value
         sequence:
           type: string
+          example: example_value
     Metrics:
       type: object
       properties:
         scope:
           type: string
+          example: example_value
         metrics:
           type: object
           additionalProperties:
@@ -880,18 +1313,20 @@ components:
               type:
                 type: string
                 enum:
-                  - counter
-                  - gauge
-                  - timer
-                  - histogram
+                - counter
+                - gauge
+                - timer
+                - histogram
+          example: example_value
     HealthCheck:
       type: object
       properties:
         status:
           type: string
           enum:
-            - UP
-            - DOWN
+          - UP
+          - DOWN
+          example: UP
         checks:
           type: array
           items:
@@ -902,23 +1337,27 @@ components:
               status:
                 type: string
                 enum:
-                  - UP
-                  - DOWN
+                - UP
+                - DOWN
               data:
                 type: object
                 additionalProperties: true
+          example: []
     Error:
       type: object
       properties:
         code:
           type: string
+          example: example_value
         message:
           type: string
+          example: example_value
         details:
           type: string
+          example: example_value
       required:
-        - code
-        - message
+      - code
+      - message
   responses:
     BadRequest:
       description: Bad request

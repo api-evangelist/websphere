@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Application",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "contextRoot": {
+      "type": "string"
+    },
+    "targetServer": {
+      "type": "string"
+    },
+    "deployedModules": {
+      "type": "array"
+    },
+    "lastModified": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Subscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Subscription identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Subscription name"
+    },
+    "topicString": {
+      "type": "string",
+      "description": "Topic string"
+    },
+    "destination": {
+      "type": "string",
+      "description": "Destination queue name"
+    },
+    "type": {
+      "type": "string"
+    },
+    "durability": {
+      "type": "string"
+    }
+  }
+}

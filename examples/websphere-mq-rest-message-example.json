@@ -1,0 +1,11 @@
+{
+  "messageId": "500123",
+  "correlationId": "500123",
+  "putDateTime": "example_value",
+  "persistence": "example_value",
+  "replyToQueue": "example_value",
+  "replyToQueueManager": "example_value",
+  "expiry": 10,
+  "body": "example_value",
+  "format": "example_value"
+}

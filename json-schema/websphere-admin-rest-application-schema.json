@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Application",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Application name"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current application status"
+    },
+    "contextRoot": {
+      "type": "string",
+      "description": "Context root for web modules"
+    },
+    "targetServer": {
+      "type": "string",
+      "description": "Target server or cluster"
+    },
+    "deployedModules": {
+      "type": "array"
+    },
+    "lastModified": {
+      "type": "string",
+      "description": "Last modification timestamp"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "logDirectory": "example_value",
+  "consoleLogLevel": "example_value",
+  "messageFileName": "example_value",
+  "traceFileName": "example_value",
+  "traceSpecification": "example_value",
+  "maxFileSize": 10,
+  "maxFiles": 10
+}

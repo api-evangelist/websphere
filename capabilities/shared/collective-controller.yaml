@@ -1,0 +1,224 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "WebSphere Liberty Collective Controller REST API"
+  description: "API for managing Liberty collective environments including member management, scaling, clusters, and centralized administration."
+  tags:
+    - IBM WebSphere
+    - Liberty
+    - Collective
+    - Clustering
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      LIBERTY_USERNAME: LIBERTY_USERNAME
+      LIBERTY_PASSWORD: LIBERTY_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: collective-controller
+      baseUri: https://localhost:9443/ibm/api/collective
+      description: "Liberty Collective Controller REST API"
+      authentication:
+        type: basic
+        username: "{{LIBERTY_USERNAME}}"
+        password: "{{LIBERTY_PASSWORD}}"
+      resources:
+        - name: members
+          path: /members
+          description: "Collective member management"
+          operations:
+            - name: list-members
+              method: GET
+              description: "List collective members"
+              inputParameters:
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by member status"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-member
+              method: GET
+              description: "Get member details"
+              inputParameters:
+                - name: memberName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Member server name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: start-member
+              method: POST
+              description: "Start a collective member"
+              inputParameters:
+                - name: memberName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Member server name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: stop-member
+              method: POST
+              description: "Stop a collective member"
+              inputParameters:
+                - name: memberName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Member server name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: clusters
+          path: /clusters
+          description: "Cluster management"
+          operations:
+            - name: list-clusters
+              method: GET
+              description: "List clusters in the collective"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-cluster
+              method: POST
+              description: "Create a cluster"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+            - name: get-cluster
+              method: GET
+              description: "Get cluster details"
+              inputParameters:
+                - name: clusterName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: start-cluster
+              method: POST
+              description: "Start all cluster members"
+              inputParameters:
+                - name: clusterName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: stop-cluster
+              method: POST
+              description: "Stop all cluster members"
+              inputParameters:
+                - name: clusterName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: scaling
+          path: /scaling/policies
+          description: "Auto-scaling policy management"
+          operations:
+            - name: list-scaling-policies
+              method: GET
+              description: "List scaling policies"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-scaling-policy
+              method: POST
+              description: "Create a scaling policy"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  clusterName: "{{tools.clusterName}}"
+        - name: controller
+          path: /controller
+          description: "Collective controller operations"
+          operations:
+            - name: get-controller-info
+              method: GET
+              description: "Get controller information"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8104
+      namespace: collective-controller-api
+      resources:
+        - path: /v1/members
+          name: members
+          description: "Collective member management"
+          operations:
+            - method: GET
+              name: list-members
+              description: "List collective members"
+              call: "collective-controller.list-members"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9104
+      namespace: collective-controller-mcp
+      transport: http
+      tools:
+        - name: list-members
+          description: "List collective members"
+          hints:
+            readOnly: true
+          call: "collective-controller.list-members"
+          outputParameters:
+            - type: object
+              mapping: "$."

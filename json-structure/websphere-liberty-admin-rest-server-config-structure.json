@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ServerConfig",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "featureManager": {
+      "type": "object"
+    },
+    "httpEndpoint": {
+      "type": "array"
+    },
+    "application": {
+      "type": "array"
+    }
+  }
+}

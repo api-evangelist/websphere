@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "QueueManager",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "commandLevel": {
+      "type": "integer"
+    },
+    "connectionCount": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    },
+    "maximumMessageLength": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ControllerInfo",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "hostName": {
+      "type": "string"
+    },
+    "httpsPort": {
+      "type": "integer"
+    },
+    "version": {
+      "type": "string"
+    },
+    "memberCount": {
+      "type": "integer"
+    },
+    "clusterCount": {
+      "type": "integer"
+    },
+    "hostCount": {
+      "type": "integer"
+    }
+  }
+}

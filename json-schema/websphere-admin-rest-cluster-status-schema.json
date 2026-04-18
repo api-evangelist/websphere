@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClusterStatus",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "membersStarted": {
+      "type": "integer"
+    },
+    "membersTotal": {
+      "type": "integer"
+    },
+    "message": {
+      "type": "string"
+    }
+  }
+}

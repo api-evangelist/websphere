@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "NotificationSubscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "objectName": {
+      "type": "string"
+    },
+    "filters": {
+      "type": "array"
+    },
+    "created": {
+      "type": "string"
+    }
+  }
+}

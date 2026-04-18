@@ -1,0 +1,7 @@
+{
+  "name": "Example Title",
+  "os": "example_value",
+  "arch": "example_value",
+  "processors": 10,
+  "members": []
+}

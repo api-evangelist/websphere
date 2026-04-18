@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "QueueUpdate",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "maxDepth": {
+      "type": "integer"
+    },
+    "maxMessageLength": {
+      "type": "integer"
+    },
+    "inhibitPut": {
+      "type": "boolean"
+    },
+    "inhibitGet": {
+      "type": "boolean"
+    }
+  }
+}

@@ -19,36 +19,36 @@ externalDocs:
   description: IBM MQ REST API Documentation
   url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
 servers:
-  - url: https://localhost:9443/ibmmq/rest/v2
-    description: IBM MQ REST API v2 Server
+- url: https://localhost:9443/ibmmq/rest/v2
+  description: IBM MQ REST API v2 Server
 security:
-  - basicAuth: []
-  - tokenAuth: []
+- basicAuth: []
+- tokenAuth: []
 tags:
-  - name: Queue Manager
-    description: Queue manager administration
-  - name: Queues
-    description: Queue administration and management
-  - name: Messages
-    description: Message operations - send and receive
-  - name: Topics
-    description: Topic administration for publish/subscribe
-  - name: Subscriptions
-    description: Subscription management
-  - name: Channels
-    description: Channel administration
-  - name: Monitoring
-    description: Monitoring and status information
-  - name: Authentication
-    description: Authentication and authorization
+- name: Queue Manager
+  description: Queue manager administration
+- name: Queues
+  description: Queue administration and management
+- name: Messages
+  description: Message operations - send and receive
+- name: Topics
+  description: Topic administration for publish/subscribe
+- name: Subscriptions
+  description: Subscription management
+- name: Channels
+  description: Channel administration
+- name: Monitoring
+  description: Monitoring and status information
+- name: Authentication
+  description: Authentication and authorization
 paths:
   /admin/qmgr:
     get:
       operationId: listQueueManagers
-      summary: List queue managers
+      summary: List Queue Managers
       description: Returns a list of queue managers that the REST API can interact with.
       tags:
-        - Queue Manager
+      - Queue Manager
       responses:
         '200':
           description: List of queue managers
@@ -61,22 +61,40 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/QueueManager'
+              examples:
+                Listqueuemanagers200Example:
+                  summary: Default listQueueManagers 200 response
+                  x-microcks-default: true
+                  value:
+                    qmgr:
+                    - name: Example Title
+                      state: running
+                      version: example_value
+                      platform: example_value
+                      commandLevel: 10
+                      connectionCount: 10
+                      description: A sample description.
+                      maximumMessageLength: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}:
     get:
       operationId: getQueueManager
-      summary: Get queue manager details
+      summary: Get Queue Manager Details
       description: Returns details of a specific queue manager.
       tags:
-        - Queue Manager
+      - Queue Manager
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: attributes
-          in: query
-          description: Comma-separated list of attributes to return
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: attributes
+        in: query
+        description: Comma-separated list of attributes to return
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Queue manager details
@@ -84,40 +102,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QueueManager'
+              examples:
+                Getqueuemanager200Example:
+                  summary: Default getQueueManager 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    state: running
+                    version: example_value
+                    platform: example_value
+                    commandLevel: 10
+                    connectionCount: 10
+                    description: A sample description.
+                    maximumMessageLength: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/queue:
     get:
       operationId: listQueues
-      summary: List queues
+      summary: List Queues
       description: Returns a list of queues on the specified queue manager.
       tags:
-        - Queues
+      - Queues
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: name
-          in: query
-          description: Queue name filter with wildcard support
-          schema:
-            type: string
-        - name: type
-          in: query
-          description: Queue type filter
-          schema:
-            type: string
-            enum:
-              - local
-              - alias
-              - remote
-              - model
-              - cluster
-        - name: attributes
-          in: query
-          description: Comma-separated list of attributes to return
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: name
+        in: query
+        description: Queue name filter with wildcard support
+        schema:
+          type: string
+        example: Example Title
+      - name: type
+        in: query
+        description: Queue type filter
+        schema:
+          type: string
+          enum:
+          - local
+          - alias
+          - remote
+          - model
+          - cluster
+        example: local
+      - name: attributes
+        in: query
+        description: Comma-separated list of attributes to return
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: List of queues
@@ -130,24 +167,65 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Queue'
+              examples:
+                Listqueues200Example:
+                  summary: Default listQueues 200 response
+                  x-microcks-default: true
+                  value:
+                    queue:
+                    - name: Example Title
+                      type: local
+                      description: A sample description.
+                      maxDepth: 10
+                      maxMessageLength: 10
+                      currentDepth: 10
+                      inhibitPut: true
+                      inhibitGet: true
+                      persistence:
+                        default: persistent
+                      cluster:
+                        name: Example Title
+                        workloadRank: 10
+                        workloadPriority: 10
+                      status:
+                        currentDepth: 10
+                        openInputCount: 10
+                        openOutputCount: 10
+                        lastGetDateTime: '2026-01-15T10:30:00Z'
+                        lastPutDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createQueue
-      summary: Create a queue
+      summary: Create a Queue
       description: Creates a new queue on the specified queue manager.
       tags:
-        - Queues
+      - Queues
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/qmgrName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/QueueCreate'
+            examples:
+              CreatequeueRequestExample:
+                summary: Default createQueue request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  type: local
+                  description: A sample description.
+                  maxDepth: 10
+                  maxMessageLength: 10
+                  persistence:
+                    default: persistent
       responses:
         '201':
           description: Queue created
@@ -155,6 +233,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Queue'
+              examples:
+                Createqueue201Example:
+                  summary: Default createQueue 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: local
+                    description: A sample description.
+                    maxDepth: 10
+                    maxMessageLength: 10
+                    currentDepth: 10
+                    inhibitPut: true
+                    inhibitGet: true
+                    persistence:
+                      default: persistent
+                    cluster:
+                      name: Example Title
+                      workloadRank: 10
+                      workloadPriority: 10
+                    status:
+                      currentDepth: 10
+                      openInputCount: 10
+                      openOutputCount: 10
+                      lastGetDateTime: '2026-01-15T10:30:00Z'
+                      lastPutDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -165,27 +268,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createqueue409Example:
+                  summary: Default createQueue 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                    - type: example_value
+                      msgId: '500123'
+                      explanation: example_value
+                      action: example_value
+                      message: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/queue/{queueName}:
     get:
       operationId: getQueue
-      summary: Get queue details
+      summary: Get Queue Details
       description: Returns details of a specific queue.
       tags:
-        - Queues
+      - Queues
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - $ref: '#/components/parameters/queueName'
-        - name: status
-          in: query
-          description: Include queue status information
-          schema:
-            type: boolean
-            default: false
-        - name: attributes
-          in: query
-          description: Comma-separated list of attributes to return
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: status
+        in: query
+        description: Include queue status information
+        schema:
+          type: boolean
+          default: false
+        example: true
+      - name: attributes
+        in: query
+        description: Comma-separated list of attributes to return
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Queue details
@@ -193,25 +312,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Queue'
+              examples:
+                Getqueue200Example:
+                  summary: Default getQueue 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: local
+                    description: A sample description.
+                    maxDepth: 10
+                    maxMessageLength: 10
+                    currentDepth: 10
+                    inhibitPut: true
+                    inhibitGet: true
+                    persistence:
+                      default: persistent
+                    cluster:
+                      name: Example Title
+                      workloadRank: 10
+                      workloadPriority: 10
+                    status:
+                      currentDepth: 10
+                      openInputCount: 10
+                      openOutputCount: 10
+                      lastGetDateTime: '2026-01-15T10:30:00Z'
+                      lastPutDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateQueue
-      summary: Update queue attributes
+      summary: Update Queue Attributes
       description: Updates attributes of an existing queue.
       tags:
-        - Queues
+      - Queues
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - $ref: '#/components/parameters/queueName'
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/QueueUpdate'
+            examples:
+              UpdatequeueRequestExample:
+                summary: Default updateQueue request
+                x-microcks-default: true
+                value:
+                  description: A sample description.
+                  maxDepth: 10
+                  maxMessageLength: 10
+                  inhibitPut: true
+                  inhibitGet: true
       responses:
         '200':
           description: Queue updated
@@ -219,27 +376,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Queue'
+              examples:
+                Updatequeue200Example:
+                  summary: Default updateQueue 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: local
+                    description: A sample description.
+                    maxDepth: 10
+                    maxMessageLength: 10
+                    currentDepth: 10
+                    inhibitPut: true
+                    inhibitGet: true
+                    persistence:
+                      default: persistent
+                    cluster:
+                      name: Example Title
+                      workloadRank: 10
+                      workloadPriority: 10
+                    status:
+                      currentDepth: 10
+                      openInputCount: 10
+                      openOutputCount: 10
+                      lastGetDateTime: '2026-01-15T10:30:00Z'
+                      lastPutDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteQueue
-      summary: Delete a queue
+      summary: Delete a Queue
       description: Deletes a queue from the queue manager.
       tags:
-        - Queues
+      - Queues
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - $ref: '#/components/parameters/queueName'
-        - name: purge
-          in: query
-          description: Purge messages before deleting
-          schema:
-            type: boolean
-            default: false
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: purge
+        in: query
+        description: Purge messages before deleting
+        schema:
+          type: boolean
+          default: false
+        example: true
       responses:
         '204':
           description: Queue deleted
@@ -247,51 +433,73 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /messaging/qmgr/{qmgrName}/queue/{queueName}/message:
     post:
       operationId: sendMessage
-      summary: Send a message to a queue
+      summary: Send a Message to a Queue
       description: Sends a message to the specified queue on the queue manager.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - $ref: '#/components/parameters/queueName'
-        - name: ibm-mq-md-correlationId
-          in: header
-          description: Correlation ID for the message
-          schema:
-            type: string
-        - name: ibm-mq-md-expiry
-          in: header
-          description: Message expiry in tenths of a second
-          schema:
-            type: integer
-        - name: ibm-mq-md-persistence
-          in: header
-          description: Message persistence
-          schema:
-            type: string
-            enum:
-              - persistent
-              - nonPersistent
-        - name: ibm-mq-md-replyTo
-          in: header
-          description: Reply-to queue name
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: ibm-mq-md-correlationId
+        in: header
+        description: Correlation ID for the message
+        schema:
+          type: string
+        example: '500123'
+      - name: ibm-mq-md-expiry
+        in: header
+        description: Message expiry in tenths of a second
+        schema:
+          type: integer
+        example: 10
+      - name: ibm-mq-md-persistence
+        in: header
+        description: Message persistence
+        schema:
+          type: string
+          enum:
+          - persistent
+          - nonPersistent
+        example: persistent
+      - name: ibm-mq-md-replyTo
+        in: header
+        description: Reply-to queue name
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           text/plain:
             schema:
               type: string
+            examples:
+              SendmessageRequestExample:
+                summary: Default sendMessage request
+                x-microcks-default: true
+                value: example_value
           application/json:
             schema:
               type: object
+            examples:
+              SendmessageRequestExample:
+                summary: Default sendMessage request
+                x-microcks-default: true
+                value: {}
           application/xml:
             schema:
               type: string
+            examples:
+              SendmessageRequestExample:
+                summary: Default sendMessage request
+                x-microcks-default: true
+                value: example_value
       responses:
         '201':
           description: Message sent
@@ -306,31 +514,37 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: browseMessages
-      summary: Browse messages on a queue
+      summary: Browse Messages on a Queue
       description: Non-destructively browses messages on the specified queue.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - $ref: '#/components/parameters/queueName'
-        - name: limit
-          in: query
-          description: Maximum number of messages to browse
-          schema:
-            type: integer
-            default: 10
-        - name: ibm-mq-md-messageId
-          in: header
-          description: Filter by message ID
-          schema:
-            type: string
-        - name: ibm-mq-md-correlationId
-          in: header
-          description: Filter by correlation ID
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: limit
+        in: query
+        description: Maximum number of messages to browse
+        schema:
+          type: integer
+          default: 10
+        example: 10
+      - name: ibm-mq-md-messageId
+        in: header
+        description: Filter by message ID
+        schema:
+          type: string
+        example: '500123'
+      - name: ibm-mq-md-correlationId
+        in: header
+        description: Filter by correlation ID
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Messages browsed
@@ -340,34 +554,54 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Message'
+              examples:
+                Browsemessages200Example:
+                  summary: Default browseMessages 200 response
+                  x-microcks-default: true
+                  value:
+                  - messageId: '500123'
+                    correlationId: '500123'
+                    putDateTime: '2026-01-15T10:30:00Z'
+                    persistence: persistent
+                    replyToQueue: example_value
+                    replyToQueueManager: example_value
+                    expiry: 10
+                    body: example_value
+                    format: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: receiveMessage
-      summary: Receive (destructively get) a message
+      summary: Receive (destructively Get) a Message
       description: Destructively gets a message from the specified queue.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - $ref: '#/components/parameters/queueName'
-        - name: wait
-          in: query
-          description: Wait time in milliseconds for a message
-          schema:
-            type: integer
-        - name: ibm-mq-md-messageId
-          in: header
-          description: Filter by message ID
-          schema:
-            type: string
-        - name: ibm-mq-md-correlationId
-          in: header
-          description: Filter by correlation ID
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: wait
+        in: query
+        description: Wait time in milliseconds for a message
+        schema:
+          type: integer
+        example: 10
+      - name: ibm-mq-md-messageId
+        in: header
+        description: Filter by message ID
+        schema:
+          type: string
+        example: '500123'
+      - name: ibm-mq-md-correlationId
+        in: header
+        description: Filter by correlation ID
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Message received
@@ -382,39 +616,63 @@ paths:
             text/plain:
               schema:
                 type: string
+              examples:
+                Receivemessage200Example:
+                  summary: Default receiveMessage 200 response
+                  x-microcks-default: true
+                  value: example_value
             application/json:
               schema:
                 type: object
+              examples:
+                Receivemessage200Example:
+                  summary: Default receiveMessage 200 response
+                  x-microcks-default: true
+                  value: {}
         '204':
           description: No message available
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /messaging/qmgr/{qmgrName}/topic/{topicString}/message:
     post:
       operationId: publishMessage
-      summary: Publish a message to a topic
+      summary: Publish a Message to a Topic
       description: Publishes a message to the specified topic string.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: topicString
-          in: path
-          required: true
-          description: Topic string to publish to
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: topicString
+        in: path
+        required: true
+        description: Topic string to publish to
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           text/plain:
             schema:
               type: string
+            examples:
+              PublishmessageRequestExample:
+                summary: Default publishMessage request
+                x-microcks-default: true
+                value: example_value
           application/json:
             schema:
               type: object
+            examples:
+              PublishmessageRequestExample:
+                summary: Default publishMessage request
+                x-microcks-default: true
+                value: {}
       responses:
         '201':
           description: Message published
@@ -422,20 +680,24 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/topic:
     get:
       operationId: listTopics
-      summary: List topics
+      summary: List Topics
       description: Returns a list of administrative topic objects on the queue manager.
       tags:
-        - Topics
+      - Topics
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: name
-          in: query
-          description: Topic name filter
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: name
+        in: query
+        description: Topic name filter
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: List of topics
@@ -448,24 +710,49 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Topic'
+              examples:
+                Listtopics200Example:
+                  summary: Default listTopics 200 response
+                  x-microcks-default: true
+                  value:
+                    topic:
+                    - name: Example Title
+                      topicString: example_value
+                      description: A sample description.
+                      type: local
+                      durableSubscriptions: allowed
+                      publish: allowed
+                      subscribe: allowed
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createTopic
-      summary: Create a topic
+      summary: Create a Topic
       description: Creates a new administrative topic object.
       tags:
-        - Topics
+      - Topics
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/qmgrName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TopicCreate'
+            examples:
+              CreatetopicRequestExample:
+                summary: Default createTopic request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  topicString: example_value
+                  description: A sample description.
+                  type: local
       responses:
         '201':
           description: Topic created
@@ -473,25 +760,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                Createtopic201Example:
+                  summary: Default createTopic 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    topicString: example_value
+                    description: A sample description.
+                    type: local
+                    durableSubscriptions: allowed
+                    publish: allowed
+                    subscribe: allowed
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/topic/{topicName}:
     get:
       operationId: getTopic
-      summary: Get topic details
+      summary: Get Topic Details
       description: Returns details of a specific administrative topic object.
       tags:
-        - Topics
+      - Topics
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: topicName
-          in: path
-          required: true
-          description: Topic object name
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: topicName
+        in: path
+        required: true
+        description: Topic object name
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Topic details
@@ -499,23 +802,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Topic'
+              examples:
+                Gettopic200Example:
+                  summary: Default getTopic 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    topicString: example_value
+                    description: A sample description.
+                    type: local
+                    durableSubscriptions: allowed
+                    publish: allowed
+                    subscribe: allowed
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteTopic
-      summary: Delete a topic
+      summary: Delete a Topic
       description: Deletes an administrative topic object.
       tags:
-        - Topics
+      - Topics
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: topicName
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: topicName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Topic deleted
@@ -523,15 +842,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/subscription:
     get:
       operationId: listSubscriptions
-      summary: List subscriptions
+      summary: List Subscriptions
       description: Returns a list of subscriptions on the queue manager.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/qmgrName'
       responses:
         '200':
           description: List of subscriptions
@@ -544,25 +866,41 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscription'
+              examples:
+                Listsubscriptions200Example:
+                  summary: Default listSubscriptions 200 response
+                  x-microcks-default: true
+                  value:
+                    subscription:
+                    - id: abc123
+                      name: Example Title
+                      topicString: example_value
+                      destination: example_value
+                      type: admin
+                      durability: durable
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/subscription/{subscriptionId}:
     get:
       operationId: getSubscription
-      summary: Get subscription details
+      summary: Get Subscription Details
       description: Returns details of a specific subscription.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: subscriptionId
-          in: path
-          required: true
-          description: Subscription identifier
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: subscriptionId
+        in: path
+        required: true
+        description: Subscription identifier
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Subscription details
@@ -570,23 +908,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Subscription'
+              examples:
+                Getsubscription200Example:
+                  summary: Default getSubscription 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    topicString: example_value
+                    destination: example_value
+                    type: admin
+                    durability: durable
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSubscription
-      summary: Delete a subscription
+      summary: Delete a Subscription
       description: Deletes a subscription from the queue manager.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: subscriptionId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       responses:
         '204':
           description: Subscription deleted
@@ -594,34 +947,39 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/channel:
     get:
       operationId: listChannels
-      summary: List channels
+      summary: List Channels
       description: Returns a list of channels on the specified queue manager.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: name
-          in: query
-          description: Channel name filter
-          schema:
-            type: string
-        - name: type
-          in: query
-          description: Channel type filter
-          schema:
-            type: string
-            enum:
-              - sender
-              - receiver
-              - server
-              - requester
-              - serverConnection
-              - clusterSender
-              - clusterReceiver
-              - amqp
+      - $ref: '#/components/parameters/qmgrName'
+      - name: name
+        in: query
+        description: Channel name filter
+        schema:
+          type: string
+        example: Example Title
+      - name: type
+        in: query
+        description: Channel type filter
+        schema:
+          type: string
+          enum:
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+        example: sender
       responses:
         '200':
           description: List of channels
@@ -634,24 +992,50 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Channel'
+              examples:
+                Listchannels200Example:
+                  summary: Default listChannels 200 response
+                  x-microcks-default: true
+                  value:
+                    channel:
+                    - name: Example Title
+                      type: sender
+                      description: A sample description.
+                      connectionName: example_value
+                      transmissionQueue: example_value
+                      status:
+                        state: running
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createChannel
-      summary: Create a channel
+      summary: Create a Channel
       description: Creates a new channel on the queue manager.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/qmgrName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChannelCreate'
+            examples:
+              CreatechannelRequestExample:
+                summary: Default createChannel request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  type: sender
+                  description: A sample description.
+                  connectionName: example_value
+                  transmissionQueue: example_value
       responses:
         '201':
           description: Channel created
@@ -659,25 +1043,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Channel'
+              examples:
+                Createchannel201Example:
+                  summary: Default createChannel 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: sender
+                    description: A sample description.
+                    connectionName: example_value
+                    transmissionQueue: example_value
+                    status:
+                      state: running
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/channel/{channelName}:
     get:
       operationId: getChannel
-      summary: Get channel details
+      summary: Get Channel Details
       description: Returns details of a specific channel.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: channelName
-          in: path
-          required: true
-          description: Channel name
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        description: Channel name
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Channel details
@@ -685,23 +1085,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Channel'
+              examples:
+                Getchannel200Example:
+                  summary: Default getChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: sender
+                    description: A sample description.
+                    connectionName: example_value
+                    transmissionQueue: example_value
+                    status:
+                      state: running
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteChannel
-      summary: Delete a channel
+      summary: Delete a Channel
       description: Deletes a channel from the queue manager.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: channelName
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Channel deleted
@@ -709,20 +1125,24 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/channel/{channelName}/start:
     post:
       operationId: startChannel
-      summary: Start a channel
+      summary: Start a Channel
       description: Starts a channel on the queue manager.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: channelName
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Channel started
@@ -730,20 +1150,24 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /admin/qmgr/{qmgrName}/channel/{channelName}/stop:
     post:
       operationId: stopChannel
-      summary: Stop a channel
+      summary: Stop a Channel
       description: Stops a channel on the queue manager.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/qmgrName'
-        - name: channelName
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Channel stopped
@@ -751,13 +1175,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /login:
     post:
       operationId: login
-      summary: Authenticate and get LTPA token
+      summary: Authenticate and Get Ltpa Token
       description: Authenticates the user and returns an LTPA token cookie for subsequent requests.
       tags:
-        - Authentication
+      - Authentication
       security: []
       requestBody:
         required: true
@@ -766,14 +1193,21 @@ paths:
             schema:
               type: object
               required:
-                - username
-                - password
+              - username
+              - password
               properties:
                 username:
                   type: string
                 password:
                   type: string
                   format: password
+            examples:
+              LoginRequestExample:
+                summary: Default login request
+                x-microcks-default: true
+                value:
+                  username: example_value
+                  password: example_value
       responses:
         '200':
           description: Authentication successful
@@ -788,16 +1222,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Login401Example:
+                  summary: Default login 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                    - type: example_value
+                      msgId: '500123'
+                      explanation: example_value
+                      action: example_value
+                      message: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /logout:
     post:
       operationId: logout
-      summary: Logout and invalidate token
+      summary: Logout and Invalidate Token
       description: Invalidates the current LTPA token.
       tags:
-        - Authentication
+      - Authentication
       responses:
         '204':
           description: Logout successful
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -831,69 +1282,86 @@ components:
         name:
           type: string
           description: Queue manager name
+          example: Example Title
         state:
           type: string
           enum:
-            - running
-            - ended
+          - running
+          - ended
           description: Queue manager state
+          example: running
         version:
           type: string
           description: MQ version
+          example: example_value
         platform:
           type: string
           description: Platform type
+          example: example_value
         commandLevel:
           type: integer
           description: Command level
+          example: 10
         connectionCount:
           type: integer
           description: Number of active connections
+          example: 10
         description:
           type: string
+          example: A sample description.
         maximumMessageLength:
           type: integer
           description: Maximum message length in bytes
+          example: 10
     Queue:
       type: object
       properties:
         name:
           type: string
           description: Queue name
+          example: Example Title
         type:
           type: string
           enum:
-            - local
-            - alias
-            - remote
-            - model
-            - cluster
+          - local
+          - alias
+          - remote
+          - model
+          - cluster
           description: Queue type
+          example: local
         description:
           type: string
+          example: A sample description.
         maxDepth:
           type: integer
           description: Maximum queue depth
+          example: 10
         maxMessageLength:
           type: integer
           description: Maximum message length in bytes
+          example: 10
         currentDepth:
           type: integer
           description: Current number of messages on the queue
+          example: 10
         inhibitPut:
           type: boolean
           description: Whether put operations are inhibited
+          example: true
         inhibitGet:
           type: boolean
           description: Whether get operations are inhibited
+          example: true
         persistence:
           type: object
           properties:
             default:
               type: string
               enum:
-                - persistent
-                - nonPersistent
+              - persistent
+              - nonPersistent
+          example: example_value
         cluster:
           type: object
           properties:
@@ -903,6 +1371,7 @@ components:
               type: integer
             workloadPriority:
               type: integer
+          example: example_value
         status:
           type: object
           properties:
@@ -918,219 +1387,268 @@ components:
             lastPutDateTime:
               type: string
               format: date-time
+          example: example_value
     QueueCreate:
       type: object
       required:
-        - name
+      - name
       properties:
         name:
           type: string
           description: Queue name
+          example: Example Title
         type:
           type: string
           enum:
-            - local
-            - alias
-            - remote
-            - model
+          - local
+          - alias
+          - remote
+          - model
           default: local
+          example: local
         description:
           type: string
+          example: A sample description.
         maxDepth:
           type: integer
           default: 5000
+          example: 10
         maxMessageLength:
           type: integer
           default: 4194304
+          example: 10
         persistence:
           type: object
           properties:
             default:
               type: string
               enum:
-                - persistent
-                - nonPersistent
+              - persistent
+              - nonPersistent
+          example: example_value
     QueueUpdate:
       type: object
       properties:
         description:
           type: string
+          example: A sample description.
         maxDepth:
           type: integer
+          example: 10
         maxMessageLength:
           type: integer
+          example: 10
         inhibitPut:
           type: boolean
+          example: true
         inhibitGet:
           type: boolean
+          example: true
     Message:
       type: object
       properties:
         messageId:
           type: string
           description: Message identifier
+          example: '500123'
         correlationId:
           type: string
           description: Correlation identifier
+          example: '500123'
         putDateTime:
           type: string
           format: date-time
           description: Time the message was put
+          example: '2026-01-15T10:30:00Z'
         persistence:
           type: string
           enum:
-            - persistent
-            - nonPersistent
+          - persistent
+          - nonPersistent
+          example: persistent
         replyToQueue:
           type: string
           description: Reply-to queue name
+          example: example_value
         replyToQueueManager:
           type: string
           description: Reply-to queue manager name
+          example: example_value
         expiry:
           type: integer
           description: Message expiry in tenths of a second
+          example: 10
         body:
           description: Message body content
+          example: example_value
         format:
           type: string
           description: Message format
+          example: example_value
     Topic:
       type: object
       properties:
         name:
           type: string
           description: Administrative topic object name
+          example: Example Title
         topicString:
           type: string
           description: Topic string
+          example: example_value
         description:
           type: string
+          example: A sample description.
         type:
           type: string
           enum:
-            - local
-            - cluster
+          - local
+          - cluster
+          example: local
         durableSubscriptions:
           type: string
           enum:
-            - allowed
-            - inhibited
+          - allowed
+          - inhibited
+          example: allowed
         publish:
           type: string
           enum:
-            - allowed
-            - inhibited
+          - allowed
+          - inhibited
+          example: allowed
         subscribe:
           type: string
           enum:
-            - allowed
-            - inhibited
+          - allowed
+          - inhibited
+          example: allowed
     TopicCreate:
       type: object
       required:
-        - name
-        - topicString
+      - name
+      - topicString
       properties:
         name:
           type: string
+          example: Example Title
         topicString:
           type: string
+          example: example_value
         description:
           type: string
+          example: A sample description.
         type:
           type: string
           enum:
-            - local
-            - cluster
+          - local
+          - cluster
           default: local
+          example: local
     Subscription:
       type: object
       properties:
         id:
           type: string
           description: Subscription identifier
+          example: abc123
         name:
           type: string
           description: Subscription name
+          example: Example Title
         topicString:
           type: string
           description: Topic string
+          example: example_value
         destination:
           type: string
           description: Destination queue name
+          example: example_value
         type:
           type: string
           enum:
-            - admin
-            - api
+          - admin
+          - api
+          example: admin
         durability:
           type: string
           enum:
-            - durable
-            - nonDurable
+          - durable
+          - nonDurable
+          example: durable
     Channel:
       type: object
       properties:
         name:
           type: string
           description: Channel name
+          example: Example Title
         type:
           type: string
           enum:
-            - sender
-            - receiver
-            - server
-            - requester
-            - serverConnection
-            - clusterSender
-            - clusterReceiver
-            - amqp
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+          example: sender
         description:
           type: string
+          example: A sample description.
         connectionName:
           type: string
           description: Connection name (host and port)
+          example: example_value
         transmissionQueue:
           type: string
           description: Transmission queue name
+          example: example_value
         status:
           type: object
           properties:
             state:
               type: string
               enum:
-                - running
-                - stopped
-                - retrying
-                - binding
-                - starting
-                - stopping
+              - running
+              - stopped
+              - retrying
+              - binding
+              - starting
+              - stopping
+          example: example_value
     ChannelCreate:
       type: object
       required:
-        - name
-        - type
+      - name
+      - type
       properties:
         name:
           type: string
+          example: Example Title
         type:
           type: string
           enum:
-            - sender
-            - receiver
-            - server
-            - requester
-            - serverConnection
-            - clusterSender
-            - clusterReceiver
-            - amqp
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+          example: sender
         description:
           type: string
+          example: A sample description.
         connectionName:
           type: string
+          example: example_value
         transmissionQueue:
           type: string
+          example: example_value
     Error:
       type: object
       properties:
@@ -1149,6 +1667,7 @@ components:
                 type: string
               message:
                 type: string
+          example: []
   responses:
     BadRequest:
       description: Bad request

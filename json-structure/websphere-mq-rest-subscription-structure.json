@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Subscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "topicString": {
+      "type": "string"
+    },
+    "destination": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "durability": {
+      "type": "string"
+    }
+  }
+}

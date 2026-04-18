@@ -1,0 +1,10 @@
+{
+  "name": "Example Title",
+  "hostName": "example_value",
+  "userDir": "example_value",
+  "status": "example_value",
+  "clusterName": "example_value",
+  "httpsPort": 10,
+  "wlpVersion": "example_value",
+  "javaVersion": "example_value"
+}

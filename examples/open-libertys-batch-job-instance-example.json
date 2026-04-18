@@ -1,0 +1,11 @@
+{
+  "jobInstanceId": "500123",
+  "jobName": "example_value",
+  "appName": "example_value",
+  "submitter": "example_value",
+  "batchStatus": "example_value",
+  "createTime": "example_value",
+  "lastUpdatedTime": "example_value",
+  "jobParameters": "example_value",
+  "_links": []
+}

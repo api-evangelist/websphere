@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConfigResource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Resource identifier"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type"
+    },
+    "name": {
+      "type": "string",
+      "description": "Resource display name"
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Resource attributes"
+    },
+    "links": {
+      "type": "array"
+    }
+  }
+}

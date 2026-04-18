@@ -1,0 +1,41 @@
+name: websphere API Vocabulary
+provider: websphere
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 154
+schemas: 66
+tags:
+- Applications
+- Authentication
+- Batch
+- Channels
+- Clusters
+- Compliance
+- Config
+- Configuration
+- Controller
+- Features
+- File Transfer
+- Fixes
+- Health
+- Hosts
+- Logging
+- MBeans
+- Members
+- Messages
+- Metrics
+- Monitoring
+- Nodes
+- Notifications
+- OpenAPI
+- Queue Manager
+- Queues
+- Repositories
+- Resources
+- Scaling
+- Security
+- Server
+- Servers
+- Subscriptions
+- Topics
+- Vulnerabilities

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Node",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Node name"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Hostname of the node"
+    },
+    "platformOS": {
+      "type": "string",
+      "description": "Operating system platform"
+    },
+    "servers": {
+      "type": "array"
+    },
+    "synchronized": {
+      "type": "boolean",
+      "description": "Whether the node configuration is synchronized"
+    }
+  }
+}

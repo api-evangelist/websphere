@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Topic",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "topicString": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "durableSubscriptions": {
+      "type": "string"
+    },
+    "publish": {
+      "type": "string"
+    },
+    "subscribe": {
+      "type": "string"
+    }
+  }
+}

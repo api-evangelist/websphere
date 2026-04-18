@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Notification",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "sequenceNumber": {
+      "type": "integer"
+    },
+    "timestamp": {
+      "type": "integer"
+    },
+    "userData": {
+      "type": "object"
+    }
+  }
+}

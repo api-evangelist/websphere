@@ -1,0 +1,10 @@
+{
+  "name": "Example Title",
+  "state": "example_value",
+  "version": "example_value",
+  "platform": "example_value",
+  "commandLevel": 10,
+  "connectionCount": 10,
+  "description": "A sample description.",
+  "maximumMessageLength": 10
+}

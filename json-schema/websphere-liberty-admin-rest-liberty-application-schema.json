@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LibertyApplication",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Application name"
+    },
+    "location": {
+      "type": "string",
+      "description": "Application file location"
+    },
+    "type": {
+      "type": "string",
+      "description": "Application type"
+    },
+    "contextRoot": {
+      "type": "string",
+      "description": "Context root for web application"
+    },
+    "state": {
+      "type": "string"
+    },
+    "autoStart": {
+      "type": "boolean",
+      "description": "Whether the application starts automatically"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CollectiveMember",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "hostName": {
+      "type": "string"
+    },
+    "userDir": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "clusterName": {
+      "type": "string"
+    },
+    "httpsPort": {
+      "type": "integer"
+    },
+    "wlpVersion": {
+      "type": "string"
+    },
+    "javaVersion": {
+      "type": "string"
+    }
+  }
+}

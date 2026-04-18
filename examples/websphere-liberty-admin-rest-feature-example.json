@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "displayName": "example_value",
+  "version": "example_value",
+  "description": "A sample description.",
+  "enabled": true,
+  "dependencies": []
+}

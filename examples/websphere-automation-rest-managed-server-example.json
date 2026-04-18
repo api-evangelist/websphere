@@ -1,0 +1,13 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "type": "example_value",
+  "version": "example_value",
+  "host": "example_value",
+  "port": 10,
+  "status": "example_value",
+  "vulnerabilityCount": 10,
+  "lastScanDate": "example_value",
+  "registeredDate": "example_value",
+  "installedFixes": []
+}

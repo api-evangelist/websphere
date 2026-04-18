@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagedServer",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique server identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Server name"
+    },
+    "type": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "description": "WebSphere version"
+    },
+    "host": {
+      "type": "string",
+      "description": "Server hostname"
+    },
+    "port": {
+      "type": "integer",
+      "description": "Server port"
+    },
+    "status": {
+      "type": "string"
+    },
+    "vulnerabilityCount": {
+      "type": "integer",
+      "description": "Number of open vulnerabilities"
+    },
+    "lastScanDate": {
+      "type": "string"
+    },
+    "registeredDate": {
+      "type": "string"
+    },
+    "installedFixes": {
+      "type": "array",
+      "description": "List of installed fix IDs"
+    }
+  }
+}

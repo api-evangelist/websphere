@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "type": "example_value",
+  "description": "A sample description.",
+  "maxDepth": 10,
+  "maxMessageLength": 10,
+  "persistence": "example_value"
+}

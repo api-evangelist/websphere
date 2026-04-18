@@ -18,49 +18,51 @@ externalDocs:
   description: WebSphere Automation Documentation
   url: https://www.ibm.com/docs/en/ws-automation
 servers:
-  - url: https://automation-api.example.com/v1
-    description: WebSphere Automation API Server
+- url: https://automation-api.example.com/v1
+  description: WebSphere Automation API Server
 security:
-  - bearerAuth: []
+- bearerAuth: []
 tags:
-  - name: Servers
-    description: Managed server inventory and registration
-  - name: Vulnerabilities
-    description: Security vulnerability tracking and remediation
-  - name: Fixes
-    description: Fix management and automated patching
-  - name: Health
-    description: Health monitoring and status
-  - name: Compliance
-    description: Compliance and configuration drift detection
-  - name: Notifications
-    description: Alert and notification management
+- name: Servers
+  description: Managed server inventory and registration
+- name: Vulnerabilities
+  description: Security vulnerability tracking and remediation
+- name: Fixes
+  description: Fix management and automated patching
+- name: Health
+  description: Health monitoring and status
+- name: Compliance
+  description: Compliance and configuration drift detection
+- name: Notifications
+  description: Alert and notification management
 paths:
   /servers:
     get:
       operationId: listManagedServers
-      summary: List managed servers
+      summary: List Managed Servers
       description: Returns a list of all servers registered with WebSphere Automation.
       tags:
-        - Servers
+      - Servers
       parameters:
-        - name: type
-          in: query
-          description: Filter by server type
-          schema:
-            type: string
-            enum:
-              - was-traditional
-              - liberty
-        - name: status
-          in: query
-          description: Filter by server status
-          schema:
-            type: string
-            enum:
-              - active
-              - inactive
-              - unknown
+      - name: type
+        in: query
+        description: Filter by server type
+        schema:
+          type: string
+          enum:
+          - was-traditional
+          - liberty
+        example: was-traditional
+      - name: status
+        in: query
+        description: Filter by server status
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        example: active
       responses:
         '200':
           description: List of managed servers
@@ -75,14 +77,36 @@ paths:
                       $ref: '#/components/schemas/ManagedServer'
                   totalCount:
                     type: integer
+              examples:
+                Listmanagedservers200Example:
+                  summary: Default listManagedServers 200 response
+                  x-microcks-default: true
+                  value:
+                    servers:
+                    - id: abc123
+                      name: Example Title
+                      type: was-traditional
+                      version: example_value
+                      host: example_value
+                      port: 10
+                      status: active
+                      vulnerabilityCount: 10
+                      lastScanDate: '2026-01-15T10:30:00Z'
+                      registeredDate: '2026-01-15T10:30:00Z'
+                      installedFixes:
+                      - {}
+                    totalCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: registerServer
-      summary: Register a server
+      summary: Register a Server
       description: Registers a new server with WebSphere Automation for monitoring and management.
       tags:
-        - Servers
+      - Servers
       requestBody:
         required: true
         content:
@@ -90,9 +114,9 @@ paths:
             schema:
               type: object
               required:
-                - name
-                - type
-                - connectionInfo
+              - name
+              - type
+              - connectionInfo
               properties:
                 name:
                   type: string
@@ -100,13 +124,13 @@ paths:
                 type:
                   type: string
                   enum:
-                    - was-traditional
-                    - liberty
+                  - was-traditional
+                  - liberty
                 connectionInfo:
                   type: object
                   required:
-                    - host
-                    - port
+                  - host
+                  - port
                   properties:
                     host:
                       type: string
@@ -115,8 +139,8 @@ paths:
                     protocol:
                       type: string
                       enum:
-                        - https
-                        - http
+                      - https
+                      - http
                       default: https
                 credentials:
                   type: object
@@ -126,6 +150,20 @@ paths:
                     password:
                       type: string
                       format: password
+            examples:
+              RegisterserverRequestExample:
+                summary: Default registerServer request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  type: was-traditional
+                  connectionInfo:
+                    host: example_value
+                    port: 10
+                    protocol: https
+                  credentials:
+                    username: example_value
+                    password: example_value
       responses:
         '201':
           description: Server registered
@@ -133,19 +171,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ManagedServer'
+              examples:
+                Registerserver201Example:
+                  summary: Default registerServer 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    type: was-traditional
+                    version: example_value
+                    host: example_value
+                    port: 10
+                    status: active
+                    vulnerabilityCount: 10
+                    lastScanDate: '2026-01-15T10:30:00Z'
+                    registeredDate: '2026-01-15T10:30:00Z'
+                    installedFixes:
+                    - example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servers/{serverId}:
     get:
       operationId: getManagedServer
-      summary: Get managed server details
+      summary: Get Managed Server Details
       description: Returns details of a specific managed server.
       tags:
-        - Servers
+      - Servers
       parameters:
-        - $ref: '#/components/parameters/serverId'
+      - $ref: '#/components/parameters/serverId'
       responses:
         '200':
           description: Server details
@@ -153,18 +211,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ManagedServer'
+              examples:
+                Getmanagedserver200Example:
+                  summary: Default getManagedServer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    type: was-traditional
+                    version: example_value
+                    host: example_value
+                    port: 10
+                    status: active
+                    vulnerabilityCount: 10
+                    lastScanDate: '2026-01-15T10:30:00Z'
+                    registeredDate: '2026-01-15T10:30:00Z'
+                    installedFixes:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deregisterServer
-      summary: Deregister a server
+      summary: Deregister a Server
       description: Removes a server from WebSphere Automation management.
       tags:
-        - Servers
+      - Servers
       parameters:
-        - $ref: '#/components/parameters/serverId'
+      - $ref: '#/components/parameters/serverId'
       responses:
         '204':
           description: Server deregistered
@@ -172,44 +250,51 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /vulnerabilities:
     get:
       operationId: listVulnerabilities
-      summary: List vulnerabilities
+      summary: List Vulnerabilities
       description: Returns a list of known security vulnerabilities affecting managed servers.
       tags:
-        - Vulnerabilities
+      - Vulnerabilities
       parameters:
-        - name: severity
-          in: query
-          description: Filter by severity
-          schema:
-            type: string
-            enum:
-              - critical
-              - high
-              - medium
-              - low
-        - name: status
-          in: query
-          description: Filter by remediation status
-          schema:
-            type: string
-            enum:
-              - open
-              - resolved
-              - in-progress
-              - accepted-risk
-        - name: serverId
-          in: query
-          description: Filter by affected server
-          schema:
-            type: string
-        - name: cveId
-          in: query
-          description: Filter by CVE identifier
-          schema:
-            type: string
+      - name: severity
+        in: query
+        description: Filter by severity
+        schema:
+          type: string
+          enum:
+          - critical
+          - high
+          - medium
+          - low
+        example: critical
+      - name: status
+        in: query
+        description: Filter by remediation status
+        schema:
+          type: string
+          enum:
+          - open
+          - resolved
+          - in-progress
+          - accepted-risk
+        example: open
+      - name: serverId
+        in: query
+        description: Filter by affected server
+        schema:
+          type: string
+        example: '500123'
+      - name: cveId
+        in: query
+        description: Filter by CVE identifier
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: List of vulnerabilities
@@ -224,22 +309,46 @@ paths:
                       $ref: '#/components/schemas/Vulnerability'
                   totalCount:
                     type: integer
+              examples:
+                Listvulnerabilities200Example:
+                  summary: Default listVulnerabilities 200 response
+                  x-microcks-default: true
+                  value:
+                    vulnerabilities:
+                    - id: abc123
+                      cveIds:
+                      - {}
+                      severity: critical
+                      cvssScore: 42.5
+                      description: A sample description.
+                      affectedServers:
+                      - {}
+                      status: open
+                      availableFixes:
+                      - {}
+                      publishedDate: '2026-01-15T10:30:00Z'
+                      discoveredDate: '2026-01-15T10:30:00Z'
+                    totalCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /vulnerabilities/{vulnerabilityId}:
     get:
       operationId: getVulnerability
-      summary: Get vulnerability details
+      summary: Get Vulnerability Details
       description: Returns details of a specific vulnerability.
       tags:
-        - Vulnerabilities
+      - Vulnerabilities
       parameters:
-        - name: vulnerabilityId
-          in: path
-          required: true
-          description: Vulnerability identifier
-          schema:
-            type: string
+      - name: vulnerabilityId
+        in: path
+        required: true
+        description: Vulnerability identifier
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Vulnerability details
@@ -247,23 +356,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vulnerability'
+              examples:
+                Getvulnerability200Example:
+                  summary: Default getVulnerability 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    cveIds:
+                    - example_value
+                    severity: critical
+                    cvssScore: 42.5
+                    description: A sample description.
+                    affectedServers:
+                    - example_value
+                    status: open
+                    availableFixes:
+                    - example_value
+                    publishedDate: '2026-01-15T10:30:00Z'
+                    discoveredDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /vulnerabilities/{vulnerabilityId}/resolve:
     post:
       operationId: resolveVulnerability
-      summary: Resolve a vulnerability
+      summary: Resolve a Vulnerability
       description: Initiates the resolution of a vulnerability by applying fixes.
       tags:
-        - Vulnerabilities
+      - Vulnerabilities
       parameters:
-        - name: vulnerabilityId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: vulnerabilityId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         content:
           application/json:
@@ -273,8 +404,8 @@ paths:
                 action:
                   type: string
                   enum:
-                    - apply-fix
-                    - accept-risk
+                  - apply-fix
+                  - accept-risk
                   description: Resolution action
                 fixId:
                   type: string
@@ -284,6 +415,15 @@ paths:
                   items:
                     type: string
                   description: Target servers for the fix
+            examples:
+              ResolvevulnerabilityRequestExample:
+                summary: Default resolveVulnerability request
+                x-microcks-default: true
+                value:
+                  action: apply-fix
+                  fixId: '500123'
+                  serverIds:
+                  - example_value
       responses:
         '202':
           description: Resolution initiated
@@ -296,34 +436,46 @@ paths:
                     type: string
                   status:
                     type: string
+              examples:
+                Resolvevulnerability202Example:
+                  summary: Default resolveVulnerability 202 response
+                  x-microcks-default: true
+                  value:
+                    taskId: '500123'
+                    status: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /fixes:
     get:
       operationId: listFixes
-      summary: List available fixes
+      summary: List Available Fixes
       description: Returns a list of available fixes and patches.
       tags:
-        - Fixes
+      - Fixes
       parameters:
-        - name: serverId
-          in: query
-          description: Filter by applicable server
-          schema:
-            type: string
-        - name: type
-          in: query
-          description: Filter by fix type
-          schema:
-            type: string
-            enum:
-              - security
-              - ifix
-              - fixpack
+      - name: serverId
+        in: query
+        description: Filter by applicable server
+        schema:
+          type: string
+        example: '500123'
+      - name: type
+        in: query
+        description: Filter by fix type
+        schema:
+          type: string
+          enum:
+          - security
+          - ifix
+          - fixpack
+        example: security
       responses:
         '200':
           description: List of fixes
@@ -338,22 +490,44 @@ paths:
                       $ref: '#/components/schemas/Fix'
                   totalCount:
                     type: integer
+              examples:
+                Listfixes200Example:
+                  summary: Default listFixes 200 response
+                  x-microcks-default: true
+                  value:
+                    fixes:
+                    - id: abc123
+                      name: Example Title
+                      type: security
+                      description: A sample description.
+                      resolvedCVEs:
+                      - {}
+                      applicableVersions:
+                      - {}
+                      downloadURL: https://www.example.com
+                      releaseDate: '2026-01-15T10:30:00Z'
+                      size: 10
+                    totalCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /fixes/{fixId}:
     get:
       operationId: getFix
-      summary: Get fix details
+      summary: Get Fix Details
       description: Returns details of a specific fix.
       tags:
-        - Fixes
+      - Fixes
       parameters:
-        - name: fixId
-          in: path
-          required: true
-          description: Fix identifier
-          schema:
-            type: string
+      - name: fixId
+        in: path
+        required: true
+        description: Fix identifier
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Fix details
@@ -361,23 +535,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fix'
+              examples:
+                Getfix200Example:
+                  summary: Default getFix 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    type: security
+                    description: A sample description.
+                    resolvedCVEs:
+                    - example_value
+                    applicableVersions:
+                    - example_value
+                    downloadURL: https://www.example.com
+                    releaseDate: '2026-01-15T10:30:00Z'
+                    size: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /fixes/{fixId}/apply:
     post:
       operationId: applyFix
-      summary: Apply a fix
+      summary: Apply a Fix
       description: Applies a fix to one or more managed servers.
       tags:
-        - Fixes
+      - Fixes
       parameters:
-        - name: fixId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: fixId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
@@ -385,7 +579,7 @@ paths:
             schema:
               type: object
               required:
-                - serverIds
+              - serverIds
               properties:
                 serverIds:
                   type: array
@@ -400,6 +594,15 @@ paths:
                   type: boolean
                   default: true
                   description: Whether to restart servers after applying the fix
+            examples:
+              ApplyfixRequestExample:
+                summary: Default applyFix request
+                x-microcks-default: true
+                value:
+                  serverIds:
+                  - example_value
+                  schedule: '2026-01-15T10:30:00Z'
+                  restartAfterApply: true
       responses:
         '202':
           description: Fix application initiated
@@ -412,19 +615,29 @@ paths:
                     type: string
                   status:
                     type: string
+              examples:
+                Applyfix202Example:
+                  summary: Default applyFix 202 response
+                  x-microcks-default: true
+                  value:
+                    taskId: '500123'
+                    status: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /health:
     get:
       operationId: getOverallHealth
-      summary: Get overall health status
+      summary: Get Overall Health Status
       description: Returns the overall health status of all managed servers.
       tags:
-        - Health
+      - Health
       responses:
         '200':
           description: Overall health status
@@ -432,17 +645,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OverallHealth'
+              examples:
+                Getoverallhealth200Example:
+                  summary: Default getOverallHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    status: healthy
+                    totalServers: 10
+                    activeServers: 10
+                    inactiveServers: 10
+                    openVulnerabilities: 10
+                    criticalVulnerabilities: 10
+                    pendingFixes: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /health/servers/{serverId}:
     get:
       operationId: getServerHealth
-      summary: Get server health status
+      summary: Get Server Health Status
       description: Returns health information for a specific managed server.
       tags:
-        - Health
+      - Health
       parameters:
-        - $ref: '#/components/parameters/serverId'
+      - $ref: '#/components/parameters/serverId'
       responses:
         '200':
           description: Server health status
@@ -450,17 +678,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerHealth'
+              examples:
+                Getserverhealth200Example:
+                  summary: Default getServerHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    serverId: '500123'
+                    serverName: example_value
+                    status: healthy
+                    uptime: 10
+                    cpuUsage: 42.5
+                    memoryUsage: 42.5
+                    openVulnerabilities: 10
+                    lastHealthCheck: '2026-01-15T10:30:00Z'
+                    checks:
+                    - name: Example Title
+                      status: pass
+                      message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /compliance/reports:
     get:
       operationId: listComplianceReports
-      summary: List compliance reports
+      summary: List Compliance Reports
       description: Returns a list of compliance reports.
       tags:
-        - Compliance
+      - Compliance
       responses:
         '200':
           description: List of compliance reports
@@ -470,21 +718,39 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ComplianceReport'
+              examples:
+                Listcompliancereports200Example:
+                  summary: Default listComplianceReports 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    generatedDate: '2026-01-15T10:30:00Z'
+                    overallCompliance: 42.5
+                    servers:
+                    - serverId: '500123'
+                      serverName: example_value
+                      complianceScore: 42.5
+                      findings: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /compliance/reports/{reportId}:
     get:
       operationId: getComplianceReport
-      summary: Get compliance report details
+      summary: Get Compliance Report Details
       description: Returns a specific compliance report.
       tags:
-        - Compliance
+      - Compliance
       parameters:
-        - name: reportId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Compliance report details
@@ -492,33 +758,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ComplianceReport'
+              examples:
+                Getcompliancereport200Example:
+                  summary: Default getComplianceReport 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    generatedDate: '2026-01-15T10:30:00Z'
+                    overallCompliance: 42.5
+                    servers:
+                    - serverId: '500123'
+                      serverName: example_value
+                      complianceScore: 42.5
+                      findings:
+                      - {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /notifications:
     get:
       operationId: listNotifications
-      summary: List notifications
+      summary: List Notifications
       description: Returns a list of notifications and alerts.
       tags:
-        - Notifications
+      - Notifications
       parameters:
-        - name: type
-          in: query
-          description: Filter by notification type
-          schema:
-            type: string
-            enum:
-              - vulnerability
-              - health
-              - compliance
-              - fix
-        - name: read
-          in: query
-          description: Filter by read status
-          schema:
-            type: boolean
+      - name: type
+        in: query
+        description: Filter by notification type
+        schema:
+          type: string
+          enum:
+          - vulnerability
+          - health
+          - compliance
+          - fix
+        example: vulnerability
+      - name: read
+        in: query
+        description: Filter by read status
+        schema:
+          type: boolean
+        example: true
       responses:
         '200':
           description: List of notifications
@@ -528,21 +814,38 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Notification'
+              examples:
+                Listnotifications200Example:
+                  summary: Default listNotifications 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    type: vulnerability
+                    severity: info
+                    title: Example Title
+                    message: example_value
+                    read: true
+                    createdDate: '2026-01-15T10:30:00Z'
+                    relatedResourceId: '500123'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /notifications/{notificationId}/read:
     post:
       operationId: markNotificationRead
-      summary: Mark notification as read
+      summary: Mark Notification as Read
       description: Marks a notification as read.
       tags:
-        - Notifications
+      - Notifications
       parameters:
-        - name: notificationId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: notificationId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Notification marked as read
@@ -550,6 +853,9 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -572,173 +878,218 @@ components:
         id:
           type: string
           description: Unique server identifier
+          example: abc123
         name:
           type: string
           description: Server name
+          example: Example Title
         type:
           type: string
           enum:
-            - was-traditional
-            - liberty
+          - was-traditional
+          - liberty
+          example: was-traditional
         version:
           type: string
           description: WebSphere version
+          example: example_value
         host:
           type: string
           description: Server hostname
+          example: example_value
         port:
           type: integer
           description: Server port
+          example: 10
         status:
           type: string
           enum:
-            - active
-            - inactive
-            - unknown
+          - active
+          - inactive
+          - unknown
+          example: active
         vulnerabilityCount:
           type: integer
           description: Number of open vulnerabilities
+          example: 10
         lastScanDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         registeredDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         installedFixes:
           type: array
           items:
             type: string
           description: List of installed fix IDs
+          example: []
     Vulnerability:
       type: object
       properties:
         id:
           type: string
           description: Vulnerability identifier
+          example: abc123
         cveIds:
           type: array
           items:
             type: string
           description: Associated CVE identifiers
+          example: []
         severity:
           type: string
           enum:
-            - critical
-            - high
-            - medium
-            - low
+          - critical
+          - high
+          - medium
+          - low
+          example: critical
         cvssScore:
           type: number
           description: CVSS base score
+          example: 42.5
         description:
           type: string
+          example: A sample description.
         affectedServers:
           type: array
           items:
             type: string
           description: List of affected server IDs
+          example: []
         status:
           type: string
           enum:
-            - open
-            - resolved
-            - in-progress
-            - accepted-risk
+          - open
+          - resolved
+          - in-progress
+          - accepted-risk
+          example: open
         availableFixes:
           type: array
           items:
             type: string
           description: List of available fix IDs
+          example: []
         publishedDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         discoveredDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     Fix:
       type: object
       properties:
         id:
           type: string
           description: Fix identifier
+          example: abc123
         name:
           type: string
           description: Fix name
+          example: Example Title
         type:
           type: string
           enum:
-            - security
-            - ifix
-            - fixpack
+          - security
+          - ifix
+          - fixpack
+          example: security
         description:
           type: string
+          example: A sample description.
         resolvedCVEs:
           type: array
           items:
             type: string
           description: CVEs resolved by this fix
+          example: []
         applicableVersions:
           type: array
           items:
             type: string
           description: WebSphere versions this fix applies to
+          example: []
         downloadURL:
           type: string
           format: uri
+          example: https://www.example.com
         releaseDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         size:
           type: integer
           description: Fix size in bytes
+          example: 10
     OverallHealth:
       type: object
       properties:
         status:
           type: string
           enum:
-            - healthy
-            - warning
-            - critical
+          - healthy
+          - warning
+          - critical
+          example: healthy
         totalServers:
           type: integer
+          example: 10
         activeServers:
           type: integer
+          example: 10
         inactiveServers:
           type: integer
+          example: 10
         openVulnerabilities:
           type: integer
+          example: 10
         criticalVulnerabilities:
           type: integer
+          example: 10
         pendingFixes:
           type: integer
+          example: 10
     ServerHealth:
       type: object
       properties:
         serverId:
           type: string
+          example: '500123'
         serverName:
           type: string
+          example: example_value
         status:
           type: string
           enum:
-            - healthy
-            - warning
-            - critical
+          - healthy
+          - warning
+          - critical
+          example: healthy
         uptime:
           type: integer
           description: Uptime in seconds
+          example: 10
         cpuUsage:
           type: number
           description: CPU usage percentage
+          example: 42.5
         memoryUsage:
           type: number
           description: Memory usage percentage
+          example: 42.5
         openVulnerabilities:
           type: integer
+          example: 10
         lastHealthCheck:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         checks:
           type: array
           items:
@@ -749,24 +1100,29 @@ components:
               status:
                 type: string
                 enum:
-                  - pass
-                  - warn
-                  - fail
+                - pass
+                - warn
+                - fail
               message:
                 type: string
+          example: []
     ComplianceReport:
       type: object
       properties:
         id:
           type: string
+          example: abc123
         name:
           type: string
+          example: Example Title
         generatedDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         overallCompliance:
           type: number
           description: Overall compliance percentage
+          example: 42.5
         servers:
           type: array
           items:
@@ -788,49 +1144,60 @@ components:
                     status:
                       type: string
                       enum:
-                        - compliant
-                        - non-compliant
+                      - compliant
+                      - non-compliant
                     description:
                       type: string
+          example: []
     Notification:
       type: object
       properties:
         id:
           type: string
+          example: abc123
         type:
           type: string
           enum:
-            - vulnerability
-            - health
-            - compliance
-            - fix
+          - vulnerability
+          - health
+          - compliance
+          - fix
+          example: vulnerability
         severity:
           type: string
           enum:
-            - info
-            - warning
-            - critical
+          - info
+          - warning
+          - critical
+          example: info
         title:
           type: string
+          example: Example Title
         message:
           type: string
+          example: example_value
         read:
           type: boolean
+          example: true
         createdDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         relatedResourceId:
           type: string
+          example: '500123'
     Error:
       type: object
       properties:
         code:
           type: string
+          example: example_value
         message:
           type: string
+          example: example_value
       required:
-        - code
-        - message
+      - code
+      - message
   responses:
     BadRequest:
       description: Bad request

@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "type": "example_value",
+  "description": "A sample description.",
+  "connectionName": "example_value",
+  "transmissionQueue": "example_value",
+  "status": "example_value"
+}

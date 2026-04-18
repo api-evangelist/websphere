@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OverallHealth",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "totalServers": {
+      "type": "integer"
+    },
+    "activeServers": {
+      "type": "integer"
+    },
+    "inactiveServers": {
+      "type": "integer"
+    },
+    "openVulnerabilities": {
+      "type": "integer"
+    },
+    "criticalVulnerabilities": {
+      "type": "integer"
+    },
+    "pendingFixes": {
+      "type": "integer"
+    }
+  }
+}

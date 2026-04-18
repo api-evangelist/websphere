@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Server",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Server name"
+    },
+    "nodeName": {
+      "type": "string",
+      "description": "Node where the server resides"
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Cluster membership"
+    },
+    "status": {
+      "type": "string"
+    },
+    "serverType": {
+      "type": "string"
+    },
+    "pid": {
+      "type": "integer",
+      "description": "Process ID"
+    },
+    "ports": {
+      "type": "array"
+    }
+  }
+}

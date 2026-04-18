@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "LibertyServer",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "wlpVersion": {
+      "type": "string"
+    },
+    "productEdition": {
+      "type": "string"
+    },
+    "javaVersion": {
+      "type": "string"
+    },
+    "javaVendor": {
+      "type": "string"
+    },
+    "serverStatus": {
+      "type": "string"
+    },
+    "uptime": {
+      "type": "integer"
+    },
+    "installDirectory": {
+      "type": "string"
+    },
+    "serverDirectory": {
+      "type": "string"
+    }
+  }
+}
