@@ -1,0 +1,13 @@
+{
+  "repo": "websphere",
+  "feeds": [
+    {
+      "source": "https://openliberty.io/blog/",
+      "feed_url": "https://openliberty.io/feed.xml",
+      "saved": 10,
+      "title": "Open Liberty"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:38:14Z"
+}
