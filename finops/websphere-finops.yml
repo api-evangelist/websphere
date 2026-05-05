@@ -1,0 +1,197 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: IBM WebSphere
+providerId: websphere
+publisherName: IBM WebSphere
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Application Server
+  - Cloud Native
+  - Enterprise Java
+  - J2EE
+  - Microservices
+  - Middleware
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the IBM WebSphere API surface. Provides a FOCUS-aligned mapping
+  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: IBM WebSphere
+  ServiceCategory: Developer Tools / API
+  ProviderName: IBM WebSphere
+  PublisherName: IBM WebSphere
+  InvoiceIssuerName: IBM WebSphere
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: WebSphere Application Server Admin API
+    baseURL: https://localhost:9443/ibm/api
+    tags:
+      - Administration
+      - Configuration
+      - Deployment
+      - Monitoring
+    serviceName: WebSphere Application Server Admin API
+    serviceCategory: API
+  - name: WebSphere Liberty Admin REST API
+    baseURL: https://localhost:9443/ibm/api
+    tags:
+      - Administration
+      - Configuration
+      - Liberty
+      - REST API
+    serviceName: WebSphere Liberty Admin REST API
+    serviceCategory: API
+  - name: WebSphere Liberty REST Connector API
+    baseURL: https://localhost:9443/IBMJMXConnectorREST/api
+    tags:
+      - JMX
+      - Liberty
+      - Remote Administration
+      - REST Connector
+    serviceName: WebSphere Liberty REST Connector API
+    serviceCategory: API
+  - name: WebSphere MQ REST API
+    baseURL: https://localhost:9443/ibmmq/rest/v2
+    tags:
+      - Integration
+      - Messaging
+      - Publish Subscribe
+      - Queue Management
+    serviceName: WebSphere MQ REST API
+    serviceCategory: API
+  - name: WebSphere Application Server JMX API
+    baseURL: service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
+    tags:
+      - JMX
+      - Management
+      - MBeans
+      - Monitoring
+    serviceName: WebSphere Application Server JMX API
+    serviceCategory: API
+  - name: WebSphere Liberty Collective Controller REST API
+    baseURL: https://localhost:9443/ibm/api/collective
+    tags:
+      - Clustering
+      - Collective
+      - Liberty
+      - Management
+    serviceName: WebSphere Liberty Collective Controller REST API
+    serviceCategory: API
+  - name: WebSphere Automation REST API
+    baseURL: https://automation-api.example.com/v1
+    tags:
+      - Automation
+      - Health Monitoring
+      - Patching
+      - Vulnerability Management
+    serviceName: WebSphere Automation REST API
+    serviceCategory: API
+  - name: Open Liberty APIs
+    baseURL: https://localhost:9443/ibm/api
+    tags:
+      - Cloud Native
+      - Jakarta EE
+      - MicroProfile
+      - Open Liberty
+    serviceName: Open Liberty APIs
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
