@@ -1,184 +1,654 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "WebSphere Security and Compliance"
-  description: "Workflow for security vulnerability management, automated patching, compliance reporting, and health monitoring across WebSphere environments for security engineers and compliance teams."
+  label: WebSphere Security and Compliance
+  description: Workflow for security vulnerability management, automated patching, compliance reporting, and health monitoring
+    across WebSphere environments for security engineers and compliance teams.
   tags:
-    - IBM WebSphere
-    - Security
-    - Compliance
-    - Vulnerability Management
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - IBM WebSphere
+  - Security
+  - Compliance
+  - Vulnerability Management
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      WEBSPHERE_AUTOMATION_TOKEN: WEBSPHERE_AUTOMATION_TOKEN
-      WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
-      WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
-
+- namespace: env
+  keys:
+    WEBSPHERE_AUTOMATION_TOKEN: WEBSPHERE_AUTOMATION_TOKEN
+    WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
+    WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
 capability:
   consumes:
-    - import: automation
-      location: ./shared/automation.yaml
-    - import: admin-rest
-      location: ./shared/admin-rest.yaml
-
+  - type: http
+    namespace: automation
+    baseUri: https://automation-api.example.com/v1
+    description: WebSphere Automation REST API for vulnerability and fix management
+    authentication:
+      type: bearer
+      token: '{{WEBSPHERE_AUTOMATION_TOKEN}}'
+    resources:
+    - name: servers
+      path: /servers
+      description: Managed server inventory
+      operations:
+      - name: list-managed-servers
+        method: GET
+        description: List managed servers
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          required: false
+          description: Filter by server type
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: register-server
+        method: POST
+        description: Register a server for management
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: '{{tools.type}}'
+      - name: get-managed-server
+        method: GET
+        description: Get managed server details
+        inputParameters:
+        - name: serverId
+          in: path
+          type: string
+          required: true
+          description: Server identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deregister-server
+        method: DELETE
+        description: Deregister a server
+        inputParameters:
+        - name: serverId
+          in: path
+          type: string
+          required: true
+          description: Server identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vulnerabilities
+      path: /vulnerabilities
+      description: Vulnerability tracking
+      operations:
+      - name: list-vulnerabilities
+        method: GET
+        description: List known vulnerabilities
+        inputParameters:
+        - name: severity
+          in: query
+          type: string
+          required: false
+          description: Filter by severity
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by remediation status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-vulnerability
+        method: GET
+        description: Get vulnerability details
+        inputParameters:
+        - name: vulnerabilityId
+          in: path
+          type: string
+          required: true
+          description: Vulnerability identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: resolve-vulnerability
+        method: POST
+        description: Initiate vulnerability resolution
+        inputParameters:
+        - name: vulnerabilityId
+          in: path
+          type: string
+          required: true
+          description: Vulnerability identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: fixes
+      path: /fixes
+      description: Fix management
+      operations:
+      - name: list-fixes
+        method: GET
+        description: List available fixes
+        inputParameters:
+        - name: serverId
+          in: query
+          type: string
+          required: false
+          description: Filter by applicable server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-fix
+        method: GET
+        description: Get fix details
+        inputParameters:
+        - name: fixId
+          in: path
+          type: string
+          required: true
+          description: Fix identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: apply-fix
+        method: POST
+        description: Apply a fix to servers
+        inputParameters:
+        - name: fixId
+          in: path
+          type: string
+          required: true
+          description: Fix identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: health
+      path: /health
+      description: Health monitoring
+      operations:
+      - name: get-overall-health
+        method: GET
+        description: Get overall health status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-server-health
+        method: GET
+        description: Get server health status
+        inputParameters:
+        - name: serverId
+          in: path
+          type: string
+          required: true
+          description: Server identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: compliance
+      path: /compliance/reports
+      description: Compliance reporting
+      operations:
+      - name: list-compliance-reports
+        method: GET
+        description: List compliance reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-compliance-report
+        method: GET
+        description: Get compliance report details
+        inputParameters:
+        - name: reportId
+          in: path
+          type: string
+          required: true
+          description: Report identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: admin-rest
+    baseUri: https://localhost:9443/ibm/api
+    description: REST API for WebSphere Application Server administration
+    authentication:
+      type: basic
+      username: '{{WEBSPHERE_USERNAME}}'
+      password: '{{WEBSPHERE_PASSWORD}}'
+    resources:
+    - name: applications
+      path: /applications
+      description: Application deployment and lifecycle management
+      operations:
+      - name: list-applications
+        method: GET
+        description: List deployed applications
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by application status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-application
+        method: GET
+        description: Get application details
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deploy-application
+        method: POST
+        description: Deploy a new application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            contextRoot: '{{tools.contextRoot}}'
+            targetServer: '{{tools.targetServer}}'
+      - name: start-application
+        method: POST
+        description: Start a deployed application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-application
+        method: POST
+        description: Stop a running application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: uninstall-application
+        method: DELETE
+        description: Uninstall a deployed application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: servers
+      path: /servers
+      description: Server configuration and management
+      operations:
+      - name: list-servers
+        method: GET
+        description: List all servers in the cell
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-server
+        method: GET
+        description: Get server details
+        inputParameters:
+        - name: serverName
+          in: path
+          type: string
+          required: true
+          description: Server name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: start-server
+        method: POST
+        description: Start a server
+        inputParameters:
+        - name: serverName
+          in: path
+          type: string
+          required: true
+          description: Server name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-server
+        method: POST
+        description: Stop a server
+        inputParameters:
+        - name: serverName
+          in: path
+          type: string
+          required: true
+          description: Server name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters
+      path: /clusters
+      description: Cluster management operations
+      operations:
+      - name: list-clusters
+        method: GET
+        description: List all clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-cluster
+        method: GET
+        description: Get cluster details
+        inputParameters:
+        - name: clusterName
+          in: path
+          type: string
+          required: true
+          description: Cluster name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: start-cluster
+        method: POST
+        description: Start all members of a cluster
+        inputParameters:
+        - name: clusterName
+          in: path
+          type: string
+          required: true
+          description: Cluster name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-cluster
+        method: POST
+        description: Stop all members of a cluster
+        inputParameters:
+        - name: clusterName
+          in: path
+          type: string
+          required: true
+          description: Cluster name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: monitoring
+      path: /monitoring
+      description: Performance monitoring and health checks
+      operations:
+      - name: get-performance-data
+        method: GET
+        description: Get performance monitoring data
+        inputParameters:
+        - name: module
+          in: query
+          type: string
+          required: false
+          description: Performance module name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-health-status
+        method: GET
+        description: Get server health status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration
+      path: /config
+      description: Server configuration management
+      operations:
+      - name: list-config-resources
+        method: GET
+        description: List configuration resource types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-config-resources
+        method: GET
+        description: List resources of a specific type
+        inputParameters:
+        - name: resourceType
+          in: path
+          type: string
+          required: true
+          description: Configuration resource type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8082
-      namespace: security-compliance-api
-      description: "Unified REST API for WebSphere security and compliance operations."
-      resources:
-        - path: /v1/vulnerabilities
-          name: vulnerabilities
-          description: "Vulnerability tracking and remediation"
-          operations:
-            - method: GET
-              name: list-vulnerabilities
-              description: "List known vulnerabilities"
-              call: "automation.list-vulnerabilities"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: GET
-              name: get-vulnerability
-              description: "Get vulnerability details"
-              call: "automation.get-vulnerability"
-              with:
-                vulnerabilityId: "rest.vulnerabilityId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/fixes
-          name: fixes
-          description: "Fix and patch management"
-          operations:
-            - method: GET
-              name: list-fixes
-              description: "List available fixes"
-              call: "automation.list-fixes"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/compliance
-          name: compliance
-          description: "Compliance reporting"
-          operations:
-            - method: GET
-              name: list-compliance-reports
-              description: "List compliance reports"
-              call: "automation.list-compliance-reports"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/health
-          name: health
-          description: "Health monitoring"
-          operations:
-            - method: GET
-              name: get-overall-health
-              description: "Get overall health status"
-              call: "automation.get-overall-health"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/security-users
-          name: security-users
-          description: "Security user management"
-          operations:
-            - method: GET
-              name: list-users
-              description: "List security users"
-              call: "admin-rest.list-users"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9092
-      namespace: security-compliance-mcp
-      transport: http
-      description: "MCP server for AI-assisted WebSphere security and compliance."
-      tools:
-        - name: list-vulnerabilities
-          description: "List known security vulnerabilities"
-          hints:
-            readOnly: true
-          call: "automation.list-vulnerabilities"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-vulnerability
-          description: "Get vulnerability details"
-          hints:
-            readOnly: true
-          call: "automation.get-vulnerability"
-          with:
-            vulnerabilityId: "tools.vulnerabilityId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: resolve-vulnerability
-          description: "Initiate vulnerability resolution"
-          hints:
-            readOnly: false
-          call: "automation.resolve-vulnerability"
-          with:
-            vulnerabilityId: "tools.vulnerabilityId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-fixes
-          description: "List available security fixes"
-          hints:
-            readOnly: true
-          call: "automation.list-fixes"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: apply-fix
-          description: "Apply a fix to managed servers"
-          hints:
-            readOnly: false
-          call: "automation.apply-fix"
-          with:
-            fixId: "tools.fixId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-overall-health
-          description: "Get overall environment health"
-          hints:
-            readOnly: true
-          call: "automation.get-overall-health"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-server-health
-          description: "Get individual server health"
-          hints:
-            readOnly: true
-          call: "automation.get-server-health"
-          with:
-            serverId: "tools.serverId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-compliance-reports
-          description: "List compliance reports"
-          hints:
-            readOnly: true
-          call: "automation.list-compliance-reports"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-managed-servers
-          description: "List servers managed by WebSphere Automation"
-          hints:
-            readOnly: true
-          call: "automation.list-managed-servers"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8082
+    namespace: security-compliance-api
+    description: Unified REST API for WebSphere security and compliance operations.
+    resources:
+    - path: /v1/vulnerabilities
+      name: vulnerabilities
+      description: Vulnerability tracking and remediation
+      operations:
+      - method: GET
+        name: list-vulnerabilities
+        description: List known vulnerabilities
+        call: automation.list-vulnerabilities
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get-vulnerability
+        description: Get vulnerability details
+        call: automation.get-vulnerability
+        with:
+          vulnerabilityId: rest.vulnerabilityId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/fixes
+      name: fixes
+      description: Fix and patch management
+      operations:
+      - method: GET
+        name: list-fixes
+        description: List available fixes
+        call: automation.list-fixes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/compliance
+      name: compliance
+      description: Compliance reporting
+      operations:
+      - method: GET
+        name: list-compliance-reports
+        description: List compliance reports
+        call: automation.list-compliance-reports
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/health
+      name: health
+      description: Health monitoring
+      operations:
+      - method: GET
+        name: get-overall-health
+        description: Get overall health status
+        call: automation.get-overall-health
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/security-users
+      name: security-users
+      description: Security user management
+      operations:
+      - method: GET
+        name: list-users
+        description: List security users
+        call: admin-rest.list-users
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9092
+    namespace: security-compliance-mcp
+    transport: http
+    description: MCP server for AI-assisted WebSphere security and compliance.
+    tools:
+    - name: list-vulnerabilities
+      description: List known security vulnerabilities
+      hints:
+        readOnly: true
+      call: automation.list-vulnerabilities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vulnerability
+      description: Get vulnerability details
+      hints:
+        readOnly: true
+      call: automation.get-vulnerability
+      with:
+        vulnerabilityId: tools.vulnerabilityId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resolve-vulnerability
+      description: Initiate vulnerability resolution
+      hints:
+        readOnly: false
+      call: automation.resolve-vulnerability
+      with:
+        vulnerabilityId: tools.vulnerabilityId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-fixes
+      description: List available security fixes
+      hints:
+        readOnly: true
+      call: automation.list-fixes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apply-fix
+      description: Apply a fix to managed servers
+      hints:
+        readOnly: false
+      call: automation.apply-fix
+      with:
+        fixId: tools.fixId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-overall-health
+      description: Get overall environment health
+      hints:
+        readOnly: true
+      call: automation.get-overall-health
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-server-health
+      description: Get individual server health
+      hints:
+        readOnly: true
+      call: automation.get-server-health
+      with:
+        serverId: tools.serverId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-compliance-reports
+      description: List compliance reports
+      hints:
+        readOnly: true
+      call: automation.list-compliance-reports
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-managed-servers
+      description: List servers managed by WebSphere Automation
+      hints:
+        readOnly: true
+      call: automation.list-managed-servers
+      outputParameters:
+      - type: object
+        mapping: $.

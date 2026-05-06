@@ -1,194 +1,875 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "WebSphere Monitoring and Observability"
-  description: "Workflow for monitoring WebSphere environments combining health checks, metrics, performance data, logging, and batch job tracking from Open Liberty and traditional WAS APIs for operations teams."
+  label: WebSphere Monitoring and Observability
+  description: Workflow for monitoring WebSphere environments combining health checks, metrics, performance data, logging,
+    and batch job tracking from Open Liberty and traditional WAS APIs for operations teams.
   tags:
-    - IBM WebSphere
-    - Monitoring
-    - Observability
-    - Metrics
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - IBM WebSphere
+  - Monitoring
+  - Observability
+  - Metrics
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
-      WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
-      LIBERTY_USERNAME: LIBERTY_USERNAME
-      LIBERTY_PASSWORD: LIBERTY_PASSWORD
-
+- namespace: env
+  keys:
+    WEBSPHERE_USERNAME: WEBSPHERE_USERNAME
+    WEBSPHERE_PASSWORD: WEBSPHERE_PASSWORD
+    LIBERTY_USERNAME: LIBERTY_USERNAME
+    LIBERTY_PASSWORD: LIBERTY_PASSWORD
 capability:
   consumes:
-    - import: open-liberty
-      location: ./shared/open-liberty.yaml
-    - import: admin-rest
-      location: ./shared/admin-rest.yaml
-    - import: liberty-admin
-      location: ./shared/liberty-admin.yaml
-
+  - type: http
+    namespace: open-liberty
+    baseUri: https://localhost:9443
+    description: Open Liberty server APIs for health, metrics, batch, and configuration
+    authentication:
+      type: basic
+      username: '{{LIBERTY_USERNAME}}'
+      password: '{{LIBERTY_PASSWORD}}'
+    resources:
+    - name: health
+      path: /health
+      description: MicroProfile Health Check API
+      operations:
+      - name: get-overall-health
+        method: GET
+        description: Get overall health status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-readiness
+        method: GET
+        description: Get readiness status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-liveness
+        method: GET
+        description: Get liveness status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-started
+        method: GET
+        description: Get startup status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: metrics
+      path: /metrics
+      description: MicroProfile Metrics API
+      operations:
+      - name: get-all-metrics
+        method: GET
+        description: Get all metrics
+        inputParameters:
+        - name: scope
+          in: query
+          type: string
+          required: false
+          description: Metrics scope filter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-base-metrics
+        method: GET
+        description: Get base metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-vendor-metrics
+        method: GET
+        description: Get vendor metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-application-metrics
+        method: GET
+        description: Get application metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: batch
+      path: /ibm/api/batch
+      description: Jakarta Batch job management
+      operations:
+      - name: list-batch-job-instances
+        method: GET
+        description: List batch job instances
+        inputParameters:
+        - name: jobName
+          in: query
+          type: string
+          required: false
+          description: Filter by job name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-batch-job-instance
+        method: GET
+        description: Get batch job instance details
+        inputParameters:
+        - name: jobInstanceId
+          in: path
+          type: integer
+          required: true
+          description: Job instance ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-batch-job-executions
+        method: GET
+        description: List job executions for an instance
+        inputParameters:
+        - name: jobInstanceId
+          in: path
+          type: integer
+          required: true
+          description: Job instance ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-batch-job-execution
+        method: PUT
+        description: Stop a running batch job
+        inputParameters:
+        - name: executionId
+          in: path
+          type: integer
+          required: true
+          description: Execution ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: restart-batch-job-execution
+        method: PUT
+        description: Restart a failed batch job
+        inputParameters:
+        - name: executionId
+          in: path
+          type: integer
+          required: true
+          description: Execution ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: admin-rest
+    baseUri: https://localhost:9443/ibm/api
+    description: REST API for WebSphere Application Server administration
+    authentication:
+      type: basic
+      username: '{{WEBSPHERE_USERNAME}}'
+      password: '{{WEBSPHERE_PASSWORD}}'
+    resources:
+    - name: applications
+      path: /applications
+      description: Application deployment and lifecycle management
+      operations:
+      - name: list-applications
+        method: GET
+        description: List deployed applications
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by application status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-application
+        method: GET
+        description: Get application details
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deploy-application
+        method: POST
+        description: Deploy a new application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            contextRoot: '{{tools.contextRoot}}'
+            targetServer: '{{tools.targetServer}}'
+      - name: start-application
+        method: POST
+        description: Start a deployed application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-application
+        method: POST
+        description: Stop a running application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: uninstall-application
+        method: DELETE
+        description: Uninstall a deployed application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: servers
+      path: /servers
+      description: Server configuration and management
+      operations:
+      - name: list-servers
+        method: GET
+        description: List all servers in the cell
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-server
+        method: GET
+        description: Get server details
+        inputParameters:
+        - name: serverName
+          in: path
+          type: string
+          required: true
+          description: Server name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: start-server
+        method: POST
+        description: Start a server
+        inputParameters:
+        - name: serverName
+          in: path
+          type: string
+          required: true
+          description: Server name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-server
+        method: POST
+        description: Stop a server
+        inputParameters:
+        - name: serverName
+          in: path
+          type: string
+          required: true
+          description: Server name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters
+      path: /clusters
+      description: Cluster management operations
+      operations:
+      - name: list-clusters
+        method: GET
+        description: List all clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-cluster
+        method: GET
+        description: Get cluster details
+        inputParameters:
+        - name: clusterName
+          in: path
+          type: string
+          required: true
+          description: Cluster name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: start-cluster
+        method: POST
+        description: Start all members of a cluster
+        inputParameters:
+        - name: clusterName
+          in: path
+          type: string
+          required: true
+          description: Cluster name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-cluster
+        method: POST
+        description: Stop all members of a cluster
+        inputParameters:
+        - name: clusterName
+          in: path
+          type: string
+          required: true
+          description: Cluster name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: monitoring
+      path: /monitoring
+      description: Performance monitoring and health checks
+      operations:
+      - name: get-performance-data
+        method: GET
+        description: Get performance monitoring data
+        inputParameters:
+        - name: module
+          in: query
+          type: string
+          required: false
+          description: Performance module name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-health-status
+        method: GET
+        description: Get server health status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration
+      path: /config
+      description: Server configuration management
+      operations:
+      - name: list-config-resources
+        method: GET
+        description: List configuration resource types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-config-resources
+        method: GET
+        description: List resources of a specific type
+        inputParameters:
+        - name: resourceType
+          in: path
+          type: string
+          required: true
+          description: Configuration resource type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: liberty-admin
+    baseUri: https://localhost:9443/ibm/api
+    description: Liberty Admin REST API for server configuration and management
+    authentication:
+      type: basic
+      username: '{{LIBERTY_USERNAME}}'
+      password: '{{LIBERTY_PASSWORD}}'
+    resources:
+    - name: server
+      path: /server
+      description: Server runtime management
+      operations:
+      - name: get-server-info
+        method: GET
+        description: Get Liberty server information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-server-dump
+        method: POST
+        description: Create a server dump for diagnostics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            include: '{{tools.include}}'
+      - name: create-java-dump
+        method: POST
+        description: Create a Java core dump
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: config
+      path: /config
+      description: Server configuration management
+      operations:
+      - name: get-server-config
+        method: GET
+        description: Get server configuration
+        inputParameters:
+        - name: depth
+          in: query
+          type: integer
+          required: false
+          description: Depth of nested elements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-server-config
+        method: PUT
+        description: Update server configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-config-element
+        method: GET
+        description: Get a specific configuration element
+        inputParameters:
+        - name: elementName
+          in: path
+          type: string
+          required: true
+          description: Configuration element name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-config-element
+        method: POST
+        description: Create a configuration element
+        inputParameters:
+        - name: elementName
+          in: path
+          type: string
+          required: true
+          description: Configuration element name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-config-element
+        method: DELETE
+        description: Delete a configuration element
+        inputParameters:
+        - name: elementName
+          in: path
+          type: string
+          required: true
+          description: Configuration element name
+        - name: uid
+          in: path
+          type: string
+          required: true
+          description: Element unique identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications
+      path: /applications
+      description: Application deployment and lifecycle
+      operations:
+      - name: list-applications
+        method: GET
+        description: List deployed applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-application
+        method: GET
+        description: Get application details
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: start-application
+        method: POST
+        description: Start an application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stop-application
+        method: POST
+        description: Stop an application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: restart-application
+        method: POST
+        description: Restart an application
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+          description: Application name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: features
+      path: /features
+      description: Liberty feature management
+      operations:
+      - name: list-features
+        method: GET
+        description: List installed features
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-feature
+        method: GET
+        description: Get feature details
+        inputParameters:
+        - name: featureName
+          in: path
+          type: string
+          required: true
+          description: Feature symbolic name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: logging
+      path: /logging
+      description: Log access and configuration
+      operations:
+      - name: get-log-config
+        method: GET
+        description: Get logging configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-log-config
+        method: PUT
+        description: Update logging configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-log-messages
+        method: GET
+        description: Get recent log messages
+        inputParameters:
+        - name: maxMessages
+          in: query
+          type: integer
+          required: false
+          description: Maximum messages to return
+        - name: level
+          in: query
+          type: string
+          required: false
+          description: Minimum log level
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: monitoring
+      path: /monitoring
+      description: Server monitoring and metrics
+      operations:
+      - name: get-metrics
+        method: GET
+        description: Get MicroProfile Metrics data
+        inputParameters:
+        - name: scope
+          in: query
+          type: string
+          required: false
+          description: Metrics scope (base, vendor, application)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-health
+        method: GET
+        description: Get MicroProfile Health check results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8083
-      namespace: monitoring-api
-      description: "Unified REST API for WebSphere monitoring and observability."
-      resources:
-        - path: /v1/health
-          name: health
-          description: "Health check endpoints"
-          operations:
-            - method: GET
-              name: get-liberty-health
-              description: "Get Open Liberty overall health"
-              call: "open-liberty.get-overall-health"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: GET
-              name: get-was-health
-              description: "Get WAS server health"
-              call: "admin-rest.get-health-status"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/metrics
-          name: metrics
-          description: "Metrics collection"
-          operations:
-            - method: GET
-              name: get-all-metrics
-              description: "Get all Open Liberty metrics"
-              call: "open-liberty.get-all-metrics"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: GET
-              name: get-liberty-metrics
-              description: "Get Liberty admin metrics"
-              call: "liberty-admin.get-metrics"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/performance
-          name: performance
-          description: "Performance data"
-          operations:
-            - method: GET
-              name: get-performance-data
-              description: "Get WAS performance monitoring data"
-              call: "admin-rest.get-performance-data"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/logs
-          name: logs
-          description: "Log management"
-          operations:
-            - method: GET
-              name: get-log-messages
-              description: "Get Liberty log messages"
-              call: "liberty-admin.get-log-messages"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/batch-jobs
-          name: batch-jobs
-          description: "Batch job monitoring"
-          operations:
-            - method: GET
-              name: list-batch-jobs
-              description: "List batch job instances"
-              call: "open-liberty.list-batch-job-instances"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9093
-      namespace: monitoring-mcp
-      transport: http
-      description: "MCP server for AI-assisted WebSphere monitoring."
-      tools:
-        - name: get-liberty-health
-          description: "Get Open Liberty overall health status"
-          hints:
-            readOnly: true
-          call: "open-liberty.get-overall-health"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-readiness
-          description: "Check if Liberty server is ready for traffic"
-          hints:
-            readOnly: true
-          call: "open-liberty.get-readiness"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-liveness
-          description: "Check if Liberty server is alive"
-          hints:
-            readOnly: true
-          call: "open-liberty.get-liveness"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-was-health
-          description: "Get WAS server health status"
-          hints:
-            readOnly: true
-          call: "admin-rest.get-health-status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-all-metrics
-          description: "Get all Open Liberty metrics"
-          hints:
-            readOnly: true
-          call: "open-liberty.get-all-metrics"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-performance-data
-          description: "Get WAS performance monitoring data"
-          hints:
-            readOnly: true
-          call: "admin-rest.get-performance-data"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-log-messages
-          description: "Get recent Liberty log messages"
-          hints:
-            readOnly: true
-          call: "liberty-admin.get-log-messages"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-log-config
-          description: "Get Liberty logging configuration"
-          hints:
-            readOnly: true
-          call: "liberty-admin.get-log-config"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-batch-jobs
-          description: "List Jakarta Batch job instances"
-          hints:
-            readOnly: true
-          call: "open-liberty.list-batch-job-instances"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-batch-job
-          description: "Get batch job instance details"
-          hints:
-            readOnly: true
-          call: "open-liberty.get-batch-job-instance"
-          with:
-            jobInstanceId: "tools.jobInstanceId"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8083
+    namespace: monitoring-api
+    description: Unified REST API for WebSphere monitoring and observability.
+    resources:
+    - path: /v1/health
+      name: health
+      description: Health check endpoints
+      operations:
+      - method: GET
+        name: get-liberty-health
+        description: Get Open Liberty overall health
+        call: open-liberty.get-overall-health
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get-was-health
+        description: Get WAS server health
+        call: admin-rest.get-health-status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metrics
+      name: metrics
+      description: Metrics collection
+      operations:
+      - method: GET
+        name: get-all-metrics
+        description: Get all Open Liberty metrics
+        call: open-liberty.get-all-metrics
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get-liberty-metrics
+        description: Get Liberty admin metrics
+        call: liberty-admin.get-metrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/performance
+      name: performance
+      description: Performance data
+      operations:
+      - method: GET
+        name: get-performance-data
+        description: Get WAS performance monitoring data
+        call: admin-rest.get-performance-data
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/logs
+      name: logs
+      description: Log management
+      operations:
+      - method: GET
+        name: get-log-messages
+        description: Get Liberty log messages
+        call: liberty-admin.get-log-messages
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/batch-jobs
+      name: batch-jobs
+      description: Batch job monitoring
+      operations:
+      - method: GET
+        name: list-batch-jobs
+        description: List batch job instances
+        call: open-liberty.list-batch-job-instances
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9093
+    namespace: monitoring-mcp
+    transport: http
+    description: MCP server for AI-assisted WebSphere monitoring.
+    tools:
+    - name: get-liberty-health
+      description: Get Open Liberty overall health status
+      hints:
+        readOnly: true
+      call: open-liberty.get-overall-health
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-readiness
+      description: Check if Liberty server is ready for traffic
+      hints:
+        readOnly: true
+      call: open-liberty.get-readiness
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-liveness
+      description: Check if Liberty server is alive
+      hints:
+        readOnly: true
+      call: open-liberty.get-liveness
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-was-health
+      description: Get WAS server health status
+      hints:
+        readOnly: true
+      call: admin-rest.get-health-status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-metrics
+      description: Get all Open Liberty metrics
+      hints:
+        readOnly: true
+      call: open-liberty.get-all-metrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-performance-data
+      description: Get WAS performance monitoring data
+      hints:
+        readOnly: true
+      call: admin-rest.get-performance-data
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-log-messages
+      description: Get recent Liberty log messages
+      hints:
+        readOnly: true
+      call: liberty-admin.get-log-messages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-log-config
+      description: Get Liberty logging configuration
+      hints:
+        readOnly: true
+      call: liberty-admin.get-log-config
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-batch-jobs
+      description: List Jakarta Batch job instances
+      hints:
+        readOnly: true
+      call: open-liberty.list-batch-job-instances
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-batch-job
+      description: Get batch job instance details
+      hints:
+        readOnly: true
+      call: open-liberty.get-batch-job-instance
+      with:
+        jobInstanceId: tools.jobInstanceId
+      outputParameters:
+      - type: object
+        mapping: $.
