@@ -4,202 +4,45 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: IBM WebSphere
 providerId: websphere
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Application Server
   - Cloud Native
   - Enterprise Java
   - J2EE
-  - Microservices
-  - Middleware
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Contact Sales
+description: IBM WebSphere is a family of Jakarta EE application servers (WebSphere Application Server,
+  WebSphere Liberty, WebSphere Hybrid Edition) sold under IBM commercial license. Programmatic surfaces
+  (admin REST, JMX, JAX-RS / MicroProfile hosting) ship inside the product and run inside the customer's
+  deployment — there is no public, self-serve API plan or per-call price. Acquisition is via IBM Passport
+  Advantage, IBM Cloud Paks, or IBM sales.
+notes: ibm.com pricing pages 403'd on automated fetch. No self-serve developer plans. Scaffold reduced
+  to one Contact Sales plan.
+sources:
+  - https://www.ibm.com/products/websphere-application-server
 plans:
-  - id: websphere-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the IBM WebSphere API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: WebSphere Application Server Admin API
-      - name: WebSphere Liberty Admin REST API
-      - name: WebSphere Liberty REST Connector API
-      - name: WebSphere MQ REST API
-      - name: WebSphere Application Server JMX API
-      - name: WebSphere Liberty Collective Controller REST API
-      - name: WebSphere Automation REST API
-      - name: Open Liberty APIs
-  - id: websphere-pro
-    name: Professional
-    type: paid
-    description: Production tier for IBM WebSphere. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: WebSphere Application Server Admin API
-      - name: WebSphere Liberty Admin REST API
-      - name: WebSphere Liberty REST Connector API
-      - name: WebSphere MQ REST API
-      - name: WebSphere Application Server JMX API
-      - name: WebSphere Liberty Collective Controller REST API
-      - name: WebSphere Automation REST API
-      - name: Open Liberty APIs
-  - id: websphere-enterprise
-    name: Enterprise
+  - id: websphere-contact-sales
+    name: Contact Sales
     type: enterprise
-    description: Custom-negotiated tier for IBM WebSphere. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
+    description: IBM WebSphere license + support, available through Passport Advantage or as part of
+      Cloud Pak for Applications. Sized per PVU / VPC / Container core.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: WebSphere License
+        name: websphere_license
+        type: flat
+        metric: varies
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
+        timeFrame: usage
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://localhost:9443/ibm/api
-          - https://localhost:9443/IBMJMXConnectorREST/api
-          - https://localhost:9443/ibmmq/rest/v2
-          - service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-          - https://localhost:9443/ibm/api/collective
-          - https://automation-api.example.com/v1
-        unit: 1
-        price: custom
+        price: see IBM Passport Advantage / Cloud Pak pricing
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: WebSphere Application Server Admin API
-      - name: WebSphere Liberty Admin REST API
-      - name: WebSphere Liberty REST Connector API
-      - name: WebSphere MQ REST API
-      - name: WebSphere Application Server JMX API
-      - name: WebSphere Liberty Collective Controller REST API
-      - name: WebSphere Automation REST API
-      - name: Open Liberty APIs
+      - name: IBM Software Support
+      - name: WebSphere Software License
+      - name: Admin REST / JMX APIs (bundled)
+      - name: IBM Account Team
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

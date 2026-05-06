@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,190 +9,63 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: IBM WebSphere
 providerId: websphere
-publisherName: IBM WebSphere
-serviceCategory: API
+publisherName: IBM Corporation
+serviceCategory: Application Server / Middleware
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Application Server
   - Cloud Native
   - Enterprise Java
   - J2EE
-  - Microservices
-  - Middleware
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the IBM WebSphere API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+  - Contact Sales
+description: FinOps placement for IBM WebSphere. WebSphere is sold as a perpetual / subscription
+  software license (per PVU / VPC / Container core) through IBM Passport Advantage or Cloud Paks; spend
+  tracks license entitlement, S&S renewals, and underlying infrastructure rather than a metered API
+  surface.
+notes: ibm.com pricing 403 on fetch. FOCUS mapping reflects software-license shape; no public usage
+  API meters available.
+sources:
+  - https://www.ibm.com/products/websphere-application-server
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Software License + Support
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: IBM WebSphere
-  ServiceCategory: Developer Tools / API
-  ProviderName: IBM WebSphere
-  PublisherName: IBM WebSphere
-  InvoiceIssuerName: IBM WebSphere
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Application Server / Middleware
+  ProviderName: IBM
+  PublisherName: IBM Corporation
+  InvoiceIssuerName: IBM Corporation
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: websphere_license
+    description: WebSphere license entitlement, sized per PVU / VPC / Container core via IBM Passport
+      Advantage or Cloud Pak for Applications.
+    unit: varies
     aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: websphere_subscription_and_support
+    description: IBM Subscription & Support renewal on the WebSphere entitlement.
+    unit: month
     aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: WebSphere Application Server Admin API
-    baseURL: https://localhost:9443/ibm/api
-    tags:
-      - Administration
-      - Configuration
-      - Deployment
-      - Monitoring
-    serviceName: WebSphere Application Server Admin API
-    serviceCategory: API
-  - name: WebSphere Liberty Admin REST API
-    baseURL: https://localhost:9443/ibm/api
-    tags:
-      - Administration
-      - Configuration
-      - Liberty
-      - REST API
-    serviceName: WebSphere Liberty Admin REST API
-    serviceCategory: API
-  - name: WebSphere Liberty REST Connector API
-    baseURL: https://localhost:9443/IBMJMXConnectorREST/api
-    tags:
-      - JMX
-      - Liberty
-      - Remote Administration
-      - REST Connector
-    serviceName: WebSphere Liberty REST Connector API
-    serviceCategory: API
-  - name: WebSphere MQ REST API
-    baseURL: https://localhost:9443/ibmmq/rest/v2
-    tags:
-      - Integration
-      - Messaging
-      - Publish Subscribe
-      - Queue Management
-    serviceName: WebSphere MQ REST API
-    serviceCategory: API
-  - name: WebSphere Application Server JMX API
-    baseURL: service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-    tags:
-      - JMX
-      - Management
-      - MBeans
-      - Monitoring
-    serviceName: WebSphere Application Server JMX API
-    serviceCategory: API
-  - name: WebSphere Liberty Collective Controller REST API
-    baseURL: https://localhost:9443/ibm/api/collective
-    tags:
-      - Clustering
-      - Collective
-      - Liberty
-      - Management
-    serviceName: WebSphere Liberty Collective Controller REST API
-    serviceCategory: API
-  - name: WebSphere Automation REST API
-    baseURL: https://automation-api.example.com/v1
-    tags:
-      - Automation
-      - Health Monitoring
-      - Patching
-      - Vulnerability Management
-    serviceName: WebSphere Automation REST API
-    serviceCategory: API
-  - name: Open Liberty APIs
-    baseURL: https://localhost:9443/ibm/api
-    tags:
-      - Cloud Native
-      - Jakarta EE
-      - MicroProfile
-      - Open Liberty
-    serviceName: Open Liberty APIs
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+principles:
+  - name: Visibility
+    description: Spend visibility comes from IBM Passport Advantage entitlement reports and the
+      customer's IBM License Metric Tool (ILMT) deployment.
+  - name: Allocation
+    description: Allocate WebSphere spend by cell, deployment, or business application using ILMT
+      tagging and CMDB ownership records.
+  - name: Optimization
+    description: Cost levers include sub-capacity licensing via ILMT, migration from WAS Traditional to
+      WebSphere Liberty, Cloud Pak entitlement sharing, and consolidation at S&S renewal.
+  - name: Accountability
+    description: Middleware platform owners and IBM software-asset-management leads coordinate true-ups
+      and renewals with IBM account management.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
