@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: IBM MQ REST API — Queue Manager
+  description: 'IBM MQ REST API — Queue Manager. 2 operations. Lead operation: List Queue Managers. Self-contained Naftiko
+    capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Queue Manager
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mq-rest-queue-manager
+    baseUri: https://localhost:9443/ibmmq/rest/v2
+    description: IBM MQ REST API — Queue Manager business capability. Self-contained, no shared references.
+    resources:
+    - name: admin-qmgr
+      path: /admin/qmgr
+      operations:
+      - name: listqueuemanagers
+        method: GET
+        description: List Queue Managers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: admin-qmgr-qmgrName
+      path: /admin/qmgr/{qmgrName}
+      operations:
+      - name: getqueuemanager
+        method: GET
+        description: Get Queue Manager Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: attributes
+          in: query
+          type: string
+          description: Comma-separated list of attributes to return
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: mq-rest-queue-manager-rest
+    port: 8080
+    description: REST adapter for IBM MQ REST API — Queue Manager. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/admin/qmgr
+      name: admin-qmgr
+      description: REST surface for admin-qmgr.
+      operations:
+      - method: GET
+        name: listqueuemanagers
+        description: List Queue Managers
+        call: mq-rest-queue-manager.listqueuemanagers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/qmgr/{qmgrname}
+      name: admin-qmgr-qmgrname
+      description: REST surface for admin-qmgr-qmgrName.
+      operations:
+      - method: GET
+        name: getqueuemanager
+        description: Get Queue Manager Details
+        call: mq-rest-queue-manager.getqueuemanager
+        with:
+          attributes: rest.attributes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mq-rest-queue-manager-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for IBM MQ REST API — Queue Manager. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-queue-managers
+      description: List Queue Managers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mq-rest-queue-manager.listqueuemanagers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-queue-manager-details
+      description: Get Queue Manager Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mq-rest-queue-manager.getqueuemanager
+      with:
+        attributes: tools.attributes
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Application Server Admin REST API — Resources
+  description: 'WebSphere Application Server Admin REST API — Resources. 3 operations. Lead operation: List Data Sources.
+    Self-contained Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Resources
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-rest-resources
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Application Server Admin REST API — Resources business capability. Self-contained, no shared references.
+    resources:
+    - name: resources-datasources
+      path: /resources/datasources
+      operations:
+      - name: listdatasources
+        method: GET
+        description: List Data Sources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources-datasources-dsName
+      path: /resources/datasources/{dsName}
+      operations:
+      - name: getdatasource
+        method: GET
+        description: Get Data Source Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dsName
+          in: path
+          type: string
+          description: Data source name
+          required: true
+    - name: resources-datasources-dsName-test
+      path: /resources/datasources/{dsName}/test
+      operations:
+      - name: testdatasourceconnection
+        method: POST
+        description: Test Data Source Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dsName
+          in: path
+          type: string
+          description: Data source name
+          required: true
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: admin-rest-resources-rest
+    port: 8080
+    description: REST adapter for WebSphere Application Server Admin REST API — Resources. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/resources/datasources
+      name: resources-datasources
+      description: REST surface for resources-datasources.
+      operations:
+      - method: GET
+        name: listdatasources
+        description: List Data Sources
+        call: admin-rest-resources.listdatasources
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources/datasources/{dsname}
+      name: resources-datasources-dsname
+      description: REST surface for resources-datasources-dsName.
+      operations:
+      - method: GET
+        name: getdatasource
+        description: Get Data Source Details
+        call: admin-rest-resources.getdatasource
+        with:
+          dsName: rest.dsName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources/datasources/{dsname}/test
+      name: resources-datasources-dsname-test
+      description: REST surface for resources-datasources-dsName-test.
+      operations:
+      - method: POST
+        name: testdatasourceconnection
+        description: Test Data Source Connection
+        call: admin-rest-resources.testdatasourceconnection
+        with:
+          dsName: rest.dsName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-rest-resources-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Application Server Admin REST API — Resources. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-data-sources
+      description: List Data Sources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-rest-resources.listdatasources
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-data-source-details
+      description: Get Data Source Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-rest-resources.getdatasource
+      with:
+        dsName: tools.dsName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-data-source-connection
+      description: Test Data Source Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: admin-rest-resources.testdatasourceconnection
+      with:
+        dsName: tools.dsName
+      outputParameters:
+      - type: object
+        mapping: $.

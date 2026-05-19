@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Collective Controller REST API — Hosts
+  description: 'WebSphere Liberty Collective Controller REST API — Hosts. 2 operations. Lead operation: List Hosts. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Hosts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-collective-controller-rest-hosts
+    baseUri: https://localhost:9443/ibm/api/collective
+    description: WebSphere Liberty Collective Controller REST API — Hosts business capability. Self-contained, no shared references.
+    resources:
+    - name: hosts
+      path: /hosts
+      operations:
+      - name: listhosts
+        method: GET
+        description: List Hosts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: hosts-hostName
+      path: /hosts/{hostName}
+      operations:
+      - name: gethost
+        method: GET
+        description: Get Host Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: hostName
+          in: path
+          type: string
+          description: Hostname
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.WEBSPHERE_USER}}'
+      password: '{{env.WEBSPHERE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: liberty-collective-controller-rest-hosts-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Collective Controller REST API — Hosts. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/hosts
+      name: hosts
+      description: REST surface for hosts.
+      operations:
+      - method: GET
+        name: listhosts
+        description: List Hosts
+        call: liberty-collective-controller-rest-hosts.listhosts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/hosts/{hostname}
+      name: hosts-hostname
+      description: REST surface for hosts-hostName.
+      operations:
+      - method: GET
+        name: gethost
+        description: Get Host Details
+        call: liberty-collective-controller-rest-hosts.gethost
+        with:
+          hostName: rest.hostName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-collective-controller-rest-hosts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Collective Controller REST API — Hosts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-hosts
+      description: List Hosts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-collective-controller-rest-hosts.listhosts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-host-details
+      description: Get Host Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-collective-controller-rest-hosts.gethost
+      with:
+        hostName: tools.hostName
+      outputParameters:
+      - type: object
+        mapping: $.

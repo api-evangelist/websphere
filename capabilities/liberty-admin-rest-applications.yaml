@@ -1,0 +1,237 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Admin REST API — Applications
+  description: 'WebSphere Liberty Admin REST API — Applications. 5 operations. Lead operation: List Deployed Applications.
+    Self-contained Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-admin-rest-applications
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Liberty Admin REST API — Applications business capability. Self-contained, no shared references.
+    resources:
+    - name: applications
+      path: /applications
+      operations:
+      - name: listapplications
+        method: GET
+        description: List Deployed Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-appName
+      path: /applications/{appName}
+      operations:
+      - name: getapplication
+        method: GET
+        description: Get Application Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          description: Application name
+          required: true
+    - name: applications-appName-restart
+      path: /applications/{appName}/restart
+      operations:
+      - name: restartapplication
+        method: POST
+        description: Restart an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+    - name: applications-appName-start
+      path: /applications/{appName}/start
+      operations:
+      - name: startapplication
+        method: POST
+        description: Start an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+    - name: applications-appName-stop
+      path: /applications/{appName}/stop
+      operations:
+      - name: stopapplication
+        method: POST
+        description: Stop an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: liberty-admin-rest-applications-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Admin REST API — Applications. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications
+      name: applications
+      description: REST surface for applications.
+      operations:
+      - method: GET
+        name: listapplications
+        description: List Deployed Applications
+        call: liberty-admin-rest-applications.listapplications
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{appname}
+      name: applications-appname
+      description: REST surface for applications-appName.
+      operations:
+      - method: GET
+        name: getapplication
+        description: Get Application Details
+        call: liberty-admin-rest-applications.getapplication
+        with:
+          appName: rest.appName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{appname}/restart
+      name: applications-appname-restart
+      description: REST surface for applications-appName-restart.
+      operations:
+      - method: POST
+        name: restartapplication
+        description: Restart an Application
+        call: liberty-admin-rest-applications.restartapplication
+        with:
+          appName: rest.appName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{appname}/start
+      name: applications-appname-start
+      description: REST surface for applications-appName-start.
+      operations:
+      - method: POST
+        name: startapplication
+        description: Start an Application
+        call: liberty-admin-rest-applications.startapplication
+        with:
+          appName: rest.appName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{appname}/stop
+      name: applications-appname-stop
+      description: REST surface for applications-appName-stop.
+      operations:
+      - method: POST
+        name: stopapplication
+        description: Stop an Application
+        call: liberty-admin-rest-applications.stopapplication
+        with:
+          appName: rest.appName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-admin-rest-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Admin REST API — Applications. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-deployed-applications
+      description: List Deployed Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-applications.listapplications
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-details
+      description: Get Application Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-applications.getapplication
+      with:
+        appName: tools.appName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restart-application
+      description: Restart an Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-admin-rest-applications.restartapplication
+      with:
+        appName: tools.appName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-application
+      description: Start an Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-admin-rest-applications.startapplication
+      with:
+        appName: tools.appName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stop-application
+      description: Stop an Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-admin-rest-applications.stopapplication
+      with:
+        appName: tools.appName
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Application Server Admin REST API — Nodes
+  description: 'WebSphere Application Server Admin REST API — Nodes. 3 operations. Lead operation: List Nodes. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Nodes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-rest-nodes
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Application Server Admin REST API — Nodes business capability. Self-contained, no shared references.
+    resources:
+    - name: nodes
+      path: /nodes
+      operations:
+      - name: listnodes
+        method: GET
+        description: List Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: nodes-nodeName
+      path: /nodes/{nodeName}
+      operations:
+      - name: getnode
+        method: GET
+        description: Get Node Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: nodes-nodeName-sync
+      path: /nodes/{nodeName}/sync
+      operations:
+      - name: syncnode
+        method: POST
+        description: Synchronize a Node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: admin-rest-nodes-rest
+    port: 8080
+    description: REST adapter for WebSphere Application Server Admin REST API — Nodes. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/nodes
+      name: nodes
+      description: REST surface for nodes.
+      operations:
+      - method: GET
+        name: listnodes
+        description: List Nodes
+        call: admin-rest-nodes.listnodes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nodes/{nodename}
+      name: nodes-nodename
+      description: REST surface for nodes-nodeName.
+      operations:
+      - method: GET
+        name: getnode
+        description: Get Node Details
+        call: admin-rest-nodes.getnode
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nodes/{nodename}/sync
+      name: nodes-nodename-sync
+      description: REST surface for nodes-nodeName-sync.
+      operations:
+      - method: POST
+        name: syncnode
+        description: Synchronize a Node
+        call: admin-rest-nodes.syncnode
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-rest-nodes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Application Server Admin REST API — Nodes. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-nodes
+      description: List Nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-rest-nodes.listnodes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-node-details
+      description: Get Node Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-rest-nodes.getnode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: synchronize-node
+      description: Synchronize a Node
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-rest-nodes.syncnode
+      outputParameters:
+      - type: object
+        mapping: $.

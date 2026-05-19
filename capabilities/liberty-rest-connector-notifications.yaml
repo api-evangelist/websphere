@@ -1,0 +1,182 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty REST Connector API — Notifications
+  description: 'WebSphere Liberty REST Connector API — Notifications. 4 operations. Lead operation: List Notification Subscriptions.
+    Self-contained Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-rest-connector-notifications
+    baseUri: https://localhost:9443/IBMJMXConnectorREST/api
+    description: WebSphere Liberty REST Connector API — Notifications business capability. Self-contained, no shared references.
+    resources:
+    - name: notifications
+      path: /notifications
+      operations:
+      - name: listnotificationsubscriptions
+        method: GET
+        description: List Notification Subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createnotificationsubscription
+        method: POST
+        description: Create a Notification Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: notifications-subscriptionId
+      path: /notifications/{subscriptionId}
+      operations:
+      - name: getnotifications
+        method: GET
+        description: Get Pending Notifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subscriptionId
+          in: path
+          type: string
+          description: Subscription identifier
+          required: true
+      - name: deletenotificationsubscription
+        method: DELETE
+        description: Delete a Notification Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subscriptionId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.WEBSPHERE_USER}}'
+      password: '{{env.WEBSPHERE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: liberty-rest-connector-notifications-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty REST Connector API — Notifications. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/notifications
+      name: notifications
+      description: REST surface for notifications.
+      operations:
+      - method: GET
+        name: listnotificationsubscriptions
+        description: List Notification Subscriptions
+        call: liberty-rest-connector-notifications.listnotificationsubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createnotificationsubscription
+        description: Create a Notification Subscription
+        call: liberty-rest-connector-notifications.createnotificationsubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/notifications/{subscriptionid}
+      name: notifications-subscriptionid
+      description: REST surface for notifications-subscriptionId.
+      operations:
+      - method: GET
+        name: getnotifications
+        description: Get Pending Notifications
+        call: liberty-rest-connector-notifications.getnotifications
+        with:
+          subscriptionId: rest.subscriptionId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletenotificationsubscription
+        description: Delete a Notification Subscription
+        call: liberty-rest-connector-notifications.deletenotificationsubscription
+        with:
+          subscriptionId: rest.subscriptionId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-rest-connector-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty REST Connector API — Notifications. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-notification-subscriptions
+      description: List Notification Subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-rest-connector-notifications.listnotificationsubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-notification-subscription
+      description: Create a Notification Subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-rest-connector-notifications.createnotificationsubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pending-notifications
+      description: Get Pending Notifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-rest-connector-notifications.getnotifications
+      with:
+        subscriptionId: tools.subscriptionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-notification-subscription
+      description: Delete a Notification Subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: liberty-rest-connector-notifications.deletenotificationsubscription
+      with:
+        subscriptionId: tools.subscriptionId
+      outputParameters:
+      - type: object
+        mapping: $.

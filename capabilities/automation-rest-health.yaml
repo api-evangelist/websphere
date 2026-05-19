@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Automation REST API — Health
+  description: 'WebSphere Automation REST API — Health. 2 operations. Lead operation: Get Overall Health Status. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Health
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-rest-health
+    baseUri: https://automation-api.example.com/v1
+    description: WebSphere Automation REST API — Health business capability. Self-contained, no shared references.
+    resources:
+    - name: health
+      path: /health
+      operations:
+      - name: getoverallhealth
+        method: GET
+        description: Get Overall Health Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: health-servers-serverId
+      path: /health/servers/{serverId}
+      operations:
+      - name: getserverhealth
+        method: GET
+        description: Get Server Health Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEBSPHERE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-rest-health-rest
+    port: 8080
+    description: REST adapter for WebSphere Automation REST API — Health. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/health
+      name: health
+      description: REST surface for health.
+      operations:
+      - method: GET
+        name: getoverallhealth
+        description: Get Overall Health Status
+        call: automation-rest-health.getoverallhealth
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/health/servers/{serverid}
+      name: health-servers-serverid
+      description: REST surface for health-servers-serverId.
+      operations:
+      - method: GET
+        name: getserverhealth
+        description: Get Server Health Status
+        call: automation-rest-health.getserverhealth
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-rest-health-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Automation REST API — Health. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-overall-health-status
+      description: Get Overall Health Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-rest-health.getoverallhealth
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-server-health-status
+      description: Get Server Health Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-rest-health.getserverhealth
+      outputParameters:
+      - type: object
+        mapping: $.

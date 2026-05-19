@@ -1,0 +1,177 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Automation REST API — Servers
+  description: 'WebSphere Automation REST API — Servers. 4 operations. Lead operation: List Managed Servers. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Servers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-rest-servers
+    baseUri: https://automation-api.example.com/v1
+    description: WebSphere Automation REST API — Servers business capability. Self-contained, no shared references.
+    resources:
+    - name: servers
+      path: /servers
+      operations:
+      - name: listmanagedservers
+        method: GET
+        description: List Managed Servers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Filter by server type
+        - name: status
+          in: query
+          type: string
+          description: Filter by server status
+      - name: registerserver
+        method: POST
+        description: Register a Server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: servers-serverId
+      path: /servers/{serverId}
+      operations:
+      - name: getmanagedserver
+        method: GET
+        description: Get Managed Server Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deregisterserver
+        method: DELETE
+        description: Deregister a Server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WEBSPHERE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-rest-servers-rest
+    port: 8080
+    description: REST adapter for WebSphere Automation REST API — Servers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/servers
+      name: servers
+      description: REST surface for servers.
+      operations:
+      - method: GET
+        name: listmanagedservers
+        description: List Managed Servers
+        call: automation-rest-servers.listmanagedservers
+        with:
+          type: rest.type
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: registerserver
+        description: Register a Server
+        call: automation-rest-servers.registerserver
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/servers/{serverid}
+      name: servers-serverid
+      description: REST surface for servers-serverId.
+      operations:
+      - method: GET
+        name: getmanagedserver
+        description: Get Managed Server Details
+        call: automation-rest-servers.getmanagedserver
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deregisterserver
+        description: Deregister a Server
+        call: automation-rest-servers.deregisterserver
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-rest-servers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Automation REST API — Servers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-managed-servers
+      description: List Managed Servers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-rest-servers.listmanagedservers
+      with:
+        type: tools.type
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: register-server
+      description: Register a Server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-rest-servers.registerserver
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-managed-server-details
+      description: Get Managed Server Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-rest-servers.getmanagedserver
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deregister-server
+      description: Deregister a Server
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: automation-rest-servers.deregisterserver
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Admin REST API — Server
+  description: 'WebSphere Liberty Admin REST API — Server. 3 operations. Lead operation: Get Server Information. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Server
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-admin-rest-server
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Liberty Admin REST API — Server business capability. Self-contained, no shared references.
+    resources:
+    - name: server
+      path: /server
+      operations:
+      - name: getserverinfo
+        method: GET
+        description: Get Server Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: server-dump
+      path: /server/dump
+      operations:
+      - name: createserverdump
+        method: POST
+        description: Create a Server Dump
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: server-javadump
+      path: /server/javadump
+      operations:
+      - name: createjavadump
+        method: POST
+        description: Create a Java Dump
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: liberty-admin-rest-server-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Admin REST API — Server. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/server
+      name: server
+      description: REST surface for server.
+      operations:
+      - method: GET
+        name: getserverinfo
+        description: Get Server Information
+        call: liberty-admin-rest-server.getserverinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/server/dump
+      name: server-dump
+      description: REST surface for server-dump.
+      operations:
+      - method: POST
+        name: createserverdump
+        description: Create a Server Dump
+        call: liberty-admin-rest-server.createserverdump
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/server/javadump
+      name: server-javadump
+      description: REST surface for server-javadump.
+      operations:
+      - method: POST
+        name: createjavadump
+        description: Create a Java Dump
+        call: liberty-admin-rest-server.createjavadump
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-admin-rest-server-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Admin REST API — Server. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-server-information
+      description: Get Server Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-server.getserverinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-server-dump
+      description: Create a Server Dump
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-admin-rest-server.createserverdump
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-java-dump
+      description: Create a Java Dump
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-admin-rest-server.createjavadump
+      outputParameters:
+      - type: object
+        mapping: $.

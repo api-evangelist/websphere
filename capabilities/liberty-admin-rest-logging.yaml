@@ -1,0 +1,154 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Admin REST API — Logging
+  description: 'WebSphere Liberty Admin REST API — Logging. 3 operations. Lead operation: Get Logging Configuration. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Logging
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-admin-rest-logging
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Liberty Admin REST API — Logging business capability. Self-contained, no shared references.
+    resources:
+    - name: logging
+      path: /logging
+      operations:
+      - name: getlogconfig
+        method: GET
+        description: Get Logging Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatelogconfig
+        method: PUT
+        description: Update Logging Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: logging-messages
+      path: /logging/messages
+      operations:
+      - name: getlogmessages
+        method: GET
+        description: Get Log Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxMessages
+          in: query
+          type: integer
+          description: Maximum number of messages to return
+        - name: level
+          in: query
+          type: string
+          description: Minimum log level
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: liberty-admin-rest-logging-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Admin REST API — Logging. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/logging
+      name: logging
+      description: REST surface for logging.
+      operations:
+      - method: GET
+        name: getlogconfig
+        description: Get Logging Configuration
+        call: liberty-admin-rest-logging.getlogconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatelogconfig
+        description: Update Logging Configuration
+        call: liberty-admin-rest-logging.updatelogconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/logging/messages
+      name: logging-messages
+      description: REST surface for logging-messages.
+      operations:
+      - method: GET
+        name: getlogmessages
+        description: Get Log Messages
+        call: liberty-admin-rest-logging.getlogmessages
+        with:
+          maxMessages: rest.maxMessages
+          level: rest.level
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-admin-rest-logging-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Admin REST API — Logging. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-logging-configuration
+      description: Get Logging Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-logging.getlogconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-logging-configuration
+      description: Update Logging Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-logging.updatelogconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-log-messages
+      description: Get Log Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-logging.getlogmessages
+      with:
+        maxMessages: tools.maxMessages
+        level: tools.level
+      outputParameters:
+      - type: object
+        mapping: $.

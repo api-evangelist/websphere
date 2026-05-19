@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Collective Controller REST API — Repositories
+  description: 'WebSphere Liberty Collective Controller REST API — Repositories. 2 operations. Lead operation: List Shared
+    Configurations. Self-contained Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Repositories
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-collective-controller-rest-repositories
+    baseUri: https://localhost:9443/ibm/api/collective
+    description: WebSphere Liberty Collective Controller REST API — Repositories business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: repository-config
+      path: /repository/config
+      operations:
+      - name: listsharedconfigs
+        method: GET
+        description: List Shared Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsharedconfig
+        method: POST
+        description: Create a Shared Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.WEBSPHERE_USER}}'
+      password: '{{env.WEBSPHERE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: liberty-collective-controller-rest-repositories-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Collective Controller REST API — Repositories. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/repository/config
+      name: repository-config
+      description: REST surface for repository-config.
+      operations:
+      - method: GET
+        name: listsharedconfigs
+        description: List Shared Configurations
+        call: liberty-collective-controller-rest-repositories.listsharedconfigs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsharedconfig
+        description: Create a Shared Configuration
+        call: liberty-collective-controller-rest-repositories.createsharedconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-collective-controller-rest-repositories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Collective Controller REST API — Repositories. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-shared-configurations
+      description: List Shared Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-collective-controller-rest-repositories.listsharedconfigs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-shared-configuration
+      description: Create a Shared Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-collective-controller-rest-repositories.createsharedconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

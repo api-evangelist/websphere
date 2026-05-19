@@ -1,0 +1,231 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Collective Controller REST API — Members
+  description: 'WebSphere Liberty Collective Controller REST API — Members. 5 operations. Lead operation: List Collective
+    Members. Self-contained Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Members
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-collective-controller-rest-members
+    baseUri: https://localhost:9443/ibm/api/collective
+    description: WebSphere Liberty Collective Controller REST API — Members business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: members
+      path: /members
+      operations:
+      - name: listmembers
+        method: GET
+        description: List Collective Members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by member status
+        - name: hostName
+          in: query
+          type: string
+          description: Filter by hostname
+        - name: clusterName
+          in: query
+          type: string
+          description: Filter by cluster membership
+    - name: members-memberName
+      path: /members/{memberName}
+      operations:
+      - name: getmember
+        method: GET
+        description: Get Member Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: members-memberName-start
+      path: /members/{memberName}/start
+      operations:
+      - name: startmember
+        method: POST
+        description: Start a Collective Member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: members-memberName-stop
+      path: /members/{memberName}/stop
+      operations:
+      - name: stopmember
+        method: POST
+        description: Stop a Collective Member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: members-memberName-transfer
+      path: /members/{memberName}/transfer
+      operations:
+      - name: transferfiles
+        method: POST
+        description: Transfer Files to a Member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.WEBSPHERE_USER}}'
+      password: '{{env.WEBSPHERE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: liberty-collective-controller-rest-members-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Collective Controller REST API — Members. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/members
+      name: members
+      description: REST surface for members.
+      operations:
+      - method: GET
+        name: listmembers
+        description: List Collective Members
+        call: liberty-collective-controller-rest-members.listmembers
+        with:
+          status: rest.status
+          hostName: rest.hostName
+          clusterName: rest.clusterName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/members/{membername}
+      name: members-membername
+      description: REST surface for members-memberName.
+      operations:
+      - method: GET
+        name: getmember
+        description: Get Member Details
+        call: liberty-collective-controller-rest-members.getmember
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/members/{membername}/start
+      name: members-membername-start
+      description: REST surface for members-memberName-start.
+      operations:
+      - method: POST
+        name: startmember
+        description: Start a Collective Member
+        call: liberty-collective-controller-rest-members.startmember
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/members/{membername}/stop
+      name: members-membername-stop
+      description: REST surface for members-memberName-stop.
+      operations:
+      - method: POST
+        name: stopmember
+        description: Stop a Collective Member
+        call: liberty-collective-controller-rest-members.stopmember
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/members/{membername}/transfer
+      name: members-membername-transfer
+      description: REST surface for members-memberName-transfer.
+      operations:
+      - method: POST
+        name: transferfiles
+        description: Transfer Files to a Member
+        call: liberty-collective-controller-rest-members.transferfiles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-collective-controller-rest-members-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Collective Controller REST API — Members. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-collective-members
+      description: List Collective Members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-collective-controller-rest-members.listmembers
+      with:
+        status: tools.status
+        hostName: tools.hostName
+        clusterName: tools.clusterName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-member-details
+      description: Get Member Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-collective-controller-rest-members.getmember
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-collective-member
+      description: Start a Collective Member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-collective-controller-rest-members.startmember
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stop-collective-member
+      description: Stop a Collective Member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-collective-controller-rest-members.stopmember
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: transfer-files-member
+      description: Transfer Files to a Member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-collective-controller-rest-members.transferfiles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,168 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Application Server Admin REST API — Clusters
+  description: 'WebSphere Application Server Admin REST API — Clusters. 4 operations. Lead operation: List Clusters. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - Clusters
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-rest-clusters
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Application Server Admin REST API — Clusters business capability. Self-contained, no shared references.
+    resources:
+    - name: clusters
+      path: /clusters
+      operations:
+      - name: listclusters
+        method: GET
+        description: List Clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-clusterName
+      path: /clusters/{clusterName}
+      operations:
+      - name: getcluster
+        method: GET
+        description: Get Cluster Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-clusterName-start
+      path: /clusters/{clusterName}/start
+      operations:
+      - name: startcluster
+        method: POST
+        description: Start a Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-clusterName-stop
+      path: /clusters/{clusterName}/stop
+      operations:
+      - name: stopcluster
+        method: POST
+        description: Stop a Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: admin-rest-clusters-rest
+    port: 8080
+    description: REST adapter for WebSphere Application Server Admin REST API — Clusters. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/clusters
+      name: clusters
+      description: REST surface for clusters.
+      operations:
+      - method: GET
+        name: listclusters
+        description: List Clusters
+        call: admin-rest-clusters.listclusters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clustername}
+      name: clusters-clustername
+      description: REST surface for clusters-clusterName.
+      operations:
+      - method: GET
+        name: getcluster
+        description: Get Cluster Details
+        call: admin-rest-clusters.getcluster
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clustername}/start
+      name: clusters-clustername-start
+      description: REST surface for clusters-clusterName-start.
+      operations:
+      - method: POST
+        name: startcluster
+        description: Start a Cluster
+        call: admin-rest-clusters.startcluster
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clustername}/stop
+      name: clusters-clustername-stop
+      description: REST surface for clusters-clusterName-stop.
+      operations:
+      - method: POST
+        name: stopcluster
+        description: Stop a Cluster
+        call: admin-rest-clusters.stopcluster
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-rest-clusters-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Application Server Admin REST API — Clusters. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-clusters
+      description: List Clusters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-rest-clusters.listclusters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cluster-details
+      description: Get Cluster Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-rest-clusters.getcluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-cluster
+      description: Start a Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-rest-clusters.startcluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stop-cluster
+      description: Stop a Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-rest-clusters.stopcluster
+      outputParameters:
+      - type: object
+        mapping: $.

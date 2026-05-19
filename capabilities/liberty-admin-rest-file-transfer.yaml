@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: WebSphere Liberty Admin REST API — File Transfer
+  description: 'WebSphere Liberty Admin REST API — File Transfer. 3 operations. Lead operation: Download a File. Self-contained
+    Naftiko capability covering one Websphere business surface.'
+  tags:
+  - Websphere
+  - File Transfer
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEBSPHERE_API_KEY: WEBSPHERE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: liberty-admin-rest-file-transfer
+    baseUri: https://localhost:9443/ibm/api
+    description: WebSphere Liberty Admin REST API — File Transfer business capability. Self-contained, no shared references.
+    resources:
+    - name: file
+      path: /file
+      operations:
+      - name: downloadfile
+        method: GET
+        description: Download a File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: Path to the file on the server
+          required: true
+      - name: uploadfile
+        method: POST
+        description: Upload a File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: Destination path on the server
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletefile
+        method: DELETE
+        description: Delete a File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: Path to the file on the server
+          required: true
+    authentication:
+      type: apikey
+      key: LtpaToken2
+      value: '{{env.WEBSPHERE_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: liberty-admin-rest-file-transfer-rest
+    port: 8080
+    description: REST adapter for WebSphere Liberty Admin REST API — File Transfer. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/file
+      name: file
+      description: REST surface for file.
+      operations:
+      - method: GET
+        name: downloadfile
+        description: Download a File
+        call: liberty-admin-rest-file-transfer.downloadfile
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: uploadfile
+        description: Upload a File
+        call: liberty-admin-rest-file-transfer.uploadfile
+        with:
+          path: rest.path
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletefile
+        description: Delete a File
+        call: liberty-admin-rest-file-transfer.deletefile
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: liberty-admin-rest-file-transfer-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for WebSphere Liberty Admin REST API — File Transfer. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: download-file
+      description: Download a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: liberty-admin-rest-file-transfer.downloadfile
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-file
+      description: Upload a File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: liberty-admin-rest-file-transfer.uploadfile
+      with:
+        path: tools.path
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-file
+      description: Delete a File
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: liberty-admin-rest-file-transfer.deletefile
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
