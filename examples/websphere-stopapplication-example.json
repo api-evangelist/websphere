@@ -1,0 +1,19 @@
+{
+  "operationId": "stopApplication",
+  "method": "POST",
+  "path": "/applications/{appName}/stop",
+  "summary": "Stop an Application",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stopapplication200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "started",
+        "message": "example_value"
+      }
+    }
+  ]
+}

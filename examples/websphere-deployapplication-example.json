@@ -1,0 +1,49 @@
+{
+  "operationId": "deployApplication",
+  "method": "POST",
+  "path": "/applications",
+  "summary": "Deploy a New Application",
+  "requestExamples": [
+    {
+      "contentType": "multipart/form-data",
+      "name": "DeployapplicationRequestExample",
+      "example": {
+        "file": "example_value",
+        "name": "Example Title",
+        "contextRoot": "example_value",
+        "targetServer": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Deployapplication201Example",
+      "example": {
+        "name": "Example Title",
+        "status": "started",
+        "contextRoot": "example_value",
+        "targetServer": "example_value",
+        "deployedModules": [
+          {
+            "name": "Example Title",
+            "type": "web",
+            "uri": "example_value"
+          }
+        ],
+        "lastModified": "2026-01-15T10:30:00Z"
+      }
+    },
+    {
+      "status": "409",
+      "contentType": "application/json",
+      "name": "Deployapplication409Example",
+      "example": {
+        "code": "example_value",
+        "message": "example_value",
+        "details": "example_value"
+      }
+    }
+  ]
+}

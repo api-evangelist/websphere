@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChannelCreate",
+  "title": "ChannelCreate",
+  "type": "object",
+  "required": [
+    "name",
+    "type"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "server",
+        "requester",
+        "serverConnection",
+        "clusterSender",
+        "clusterReceiver",
+        "amqp"
+      ],
+      "example": "sender"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "connectionName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "transmissionQueue": {
+      "type": "string",
+      "example": "example_value"
+    }
+  }
+}

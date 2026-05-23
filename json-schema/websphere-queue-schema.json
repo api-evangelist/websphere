@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Queue",
+  "title": "Queue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Queue name",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "local",
+        "alias",
+        "remote",
+        "model",
+        "cluster"
+      ],
+      "description": "Queue type",
+      "example": "local"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "maxDepth": {
+      "type": "integer",
+      "description": "Maximum queue depth",
+      "example": 10
+    },
+    "maxMessageLength": {
+      "type": "integer",
+      "description": "Maximum message length in bytes",
+      "example": 10
+    },
+    "currentDepth": {
+      "type": "integer",
+      "description": "Current number of messages on the queue",
+      "example": 10
+    },
+    "inhibitPut": {
+      "type": "boolean",
+      "description": "Whether put operations are inhibited",
+      "example": true
+    },
+    "inhibitGet": {
+      "type": "boolean",
+      "description": "Whether get operations are inhibited",
+      "example": true
+    },
+    "persistence": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "enum": [
+            "persistent",
+            "nonPersistent"
+          ]
+        }
+      },
+      "example": "example_value"
+    },
+    "cluster": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "workloadRank": {
+          "type": "integer"
+        },
+        "workloadPriority": {
+          "type": "integer"
+        }
+      },
+      "example": "example_value"
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "currentDepth": {
+          "type": "integer"
+        },
+        "openInputCount": {
+          "type": "integer"
+        },
+        "openOutputCount": {
+          "type": "integer"
+        },
+        "lastGetDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastPutDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

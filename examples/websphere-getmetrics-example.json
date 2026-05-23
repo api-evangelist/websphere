@@ -1,0 +1,18 @@
+{
+  "operationId": "getMetrics",
+  "method": "GET",
+  "path": "/monitoring/metrics",
+  "summary": "Get Server Metrics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getmetrics200Example",
+      "example": {
+        "scope": "example_value",
+        "metrics": "example_value"
+      }
+    }
+  ]
+}

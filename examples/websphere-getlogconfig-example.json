@@ -1,0 +1,23 @@
+{
+  "operationId": "getLogConfig",
+  "method": "GET",
+  "path": "/logging",
+  "summary": "Get Logging Configuration",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getlogconfig200Example",
+      "example": {
+        "logDirectory": "example_value",
+        "consoleLogLevel": "AUDIT",
+        "messageFileName": "example_value",
+        "traceFileName": "example_value",
+        "traceSpecification": "example_value",
+        "maxFileSize": 10,
+        "maxFiles": 10
+      }
+    }
+  ]
+}

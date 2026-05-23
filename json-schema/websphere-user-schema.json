@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/User",
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "type": "string",
+      "example": "500123"
+    },
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "user@example.com"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    }
+  }
+}

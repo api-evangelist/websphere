@@ -1,0 +1,16 @@
+{
+  "operationId": "addClusterMember",
+  "method": "POST",
+  "path": "/clusters/{clusterName}/members",
+  "summary": "Add a Member to a Cluster",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "AddclustermemberRequestExample",
+      "example": {
+        "memberName": "example_value"
+      }
+    }
+  ],
+  "responseExamples": []
+}

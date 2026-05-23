@@ -1,0 +1,30 @@
+{
+  "operationId": "listComplianceReports",
+  "method": "GET",
+  "path": "/compliance/reports",
+  "summary": "List Compliance Reports",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listcompliancereports200Example",
+      "example": [
+        {
+          "id": "abc123",
+          "name": "Example Title",
+          "generatedDate": "2026-01-15T10:30:00Z",
+          "overallCompliance": 42.5,
+          "servers": [
+            {
+              "serverId": "500123",
+              "serverName": "example_value",
+              "complianceScore": 42.5,
+              "findings": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

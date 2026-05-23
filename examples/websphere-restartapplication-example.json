@@ -1,0 +1,19 @@
+{
+  "operationId": "restartApplication",
+  "method": "POST",
+  "path": "/applications/{appName}/restart",
+  "summary": "Restart an Application",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Restartapplication200Example",
+      "example": {
+        "name": "Example Title",
+        "state": "STARTED",
+        "message": "example_value"
+      }
+    }
+  ]
+}

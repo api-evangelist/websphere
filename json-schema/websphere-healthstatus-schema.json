@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/HealthStatus",
+  "title": "HealthStatus",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "UP",
+        "DOWN",
+        "DEGRADED"
+      ],
+      "example": "UP"
+    },
+    "serverName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "uptime": {
+      "type": "integer",
+      "description": "Server uptime in milliseconds",
+      "example": 10
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UP",
+              "DOWN"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

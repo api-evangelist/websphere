@@ -1,0 +1,26 @@
+{
+  "operationId": "listFeatures",
+  "method": "GET",
+  "path": "/features",
+  "summary": "List Installed Features",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listfeatures200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "displayName": "example_value",
+          "version": "example_value",
+          "description": "A sample description.",
+          "enabled": true,
+          "dependencies": [
+            "example_value"
+          ]
+        }
+      ]
+    }
+  ]
+}

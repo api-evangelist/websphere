@@ -1,0 +1,31 @@
+{
+  "operationId": "createSharedConfig",
+  "method": "POST",
+  "path": "/repository/config",
+  "summary": "Create a Shared Configuration",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatesharedconfigRequestExample",
+      "example": {
+        "name": "Example Title",
+        "description": "A sample description.",
+        "content": "example_value",
+        "lastModified": "2026-01-15T10:30:00Z"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createsharedconfig201Example",
+      "example": {
+        "name": "Example Title",
+        "description": "A sample description.",
+        "content": "example_value",
+        "lastModified": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

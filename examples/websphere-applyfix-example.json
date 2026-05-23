@@ -1,0 +1,30 @@
+{
+  "operationId": "applyFix",
+  "method": "POST",
+  "path": "/fixes/{fixId}/apply",
+  "summary": "Apply a Fix",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "ApplyfixRequestExample",
+      "example": {
+        "serverIds": [
+          "example_value"
+        ],
+        "schedule": "2026-01-15T10:30:00Z",
+        "restartAfterApply": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "202",
+      "contentType": "application/json",
+      "name": "Applyfix202Example",
+      "example": {
+        "taskId": "500123",
+        "status": "example_value"
+      }
+    }
+  ]
+}

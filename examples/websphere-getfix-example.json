@@ -1,0 +1,29 @@
+{
+  "operationId": "getFix",
+  "method": "GET",
+  "path": "/fixes/{fixId}",
+  "summary": "Get Fix Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getfix200Example",
+      "example": {
+        "id": "abc123",
+        "name": "Example Title",
+        "type": "security",
+        "description": "A sample description.",
+        "resolvedCVEs": [
+          "example_value"
+        ],
+        "applicableVersions": [
+          "example_value"
+        ],
+        "downloadURL": "https://www.example.com",
+        "releaseDate": "2026-01-15T10:30:00Z",
+        "size": 10
+      }
+    }
+  ]
+}

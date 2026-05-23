@@ -1,0 +1,25 @@
+{
+  "operationId": "listNodes",
+  "method": "GET",
+  "path": "/nodes",
+  "summary": "List Nodes",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listnodes200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "hostName": "example_value",
+          "platformOS": "example_value",
+          "servers": [
+            "example_value"
+          ],
+          "synchronized": true
+        }
+      ]
+    }
+  ]
+}

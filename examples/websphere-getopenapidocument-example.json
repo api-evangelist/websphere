@@ -1,0 +1,21 @@
+{
+  "operationId": "getOpenApiDocument",
+  "method": "GET",
+  "path": "/openapi",
+  "summary": "Get Openapi Document",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/yaml",
+      "name": "Getopenapidocument200Example",
+      "example": "example_value"
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getopenapidocument200Example",
+      "example": {}
+    }
+  ]
+}

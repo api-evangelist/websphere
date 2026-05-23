@@ -1,0 +1,27 @@
+{
+  "operationId": "getDataSource",
+  "method": "GET",
+  "path": "/resources/datasources/{dsName}",
+  "summary": "Get Data Source Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getdatasource200Example",
+      "example": {
+        "name": "Example Title",
+        "jndiName": "example_value",
+        "databaseType": "example_value",
+        "jdbcProvider": "example_value",
+        "connectionPool": {
+          "minConnections": 10,
+          "maxConnections": 10,
+          "connectionTimeout": 10,
+          "reapTime": 10
+        },
+        "status": "active"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "operationId": "listQueueManagers",
+  "method": "GET",
+  "path": "/admin/qmgr",
+  "summary": "List Queue Managers",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listqueuemanagers200Example",
+      "example": {
+        "qmgr": [
+          {
+            "name": "Example Title",
+            "state": "running",
+            "version": "example_value",
+            "platform": "example_value",
+            "commandLevel": 10,
+            "connectionCount": 10,
+            "description": "A sample description.",
+            "maximumMessageLength": 10
+          }
+        ]
+      }
+    }
+  ]
+}

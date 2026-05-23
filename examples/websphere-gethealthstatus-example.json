@@ -1,0 +1,26 @@
+{
+  "operationId": "getHealthStatus",
+  "method": "GET",
+  "path": "/monitoring/health",
+  "summary": "Get Health Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Gethealthstatus200Example",
+      "example": {
+        "status": "UP",
+        "serverName": "example_value",
+        "uptime": 10,
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "operationId": "getNode",
+  "method": "GET",
+  "path": "/nodes/{nodeName}",
+  "summary": "Get Node Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getnode200Example",
+      "example": {
+        "name": "Example Title",
+        "hostName": "example_value",
+        "platformOS": "example_value",
+        "servers": [
+          "example_value"
+        ],
+        "synchronized": true
+      }
+    }
+  ]
+}

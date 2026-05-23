@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PerformanceData",
+  "title": "PerformanceData",
+  "type": "object",
+  "properties": {
+    "module": {
+      "type": "string",
+      "description": "Performance module name",
+      "example": "example_value"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "counter",
+              "gauge",
+              "average"
+            ]
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

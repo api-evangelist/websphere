@@ -1,0 +1,24 @@
+{
+  "operationId": "listUsers",
+  "method": "GET",
+  "path": "/security/users",
+  "summary": "List Security Users",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listusers200Example",
+      "example": [
+        {
+          "uid": "500123",
+          "displayName": "example_value",
+          "email": "user@example.com",
+          "groups": [
+            "example_value"
+          ]
+        }
+      ]
+    }
+  ]
+}

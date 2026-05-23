@@ -1,0 +1,18 @@
+{
+  "operationId": "testDataSourceConnection",
+  "method": "POST",
+  "path": "/resources/datasources/{dsName}/test",
+  "summary": "Test Data Source Connection",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Testdatasourceconnection200Example",
+      "example": {
+        "success": true,
+        "message": "example_value"
+      }
+    }
+  ]
+}

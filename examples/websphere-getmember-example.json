@@ -1,0 +1,24 @@
+{
+  "operationId": "getMember",
+  "method": "GET",
+  "path": "/members/{memberName}",
+  "summary": "Get Member Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getmember200Example",
+      "example": {
+        "name": "Example Title",
+        "hostName": "example_value",
+        "userDir": "example_value",
+        "status": "STARTED",
+        "clusterName": "example_value",
+        "httpsPort": 10,
+        "wlpVersion": "example_value",
+        "javaVersion": "example_value"
+      }
+    }
+  ]
+}

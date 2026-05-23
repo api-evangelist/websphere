@@ -1,0 +1,27 @@
+{
+  "operationId": "updateConfigElement",
+  "method": "PUT",
+  "path": "/config/{elementName}/{uid}",
+  "summary": "Update a Configuration Element Instance",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateconfigelementRequestExample",
+      "example": {
+        "uid": "500123",
+        "configElementName": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updateconfigelement200Example",
+      "example": {
+        "uid": "500123",
+        "configElementName": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "operationId": "login",
+  "method": "POST",
+  "path": "/login",
+  "summary": "Authenticate and Get Ltpa Token",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "LoginRequestExample",
+      "example": {
+        "username": "example_value",
+        "password": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "Login401Example",
+      "example": {
+        "error": [
+          {
+            "type": "example_value",
+            "msgId": "500123",
+            "explanation": "example_value",
+            "action": "example_value",
+            "message": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

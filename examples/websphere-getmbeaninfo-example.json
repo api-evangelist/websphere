@@ -1,0 +1,48 @@
+{
+  "operationId": "getMBeanInfo",
+  "method": "GET",
+  "path": "/mbeans/{objectName}",
+  "summary": "Get Mbean Information",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getmbeaninfo200Example",
+      "example": {
+        "objectName": "example_value",
+        "className": "example_value",
+        "description": "A sample description.",
+        "attributes": [
+          {
+            "name": "Example Title",
+            "type": "example_value",
+            "description": "A sample description.",
+            "readable": true,
+            "writable": true
+          }
+        ],
+        "operations": [
+          {
+            "name": "Example Title",
+            "description": "A sample description.",
+            "returnType": "example_value",
+            "parameters": [
+              {}
+            ],
+            "impact": "ACTION"
+          }
+        ],
+        "notifications": [
+          {
+            "name": "Example Title",
+            "description": "A sample description.",
+            "notifTypes": [
+              {}
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

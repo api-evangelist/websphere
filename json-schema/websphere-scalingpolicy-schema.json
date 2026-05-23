@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScalingPolicy",
+  "title": "ScalingPolicy",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Policy name",
+      "example": "Example Title"
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Target cluster",
+      "example": "example_value"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the policy is active",
+      "example": true
+    },
+    "minMembers": {
+      "type": "integer",
+      "description": "Minimum number of cluster members",
+      "example": 10
+    },
+    "maxMembers": {
+      "type": "integer",
+      "description": "Maximum number of cluster members",
+      "example": 10
+    },
+    "scaleUpTrigger": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "enum": [
+            "cpuUtilization",
+            "memoryUtilization",
+            "responseTime"
+          ]
+        },
+        "threshold": {
+          "type": "number"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Duration in seconds before triggering"
+        }
+      },
+      "example": "example_value"
+    },
+    "scaleDownTrigger": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "enum": [
+            "cpuUtilization",
+            "memoryUtilization",
+            "responseTime"
+          ]
+        },
+        "threshold": {
+          "type": "number"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      },
+      "example": "example_value"
+    },
+    "cooldownPeriod": {
+      "type": "integer",
+      "description": "Cooldown period in seconds between scaling events",
+      "example": 10
+    }
+  }
+}

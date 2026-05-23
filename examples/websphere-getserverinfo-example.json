@@ -1,0 +1,25 @@
+{
+  "operationId": "getServerInfo",
+  "method": "GET",
+  "path": "/server",
+  "summary": "Get Server Information",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getserverinfo200Example",
+      "example": {
+        "name": "Example Title",
+        "wlpVersion": "example_value",
+        "productEdition": "example_value",
+        "javaVersion": "example_value",
+        "javaVendor": "example_value",
+        "serverStatus": "STARTED",
+        "uptime": 10,
+        "installDirectory": "example_value",
+        "serverDirectory": "example_value"
+      }
+    }
+  ]
+}

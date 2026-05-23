@@ -1,0 +1,26 @@
+{
+  "operationId": "listSubscriptions",
+  "method": "GET",
+  "path": "/admin/qmgr/{qmgrName}/subscription",
+  "summary": "List Subscriptions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listsubscriptions200Example",
+      "example": {
+        "subscription": [
+          {
+            "id": "abc123",
+            "name": "Example Title",
+            "topicString": "example_value",
+            "destination": "example_value",
+            "type": "admin",
+            "durability": "durable"
+          }
+        ]
+      }
+    }
+  ]
+}

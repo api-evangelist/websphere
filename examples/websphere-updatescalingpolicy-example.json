@@ -1,0 +1,55 @@
+{
+  "operationId": "updateScalingPolicy",
+  "method": "PUT",
+  "path": "/scaling/policies/{policyName}",
+  "summary": "Update a Scaling Policy",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatescalingpolicyRequestExample",
+      "example": {
+        "name": "Example Title",
+        "clusterName": "example_value",
+        "enabled": true,
+        "minMembers": 10,
+        "maxMembers": 10,
+        "scaleUpTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "scaleDownTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "cooldownPeriod": 10
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatescalingpolicy200Example",
+      "example": {
+        "name": "Example Title",
+        "clusterName": "example_value",
+        "enabled": true,
+        "minMembers": 10,
+        "maxMembers": 10,
+        "scaleUpTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "scaleDownTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "cooldownPeriod": 10
+      }
+    }
+  ]
+}

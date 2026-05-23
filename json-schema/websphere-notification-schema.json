@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Notification",
+  "title": "Notification",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "abc123"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "vulnerability",
+        "health",
+        "compliance",
+        "fix"
+      ],
+      "example": "vulnerability"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ],
+      "example": "info"
+    },
+    "title": {
+      "type": "string",
+      "example": "Example Title"
+    },
+    "message": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "read": {
+      "type": "boolean",
+      "example": true
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "relatedResourceId": {
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

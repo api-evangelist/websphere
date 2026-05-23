@@ -1,0 +1,18 @@
+{
+  "operationId": "syncNode",
+  "method": "POST",
+  "path": "/nodes/{nodeName}/sync",
+  "summary": "Synchronize a Node",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Syncnode200Example",
+      "example": {
+        "status": "example_value",
+        "message": "example_value"
+      }
+    }
+  ]
+}

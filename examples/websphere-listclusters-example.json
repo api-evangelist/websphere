@@ -1,0 +1,29 @@
+{
+  "operationId": "listClusters",
+  "method": "GET",
+  "path": "/clusters",
+  "summary": "List Clusters",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listclusters200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "status": "running",
+          "members": [
+            {
+              "serverName": "example_value",
+              "nodeName": "example_value",
+              "status": "example_value",
+              "weight": 10
+            }
+          ],
+          "preferLocal": true
+        }
+      ]
+    }
+  ]
+}

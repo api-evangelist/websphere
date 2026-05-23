@@ -1,0 +1,15 @@
+{
+  "operationId": "getApiExplorer",
+  "method": "GET",
+  "path": "/explorer",
+  "summary": "Access the Api Explorer",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "text/html",
+      "name": "Getapiexplorer200Example",
+      "example": "example_value"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LibertyServer",
+  "title": "LibertyServer",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Server name",
+      "example": "Example Title"
+    },
+    "wlpVersion": {
+      "type": "string",
+      "description": "Liberty version",
+      "example": "example_value"
+    },
+    "productEdition": {
+      "type": "string",
+      "description": "Product edition",
+      "example": "example_value"
+    },
+    "javaVersion": {
+      "type": "string",
+      "description": "Java version",
+      "example": "example_value"
+    },
+    "javaVendor": {
+      "type": "string",
+      "description": "Java vendor",
+      "example": "example_value"
+    },
+    "serverStatus": {
+      "type": "string",
+      "enum": [
+        "STARTED",
+        "STOPPED",
+        "STARTING",
+        "STOPPING"
+      ],
+      "example": "STARTED"
+    },
+    "uptime": {
+      "type": "integer",
+      "description": "Server uptime in milliseconds",
+      "example": 10
+    },
+    "installDirectory": {
+      "type": "string",
+      "description": "Liberty installation directory",
+      "example": "example_value"
+    },
+    "serverDirectory": {
+      "type": "string",
+      "description": "Server configuration directory",
+      "example": "example_value"
+    }
+  }
+}

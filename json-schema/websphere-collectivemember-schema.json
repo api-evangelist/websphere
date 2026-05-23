@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CollectiveMember",
+  "title": "CollectiveMember",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Member server name",
+      "example": "Example Title"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Host where the member is located",
+      "example": "example_value"
+    },
+    "userDir": {
+      "type": "string",
+      "description": "User directory path",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "STARTED",
+        "STOPPED",
+        "UNKNOWN"
+      ],
+      "description": "Member status",
+      "example": "STARTED"
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Cluster the member belongs to",
+      "example": "example_value"
+    },
+    "httpsPort": {
+      "type": "integer",
+      "description": "HTTPS port",
+      "example": 10
+    },
+    "wlpVersion": {
+      "type": "string",
+      "description": "Liberty version",
+      "example": "example_value"
+    },
+    "javaVersion": {
+      "type": "string",
+      "description": "Java version",
+      "example": "example_value"
+    }
+  }
+}

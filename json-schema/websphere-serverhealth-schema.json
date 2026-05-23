@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServerHealth",
+  "title": "ServerHealth",
+  "type": "object",
+  "properties": {
+    "serverId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "serverName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "healthy",
+        "warning",
+        "critical"
+      ],
+      "example": "healthy"
+    },
+    "uptime": {
+      "type": "integer",
+      "description": "Uptime in seconds",
+      "example": 10
+    },
+    "cpuUsage": {
+      "type": "number",
+      "description": "CPU usage percentage",
+      "example": 42.5
+    },
+    "memoryUsage": {
+      "type": "number",
+      "description": "Memory usage percentage",
+      "example": 42.5
+    },
+    "openVulnerabilities": {
+      "type": "integer",
+      "example": 10
+    },
+    "lastHealthCheck": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "warn",
+              "fail"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

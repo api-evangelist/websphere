@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ControllerInfo",
+  "title": "ControllerInfo",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Controller server name",
+      "example": "Example Title"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Controller hostname",
+      "example": "example_value"
+    },
+    "httpsPort": {
+      "type": "integer",
+      "description": "HTTPS port",
+      "example": 10
+    },
+    "version": {
+      "type": "string",
+      "description": "Liberty version",
+      "example": "example_value"
+    },
+    "memberCount": {
+      "type": "integer",
+      "description": "Total number of collective members",
+      "example": 10
+    },
+    "clusterCount": {
+      "type": "integer",
+      "description": "Total number of clusters",
+      "example": 10
+    },
+    "hostCount": {
+      "type": "integer",
+      "description": "Total number of hosts",
+      "example": 10
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Message",
+  "title": "Message",
+  "type": "object",
+  "properties": {
+    "messageId": {
+      "type": "string",
+      "description": "Message identifier",
+      "example": "500123"
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Correlation identifier",
+      "example": "500123"
+    },
+    "putDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the message was put",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "persistence": {
+      "type": "string",
+      "enum": [
+        "persistent",
+        "nonPersistent"
+      ],
+      "example": "persistent"
+    },
+    "replyToQueue": {
+      "type": "string",
+      "description": "Reply-to queue name",
+      "example": "example_value"
+    },
+    "replyToQueueManager": {
+      "type": "string",
+      "description": "Reply-to queue manager name",
+      "example": "example_value"
+    },
+    "expiry": {
+      "type": "integer",
+      "description": "Message expiry in tenths of a second",
+      "example": 10
+    },
+    "body": {
+      "description": "Message body content",
+      "example": "example_value"
+    },
+    "format": {
+      "type": "string",
+      "description": "Message format",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueueUpdate",
+  "title": "QueueUpdate",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "maxDepth": {
+      "type": "integer",
+      "example": 10
+    },
+    "maxMessageLength": {
+      "type": "integer",
+      "example": 10
+    },
+    "inhibitPut": {
+      "type": "boolean",
+      "example": true
+    },
+    "inhibitGet": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

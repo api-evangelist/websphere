@@ -1,0 +1,18 @@
+{
+  "operationId": "createJavaDump",
+  "method": "POST",
+  "path": "/server/javadump",
+  "summary": "Create a Java Dump",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Createjavadump200Example",
+      "example": {
+        "dumpFile": "example_value",
+        "timestamp": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

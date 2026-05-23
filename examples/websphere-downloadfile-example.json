@@ -1,0 +1,15 @@
+{
+  "operationId": "downloadFile",
+  "method": "GET",
+  "path": "/file",
+  "summary": "Download a File",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/octet-stream",
+      "name": "Downloadfile200Example",
+      "example": "example_value"
+    }
+  ]
+}

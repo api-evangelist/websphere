@@ -1,0 +1,17 @@
+{
+  "operationId": "getConfigElement",
+  "method": "GET",
+  "path": "/ibm/api/config/{elementName}",
+  "summary": "Get Configuration Element",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getconfigelement200Example",
+      "example": [
+        {}
+      ]
+    }
+  ]
+}

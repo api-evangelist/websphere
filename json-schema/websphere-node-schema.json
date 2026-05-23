@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Node",
+  "title": "Node",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Node name",
+      "example": "Example Title"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Hostname of the node",
+      "example": "example_value"
+    },
+    "platformOS": {
+      "type": "string",
+      "description": "Operating system platform",
+      "example": "example_value"
+    },
+    "servers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    },
+    "synchronized": {
+      "type": "boolean",
+      "description": "Whether the node configuration is synchronized",
+      "example": true
+    }
+  }
+}

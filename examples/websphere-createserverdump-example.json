@@ -1,0 +1,28 @@
+{
+  "operationId": "createServerDump",
+  "method": "POST",
+  "path": "/server/dump",
+  "summary": "Create a Server Dump",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateserverdumpRequestExample",
+      "example": {
+        "include": [
+          "heap"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Createserverdump200Example",
+      "example": {
+        "dumpFile": "example_value",
+        "timestamp": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

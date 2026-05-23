@@ -1,0 +1,37 @@
+{
+  "operationId": "updateLogConfig",
+  "method": "PUT",
+  "path": "/logging",
+  "summary": "Update Logging Configuration",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatelogconfigRequestExample",
+      "example": {
+        "logDirectory": "example_value",
+        "consoleLogLevel": "AUDIT",
+        "messageFileName": "example_value",
+        "traceFileName": "example_value",
+        "traceSpecification": "example_value",
+        "maxFileSize": 10,
+        "maxFiles": 10
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatelogconfig200Example",
+      "example": {
+        "logDirectory": "example_value",
+        "consoleLogLevel": "AUDIT",
+        "messageFileName": "example_value",
+        "traceFileName": "example_value",
+        "traceSpecification": "example_value",
+        "maxFileSize": 10,
+        "maxFiles": 10
+      }
+    }
+  ]
+}

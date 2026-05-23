@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TopicCreate",
+  "title": "TopicCreate",
+  "type": "object",
+  "required": [
+    "name",
+    "topicString"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Example Title"
+    },
+    "topicString": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "local",
+        "cluster"
+      ],
+      "default": "local",
+      "example": "local"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ManagedServer",
+  "title": "ManagedServer",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique server identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Server name",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "was-traditional",
+        "liberty"
+      ],
+      "example": "was-traditional"
+    },
+    "version": {
+      "type": "string",
+      "description": "WebSphere version",
+      "example": "example_value"
+    },
+    "host": {
+      "type": "string",
+      "description": "Server hostname",
+      "example": "example_value"
+    },
+    "port": {
+      "type": "integer",
+      "description": "Server port",
+      "example": 10
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "unknown"
+      ],
+      "example": "active"
+    },
+    "vulnerabilityCount": {
+      "type": "integer",
+      "description": "Number of open vulnerabilities",
+      "example": 10
+    },
+    "lastScanDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "registeredDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "installedFixes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of installed fix IDs",
+      "example": []
+    }
+  }
+}

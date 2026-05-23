@@ -1,0 +1,26 @@
+{
+  "operationId": "listRoles",
+  "method": "GET",
+  "path": "/security/roles",
+  "summary": "List Security Roles",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listroles200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "description": "A sample description.",
+          "users": [
+            "example_value"
+          ],
+          "groups": [
+            "example_value"
+          ]
+        }
+      ]
+    }
+  ]
+}

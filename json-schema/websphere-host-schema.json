@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Host",
+  "title": "Host",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Hostname",
+      "example": "Example Title"
+    },
+    "os": {
+      "type": "string",
+      "description": "Operating system",
+      "example": "example_value"
+    },
+    "arch": {
+      "type": "string",
+      "description": "Architecture",
+      "example": "example_value"
+    },
+    "processors": {
+      "type": "integer",
+      "description": "Number of processors",
+      "example": 10
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Members on this host",
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Cluster",
+  "title": "Cluster",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Cluster name",
+      "example": "Example Title"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "stopped",
+        "partial"
+      ],
+      "example": "running"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "serverName": {
+            "type": "string"
+          },
+          "nodeName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "integer"
+          }
+        }
+      },
+      "example": []
+    },
+    "preferLocal": {
+      "type": "boolean",
+      "description": "Whether to prefer local routing",
+      "example": true
+    }
+  }
+}

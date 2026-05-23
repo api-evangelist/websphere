@@ -1,0 +1,19 @@
+{
+  "operationId": "getMBeanAttribute",
+  "method": "GET",
+  "path": "/mbeans/{objectName}/attributes/{attributeName}",
+  "summary": "Get a Specific Mbean Attribute",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getmbeanattribute200Example",
+      "example": {
+        "name": "Example Title",
+        "value": "example_value",
+        "type": "example_value"
+      }
+    }
+  ]
+}

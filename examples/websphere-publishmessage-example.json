@@ -1,0 +1,19 @@
+{
+  "operationId": "publishMessage",
+  "method": "POST",
+  "path": "/messaging/qmgr/{qmgrName}/topic/{topicString}/message",
+  "summary": "Publish a Message to a Topic",
+  "requestExamples": [
+    {
+      "contentType": "text/plain",
+      "name": "PublishmessageRequestExample",
+      "example": "example_value"
+    },
+    {
+      "contentType": "application/json",
+      "name": "PublishmessageRequestExample",
+      "example": {}
+    }
+  ],
+  "responseExamples": []
+}

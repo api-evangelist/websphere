@@ -1,0 +1,71 @@
+{
+  "operationId": "updateServerConfig",
+  "method": "PUT",
+  "path": "/config",
+  "summary": "Update Server Configuration",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateserverconfigRequestExample",
+      "example": {
+        "description": "A sample description.",
+        "featureManager": {
+          "feature": [
+            "example_value"
+          ]
+        },
+        "httpEndpoint": [
+          {
+            "id": "abc123",
+            "host": "example_value",
+            "httpPort": 10,
+            "httpsPort": 10
+          }
+        ],
+        "application": [
+          {
+            "name": "Example Title",
+            "location": "example_value",
+            "type": "war",
+            "contextRoot": "example_value",
+            "state": "STARTED",
+            "autoStart": true
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updateserverconfig200Example",
+      "example": {
+        "description": "A sample description.",
+        "featureManager": {
+          "feature": [
+            "example_value"
+          ]
+        },
+        "httpEndpoint": [
+          {
+            "id": "abc123",
+            "host": "example_value",
+            "httpPort": 10,
+            "httpsPort": 10
+          }
+        ],
+        "application": [
+          {
+            "name": "Example Title",
+            "location": "example_value",
+            "type": "war",
+            "contextRoot": "example_value",
+            "state": "STARTED",
+            "autoStart": true
+          }
+        ]
+      }
+    }
+  ]
+}

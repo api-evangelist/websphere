@@ -1,0 +1,23 @@
+{
+  "operationId": "getControllerInfo",
+  "method": "GET",
+  "path": "/controller",
+  "summary": "Get Controller Information",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getcontrollerinfo200Example",
+      "example": {
+        "name": "Example Title",
+        "hostName": "example_value",
+        "httpsPort": 10,
+        "version": "example_value",
+        "memberCount": 10,
+        "clusterCount": 10,
+        "hostCount": 10
+      }
+    }
+  ]
+}

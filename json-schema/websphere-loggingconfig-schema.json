@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LoggingConfig",
+  "title": "LoggingConfig",
+  "type": "object",
+  "properties": {
+    "logDirectory": {
+      "type": "string",
+      "description": "Log output directory",
+      "example": "example_value"
+    },
+    "consoleLogLevel": {
+      "type": "string",
+      "enum": [
+        "AUDIT",
+        "INFO",
+        "WARNING",
+        "ERROR",
+        false
+      ],
+      "example": "AUDIT"
+    },
+    "messageFileName": {
+      "type": "string",
+      "description": "Name of the messages log file",
+      "example": "example_value"
+    },
+    "traceFileName": {
+      "type": "string",
+      "description": "Name of the trace log file",
+      "example": "example_value"
+    },
+    "traceSpecification": {
+      "type": "string",
+      "description": "Trace specification string",
+      "example": "example_value"
+    },
+    "maxFileSize": {
+      "type": "integer",
+      "description": "Maximum log file size in MB",
+      "example": 10
+    },
+    "maxFiles": {
+      "type": "integer",
+      "description": "Maximum number of log files",
+      "example": 10
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BatchJobExecution",
+  "title": "BatchJobExecution",
+  "type": "object",
+  "properties": {
+    "executionId": {
+      "type": "integer",
+      "example": "500123"
+    },
+    "jobInstanceId": {
+      "type": "integer",
+      "example": "500123"
+    },
+    "jobName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "batchStatus": {
+      "type": "string",
+      "enum": [
+        "STARTING",
+        "STARTED",
+        "STOPPING",
+        "STOPPED",
+        "FAILED",
+        "COMPLETED",
+        "ABANDONED"
+      ],
+      "example": "STARTING"
+    },
+    "exitStatus": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "createTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "lastUpdatedTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "jobParameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": "example_value"
+    },
+    "stepExecutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stepExecutionId": {
+            "type": "integer"
+          },
+          "stepName": {
+            "type": "string"
+          },
+          "batchStatus": {
+            "type": "string"
+          },
+          "exitStatus": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "readCount": {
+            "type": "integer"
+          },
+          "writeCount": {
+            "type": "integer"
+          },
+          "commitCount": {
+            "type": "integer"
+          },
+          "rollbackCount": {
+            "type": "integer"
+          },
+          "filterCount": {
+            "type": "integer"
+          },
+          "processSkipCount": {
+            "type": "integer"
+          },
+          "readSkipCount": {
+            "type": "integer"
+          },
+          "writeSkipCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

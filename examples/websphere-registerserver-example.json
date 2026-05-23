@@ -1,0 +1,47 @@
+{
+  "operationId": "registerServer",
+  "method": "POST",
+  "path": "/servers",
+  "summary": "Register a Server",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "RegisterserverRequestExample",
+      "example": {
+        "name": "Example Title",
+        "type": "was-traditional",
+        "connectionInfo": {
+          "host": "example_value",
+          "port": 10,
+          "protocol": "https"
+        },
+        "credentials": {
+          "username": "example_value",
+          "password": "example_value"
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Registerserver201Example",
+      "example": {
+        "id": "abc123",
+        "name": "Example Title",
+        "type": "was-traditional",
+        "version": "example_value",
+        "host": "example_value",
+        "port": 10,
+        "status": "active",
+        "vulnerabilityCount": 10,
+        "lastScanDate": "2026-01-15T10:30:00Z",
+        "registeredDate": "2026-01-15T10:30:00Z",
+        "installedFixes": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

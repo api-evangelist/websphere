@@ -1,0 +1,30 @@
+{
+  "operationId": "getServerConfig",
+  "method": "GET",
+  "path": "/ibm/api/config",
+  "summary": "Get Server Configuration",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getserverconfig200Example",
+      "example": {
+        "description": "A sample description.",
+        "featureManager": {
+          "feature": [
+            "example_value"
+          ]
+        },
+        "httpEndpoint": [
+          {
+            "id": "abc123",
+            "host": "example_value",
+            "httpPort": 10,
+            "httpsPort": 10
+          }
+        ]
+      }
+    }
+  ]
+}

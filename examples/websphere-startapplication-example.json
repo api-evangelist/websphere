@@ -1,0 +1,29 @@
+{
+  "operationId": "startApplication",
+  "method": "POST",
+  "path": "/applications/{appName}/start",
+  "summary": "Start an Application",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Startapplication200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "started",
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "409",
+      "contentType": "application/json",
+      "name": "Startapplication409Example",
+      "example": {
+        "code": "example_value",
+        "message": "example_value",
+        "details": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Channel",
+  "title": "Channel",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Channel name",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "server",
+        "requester",
+        "serverConnection",
+        "clusterSender",
+        "clusterReceiver",
+        "amqp"
+      ],
+      "example": "sender"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "connectionName": {
+      "type": "string",
+      "description": "Connection name (host and port)",
+      "example": "example_value"
+    },
+    "transmissionQueue": {
+      "type": "string",
+      "description": "Transmission queue name",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "running",
+            "stopped",
+            "retrying",
+            "binding",
+            "starting",
+            "stopping"
+          ]
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

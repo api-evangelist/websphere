@@ -1,0 +1,32 @@
+{
+  "operationId": "getScalingPolicy",
+  "method": "GET",
+  "path": "/scaling/policies/{policyName}",
+  "summary": "Get Scaling Policy Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getscalingpolicy200Example",
+      "example": {
+        "name": "Example Title",
+        "clusterName": "example_value",
+        "enabled": true,
+        "minMembers": 10,
+        "maxMembers": 10,
+        "scaleUpTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "scaleDownTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "cooldownPeriod": 10
+      }
+    }
+  ]
+}

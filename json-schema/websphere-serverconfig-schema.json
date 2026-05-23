@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServerConfig",
+  "title": "ServerConfig",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "featureManager": {
+      "type": "object",
+      "properties": {
+        "feature": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "example": "example_value"
+    },
+    "httpEndpoint": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "httpPort": {
+            "type": "integer"
+          },
+          "httpsPort": {
+            "type": "integer"
+          }
+        }
+      },
+      "example": []
+    }
+  },
+  "additionalProperties": true
+}

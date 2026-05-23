@@ -1,0 +1,24 @@
+{
+  "operationId": "getChannel",
+  "method": "GET",
+  "path": "/admin/qmgr/{qmgrName}/channel/{channelName}",
+  "summary": "Get Channel Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getchannel200Example",
+      "example": {
+        "name": "Example Title",
+        "type": "sender",
+        "description": "A sample description.",
+        "connectionName": "example_value",
+        "transmissionQueue": "example_value",
+        "status": {
+          "state": "running"
+        }
+      }
+    }
+  ]
+}

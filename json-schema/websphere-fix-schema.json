@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Fix",
+  "title": "Fix",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Fix identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Fix name",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "security",
+        "ifix",
+        "fixpack"
+      ],
+      "example": "security"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "resolvedCVEs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "CVEs resolved by this fix",
+      "example": []
+    },
+    "applicableVersions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "WebSphere versions this fix applies to",
+      "example": []
+    },
+    "downloadURL": {
+      "type": "string",
+      "format": "uri",
+      "example": "https://www.example.com"
+    },
+    "releaseDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "size": {
+      "type": "integer",
+      "description": "Fix size in bytes",
+      "example": 10
+    }
+  }
+}

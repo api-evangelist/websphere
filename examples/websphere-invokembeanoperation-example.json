@@ -1,0 +1,28 @@
+{
+  "operationId": "invokeMBeanOperation",
+  "method": "POST",
+  "path": "/mbeans/{objectName}/operations/{operationName}",
+  "summary": "Invoke an Mbean Operation",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "InvokembeanoperationRequestExample",
+      "example": {
+        "params": [],
+        "signature": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Invokembeanoperation200Example",
+      "example": {
+        "value": "example_value"
+      }
+    }
+  ]
+}

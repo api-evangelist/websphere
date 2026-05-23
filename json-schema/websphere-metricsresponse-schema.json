@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MetricsResponse",
+  "title": "MetricsResponse",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "displayName": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "unit": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "counter",
+          "gauge",
+          "timer",
+          "histogram",
+          "simple_timer",
+          "concurrent_gauge"
+        ]
+      },
+      "value": {
+        "type": "number"
+      },
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

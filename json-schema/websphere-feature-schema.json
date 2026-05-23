@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Feature",
+  "title": "Feature",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Feature symbolic name",
+      "example": "Example Title"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable feature name",
+      "example": "example_value"
+    },
+    "version": {
+      "type": "string",
+      "description": "Feature version",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "Feature description",
+      "example": "A sample description."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the feature is currently enabled",
+      "example": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of dependent feature names",
+      "example": []
+    }
+  }
+}

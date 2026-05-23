@@ -1,0 +1,24 @@
+{
+  "operationId": "getNotifications",
+  "method": "GET",
+  "path": "/notifications/{subscriptionId}",
+  "summary": "Get Pending Notifications",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getnotifications200Example",
+      "example": [
+        {
+          "type": "example_value",
+          "source": "example_value",
+          "message": "example_value",
+          "sequenceNumber": 10,
+          "timestamp": 10,
+          "userData": "example_value"
+        }
+      ]
+    }
+  ]
+}

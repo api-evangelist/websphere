@@ -1,0 +1,18 @@
+{
+  "operationId": "getConfigElementById",
+  "method": "GET",
+  "path": "/config/{elementName}/{uid}",
+  "summary": "Get a Specific Configuration Element Instance",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getconfigelementbyid200Example",
+      "example": {
+        "uid": "500123",
+        "configElementName": "example_value"
+      }
+    }
+  ]
+}

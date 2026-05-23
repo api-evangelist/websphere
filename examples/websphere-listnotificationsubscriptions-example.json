@@ -1,0 +1,24 @@
+{
+  "operationId": "listNotificationSubscriptions",
+  "method": "GET",
+  "path": "/notifications",
+  "summary": "List Notification Subscriptions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listnotificationsubscriptions200Example",
+      "example": [
+        {
+          "id": "abc123",
+          "objectName": "example_value",
+          "filters": [
+            "example_value"
+          ],
+          "created": "2026-01-15T10:30:00Z"
+        }
+      ]
+    }
+  ]
+}

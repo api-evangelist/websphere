@@ -1,0 +1,43 @@
+{
+  "operationId": "updateConfigResource",
+  "method": "PUT",
+  "path": "/config/{resourceType}/{resourceId}",
+  "summary": "Update a Configuration Resource",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateconfigresourceRequestExample",
+      "example": {
+        "id": "abc123",
+        "type": "example_value",
+        "name": "Example Title",
+        "attributes": "example_value",
+        "links": [
+          {
+            "rel": "example_value",
+            "href": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updateconfigresource200Example",
+      "example": {
+        "id": "abc123",
+        "type": "example_value",
+        "name": "Example Title",
+        "attributes": "example_value",
+        "links": [
+          {
+            "rel": "example_value",
+            "href": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "operationId": "uploadFile",
+  "method": "POST",
+  "path": "/file",
+  "summary": "Upload a File",
+  "requestExamples": [
+    {
+      "contentType": "application/octet-stream",
+      "name": "UploadfileRequestExample",
+      "example": "example_value"
+    }
+  ],
+  "responseExamples": []
+}

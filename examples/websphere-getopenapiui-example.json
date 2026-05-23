@@ -1,0 +1,15 @@
+{
+  "operationId": "getOpenApiUi",
+  "method": "GET",
+  "path": "/openapi/ui",
+  "summary": "Access the Openapi Ui",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "text/html",
+      "name": "Getopenapiui200Example",
+      "example": "example_value"
+    }
+  ]
+}

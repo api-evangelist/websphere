@@ -1,0 +1,24 @@
+{
+  "operationId": "sendMessage",
+  "method": "POST",
+  "path": "/messaging/qmgr/{qmgrName}/queue/{queueName}/message",
+  "summary": "Send a Message to a Queue",
+  "requestExamples": [
+    {
+      "contentType": "text/plain",
+      "name": "SendmessageRequestExample",
+      "example": "example_value"
+    },
+    {
+      "contentType": "application/json",
+      "name": "SendmessageRequestExample",
+      "example": {}
+    },
+    {
+      "contentType": "application/xml",
+      "name": "SendmessageRequestExample",
+      "example": "example_value"
+    }
+  ],
+  "responseExamples": []
+}

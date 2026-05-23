@@ -1,0 +1,36 @@
+{
+  "operationId": "createChannel",
+  "method": "POST",
+  "path": "/admin/qmgr/{qmgrName}/channel",
+  "summary": "Create a Channel",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatechannelRequestExample",
+      "example": {
+        "name": "Example Title",
+        "type": "sender",
+        "description": "A sample description.",
+        "connectionName": "example_value",
+        "transmissionQueue": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createchannel201Example",
+      "example": {
+        "name": "Example Title",
+        "type": "sender",
+        "description": "A sample description.",
+        "connectionName": "example_value",
+        "transmissionQueue": "example_value",
+        "status": {
+          "state": "running"
+        }
+      }
+    }
+  ]
+}

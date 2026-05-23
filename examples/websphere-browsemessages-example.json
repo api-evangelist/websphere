@@ -1,0 +1,27 @@
+{
+  "operationId": "browseMessages",
+  "method": "GET",
+  "path": "/messaging/qmgr/{qmgrName}/queue/{queueName}/message",
+  "summary": "Browse Messages on a Queue",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Browsemessages200Example",
+      "example": [
+        {
+          "messageId": "500123",
+          "correlationId": "500123",
+          "putDateTime": "2026-01-15T10:30:00Z",
+          "persistence": "persistent",
+          "replyToQueue": "example_value",
+          "replyToQueueManager": "example_value",
+          "expiry": 10,
+          "body": "example_value",
+          "format": "example_value"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "operationId": "getOverallHealth",
+  "method": "GET",
+  "path": "/health",
+  "summary": "Get Overall Health Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getoverallhealth200Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    },
+    {
+      "status": "503",
+      "contentType": "application/json",
+      "name": "Getoverallhealth503Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

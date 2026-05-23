@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LibertyApplication",
+  "title": "LibertyApplication",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Application name",
+      "example": "Example Title"
+    },
+    "location": {
+      "type": "string",
+      "description": "Application file location",
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "war",
+        "ear",
+        "eba",
+        "rar"
+      ],
+      "description": "Application type",
+      "example": "war"
+    },
+    "contextRoot": {
+      "type": "string",
+      "description": "Context root for web application",
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "STARTED",
+        "STOPPED",
+        "INSTALLED",
+        "STARTING",
+        "STOPPING"
+      ],
+      "example": "STARTED"
+    },
+    "autoStart": {
+      "type": "boolean",
+      "description": "Whether the application starts automatically",
+      "example": true
+    }
+  }
+}

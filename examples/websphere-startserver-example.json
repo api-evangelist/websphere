@@ -1,0 +1,19 @@
+{
+  "operationId": "startServer",
+  "method": "POST",
+  "path": "/servers/{serverName}/start",
+  "summary": "Start a Server",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Startserver200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "STARTED",
+        "message": "example_value"
+      }
+    }
+  ]
+}

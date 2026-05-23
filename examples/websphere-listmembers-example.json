@@ -1,0 +1,26 @@
+{
+  "operationId": "listMembers",
+  "method": "GET",
+  "path": "/members",
+  "summary": "List Collective Members",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listmembers200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "hostName": "example_value",
+          "userDir": "example_value",
+          "status": "STARTED",
+          "clusterName": "example_value",
+          "httpsPort": 10,
+          "wlpVersion": "example_value",
+          "javaVersion": "example_value"
+        }
+      ]
+    }
+  ]
+}

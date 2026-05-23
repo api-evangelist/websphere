@@ -1,0 +1,31 @@
+{
+  "operationId": "getServerHealth",
+  "method": "GET",
+  "path": "/health/servers/{serverId}",
+  "summary": "Get Server Health Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getserverhealth200Example",
+      "example": {
+        "serverId": "500123",
+        "serverName": "example_value",
+        "status": "healthy",
+        "uptime": 10,
+        "cpuUsage": 42.5,
+        "memoryUsage": 42.5,
+        "openVulnerabilities": 10,
+        "lastHealthCheck": "2026-01-15T10:30:00Z",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "pass",
+            "message": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

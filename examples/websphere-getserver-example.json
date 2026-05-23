@@ -1,0 +1,29 @@
+{
+  "operationId": "getServer",
+  "method": "GET",
+  "path": "/servers/{serverName}",
+  "summary": "Get Server Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getserver200Example",
+      "example": {
+        "name": "Example Title",
+        "nodeName": "example_value",
+        "clusterName": "example_value",
+        "status": "STARTED",
+        "serverType": "APPLICATION_SERVER",
+        "pid": "500123",
+        "ports": [
+          {
+            "name": "Example Title",
+            "port": 10,
+            "host": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

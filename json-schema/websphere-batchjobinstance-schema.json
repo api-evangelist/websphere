@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BatchJobInstance",
+  "title": "BatchJobInstance",
+  "type": "object",
+  "properties": {
+    "jobInstanceId": {
+      "type": "integer",
+      "example": "500123"
+    },
+    "jobName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "appName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "submitter": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "batchStatus": {
+      "type": "string",
+      "enum": [
+        "STARTING",
+        "STARTED",
+        "STOPPING",
+        "STOPPED",
+        "FAILED",
+        "COMPLETED",
+        "ABANDONED"
+      ],
+      "example": "STARTING"
+    },
+    "createTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "lastUpdatedTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "jobParameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": "example_value"
+    },
+    "_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rel": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Metrics",
+  "title": "Metrics",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "counter",
+              "gauge",
+              "timer",
+              "histogram"
+            ]
+          }
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

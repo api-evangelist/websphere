@@ -1,0 +1,26 @@
+{
+  "operationId": "getPerformanceData",
+  "method": "GET",
+  "path": "/monitoring/performance",
+  "summary": "Get Performance Monitoring Data",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getperformancedata200Example",
+      "example": {
+        "module": "example_value",
+        "timestamp": "2026-01-15T10:30:00Z",
+        "metrics": [
+          {
+            "name": "Example Title",
+            "value": 42.5,
+            "unit": "example_value",
+            "type": "counter"
+          }
+        ]
+      }
+    }
+  ]
+}

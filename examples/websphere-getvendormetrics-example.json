@@ -1,0 +1,21 @@
+{
+  "operationId": "getVendorMetrics",
+  "method": "GET",
+  "path": "/metrics/vendor",
+  "summary": "Get Vendor Metrics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "text/plain",
+      "name": "Getvendormetrics200Example",
+      "example": "example_value"
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getvendormetrics200Example",
+      "example": {}
+    }
+  ]
+}

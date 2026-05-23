@@ -1,0 +1,23 @@
+{
+  "operationId": "getHost",
+  "method": "GET",
+  "path": "/hosts/{hostName}",
+  "summary": "Get Host Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Gethost200Example",
+      "example": {
+        "name": "Example Title",
+        "os": "example_value",
+        "arch": "example_value",
+        "processors": 10,
+        "members": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

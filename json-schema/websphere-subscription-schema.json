@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Subscription",
+  "title": "Subscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Subscription identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Subscription name",
+      "example": "Example Title"
+    },
+    "topicString": {
+      "type": "string",
+      "description": "Topic string",
+      "example": "example_value"
+    },
+    "destination": {
+      "type": "string",
+      "description": "Destination queue name",
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "api"
+      ],
+      "example": "admin"
+    },
+    "durability": {
+      "type": "string",
+      "enum": [
+        "durable",
+        "nonDurable"
+      ],
+      "example": "durable"
+    }
+  }
+}

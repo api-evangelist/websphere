@@ -1,0 +1,24 @@
+{
+  "operationId": "getQueueManager",
+  "method": "GET",
+  "path": "/admin/qmgr/{qmgrName}",
+  "summary": "Get Queue Manager Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getqueuemanager200Example",
+      "example": {
+        "name": "Example Title",
+        "state": "running",
+        "version": "example_value",
+        "platform": "example_value",
+        "commandLevel": 10,
+        "connectionCount": 10,
+        "description": "A sample description.",
+        "maximumMessageLength": 10
+      }
+    }
+  ]
+}

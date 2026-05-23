@@ -1,0 +1,21 @@
+{
+  "operationId": "startCluster",
+  "method": "POST",
+  "path": "/clusters/{clusterName}/start",
+  "summary": "Start a Cluster",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Startcluster200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "example_value",
+        "membersStarted": 10,
+        "membersTotal": 10,
+        "message": "example_value"
+      }
+    }
+  ]
+}

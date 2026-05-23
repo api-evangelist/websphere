@@ -1,0 +1,29 @@
+{
+  "operationId": "setMBeanAttribute",
+  "method": "PUT",
+  "path": "/mbeans/{objectName}/attributes/{attributeName}",
+  "summary": "Set a Specific Mbean Attribute",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "SetmbeanattributeRequestExample",
+      "example": {
+        "name": "Example Title",
+        "value": "example_value",
+        "type": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Setmbeanattribute200Example",
+      "example": {
+        "name": "Example Title",
+        "value": "example_value",
+        "type": "example_value"
+      }
+    }
+  ]
+}

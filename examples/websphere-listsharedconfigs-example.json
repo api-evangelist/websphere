@@ -1,0 +1,22 @@
+{
+  "operationId": "listSharedConfigs",
+  "method": "GET",
+  "path": "/repository/config",
+  "summary": "List Shared Configurations",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listsharedconfigs200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "description": "A sample description.",
+          "content": "example_value",
+          "lastModified": "2026-01-15T10:30:00Z"
+        }
+      ]
+    }
+  ]
+}

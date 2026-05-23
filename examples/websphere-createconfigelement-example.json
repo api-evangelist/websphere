@@ -1,0 +1,27 @@
+{
+  "operationId": "createConfigElement",
+  "method": "POST",
+  "path": "/config/{elementName}",
+  "summary": "Create a Configuration Element",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateconfigelementRequestExample",
+      "example": {
+        "uid": "500123",
+        "configElementName": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createconfigelement201Example",
+      "example": {
+        "uid": "500123",
+        "configElementName": "example_value"
+      }
+    }
+  ]
+}

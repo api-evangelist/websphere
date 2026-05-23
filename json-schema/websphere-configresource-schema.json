@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConfigResource",
+  "title": "ConfigResource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Resource identifier",
+      "example": "abc123"
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type",
+      "example": "example_value"
+    },
+    "name": {
+      "type": "string",
+      "description": "Resource display name",
+      "example": "Example Title"
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Resource attributes",
+      "example": "example_value"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rel": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

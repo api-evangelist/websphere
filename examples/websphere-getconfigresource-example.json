@@ -1,0 +1,26 @@
+{
+  "operationId": "getConfigResource",
+  "method": "GET",
+  "path": "/config/{resourceType}/{resourceId}",
+  "summary": "Get a Specific Configuration Resource",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getconfigresource200Example",
+      "example": {
+        "id": "abc123",
+        "type": "example_value",
+        "name": "Example Title",
+        "attributes": "example_value",
+        "links": [
+          {
+            "rel": "example_value",
+            "href": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

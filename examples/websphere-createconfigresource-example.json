@@ -1,0 +1,43 @@
+{
+  "operationId": "createConfigResource",
+  "method": "POST",
+  "path": "/config/{resourceType}",
+  "summary": "Create a New Configuration Resource",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateconfigresourceRequestExample",
+      "example": {
+        "id": "abc123",
+        "type": "example_value",
+        "name": "Example Title",
+        "attributes": "example_value",
+        "links": [
+          {
+            "rel": "example_value",
+            "href": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createconfigresource201Example",
+      "example": {
+        "id": "abc123",
+        "type": "example_value",
+        "name": "Example Title",
+        "attributes": "example_value",
+        "links": [
+          {
+            "rel": "example_value",
+            "href": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

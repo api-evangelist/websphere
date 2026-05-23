@@ -1,0 +1,22 @@
+{
+  "operationId": "listMBeans",
+  "method": "GET",
+  "path": "/mbeans",
+  "summary": "List Registered Mbeans",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listmbeans200Example",
+      "example": [
+        {
+          "objectName": "example_value",
+          "className": "example_value",
+          "description": "A sample description.",
+          "URL": "https://www.example.com"
+        }
+      ]
+    }
+  ]
+}

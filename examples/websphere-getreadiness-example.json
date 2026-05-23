@@ -1,0 +1,39 @@
+{
+  "operationId": "getReadiness",
+  "method": "GET",
+  "path": "/health/ready",
+  "summary": "Get Readiness Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getreadiness200Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    },
+    {
+      "status": "503",
+      "contentType": "application/json",
+      "name": "Getreadiness503Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

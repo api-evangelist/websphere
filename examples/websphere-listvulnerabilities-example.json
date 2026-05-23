@@ -1,0 +1,37 @@
+{
+  "operationId": "listVulnerabilities",
+  "method": "GET",
+  "path": "/vulnerabilities",
+  "summary": "List Vulnerabilities",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listvulnerabilities200Example",
+      "example": {
+        "vulnerabilities": [
+          {
+            "id": "abc123",
+            "cveIds": [
+              {}
+            ],
+            "severity": "critical",
+            "cvssScore": 42.5,
+            "description": "A sample description.",
+            "affectedServers": [
+              {}
+            ],
+            "status": "open",
+            "availableFixes": [
+              {}
+            ],
+            "publishedDate": "2026-01-15T10:30:00Z",
+            "discoveredDate": "2026-01-15T10:30:00Z"
+          }
+        ],
+        "totalCount": 10
+      }
+    }
+  ]
+}

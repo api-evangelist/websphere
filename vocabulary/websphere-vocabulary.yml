@@ -1,0 +1,21 @@
+name: IBM WebSphere Domain Vocabulary
+provider: IBM WebSphere
+providerId: websphere
+description: Tag-derived vocabulary for the IBM WebSphere API surface; sourced from openapi/ tags.
+terms:
+- term: Applications
+  description: Application deployment and lifecycle management
+- term: Servers
+  description: Server configuration and management
+- term: Clusters
+  description: Cluster management operations
+- term: Nodes
+  description: Node management operations
+- term: Configuration
+  description: Server configuration management
+- term: Monitoring
+  description: Performance monitoring and health checks
+- term: Security
+  description: Security configuration and management
+- term: Resources
+  description: Resource management including data sources and JMS

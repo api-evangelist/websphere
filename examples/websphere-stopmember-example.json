@@ -1,0 +1,19 @@
+{
+  "operationId": "stopMember",
+  "method": "POST",
+  "path": "/members/{memberName}/stop",
+  "summary": "Stop a Collective Member",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stopmember200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "STARTED",
+        "message": "example_value"
+      }
+    }
+  ]
+}

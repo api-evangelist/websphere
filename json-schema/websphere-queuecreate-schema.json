@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueueCreate",
+  "title": "QueueCreate",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Queue name",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "local",
+        "alias",
+        "remote",
+        "model"
+      ],
+      "default": "local",
+      "example": "local"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "maxDepth": {
+      "type": "integer",
+      "default": 5000,
+      "example": 10
+    },
+    "maxMessageLength": {
+      "type": "integer",
+      "default": 4194304,
+      "example": 10
+    },
+    "persistence": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "enum": [
+            "persistent",
+            "nonPersistent"
+          ]
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

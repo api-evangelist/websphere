@@ -1,0 +1,28 @@
+{
+  "operationId": "listChannels",
+  "method": "GET",
+  "path": "/admin/qmgr/{qmgrName}/channel",
+  "summary": "List Channels",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listchannels200Example",
+      "example": {
+        "channel": [
+          {
+            "name": "Example Title",
+            "type": "sender",
+            "description": "A sample description.",
+            "connectionName": "example_value",
+            "transmissionQueue": "example_value",
+            "status": {
+              "state": "running"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

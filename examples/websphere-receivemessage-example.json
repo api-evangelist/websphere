@@ -1,0 +1,21 @@
+{
+  "operationId": "receiveMessage",
+  "method": "DELETE",
+  "path": "/messaging/qmgr/{qmgrName}/queue/{queueName}/message",
+  "summary": "Receive (destructively Get) a Message",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "text/plain",
+      "name": "Receivemessage200Example",
+      "example": "example_value"
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Receivemessage200Example",
+      "example": {}
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "operationId": "getHealth",
+  "method": "GET",
+  "path": "/monitoring/health",
+  "summary": "Get Health Check Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Gethealth200Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    },
+    {
+      "status": "503",
+      "contentType": "application/json",
+      "name": "Gethealth503Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

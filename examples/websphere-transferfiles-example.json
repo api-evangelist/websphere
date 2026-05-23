@@ -1,0 +1,17 @@
+{
+  "operationId": "transferFiles",
+  "method": "POST",
+  "path": "/members/{memberName}/transfer",
+  "summary": "Transfer Files to a Member",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "TransferfilesRequestExample",
+      "example": {
+        "sourcePath": "example_value",
+        "targetPath": "example_value"
+      }
+    }
+  ],
+  "responseExamples": []
+}

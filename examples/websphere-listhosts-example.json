@@ -1,0 +1,25 @@
+{
+  "operationId": "listHosts",
+  "method": "GET",
+  "path": "/hosts",
+  "summary": "List Hosts",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listhosts200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "os": "example_value",
+          "arch": "example_value",
+          "processors": 10,
+          "members": [
+            "example_value"
+          ]
+        }
+      ]
+    }
+  ]
+}

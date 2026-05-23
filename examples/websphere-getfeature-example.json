@@ -1,0 +1,24 @@
+{
+  "operationId": "getFeature",
+  "method": "GET",
+  "path": "/features/{featureName}",
+  "summary": "Get Feature Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getfeature200Example",
+      "example": {
+        "name": "Example Title",
+        "displayName": "example_value",
+        "version": "example_value",
+        "description": "A sample description.",
+        "enabled": true,
+        "dependencies": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

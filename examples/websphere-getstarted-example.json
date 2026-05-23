@@ -1,0 +1,39 @@
+{
+  "operationId": "getStarted",
+  "method": "GET",
+  "path": "/health/started",
+  "summary": "Get Startup Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getstarted200Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    },
+    {
+      "status": "503",
+      "contentType": "application/json",
+      "name": "Getstarted503Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

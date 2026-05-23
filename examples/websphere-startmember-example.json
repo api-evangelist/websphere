@@ -1,0 +1,19 @@
+{
+  "operationId": "startMember",
+  "method": "POST",
+  "path": "/members/{memberName}/start",
+  "summary": "Start a Collective Member",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Startmember200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "STARTED",
+        "message": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "provider": "IBM WebSphere",
+  "providerId": "websphere",
+  "kind": "json-structure",
+  "description": "Structural overview of the IBM WebSphere API surface; extracted from openapi/.",
+  "schemaCount": 15,
+  "operationCount": 32,
+  "schemas": [
+    {
+      "name": "Application",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ApplicationStatus",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Server",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ServerStatus",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Cluster",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ClusterStatus",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Node",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ConfigResource",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ResourceType",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "PerformanceData",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "HealthStatus",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SecurityRole",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "DataSource",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/explorer",
+      "operationId": "getApiExplorer",
+      "summary": "Access the Api Explorer",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/config",
+      "operationId": "listConfigResources",
+      "summary": "List Configuration Resource Types",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/config/{resourceType}",
+      "operationId": "getConfigResources",
+      "summary": "List Resources of a Specific Type",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/config/{resourceType}",
+      "operationId": "createConfigResource",
+      "summary": "Create a New Configuration Resource",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/config/{resourceType}/{resourceId}",
+      "operationId": "getConfigResource",
+      "summary": "Get a Specific Configuration Resource",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/config/{resourceType}/{resourceId}",
+      "operationId": "updateConfigResource",
+      "summary": "Update a Configuration Resource",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/config/{resourceType}/{resourceId}",
+      "operationId": "deleteConfigResource",
+      "summary": "Delete a Configuration Resource",
+      "tags": [
+        "Configuration"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/applications",
+      "operationId": "listApplications",
+      "summary": "List Deployed Applications",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications",
+      "operationId": "deployApplication",
+      "summary": "Deploy a New Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/applications/{appName}",
+      "operationId": "getApplication",
+      "summary": "Get Application Details",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/applications/{appName}",
+      "operationId": "updateApplication",
+      "summary": "Update Application Configuration",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/applications/{appName}",
+      "operationId": "uninstallApplication",
+      "summary": "Uninstall an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications/{appName}/start",
+      "operationId": "startApplication",
+      "summary": "Start an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications/{appName}/stop",
+      "operationId": "stopApplication",
+      "summary": "Stop an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servers",
+      "operationId": "listServers",
+      "summary": "List Servers",
+      "tags": [
+        "Servers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servers/{serverName}",
+      "operationId": "getServer",
+      "summary": "Get Server Details",
+      "tags": [
+        "Servers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/servers/{serverName}/start",
+      "operationId": "startServer",
+      "summary": "Start a Server",
+      "tags": [
+        "Servers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/servers/{serverName}/stop",
+      "operationId": "stopServer",
+      "summary": "Stop a Server",
+      "tags": [
+        "Servers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/clusters",
+      "operationId": "listClusters",
+      "summary": "List Clusters",
+      "tags": [
+        "Clusters"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/clusters/{clusterName}",
+      "operationId": "getCluster",
+      "summary": "Get Cluster Details",
+      "tags": [
+        "Clusters"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/clusters/{clusterName}/start",
+      "operationId": "startCluster",
+      "summary": "Start a Cluster",
+      "tags": [
+        "Clusters"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/clusters/{clusterName}/stop",
+      "operationId": "stopCluster",
+      "summary": "Stop a Cluster",
+      "tags": [
+        "Clusters"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/nodes",
+      "operationId": "listNodes",
+      "summary": "List Nodes",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/nodes/{nodeName}",
+      "operationId": "getNode",
+      "summary": "Get Node Details",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/nodes/{nodeName}/sync",
+      "operationId": "syncNode",
+      "summary": "Synchronize a Node",
+      "tags": [
+        "Nodes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/monitoring/performance",
+      "operationId": "getPerformanceData",
+      "summary": "Get Performance Monitoring Data",
+      "tags": [
+        "Monitoring"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/monitoring/health",
+      "operationId": "getHealthStatus",
+      "summary": "Get Health Status",
+      "tags": [
+        "Monitoring"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/security/users",
+      "operationId": "listUsers",
+      "summary": "List Security Users",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/security/roles",
+      "operationId": "listRoles",
+      "summary": "List Security Roles",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/resources/datasources",
+      "operationId": "listDataSources",
+      "summary": "List Data Sources",
+      "tags": [
+        "Resources"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/resources/datasources/{dsName}",
+      "operationId": "getDataSource",
+      "summary": "Get Data Source Details",
+      "tags": [
+        "Resources"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/resources/datasources/{dsName}/test",
+      "operationId": "testDataSourceConnection",
+      "summary": "Test Data Source Connection",
+      "tags": [
+        "Resources"
+      ]
+    }
+  ]
+}

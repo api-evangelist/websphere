@@ -1,0 +1,34 @@
+{
+  "operationId": "createTopic",
+  "method": "POST",
+  "path": "/admin/qmgr/{qmgrName}/topic",
+  "summary": "Create a Topic",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatetopicRequestExample",
+      "example": {
+        "name": "Example Title",
+        "topicString": "example_value",
+        "description": "A sample description.",
+        "type": "local"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createtopic201Example",
+      "example": {
+        "name": "Example Title",
+        "topicString": "example_value",
+        "description": "A sample description.",
+        "type": "local",
+        "durableSubscriptions": "allowed",
+        "publish": "allowed",
+        "subscribe": "allowed"
+      }
+    }
+  ]
+}

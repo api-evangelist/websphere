@@ -1,0 +1,19 @@
+{
+  "operationId": "stopServer",
+  "method": "POST",
+  "path": "/servers/{serverName}/stop",
+  "summary": "Stop a Server",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stopserver200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "STARTED",
+        "message": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "operationId": "getLiveness",
+  "method": "GET",
+  "path": "/health/live",
+  "summary": "Get Liveness Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getliveness200Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    },
+    {
+      "status": "503",
+      "contentType": "application/json",
+      "name": "Getliveness503Example",
+      "example": {
+        "status": "UP",
+        "checks": [
+          {
+            "name": "Example Title",
+            "status": "UP",
+            "data": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

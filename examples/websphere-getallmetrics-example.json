@@ -1,0 +1,21 @@
+{
+  "operationId": "getAllMetrics",
+  "method": "GET",
+  "path": "/metrics",
+  "summary": "Get All Metrics",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "text/plain",
+      "name": "Getallmetrics200Example",
+      "example": "example_value"
+    },
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getallmetrics200Example",
+      "example": {}
+    }
+  ]
+}

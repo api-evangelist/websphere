@@ -1,0 +1,23 @@
+{
+  "operationId": "listConfigResources",
+  "method": "GET",
+  "path": "/config",
+  "summary": "List Configuration Resource Types",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listconfigresources200Example",
+      "example": {
+        "resourceTypes": [
+          {
+            "name": "Example Title",
+            "description": "A sample description.",
+            "href": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

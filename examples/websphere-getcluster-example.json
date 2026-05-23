@@ -1,0 +1,27 @@
+{
+  "operationId": "getCluster",
+  "method": "GET",
+  "path": "/clusters/{clusterName}",
+  "summary": "Get Cluster Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getcluster200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "running",
+        "members": [
+          {
+            "serverName": "example_value",
+            "nodeName": "example_value",
+            "status": "example_value",
+            "weight": 10
+          }
+        ],
+        "preferLocal": true
+      }
+    }
+  ]
+}

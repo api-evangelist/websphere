@@ -1,0 +1,24 @@
+{
+  "operationId": "getLogMessages",
+  "method": "GET",
+  "path": "/logging/messages",
+  "summary": "Get Log Messages",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getlogmessages200Example",
+      "example": [
+        {
+          "datetime": "2026-01-15T10:30:00Z",
+          "level": "example_value",
+          "message": "example_value",
+          "logger": "example_value",
+          "thread": "example_value",
+          "sequence": "example_value"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "operationId": "createCluster",
+  "method": "POST",
+  "path": "/clusters",
+  "summary": "Create a Cluster",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateclusterRequestExample",
+      "example": {
+        "name": "Example Title",
+        "description": "A sample description."
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createcluster201Example",
+      "example": {
+        "name": "Example Title",
+        "description": "A sample description.",
+        "memberCount": 10,
+        "membersStarted": 10,
+        "members": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "409",
+      "contentType": "application/json",
+      "name": "Createcluster409Example",
+      "example": {
+        "code": "example_value",
+        "message": "example_value"
+      }
+    }
+  ]
+}

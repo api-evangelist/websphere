@@ -1,0 +1,39 @@
+{
+  "operationId": "getQueue",
+  "method": "GET",
+  "path": "/admin/qmgr/{qmgrName}/queue/{queueName}",
+  "summary": "Get Queue Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getqueue200Example",
+      "example": {
+        "name": "Example Title",
+        "type": "local",
+        "description": "A sample description.",
+        "maxDepth": 10,
+        "maxMessageLength": 10,
+        "currentDepth": 10,
+        "inhibitPut": true,
+        "inhibitGet": true,
+        "persistence": {
+          "default": "persistent"
+        },
+        "cluster": {
+          "name": "Example Title",
+          "workloadRank": 10,
+          "workloadPriority": 10
+        },
+        "status": {
+          "currentDepth": 10,
+          "openInputCount": 10,
+          "openOutputCount": 10,
+          "lastGetDateTime": "2026-01-15T10:30:00Z",
+          "lastPutDateTime": "2026-01-15T10:30:00Z"
+        }
+      }
+    }
+  ]
+}

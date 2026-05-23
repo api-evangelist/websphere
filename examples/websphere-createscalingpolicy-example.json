@@ -1,0 +1,55 @@
+{
+  "operationId": "createScalingPolicy",
+  "method": "POST",
+  "path": "/scaling/policies",
+  "summary": "Create a Scaling Policy",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatescalingpolicyRequestExample",
+      "example": {
+        "name": "Example Title",
+        "clusterName": "example_value",
+        "enabled": true,
+        "minMembers": 10,
+        "maxMembers": 10,
+        "scaleUpTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "scaleDownTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "cooldownPeriod": 10
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createscalingpolicy201Example",
+      "example": {
+        "name": "Example Title",
+        "clusterName": "example_value",
+        "enabled": true,
+        "minMembers": 10,
+        "maxMembers": 10,
+        "scaleUpTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "scaleDownTrigger": {
+          "metric": "cpuUtilization",
+          "threshold": 42.5,
+          "duration": 10
+        },
+        "cooldownPeriod": 10
+      }
+    }
+  ]
+}

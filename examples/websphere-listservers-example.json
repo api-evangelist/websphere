@@ -1,0 +1,31 @@
+{
+  "operationId": "listServers",
+  "method": "GET",
+  "path": "/servers",
+  "summary": "List Servers",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listservers200Example",
+      "example": [
+        {
+          "name": "Example Title",
+          "nodeName": "example_value",
+          "clusterName": "example_value",
+          "status": "STARTED",
+          "serverType": "APPLICATION_SERVER",
+          "pid": "500123",
+          "ports": [
+            {
+              "name": "Example Title",
+              "port": 10,
+              "host": "example_value"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

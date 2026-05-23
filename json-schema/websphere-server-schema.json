@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Server",
+  "title": "Server",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Server name",
+      "example": "Example Title"
+    },
+    "nodeName": {
+      "type": "string",
+      "description": "Node where the server resides",
+      "example": "example_value"
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Cluster membership",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "STARTED",
+        "STOPPED",
+        "STARTING",
+        "STOPPING",
+        "UNKNOWN"
+      ],
+      "example": "STARTED"
+    },
+    "serverType": {
+      "type": "string",
+      "enum": [
+        "APPLICATION_SERVER",
+        "WEB_SERVER",
+        "PROXY_SERVER",
+        "GENERIC_SERVER"
+      ],
+      "example": "APPLICATION_SERVER"
+    },
+    "pid": {
+      "type": "integer",
+      "description": "Process ID",
+      "example": "500123"
+    },
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "port": {
+            "type": "integer"
+          },
+          "host": {
+            "type": "string"
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

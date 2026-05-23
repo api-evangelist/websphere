@@ -1,0 +1,21 @@
+{
+  "operationId": "stopCluster",
+  "method": "POST",
+  "path": "/clusters/{clusterName}/stop",
+  "summary": "Stop a Cluster",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stopcluster200Example",
+      "example": {
+        "name": "Example Title",
+        "status": "example_value",
+        "membersStarted": 10,
+        "membersTotal": 10,
+        "message": "example_value"
+      }
+    }
+  ]
+}

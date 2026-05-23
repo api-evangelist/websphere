@@ -1,0 +1,23 @@
+{
+  "operationId": "getTopic",
+  "method": "GET",
+  "path": "/admin/qmgr/{qmgrName}/topic/{topicName}",
+  "summary": "Get Topic Details",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Gettopic200Example",
+      "example": {
+        "name": "Example Title",
+        "topicString": "example_value",
+        "description": "A sample description.",
+        "type": "local",
+        "durableSubscriptions": "allowed",
+        "publish": "allowed",
+        "subscribe": "allowed"
+      }
+    }
+  ]
+}

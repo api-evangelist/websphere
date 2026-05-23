@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataSource",
+  "title": "DataSource",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Data source name",
+      "example": "Example Title"
+    },
+    "jndiName": {
+      "type": "string",
+      "description": "JNDI name",
+      "example": "example_value"
+    },
+    "databaseType": {
+      "type": "string",
+      "description": "Database type",
+      "example": "example_value"
+    },
+    "jdbcProvider": {
+      "type": "string",
+      "description": "JDBC provider name",
+      "example": "example_value"
+    },
+    "connectionPool": {
+      "type": "object",
+      "properties": {
+        "minConnections": {
+          "type": "integer"
+        },
+        "maxConnections": {
+          "type": "integer"
+        },
+        "connectionTimeout": {
+          "type": "integer",
+          "description": "Timeout in seconds"
+        },
+        "reapTime": {
+          "type": "integer",
+          "description": "Reap time in seconds"
+        }
+      },
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "example": "active"
+    }
+  }
+}

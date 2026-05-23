@@ -1,0 +1,44 @@
+{
+  "operationId": "stopBatchJobExecution",
+  "method": "PUT",
+  "path": "/ibm/api/batch/jobexecutions/{executionId}/stop",
+  "summary": "Stop a Batch Job Execution",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Stopbatchjobexecution200Example",
+      "example": {
+        "executionId": "500123",
+        "jobInstanceId": "500123",
+        "jobName": "example_value",
+        "batchStatus": "STARTING",
+        "exitStatus": "example_value",
+        "createTime": "2026-01-15T10:30:00Z",
+        "startTime": "2026-01-15T10:30:00Z",
+        "endTime": "2026-01-15T10:30:00Z",
+        "lastUpdatedTime": "2026-01-15T10:30:00Z",
+        "jobParameters": "example_value",
+        "stepExecutions": [
+          {
+            "stepExecutionId": "500123",
+            "stepName": "example_value",
+            "batchStatus": "example_value",
+            "exitStatus": "example_value",
+            "startTime": "2026-01-15T10:30:00Z",
+            "endTime": "2026-01-15T10:30:00Z",
+            "readCount": 10,
+            "writeCount": 10,
+            "commitCount": 10,
+            "rollbackCount": 10,
+            "filterCount": 10,
+            "processSkipCount": 10,
+            "readSkipCount": 10,
+            "writeSkipCount": 10
+          }
+        ]
+      }
+    }
+  ]
+}
