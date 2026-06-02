@@ -2,12 +2,27 @@
   "repo": "websphere",
   "feeds": [
     {
-      "source": "https://openliberty.io/blog/",
+      "source": "https://openliberty.io/feed.xml",
       "feed_url": "https://openliberty.io/feed.xml",
-      "title": "Open Liberty",
-      "saved": 8
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://openliberty.io/docs/latest/microprofile.html",
+      "feed_url": "https://openliberty.io/docs/latest/microprofile.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://cloud.ibm.com/status",
+      "feed_url": "https://cloud.ibm.com/status",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 18,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 22,
+  "fetched": "2026-06-01T23:35:02Z"
 }
