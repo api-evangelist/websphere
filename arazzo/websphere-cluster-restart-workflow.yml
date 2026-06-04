@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: WebSphere Cluster Controlled Restart
+  summary: Find a cluster, stop all its members, and start them again.
+  description: >-
+    A WebSphere Network Deployment cluster operation. The workflow lists the
+    clusters in the cell to confirm the target exists, reads the cluster to
+    capture its members and current status, stops all members of the cluster, and
+    then starts them again so configuration or maintenance changes take effect
+    across the whole cluster. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websphereAdminApi
+  url: ../openapi/websphere-admin-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: restart-cluster
+  summary: Stop and start all members of a WebSphere cluster by name.
+  description: >-
+    Confirms the cluster exists, captures its members and status, stops the
+    cluster, and starts it again, returning how many members came back up.
+  inputs:
+    type: object
+    required:
+    - clusterName
+    properties:
+      clusterName:
+        type: string
+        description: The name of the cluster to restart.
+  steps:
+  - stepId: listClusters
+    description: >-
+      List all clusters in the cell so the target cluster can be confirmed before
+      any lifecycle action is taken.
+    operationId: listClusters
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusters: $response.body
+  - stepId: getCluster
+    description: >-
+      Read the target cluster to capture its members and current status before
+      stopping it.
+    operationId: getCluster
+    parameters:
+    - name: clusterName
+      in: path
+      value: $inputs.clusterName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentStatus: $response.body#/status
+      members: $response.body#/members
+  - stepId: stopCluster
+    description: >-
+      Stop all members of the cluster. The response reports how many members were
+      affected.
+    operationId: stopCluster
+    parameters:
+    - name: clusterName
+      in: path
+      value: $inputs.clusterName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stoppedStatus: $response.body#/status
+      membersTotal: $response.body#/membersTotal
+  - stepId: startCluster
+    description: >-
+      Start all members of the cluster again so it returns to service with any
+      pending changes applied.
+    operationId: startCluster
+    parameters:
+    - name: clusterName
+      in: path
+      value: $inputs.clusterName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      startedStatus: $response.body#/status
+      membersStarted: $response.body#/membersStarted
+      membersTotal: $response.body#/membersTotal
+  outputs:
+    clusterName: $inputs.clusterName
+    finalStatus: $steps.startCluster.outputs.startedStatus
+    membersStarted: $steps.startCluster.outputs.membersStarted

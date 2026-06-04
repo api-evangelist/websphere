@@ -1,0 +1,72 @@
+arazzo: 1.0.1
+info:
+  title: Liberty Server Configuration Update
+  summary: Read the Liberty server configuration, update it, and confirm the server runtime.
+  description: >-
+    A core WebSphere Liberty administration flow. The workflow reads the current
+    server configuration, writes an updated configuration document, and then
+    reads server runtime information to confirm the Liberty server is still
+    reporting a started state after the change. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: libertyAdminApi
+  url: ../openapi/websphere-liberty-admin-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: update-server-config
+  summary: Update a Liberty server configuration and verify the runtime afterward.
+  description: >-
+    Reads the current Liberty configuration, applies the supplied configuration
+    document, and reads server runtime info to confirm the server status.
+  inputs:
+    type: object
+    required:
+    - config
+    properties:
+      depth:
+        type: integer
+        description: Depth of nested configuration elements to read back.
+      config:
+        type: object
+        description: The full server configuration document to write.
+  steps:
+  - stepId: getCurrentConfig
+    description: >-
+      Read the current Liberty server configuration before applying any changes.
+    operationId: getServerConfig
+    parameters:
+    - name: depth
+      in: query
+      value: $inputs.depth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentConfig: $response.body
+  - stepId: updateConfig
+    description: >-
+      Write the updated server configuration document. Changes may require a
+      server restart to take full effect.
+    operationId: updateServerConfig
+    requestBody:
+      contentType: application/json
+      payload: $inputs.config
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      appliedConfig: $response.body
+  - stepId: getServerInfo
+    description: >-
+      Read Liberty server runtime information to confirm the server is still
+      reporting a started status after the configuration change.
+    operationId: getServerInfo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serverStatus: $response.body#/serverStatus
+      wlpVersion: $response.body#/wlpVersion
+      uptime: $response.body#/uptime
+  outputs:
+    serverStatus: $steps.getServerInfo.outputs.serverStatus
+    wlpVersion: $steps.getServerInfo.outputs.wlpVersion

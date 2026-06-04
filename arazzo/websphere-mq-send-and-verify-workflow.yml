@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: IBM MQ Send Message and Verify Depth
+  summary: Authenticate, confirm the target queue, send a message, and verify queue depth increased.
+  description: >-
+    An IBM MQ messaging flow over the messaging REST API. The workflow
+    authenticates to obtain an LTPA token, lists queues on the queue manager to
+    confirm the target queue exists, sends a message to that queue, and then
+    reads the queue with status enabled to confirm the current depth reflects the
+    delivered message. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: mqApi
+  url: ../openapi/websphere-mq-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: send-message-and-verify
+  summary: Send a message to an IBM MQ queue and verify the queue depth.
+  description: >-
+    Logs in, confirms the queue exists on the queue manager, sends a message to
+    it, and reads the queue status to confirm the message landed.
+  inputs:
+    type: object
+    required:
+    - username
+    - password
+    - qmgrName
+    - queueName
+    - messageBody
+    properties:
+      username:
+        type: string
+        description: Username for MQ authentication.
+      password:
+        type: string
+        description: Password for MQ authentication.
+      qmgrName:
+        type: string
+        description: The queue manager name.
+      queueName:
+        type: string
+        description: The target queue name.
+      messageBody:
+        type: string
+        description: The text message payload to send.
+  steps:
+  - stepId: login
+    description: >-
+      Authenticate to the MQ REST API to obtain an LTPA token cookie for the
+      subsequent requests.
+    operationId: login
+    requestBody:
+      contentType: application/json
+      payload:
+        username: $inputs.username
+        password: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: listQueues
+    description: >-
+      List queues on the queue manager filtered to the target queue name to
+      confirm it exists before sending.
+    operationId: listQueues
+    parameters:
+    - name: qmgrName
+      in: path
+      value: $inputs.qmgrName
+    - name: name
+      in: query
+      value: $inputs.queueName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      queues: $response.body#/queue
+  - stepId: sendMessage
+    description: >-
+      Send a persistent text message to the target queue on the queue manager.
+    operationId: sendMessage
+    parameters:
+    - name: qmgrName
+      in: path
+      value: $inputs.qmgrName
+    - name: queueName
+      in: path
+      value: $inputs.queueName
+    - name: ibm-mq-md-persistence
+      in: header
+      value: persistent
+    requestBody:
+      contentType: text/plain
+      payload: $inputs.messageBody
+    successCriteria:
+    - condition: $statusCode == 201
+  - stepId: verifyQueueDepth
+    description: >-
+      Read the queue with status information enabled to confirm the current depth
+      reflects the delivered message.
+    operationId: getQueue
+    parameters:
+    - name: qmgrName
+      in: path
+      value: $inputs.qmgrName
+    - name: queueName
+      in: path
+      value: $inputs.queueName
+    - name: status
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentDepth: $response.body#/currentDepth
+      statusDepth: $response.body#/status/currentDepth
+  outputs:
+    queueName: $inputs.queueName
+    currentDepth: $steps.verifyQueueDepth.outputs.currentDepth

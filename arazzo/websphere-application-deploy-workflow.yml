@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: WebSphere Deploy and Start Application
+  summary: Deploy an application archive, confirm it installed, and start it.
+  description: >-
+    Covers the core WebSphere application install path. The workflow uploads an
+    application archive (EAR, WAR, or JAR) to a target server or cluster, reads
+    the newly installed application to confirm it is registered, and starts it so
+    it begins serving traffic. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websphereAdminApi
+  url: ../openapi/websphere-admin-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: deploy-and-start-application
+  summary: Deploy a new application archive to WebSphere and start it.
+  description: >-
+    Deploys the supplied archive, verifies the application is installed by
+    reading it back, and starts the application.
+  inputs:
+    type: object
+    required:
+    - file
+    - name
+    properties:
+      file:
+        type: string
+        description: The application archive content (EAR, WAR, or JAR).
+      name:
+        type: string
+        description: The name to register the application under.
+      contextRoot:
+        type: string
+        description: Context root for web modules.
+      targetServer:
+        type: string
+        description: Target server or cluster name.
+  steps:
+  - stepId: deployApplication
+    description: >-
+      Deploy the application archive to the target server or cluster as a
+      multipart form upload.
+    operationId: deployApplication
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+        name: $inputs.name
+        contextRoot: $inputs.contextRoot
+        targetServer: $inputs.targetServer
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      deployedName: $response.body#/name
+      deployedStatus: $response.body#/status
+  - stepId: getApplication
+    description: >-
+      Read the newly deployed application to confirm it is registered before
+      attempting to start it.
+    operationId: getApplication
+    parameters:
+    - name: appName
+      in: path
+      value: $steps.deployApplication.outputs.deployedName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contextRoot: $response.body#/contextRoot
+      targetServer: $response.body#/targetServer
+  - stepId: startApplication
+    description: >-
+      Start the deployed application so it begins serving requests.
+    operationId: startApplication
+    parameters:
+    - name: appName
+      in: path
+      value: $steps.deployApplication.outputs.deployedName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      message: $response.body#/message
+  outputs:
+    applicationName: $steps.deployApplication.outputs.deployedName
+    contextRoot: $steps.getApplication.outputs.contextRoot
+    finalStatus: $steps.startApplication.outputs.status

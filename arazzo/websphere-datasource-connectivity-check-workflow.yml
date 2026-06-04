@@ -1,0 +1,72 @@
+arazzo: 1.0.1
+info:
+  title: WebSphere Data Source Connectivity Check
+  summary: Find a JDBC data source, read its configuration, and test its connection.
+  description: >-
+    A common WebSphere resource diagnostic. The workflow lists the configured
+    JDBC data sources to locate the target, reads its connection pool
+    configuration, and runs the built-in connection test to confirm the database
+    is reachable. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websphereAdminApi
+  url: ../openapi/websphere-admin-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: check-datasource-connectivity
+  summary: Read a JDBC data source configuration and test its database connection.
+  description: >-
+    Locates a data source in the configured list, reads its pool settings, and
+    runs the connection test, returning whether the database responded.
+  inputs:
+    type: object
+    required:
+    - dsName
+    properties:
+      dsName:
+        type: string
+        description: The name of the JDBC data source to test.
+  steps:
+  - stepId: listDataSources
+    description: >-
+      List the configured JDBC data sources so the target can be confirmed before
+      reading or testing it.
+    operationId: listDataSources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      dataSources: $response.body
+  - stepId: getDataSource
+    description: >-
+      Read the target data source to capture its JNDI name and connection pool
+      configuration.
+    operationId: getDataSource
+    parameters:
+    - name: dsName
+      in: path
+      value: $inputs.dsName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jndiName: $response.body#/jndiName
+      databaseType: $response.body#/databaseType
+      poolStatus: $response.body#/status
+  - stepId: testConnection
+    description: >-
+      Run the built-in connection test for the data source to confirm the
+      database is reachable.
+    operationId: testDataSourceConnection
+    parameters:
+    - name: dsName
+      in: path
+      value: $inputs.dsName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+      message: $response.body#/message
+  outputs:
+    dsName: $inputs.dsName
+    jndiName: $steps.getDataSource.outputs.jndiName
+    connectionSuccess: $steps.testConnection.outputs.success

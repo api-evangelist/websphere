@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Liberty Application Restart with Diagnostics
+  summary: Restart a Liberty application, capture a server dump, and verify health.
+  description: >-
+    A WebSphere Liberty troubleshooting flow for an unstable application. The
+    workflow reads the target application, restarts it, creates a server dump
+    capturing heap and thread diagnostics for later analysis, and then runs the
+    MicroProfile Health check to confirm the server is reporting UP. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: libertyAdminApi
+  url: ../openapi/websphere-liberty-admin-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: restart-application-with-diagnostics
+  summary: Restart a Liberty application and capture diagnostics around the restart.
+  description: >-
+    Reads the target application, restarts it, creates a server dump with heap
+    and thread data, and checks server health.
+  inputs:
+    type: object
+    required:
+    - appName
+    properties:
+      appName:
+        type: string
+        description: The name of the Liberty application to restart.
+  steps:
+  - stepId: getApplication
+    description: >-
+      Read the target application to capture its current state before the
+      restart.
+    operationId: getApplication
+    parameters:
+    - name: appName
+      in: path
+      value: $inputs.appName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentState: $response.body#/state
+      location: $response.body#/location
+  - stepId: restartApplication
+    description: >-
+      Restart the application. The response reports the resulting application
+      state.
+    operationId: restartApplication
+    parameters:
+    - name: appName
+      in: path
+      value: $inputs.appName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      restartState: $response.body#/state
+      message: $response.body#/message
+  - stepId: createServerDump
+    description: >-
+      Create a server dump capturing heap and thread diagnostics so the restart
+      can be analyzed later.
+    operationId: createServerDump
+    requestBody:
+      contentType: application/json
+      payload:
+        include:
+        - heap
+        - thread
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      dumpFile: $response.body#/dumpFile
+      dumpTimestamp: $response.body#/timestamp
+  - stepId: checkHealth
+    description: >-
+      Run the MicroProfile Health check to confirm the server is reporting UP
+      after the application restart.
+    operationId: getHealth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      healthStatus: $response.body#/status
+  outputs:
+    appName: $inputs.appName
+    restartState: $steps.restartApplication.outputs.restartState
+    dumpFile: $steps.createServerDump.outputs.dumpFile
+    healthStatus: $steps.checkHealth.outputs.healthStatus

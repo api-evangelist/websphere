@@ -1,0 +1,77 @@
+arazzo: 1.0.1
+info:
+  title: Liberty Collective Member Recovery
+  summary: Find stopped collective members, inspect one, and start it.
+  description: >-
+    A WebSphere Liberty collective operations flow. The workflow lists collective
+    members filtered to those reporting a stopped status, reads the chosen member
+    to confirm its host and cluster membership, and then starts it to bring it
+    back into the collective. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: collectiveControllerApi
+  url: ../openapi/websphere-liberty-collective-controller-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: recover-collective-member
+  summary: Inspect and start a stopped Liberty collective member.
+  description: >-
+    Lists members reporting a stopped status, reads the target member, and starts
+    it to return it to service.
+  inputs:
+    type: object
+    required:
+    - memberName
+    properties:
+      memberName:
+        type: string
+        description: The name of the collective member to recover.
+  steps:
+  - stepId: listStoppedMembers
+    description: >-
+      List collective members filtered to those reporting a stopped status so the
+      target member can be confirmed.
+    operationId: listMembers
+    parameters:
+    - name: status
+      in: query
+      value: STOPPED
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stoppedMembers: $response.body
+  - stepId: getMember
+    description: >-
+      Read the target member to capture its host and cluster membership before
+      starting it.
+    operationId: getMember
+    parameters:
+    - name: memberName
+      in: path
+      value: $inputs.memberName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      hostName: $response.body#/hostName
+      clusterName: $response.body#/clusterName
+      currentStatus: $response.body#/status
+  - stepId: startMember
+    description: >-
+      Start the collective member so it rejoins the collective and returns to
+      service.
+    operationId: startMember
+    parameters:
+    - name: memberName
+      in: path
+      value: $inputs.memberName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      message: $response.body#/message
+  outputs:
+    memberName: $inputs.memberName
+    hostName: $steps.getMember.outputs.hostName
+    finalStatus: $steps.startMember.outputs.status

@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: WebSphere Server Controlled Restart
+  summary: Find an application server, stop it, and start it again to apply pending changes.
+  description: >-
+    A routine WebSphere Application Server operation. The workflow lists the
+    servers in the cell to confirm the target exists, reads the target server to
+    capture its current status, stops the server, and then starts it again so
+    configuration or maintenance changes take effect. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websphereAdminApi
+  url: ../openapi/websphere-admin-rest-api.yml
+  type: openapi
+workflows:
+- workflowId: restart-server
+  summary: Stop and start a single WebSphere application server by name.
+  description: >-
+    Confirms the server exists in the cell, captures its current status, stops
+    it, and starts it again, returning the final reported status.
+  inputs:
+    type: object
+    required:
+    - serverName
+    properties:
+      serverName:
+        type: string
+        description: The name of the application server to restart.
+  steps:
+  - stepId: listServers
+    description: >-
+      List all servers in the cell so the target server can be confirmed before
+      any lifecycle action is taken.
+    operationId: listServers
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      servers: $response.body
+  - stepId: getServer
+    description: >-
+      Read the target server to capture its current status before stopping it.
+    operationId: getServer
+    parameters:
+    - name: serverName
+      in: path
+      value: $inputs.serverName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentStatus: $response.body#/status
+      nodeName: $response.body#/nodeName
+  - stepId: stopServer
+    description: >-
+      Stop the application server. The server reports its lifecycle status in the
+      response payload.
+    operationId: stopServer
+    parameters:
+    - name: serverName
+      in: path
+      value: $inputs.serverName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stoppedStatus: $response.body#/status
+  - stepId: startServer
+    description: >-
+      Start the application server again so it returns to service with any
+      pending changes applied.
+    operationId: startServer
+    parameters:
+    - name: serverName
+      in: path
+      value: $inputs.serverName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      startedStatus: $response.body#/status
+      message: $response.body#/message
+  outputs:
+    serverName: $inputs.serverName
+    nodeName: $steps.getServer.outputs.nodeName
+    finalStatus: $steps.startServer.outputs.startedStatus
