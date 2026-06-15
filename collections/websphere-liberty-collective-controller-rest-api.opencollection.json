@@ -1,0 +1,497 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WebSphere Liberty Collective Controller REST API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Collective Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/members",
+            "params": [
+              {
+                "name": "status",
+                "value": "STARTED",
+                "type": "query",
+                "description": "Filter by member status"
+              },
+              {
+                "name": "hostName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by hostname"
+              },
+              {
+                "name": "clusterName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by cluster membership"
+              }
+            ]
+          },
+          "docs": "Returns a list of all servers that are members of this collective."
+        },
+        {
+          "info": {
+            "name": "Get Member Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/members/:memberName",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific collective member."
+        },
+        {
+          "info": {
+            "name": "Start a Collective Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/members/:memberName/start",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Starts a stopped collective member server."
+        },
+        {
+          "info": {
+            "name": "Stop a Collective Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/members/:memberName/stop",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Stops a running collective member server."
+        },
+        {
+          "info": {
+            "name": "Transfer Files to a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/members/:memberName/transfer",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfers configuration or application files to a collective member."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/clusters"
+          },
+          "docs": "Returns a list of all clusters defined in the collective."
+        },
+        {
+          "info": {
+            "name": "Create a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/clusters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new cluster in the collective."
+        },
+        {
+          "info": {
+            "name": "Get Cluster Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific cluster."
+        },
+        {
+          "info": {
+            "name": "Delete a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Deletes a cluster from the collective."
+        },
+        {
+          "info": {
+            "name": "List Cluster Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName/members",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Returns a list of members in the specified cluster."
+        },
+        {
+          "info": {
+            "name": "Add a Member to a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName/members",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an existing collective member to the specified cluster."
+        },
+        {
+          "info": {
+            "name": "Remove a Member From a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName/members/:memberName",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Removes a member from the specified cluster."
+        },
+        {
+          "info": {
+            "name": "Start All Cluster Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName/start",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Starts all stopped members in the specified cluster."
+        },
+        {
+          "info": {
+            "name": "Stop All Cluster Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/clusters/:clusterName/stop",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Stops all running members in the specified cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/hosts"
+          },
+          "docs": "Returns a list of hosts registered in the collective."
+        },
+        {
+          "info": {
+            "name": "Get Host Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/hosts/:hostName",
+            "params": [
+              {
+                "name": "hostName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Hostname"
+              }
+            ]
+          },
+          "docs": "Returns details about a specific host in the collective."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Controller",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Controller Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/controller"
+          },
+          "docs": "Returns information about the collective controller."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Repositories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Shared Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/repository/config"
+          },
+          "docs": "Returns a list of shared configurations in the collective repository."
+        },
+        {
+          "info": {
+            "name": "Create a Shared Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/repository/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new shared configuration in the repository."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scaling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scaling Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/scaling/policies"
+          },
+          "docs": "Returns a list of auto-scaling policies."
+        },
+        {
+          "info": {
+            "name": "Create a Scaling Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/collective/scaling/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new auto-scaling policy for a cluster."
+        },
+        {
+          "info": {
+            "name": "Get Scaling Policy Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/collective/scaling/policies/:policyName",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Scaling policy name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific auto-scaling policy."
+        },
+        {
+          "info": {
+            "name": "Update a Scaling Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/collective/scaling/policies/:policyName",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing auto-scaling policy."
+        },
+        {
+          "info": {
+            "name": "Delete a Scaling Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/collective/scaling/policies/:policyName",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an auto-scaling policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

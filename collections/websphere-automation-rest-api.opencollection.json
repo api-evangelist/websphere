@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WebSphere Automation REST API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Managed Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/servers",
+            "params": [
+              {
+                "name": "type",
+                "value": "was-traditional",
+                "type": "query",
+                "description": "Filter by server type"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filter by server status"
+              }
+            ]
+          },
+          "docs": "Returns a list of all servers registered with WebSphere Automation."
+        },
+        {
+          "info": {
+            "name": "Register a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://automation-api.example.com/v1/servers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new server with WebSphere Automation for monitoring and management."
+        },
+        {
+          "info": {
+            "name": "Get Managed Server Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Managed server identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific managed server."
+        },
+        {
+          "info": {
+            "name": "Deregister a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://automation-api.example.com/v1/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Managed server identifier"
+              }
+            ]
+          },
+          "docs": "Removes a server from WebSphere Automation management."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Vulnerabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/vulnerabilities",
+            "params": [
+              {
+                "name": "severity",
+                "value": "critical",
+                "type": "query",
+                "description": "Filter by severity"
+              },
+              {
+                "name": "status",
+                "value": "open",
+                "type": "query",
+                "description": "Filter by remediation status"
+              },
+              {
+                "name": "serverId",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter by affected server"
+              },
+              {
+                "name": "cveId",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter by CVE identifier"
+              }
+            ]
+          },
+          "docs": "Returns a list of known security vulnerabilities affecting managed servers."
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/vulnerabilities/:vulnerabilityId",
+            "params": [
+              {
+                "name": "vulnerabilityId",
+                "value": "500123",
+                "type": "path",
+                "description": "Vulnerability identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific vulnerability."
+        },
+        {
+          "info": {
+            "name": "Resolve a Vulnerability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://automation-api.example.com/v1/vulnerabilities/:vulnerabilityId/resolve",
+            "params": [
+              {
+                "name": "vulnerabilityId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the resolution of a vulnerability by applying fixes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fixes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Fixes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/fixes",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter by applicable server"
+              },
+              {
+                "name": "type",
+                "value": "security",
+                "type": "query",
+                "description": "Filter by fix type"
+              }
+            ]
+          },
+          "docs": "Returns a list of available fixes and patches."
+        },
+        {
+          "info": {
+            "name": "Get Fix Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/fixes/:fixId",
+            "params": [
+              {
+                "name": "fixId",
+                "value": "500123",
+                "type": "path",
+                "description": "Fix identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific fix."
+        },
+        {
+          "info": {
+            "name": "Apply a Fix",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://automation-api.example.com/v1/fixes/:fixId/apply",
+            "params": [
+              {
+                "name": "fixId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies a fix to one or more managed servers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Overall Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/health"
+          },
+          "docs": "Returns the overall health status of all managed servers."
+        },
+        {
+          "info": {
+            "name": "Get Server Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/health/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Managed server identifier"
+              }
+            ]
+          },
+          "docs": "Returns health information for a specific managed server."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Compliance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Compliance Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/compliance/reports"
+          },
+          "docs": "Returns a list of compliance reports."
+        },
+        {
+          "info": {
+            "name": "Get Compliance Report Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/compliance/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific compliance report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://automation-api.example.com/v1/notifications",
+            "params": [
+              {
+                "name": "type",
+                "value": "vulnerability",
+                "type": "query",
+                "description": "Filter by notification type"
+              },
+              {
+                "name": "read",
+                "value": "true",
+                "type": "query",
+                "description": "Filter by read status"
+              }
+            ]
+          },
+          "docs": "Returns a list of notifications and alerts."
+        },
+        {
+          "info": {
+            "name": "Mark Notification as Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://automation-api.example.com/v1/notifications/:notificationId/read",
+            "params": [
+              {
+                "name": "notificationId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Marks a notification as read."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

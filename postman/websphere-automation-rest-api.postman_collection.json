@@ -1,0 +1,3159 @@
+{
+  "info": {
+    "_postman_id": "f019edf9-61c4-461b-9dc6-9afcd06b66d9",
+    "name": "WebSphere Automation REST API",
+    "description": "API for WebSphere Automation capabilities including vulnerability management, automated patching, health monitoring, and compliance tracking. Accessible through the Swagger UI on OpenShift Container Platform deployments. Provides centralized management of WebSphere Application Server and Liberty environments with automated security vulnerability remediation.\n\nContact Support:\n Name: IBM Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:21:24.000Z",
+    "updatedAt": "2026-06-05T15:21:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f019edf9-61c4-461b-9dc6-9afcd06b66d9"
+  },
+  "item": [
+    {
+      "name": "servers",
+      "item": [
+        {
+          "name": "{serverId}",
+          "item": [
+            {
+              "name": "Get Managed Server Details",
+              "id": "5e1d6b70-f104-4847-bc8e-9d589163f7b2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servers/:serverId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers",
+                    ":serverId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d77965b0-8190-4f56-984c-5b59b7dd8961",
+                      "key": "serverId",
+                      "value": "<string>",
+                      "description": "(Required) Managed server identifier"
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific managed server."
+              },
+              "response": [
+                {
+                  "id": "2753df85-22bc-47b7-9d9f-da4d2d79a7ba",
+                  "name": "Server details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "serverId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"was-traditional\",\n  \"version\": \"<string>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"status\": \"unknown\",\n  \"vulnerabilityCount\": \"<integer>\",\n  \"lastScanDate\": \"<dateTime>\",\n  \"registeredDate\": \"<dateTime>\",\n  \"installedFixes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-2753df85-22bc-47b7-9d9f-da4d2d79a7ba"
+                },
+                {
+                  "id": "7b72a6d4-1ccb-453f-9821-a52f4d0c2248",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "serverId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-7b72a6d4-1ccb-453f-9821-a52f4d0c2248"
+                },
+                {
+                  "id": "0d0e1ef3-4ab9-4f02-a8d3-44905364cf5b",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "serverId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-0d0e1ef3-4ab9-4f02-a8d3-44905364cf5b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-5e1d6b70-f104-4847-bc8e-9d589163f7b2"
+            },
+            {
+              "name": "Deregister a Server",
+              "id": "9e46f507-aa15-423a-ae4b-66a982879722",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servers/:serverId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers",
+                    ":serverId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "539f8a30-c906-4444-88cd-da46836c5b31",
+                      "key": "serverId",
+                      "value": "<string>",
+                      "description": "(Required) Managed server identifier"
+                    }
+                  ]
+                },
+                "description": "Removes a server from WebSphere Automation management."
+              },
+              "response": [
+                {
+                  "id": "85aa8ce6-b91c-41a0-9734-c68595c200b8",
+                  "name": "Server deregistered",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "serverId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-85aa8ce6-b91c-41a0-9734-c68595c200b8"
+                },
+                {
+                  "id": "6bffbe56-7ba0-4826-a9b0-506a092fb594",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "serverId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-6bffbe56-7ba0-4826-a9b0-506a092fb594"
+                },
+                {
+                  "id": "d6c2abc5-1a5a-4bb1-a0fa-30d0b997f624",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "serverId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-d6c2abc5-1a5a-4bb1-a0fa-30d0b997f624"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-9e46f507-aa15-423a-ae4b-66a982879722"
+            }
+          ],
+          "id": "251d46ef-29c5-47db-b5ed-a3a7c6405c14",
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-251d46ef-29c5-47db-b5ed-a3a7c6405c14"
+        },
+        {
+          "name": "List Managed Servers",
+          "id": "0f06aa44-e547-41f8-b1be-996e873969b9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/servers?type=liberty&status=unknown",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "servers"
+              ],
+              "query": [
+                {
+                  "description": "Filter by server type",
+                  "key": "type",
+                  "value": "liberty"
+                },
+                {
+                  "description": "Filter by server status",
+                  "key": "status",
+                  "value": "unknown"
+                }
+              ]
+            },
+            "description": "Returns a list of all servers registered with WebSphere Automation."
+          },
+          "response": [
+            {
+              "id": "6193ce8f-bbb9-47d2-9e7f-019653a6476b",
+              "name": "List of managed servers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servers?type=liberty&status=unknown",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by server type",
+                      "key": "type",
+                      "value": "liberty"
+                    },
+                    {
+                      "description": "Filter by server status",
+                      "key": "status",
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"servers\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"was-traditional\",\n      \"version\": \"<string>\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"status\": \"active\",\n      \"vulnerabilityCount\": \"<integer>\",\n      \"lastScanDate\": \"<dateTime>\",\n      \"registeredDate\": \"<dateTime>\",\n      \"installedFixes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"liberty\",\n      \"version\": \"<string>\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"status\": \"inactive\",\n      \"vulnerabilityCount\": \"<integer>\",\n      \"lastScanDate\": \"<dateTime>\",\n      \"registeredDate\": \"<dateTime>\",\n      \"installedFixes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-6193ce8f-bbb9-47d2-9e7f-019653a6476b"
+            },
+            {
+              "id": "e9315058-9779-45aa-b563-3be4294263b8",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servers?type=liberty&status=unknown",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by server type",
+                      "key": "type",
+                      "value": "liberty"
+                    },
+                    {
+                      "description": "Filter by server status",
+                      "key": "status",
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-e9315058-9779-45aa-b563-3be4294263b8"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-0f06aa44-e547-41f8-b1be-996e873969b9"
+        },
+        {
+          "name": "Register a Server",
+          "id": "f12b910a-7862-4cac-ad20-8cd06077ff51",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"was-traditional\",\n  \"connectionInfo\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"protocol\": \"https\"\n  },\n  \"credentials\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/servers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "servers"
+              ]
+            },
+            "description": "Registers a new server with WebSphere Automation for monitoring and management."
+          },
+          "response": [
+            {
+              "id": "85dece12-e1bf-4889-b10d-e398f754008c",
+              "name": "Server registered",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"was-traditional\",\n  \"connectionInfo\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"protocol\": \"https\"\n  },\n  \"credentials\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/servers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"was-traditional\",\n  \"version\": \"<string>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\",\n  \"status\": \"unknown\",\n  \"vulnerabilityCount\": \"<integer>\",\n  \"lastScanDate\": \"<dateTime>\",\n  \"registeredDate\": \"<dateTime>\",\n  \"installedFixes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-85dece12-e1bf-4889-b10d-e398f754008c"
+            },
+            {
+              "id": "1ddd6925-64e6-4d88-92e2-fcfed98a263e",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"was-traditional\",\n  \"connectionInfo\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"protocol\": \"https\"\n  },\n  \"credentials\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/servers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-1ddd6925-64e6-4d88-92e2-fcfed98a263e"
+            },
+            {
+              "id": "2cde99ff-e117-4a7d-96e8-9d608c9015d8",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"was-traditional\",\n  \"connectionInfo\": {\n    \"host\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"protocol\": \"https\"\n  },\n  \"credentials\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/servers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servers"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-2cde99ff-e117-4a7d-96e8-9d608c9015d8"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-f12b910a-7862-4cac-ad20-8cd06077ff51"
+        }
+      ],
+      "id": "6e1b1c86-0764-491e-af35-5704066c66c9",
+      "createdAt": "2026-06-05T15:21:24.000Z",
+      "updatedAt": "2026-06-05T15:21:24.000Z",
+      "uid": "35240-6e1b1c86-0764-491e-af35-5704066c66c9"
+    },
+    {
+      "name": "vulnerabilities",
+      "item": [
+        {
+          "name": "{vulnerabilityId}",
+          "item": [
+            {
+              "name": "resolve",
+              "item": [
+                {
+                  "name": "Resolve a Vulnerability",
+                  "id": "e518a0ff-eefd-4eea-9745-d4ab107f0e2c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"action\": \"apply-fix\",\n  \"fixId\": \"<string>\",\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId/resolve",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vulnerabilities",
+                        ":vulnerabilityId",
+                        "resolve"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9fd60610-495d-45f7-a82e-f6d50d7c52ca",
+                          "key": "vulnerabilityId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Initiates the resolution of a vulnerability by applying fixes."
+                  },
+                  "response": [
+                    {
+                      "id": "58f949c0-4685-47e0-be17-4c1ed7e799f1",
+                      "name": "Resolution initiated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"action\": \"apply-fix\",\n  \"fixId\": \"<string>\",\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId/resolve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vulnerabilities",
+                            ":vulnerabilityId",
+                            "resolve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "vulnerabilityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"taskId\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-58f949c0-4685-47e0-be17-4c1ed7e799f1"
+                    },
+                    {
+                      "id": "9a95b544-655f-4a70-8d26-443f3bca4f84",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"action\": \"apply-fix\",\n  \"fixId\": \"<string>\",\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId/resolve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vulnerabilities",
+                            ":vulnerabilityId",
+                            "resolve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "vulnerabilityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-9a95b544-655f-4a70-8d26-443f3bca4f84"
+                    },
+                    {
+                      "id": "f233155c-7e1f-46e1-af47-2f0ecd157586",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"action\": \"apply-fix\",\n  \"fixId\": \"<string>\",\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId/resolve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vulnerabilities",
+                            ":vulnerabilityId",
+                            "resolve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "vulnerabilityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-f233155c-7e1f-46e1-af47-2f0ecd157586"
+                    },
+                    {
+                      "id": "0637a724-1662-4bcd-8165-c902199109a3",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"action\": \"apply-fix\",\n  \"fixId\": \"<string>\",\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId/resolve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vulnerabilities",
+                            ":vulnerabilityId",
+                            "resolve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "vulnerabilityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-0637a724-1662-4bcd-8165-c902199109a3"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:24.000Z",
+                  "updatedAt": "2026-06-05T15:21:24.000Z",
+                  "uid": "35240-e518a0ff-eefd-4eea-9745-d4ab107f0e2c"
+                }
+              ],
+              "id": "f26a1d8c-f1db-4e77-87ef-21ee432b73a3",
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-f26a1d8c-f1db-4e77-87ef-21ee432b73a3"
+            },
+            {
+              "name": "Get Vulnerability Details",
+              "id": "088de9cd-fce9-4e66-9417-0ee3e48ffe3c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vulnerabilities",
+                    ":vulnerabilityId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ac3955d3-66ef-4da1-93b8-7bcb52271745",
+                      "key": "vulnerabilityId",
+                      "value": "<string>",
+                      "description": "(Required) Vulnerability identifier"
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific vulnerability."
+              },
+              "response": [
+                {
+                  "id": "02b8632e-1ea6-4bc2-855c-ba1e717520de",
+                  "name": "Vulnerability details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vulnerabilities",
+                        ":vulnerabilityId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "vulnerabilityId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"cveIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"severity\": \"low\",\n  \"cvssScore\": \"<number>\",\n  \"description\": \"<string>\",\n  \"affectedServers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"accepted-risk\",\n  \"availableFixes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishedDate\": \"<dateTime>\",\n  \"discoveredDate\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-02b8632e-1ea6-4bc2-855c-ba1e717520de"
+                },
+                {
+                  "id": "a99f1964-69d6-42de-a2ec-491e16589715",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vulnerabilities",
+                        ":vulnerabilityId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "vulnerabilityId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-a99f1964-69d6-42de-a2ec-491e16589715"
+                },
+                {
+                  "id": "4016f986-832c-487d-bbe7-977542d8e691",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vulnerabilities/:vulnerabilityId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vulnerabilities",
+                        ":vulnerabilityId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "vulnerabilityId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-4016f986-832c-487d-bbe7-977542d8e691"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-088de9cd-fce9-4e66-9417-0ee3e48ffe3c"
+            }
+          ],
+          "id": "ee7904a1-1860-48bb-b3ec-a1592d0cd097",
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-ee7904a1-1860-48bb-b3ec-a1592d0cd097"
+        },
+        {
+          "name": "List Vulnerabilities",
+          "id": "b69bd5d9-d1ea-4bcb-9231-b5a97a4d7d20",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/vulnerabilities?severity=critical&status=accepted-risk&serverId=<string>&cveId=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vulnerabilities"
+              ],
+              "query": [
+                {
+                  "description": "Filter by severity",
+                  "key": "severity",
+                  "value": "critical"
+                },
+                {
+                  "description": "Filter by remediation status",
+                  "key": "status",
+                  "value": "accepted-risk"
+                },
+                {
+                  "description": "Filter by affected server",
+                  "key": "serverId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by CVE identifier",
+                  "key": "cveId",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of known security vulnerabilities affecting managed servers."
+          },
+          "response": [
+            {
+              "id": "b3ffa9fb-9000-4a0c-a499-4d8613ca5a69",
+              "name": "List of vulnerabilities",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vulnerabilities?severity=critical&status=accepted-risk&serverId=<string>&cveId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vulnerabilities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by severity",
+                      "key": "severity",
+                      "value": "critical"
+                    },
+                    {
+                      "description": "Filter by remediation status",
+                      "key": "status",
+                      "value": "accepted-risk"
+                    },
+                    {
+                      "description": "Filter by affected server",
+                      "key": "serverId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by CVE identifier",
+                      "key": "cveId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"vulnerabilities\": [\n    {\n      \"id\": \"<string>\",\n      \"cveIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"severity\": \"low\",\n      \"cvssScore\": \"<number>\",\n      \"description\": \"<string>\",\n      \"affectedServers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"status\": \"resolved\",\n      \"availableFixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"publishedDate\": \"<dateTime>\",\n      \"discoveredDate\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"cveIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"severity\": \"low\",\n      \"cvssScore\": \"<number>\",\n      \"description\": \"<string>\",\n      \"affectedServers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"status\": \"open\",\n      \"availableFixes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"publishedDate\": \"<dateTime>\",\n      \"discoveredDate\": \"<dateTime>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-b3ffa9fb-9000-4a0c-a499-4d8613ca5a69"
+            },
+            {
+              "id": "a4853fb2-17b7-4aad-8948-366d71997fab",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vulnerabilities?severity=critical&status=accepted-risk&serverId=<string>&cveId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vulnerabilities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by severity",
+                      "key": "severity",
+                      "value": "critical"
+                    },
+                    {
+                      "description": "Filter by remediation status",
+                      "key": "status",
+                      "value": "accepted-risk"
+                    },
+                    {
+                      "description": "Filter by affected server",
+                      "key": "serverId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by CVE identifier",
+                      "key": "cveId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-a4853fb2-17b7-4aad-8948-366d71997fab"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-b69bd5d9-d1ea-4bcb-9231-b5a97a4d7d20"
+        }
+      ],
+      "id": "07202da8-42ed-4beb-9c1a-995cc37d1220",
+      "createdAt": "2026-06-05T15:21:24.000Z",
+      "updatedAt": "2026-06-05T15:21:24.000Z",
+      "uid": "35240-07202da8-42ed-4beb-9c1a-995cc37d1220"
+    },
+    {
+      "name": "fixes",
+      "item": [
+        {
+          "name": "{fixId}",
+          "item": [
+            {
+              "name": "apply",
+              "item": [
+                {
+                  "name": "Apply a Fix",
+                  "id": "44b23bc9-4cd2-4ac5-aac9-6eb701adfed3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schedule\": \"<dateTime>\",\n  \"restartAfterApply\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/fixes/:fixId/apply",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fixes",
+                        ":fixId",
+                        "apply"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5ab32619-68b7-4ded-b0ae-9632017fee04",
+                          "key": "fixId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Applies a fix to one or more managed servers."
+                  },
+                  "response": [
+                    {
+                      "id": "0d935cf1-33b9-44d1-be15-8da469faef1d",
+                      "name": "Fix application initiated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schedule\": \"<dateTime>\",\n  \"restartAfterApply\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/fixes/:fixId/apply",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "fixes",
+                            ":fixId",
+                            "apply"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fixId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"taskId\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-0d935cf1-33b9-44d1-be15-8da469faef1d"
+                    },
+                    {
+                      "id": "b477ea08-e942-45db-9ae3-b85430fb782b",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schedule\": \"<dateTime>\",\n  \"restartAfterApply\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/fixes/:fixId/apply",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "fixes",
+                            ":fixId",
+                            "apply"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fixId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-b477ea08-e942-45db-9ae3-b85430fb782b"
+                    },
+                    {
+                      "id": "8109cee0-f20d-48d3-bca6-db2307d46d96",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schedule\": \"<dateTime>\",\n  \"restartAfterApply\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/fixes/:fixId/apply",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "fixes",
+                            ":fixId",
+                            "apply"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fixId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-8109cee0-f20d-48d3-bca6-db2307d46d96"
+                    },
+                    {
+                      "id": "20a1d208-3959-46ec-ad4c-f8a0ac99b791",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"serverIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schedule\": \"<dateTime>\",\n  \"restartAfterApply\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/fixes/:fixId/apply",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "fixes",
+                            ":fixId",
+                            "apply"
+                          ],
+                          "variable": [
+                            {
+                              "key": "fixId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-20a1d208-3959-46ec-ad4c-f8a0ac99b791"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:24.000Z",
+                  "updatedAt": "2026-06-05T15:21:24.000Z",
+                  "uid": "35240-44b23bc9-4cd2-4ac5-aac9-6eb701adfed3"
+                }
+              ],
+              "id": "43fd1ce6-6b14-4b1f-8876-5cfc24d571c8",
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-43fd1ce6-6b14-4b1f-8876-5cfc24d571c8"
+            },
+            {
+              "name": "Get Fix Details",
+              "id": "d3b0d493-6abd-4bd0-856b-ce0123d0d0cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fixes/:fixId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fixes",
+                    ":fixId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b7be6d27-38d2-49a8-bb2b-f1881fd63b3b",
+                      "key": "fixId",
+                      "value": "<string>",
+                      "description": "(Required) Fix identifier"
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific fix."
+              },
+              "response": [
+                {
+                  "id": "28660fd9-dc8f-4c72-8a71-f7b065a32c4c",
+                  "name": "Fix details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fixes/:fixId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fixes",
+                        ":fixId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fixId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"security\",\n  \"description\": \"<string>\",\n  \"resolvedCVEs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"applicableVersions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"downloadURL\": \"<uri>\",\n  \"releaseDate\": \"<dateTime>\",\n  \"size\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-28660fd9-dc8f-4c72-8a71-f7b065a32c4c"
+                },
+                {
+                  "id": "9f0d4e2d-7c93-4f25-8419-d5e0144bb1da",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fixes/:fixId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fixes",
+                        ":fixId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fixId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-9f0d4e2d-7c93-4f25-8419-d5e0144bb1da"
+                },
+                {
+                  "id": "7ba16253-c4d0-4af6-84b5-e0ecd36ca979",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fixes/:fixId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fixes",
+                        ":fixId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fixId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-7ba16253-c4d0-4af6-84b5-e0ecd36ca979"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-d3b0d493-6abd-4bd0-856b-ce0123d0d0cf"
+            }
+          ],
+          "id": "399cf93e-e88f-4a10-ab78-ab23a661e3ea",
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-399cf93e-e88f-4a10-ab78-ab23a661e3ea"
+        },
+        {
+          "name": "List Available Fixes",
+          "id": "c14f0337-0c8f-4638-8eeb-113aff1360f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/fixes?serverId=<string>&type=security",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fixes"
+              ],
+              "query": [
+                {
+                  "description": "Filter by applicable server",
+                  "key": "serverId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by fix type",
+                  "key": "type",
+                  "value": "security"
+                }
+              ]
+            },
+            "description": "Returns a list of available fixes and patches."
+          },
+          "response": [
+            {
+              "id": "10f9e165-51ac-469f-8077-5ea113d19837",
+              "name": "List of fixes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fixes?serverId=<string>&type=security",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fixes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by applicable server",
+                      "key": "serverId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by fix type",
+                      "key": "type",
+                      "value": "security"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"fixes\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"fixpack\",\n      \"description\": \"<string>\",\n      \"resolvedCVEs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"applicableVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"downloadURL\": \"<uri>\",\n      \"releaseDate\": \"<dateTime>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"ifix\",\n      \"description\": \"<string>\",\n      \"resolvedCVEs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"applicableVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"downloadURL\": \"<uri>\",\n      \"releaseDate\": \"<dateTime>\",\n      \"size\": \"<integer>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-10f9e165-51ac-469f-8077-5ea113d19837"
+            },
+            {
+              "id": "601f143d-3e65-4e87-bbf0-2d74ad9b644c",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fixes?serverId=<string>&type=security",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fixes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by applicable server",
+                      "key": "serverId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by fix type",
+                      "key": "type",
+                      "value": "security"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-601f143d-3e65-4e87-bbf0-2d74ad9b644c"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-c14f0337-0c8f-4638-8eeb-113aff1360f1"
+        }
+      ],
+      "id": "2310049d-002d-4b01-979f-5c8e11d12fe9",
+      "createdAt": "2026-06-05T15:21:24.000Z",
+      "updatedAt": "2026-06-05T15:21:24.000Z",
+      "uid": "35240-2310049d-002d-4b01-979f-5c8e11d12fe9"
+    },
+    {
+      "name": "health",
+      "item": [
+        {
+          "name": "servers",
+          "item": [
+            {
+              "name": "{serverId}",
+              "item": [
+                {
+                  "name": "Get Server Health Status",
+                  "id": "64dc0d5f-26f1-4502-813d-87010c3795d2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/servers/:serverId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "servers",
+                        ":serverId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3b8a3660-4bb5-46cd-8ec8-e73b7a34798b",
+                          "key": "serverId",
+                          "value": "<string>",
+                          "description": "(Required) Managed server identifier"
+                        }
+                      ]
+                    },
+                    "description": "Returns health information for a specific managed server."
+                  },
+                  "response": [
+                    {
+                      "id": "ae9c8750-5505-44cd-8aea-b31698a291e4",
+                      "name": "Server health status",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/health/servers/:serverId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "health",
+                            "servers",
+                            ":serverId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "serverId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"serverId\": \"<string>\",\n  \"serverName\": \"<string>\",\n  \"status\": \"healthy\",\n  \"uptime\": \"<integer>\",\n  \"cpuUsage\": \"<number>\",\n  \"memoryUsage\": \"<number>\",\n  \"openVulnerabilities\": \"<integer>\",\n  \"lastHealthCheck\": \"<dateTime>\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"pass\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"fail\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-ae9c8750-5505-44cd-8aea-b31698a291e4"
+                    },
+                    {
+                      "id": "780cda42-ebde-4d1e-9e3f-8a2488f70f34",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/health/servers/:serverId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "health",
+                            "servers",
+                            ":serverId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "serverId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-780cda42-ebde-4d1e-9e3f-8a2488f70f34"
+                    },
+                    {
+                      "id": "d63e2685-e18b-4efb-b80c-7624c061f4fc",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/health/servers/:serverId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "health",
+                            "servers",
+                            ":serverId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "serverId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-d63e2685-e18b-4efb-b80c-7624c061f4fc"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:24.000Z",
+                  "updatedAt": "2026-06-05T15:21:24.000Z",
+                  "uid": "35240-64dc0d5f-26f1-4502-813d-87010c3795d2"
+                }
+              ],
+              "id": "86c2d0cf-9b36-45cf-bece-39e1f6feb541",
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-86c2d0cf-9b36-45cf-bece-39e1f6feb541"
+            }
+          ],
+          "id": "91f300fd-3a10-4f87-8ae5-c2516bd9d77f",
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-91f300fd-3a10-4f87-8ae5-c2516bd9d77f"
+        },
+        {
+          "name": "Get Overall Health Status",
+          "id": "1ebadabb-3363-4496-a1a9-a7de006c15d9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Returns the overall health status of all managed servers."
+          },
+          "response": [
+            {
+              "id": "72bcfa35-0be8-452b-8748-c2efd67e612e",
+              "name": "Overall health status",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"healthy\",\n  \"totalServers\": \"<integer>\",\n  \"activeServers\": \"<integer>\",\n  \"inactiveServers\": \"<integer>\",\n  \"openVulnerabilities\": \"<integer>\",\n  \"criticalVulnerabilities\": \"<integer>\",\n  \"pendingFixes\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-72bcfa35-0be8-452b-8748-c2efd67e612e"
+            },
+            {
+              "id": "3e44d515-6fb5-4d76-abb4-8c8a4c951ff6",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-3e44d515-6fb5-4d76-abb4-8c8a4c951ff6"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-1ebadabb-3363-4496-a1a9-a7de006c15d9"
+        }
+      ],
+      "id": "9a09379a-ec14-44b7-9190-cfba23689652",
+      "createdAt": "2026-06-05T15:21:24.000Z",
+      "updatedAt": "2026-06-05T15:21:24.000Z",
+      "uid": "35240-9a09379a-ec14-44b7-9190-cfba23689652"
+    },
+    {
+      "name": "compliance",
+      "item": [
+        {
+          "name": "reports",
+          "item": [
+            {
+              "name": "{reportId}",
+              "item": [
+                {
+                  "name": "Get Compliance Report Details",
+                  "id": "0c8a07b5-9c31-40e1-acd9-2b0ef6390e4b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance",
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "857cd7b8-479c-401f-bac7-a938d5c2eb8a",
+                          "key": "reportId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns a specific compliance report."
+                  },
+                  "response": [
+                    {
+                      "id": "110084eb-15dc-48a7-ab26-9243af4aaf83",
+                      "name": "Compliance report details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compliance/reports/:reportId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compliance",
+                            "reports",
+                            ":reportId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"generatedDate\": \"<dateTime>\",\n  \"overallCompliance\": \"<number>\",\n  \"servers\": [\n    {\n      \"serverId\": \"<string>\",\n      \"serverName\": \"<string>\",\n      \"complianceScore\": \"<number>\",\n      \"findings\": [\n        {\n          \"rule\": \"<string>\",\n          \"status\": \"compliant\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"rule\": \"<string>\",\n          \"status\": \"compliant\",\n          \"description\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"serverId\": \"<string>\",\n      \"serverName\": \"<string>\",\n      \"complianceScore\": \"<number>\",\n      \"findings\": [\n        {\n          \"rule\": \"<string>\",\n          \"status\": \"compliant\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"rule\": \"<string>\",\n          \"status\": \"non-compliant\",\n          \"description\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-110084eb-15dc-48a7-ab26-9243af4aaf83"
+                    },
+                    {
+                      "id": "89d2fec6-da68-4ce0-80a7-72f8579b6d65",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compliance/reports/:reportId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compliance",
+                            "reports",
+                            ":reportId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-89d2fec6-da68-4ce0-80a7-72f8579b6d65"
+                    },
+                    {
+                      "id": "c72a3561-4ae9-4b95-91bf-0ce75cbcf6d1",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compliance/reports/:reportId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compliance",
+                            "reports",
+                            ":reportId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-c72a3561-4ae9-4b95-91bf-0ce75cbcf6d1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:24.000Z",
+                  "updatedAt": "2026-06-05T15:21:24.000Z",
+                  "uid": "35240-0c8a07b5-9c31-40e1-acd9-2b0ef6390e4b"
+                }
+              ],
+              "id": "0ec670eb-c0c9-44c0-be4a-633574dfe9db",
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-0ec670eb-c0c9-44c0-be4a-633574dfe9db"
+            },
+            {
+              "name": "List Compliance Reports",
+              "id": "5f0014c6-e917-42e4-b472-f22a725ac701",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compliance/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compliance",
+                    "reports"
+                  ]
+                },
+                "description": "Returns a list of compliance reports."
+              },
+              "response": [
+                {
+                  "id": "c45389ef-df89-41d0-9148-3e201bc0b26e",
+                  "name": "List of compliance reports",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance/reports",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance",
+                        "reports"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"generatedDate\": \"<dateTime>\",\n    \"overallCompliance\": \"<number>\",\n    \"servers\": [\n      {\n        \"serverId\": \"<string>\",\n        \"serverName\": \"<string>\",\n        \"complianceScore\": \"<number>\",\n        \"findings\": [\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"non-compliant\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"compliant\",\n            \"description\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"serverId\": \"<string>\",\n        \"serverName\": \"<string>\",\n        \"complianceScore\": \"<number>\",\n        \"findings\": [\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"non-compliant\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"compliant\",\n            \"description\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"generatedDate\": \"<dateTime>\",\n    \"overallCompliance\": \"<number>\",\n    \"servers\": [\n      {\n        \"serverId\": \"<string>\",\n        \"serverName\": \"<string>\",\n        \"complianceScore\": \"<number>\",\n        \"findings\": [\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"compliant\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"non-compliant\",\n            \"description\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"serverId\": \"<string>\",\n        \"serverName\": \"<string>\",\n        \"complianceScore\": \"<number>\",\n        \"findings\": [\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"compliant\",\n            \"description\": \"<string>\"\n          },\n          {\n            \"rule\": \"<string>\",\n            \"status\": \"compliant\",\n            \"description\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-c45389ef-df89-41d0-9148-3e201bc0b26e"
+                },
+                {
+                  "id": "cf957455-002f-4c45-8a62-4a0c39123f18",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compliance/reports",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compliance",
+                        "reports"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:25.000Z",
+                  "updatedAt": "2026-06-05T15:21:25.000Z",
+                  "uid": "35240-cf957455-002f-4c45-8a62-4a0c39123f18"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-5f0014c6-e917-42e4-b472-f22a725ac701"
+            }
+          ],
+          "id": "9fd51962-8da9-494c-88fd-34eec8ad8e72",
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-9fd51962-8da9-494c-88fd-34eec8ad8e72"
+        }
+      ],
+      "id": "150e9f4e-8963-4871-830f-619a556350aa",
+      "createdAt": "2026-06-05T15:21:24.000Z",
+      "updatedAt": "2026-06-05T15:21:24.000Z",
+      "uid": "35240-150e9f4e-8963-4871-830f-619a556350aa"
+    },
+    {
+      "name": "notifications",
+      "item": [
+        {
+          "name": "{notificationId}",
+          "item": [
+            {
+              "name": "read",
+              "item": [
+                {
+                  "name": "Mark Notification as Read",
+                  "id": "2fdc4ae3-3e7c-48c6-b9c9-fa184234fd1e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/notifications/:notificationId/read",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "notifications",
+                        ":notificationId",
+                        "read"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f6d13b36-4d74-46de-8e5f-448f3226ef0b",
+                          "key": "notificationId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Marks a notification as read."
+                  },
+                  "response": [
+                    {
+                      "id": "e1e6c1e5-dc61-4b11-809a-546af4cb0717",
+                      "name": "Notification marked as read",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/notifications/:notificationId/read",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "notifications",
+                            ":notificationId",
+                            "read"
+                          ],
+                          "variable": [
+                            {
+                              "key": "notificationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-e1e6c1e5-dc61-4b11-809a-546af4cb0717"
+                    },
+                    {
+                      "id": "a14b85a5-8202-4a55-b9b2-7418868cf3d2",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/notifications/:notificationId/read",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "notifications",
+                            ":notificationId",
+                            "read"
+                          ],
+                          "variable": [
+                            {
+                              "key": "notificationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-a14b85a5-8202-4a55-b9b2-7418868cf3d2"
+                    },
+                    {
+                      "id": "dada23af-7e9b-4b17-85fa-76124cc4fe99",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/notifications/:notificationId/read",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "notifications",
+                            ":notificationId",
+                            "read"
+                          ],
+                          "variable": [
+                            {
+                              "key": "notificationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:25.000Z",
+                      "updatedAt": "2026-06-05T15:21:25.000Z",
+                      "uid": "35240-dada23af-7e9b-4b17-85fa-76124cc4fe99"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:24.000Z",
+                  "updatedAt": "2026-06-05T15:21:24.000Z",
+                  "uid": "35240-2fdc4ae3-3e7c-48c6-b9c9-fa184234fd1e"
+                }
+              ],
+              "id": "f9eb61e1-5441-415e-8ef6-31a7c1a6f52c",
+              "createdAt": "2026-06-05T15:21:24.000Z",
+              "updatedAt": "2026-06-05T15:21:24.000Z",
+              "uid": "35240-f9eb61e1-5441-415e-8ef6-31a7c1a6f52c"
+            }
+          ],
+          "id": "6df5551e-11ba-42d7-b01d-3b49b5d65699",
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-6df5551e-11ba-42d7-b01d-3b49b5d65699"
+        },
+        {
+          "name": "List Notifications",
+          "id": "2c97c4bd-df6e-4a77-afe6-8161d3d1a02b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications?type=compliance&read=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications"
+              ],
+              "query": [
+                {
+                  "description": "Filter by notification type",
+                  "key": "type",
+                  "value": "compliance"
+                },
+                {
+                  "description": "Filter by read status",
+                  "key": "read",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Returns a list of notifications and alerts."
+          },
+          "response": [
+            {
+              "id": "ffbee448-cac4-4e3c-bac7-833712b96e63",
+              "name": "List of notifications",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?type=compliance&read=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by notification type",
+                      "key": "type",
+                      "value": "compliance"
+                    },
+                    {
+                      "description": "Filter by read status",
+                      "key": "read",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"type\": \"vulnerability\",\n    \"severity\": \"info\",\n    \"title\": \"<string>\",\n    \"message\": \"<string>\",\n    \"read\": \"<boolean>\",\n    \"createdDate\": \"<dateTime>\",\n    \"relatedResourceId\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"type\": \"vulnerability\",\n    \"severity\": \"warning\",\n    \"title\": \"<string>\",\n    \"message\": \"<string>\",\n    \"read\": \"<boolean>\",\n    \"createdDate\": \"<dateTime>\",\n    \"relatedResourceId\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-ffbee448-cac4-4e3c-bac7-833712b96e63"
+            },
+            {
+              "id": "d1447840-f7d5-4771-a017-793b55135a4c",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?type=compliance&read=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by notification type",
+                      "key": "type",
+                      "value": "compliance"
+                    },
+                    {
+                      "description": "Filter by read status",
+                      "key": "read",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:25.000Z",
+              "updatedAt": "2026-06-05T15:21:25.000Z",
+              "uid": "35240-d1447840-f7d5-4771-a017-793b55135a4c"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:24.000Z",
+          "updatedAt": "2026-06-05T15:21:24.000Z",
+          "uid": "35240-2c97c4bd-df6e-4a77-afe6-8161d3d1a02b"
+        }
+      ],
+      "id": "3e3e7161-40d9-48de-8686-18dfb7217b28",
+      "createdAt": "2026-06-05T15:21:24.000Z",
+      "updatedAt": "2026-06-05T15:21:24.000Z",
+      "uid": "35240-3e3e7161-40d9-48de-8686-18dfb7217b28"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://automation-api.example.com/v1"
+    }
+  ]
+}

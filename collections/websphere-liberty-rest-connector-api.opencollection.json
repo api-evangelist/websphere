@@ -1,0 +1,306 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WebSphere Liberty REST Connector API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MBeans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Registered Mbeans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/mbeans",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "example_value",
+                "type": "query",
+                "description": "ObjectName pattern to filter MBeans"
+              },
+              {
+                "name": "className",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by MBean class name"
+              }
+            ]
+          },
+          "docs": "Returns a list of all MBeans registered in the MBean server."
+        },
+        {
+          "info": {
+            "name": "Get Mbean Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/mbeans/:objectName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              }
+            ]
+          },
+          "docs": "Returns metadata about a specific MBean including attributes, operations, and notifications."
+        },
+        {
+          "info": {
+            "name": "Get Mbean Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/mbeans/:objectName/attributes",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              }
+            ]
+          },
+          "docs": "Returns the current values of all readable attributes for the specified MBean."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Mbean Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/mbeans/:objectName/attributes/:attributeName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              },
+              {
+                "name": "attributeName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Name of the MBean attribute"
+              }
+            ]
+          },
+          "docs": "Returns the value of a specific attribute for the specified MBean."
+        },
+        {
+          "info": {
+            "name": "Set a Specific Mbean Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/mbeans/:objectName/attributes/:attributeName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              },
+              {
+                "name": "attributeName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the value of a writable attribute for the specified MBean."
+        },
+        {
+          "info": {
+            "name": "Invoke an Mbean Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/mbeans/:objectName/operations/:operationName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              },
+              {
+                "name": "operationName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Name of the MBean operation to invoke"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invokes an operation on the specified MBean with optional parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notification Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/notifications"
+          },
+          "docs": "Returns a list of active notification subscriptions."
+        },
+        {
+          "info": {
+            "name": "Create a Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/notifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes to notifications from a specific MBean."
+        },
+        {
+          "info": {
+            "name": "Get Pending Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/notifications/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path",
+                "description": "Subscription identifier"
+              }
+            ]
+          },
+          "docs": "Returns pending notifications for a subscription."
+        },
+        {
+          "info": {
+            "name": "Delete a Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/notifications/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unsubscribes from notifications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Transfer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/file/upload",
+            "params": [
+              {
+                "name": "targetPath",
+                "value": "example_value",
+                "type": "query",
+                "description": "Target file path on the server"
+              }
+            ]
+          },
+          "docs": "Uploads a file to the Liberty server file system."
+        },
+        {
+          "info": {
+            "name": "Download a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/file/download",
+            "params": [
+              {
+                "name": "sourcePath",
+                "value": "example_value",
+                "type": "query",
+                "description": "Source file path on the server"
+              }
+            ]
+          },
+          "docs": "Downloads a file from the Liberty server file system."
+        },
+        {
+          "info": {
+            "name": "Delete a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/IBMJMXConnectorREST/api/file/delete",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "File path on the server"
+              }
+            ]
+          },
+          "docs": "Deletes a file from the Liberty server file system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,512 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WebSphere Liberty Admin REST API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config",
+            "params": [
+              {
+                "name": "depth",
+                "value": "10",
+                "type": "query",
+                "description": "Depth of nested configuration elements to include"
+              }
+            ]
+          },
+          "docs": "Returns the current server configuration in JSON format."
+        },
+        {
+          "info": {
+            "name": "Update Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the server configuration. Changes may require a server restart."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Configuration Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config/:elementName",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Configuration element name (e.g., httpEndpoint, dataSource, application)"
+              }
+            ]
+          },
+          "docs": "Returns the configuration for a specific element type."
+        },
+        {
+          "info": {
+            "name": "Create a Configuration Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/config/:elementName",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Configuration element name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new configuration element to the server configuration."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Configuration Element Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config/:elementName/:uid",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the configuration element"
+              }
+            ]
+          },
+          "docs": "Returns a specific configuration element instance by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Configuration Element Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/config/:elementName/:uid",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific configuration element."
+        },
+        {
+          "info": {
+            "name": "Delete a Configuration Element Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/config/:elementName/:uid",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a specific configuration element from the server configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/server"
+          },
+          "docs": "Returns runtime information about the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Create a Server Dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/server/dump",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a server dump for diagnostic purposes."
+        },
+        {
+          "info": {
+            "name": "Create a Java Dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/server/javadump"
+          },
+          "docs": "Creates a Java core dump for thread analysis."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Deployed Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/applications"
+          },
+          "docs": "Returns a list of applications deployed on the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Get Application Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/applications/:appName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Application name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific deployed application."
+        },
+        {
+          "info": {
+            "name": "Start an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/applications/:appName/start",
+            "params": [
+              {
+                "name": "appName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Starts a deployed application."
+        },
+        {
+          "info": {
+            "name": "Stop an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/applications/:appName/stop",
+            "params": [
+              {
+                "name": "appName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops a running application."
+        },
+        {
+          "info": {
+            "name": "Restart an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/applications/:appName/restart",
+            "params": [
+              {
+                "name": "appName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Restarts a deployed application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Installed Features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/features"
+          },
+          "docs": "Returns a list of all Liberty features installed on the server."
+        },
+        {
+          "info": {
+            "name": "Get Feature Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/features/:featureName",
+            "params": [
+              {
+                "name": "featureName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Feature symbolic name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific Liberty feature."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Logging Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/logging"
+          },
+          "docs": "Returns the current logging configuration."
+        },
+        {
+          "info": {
+            "name": "Update Logging Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/logging",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the logging configuration dynamically."
+        },
+        {
+          "info": {
+            "name": "Get Log Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/logging/messages",
+            "params": [
+              {
+                "name": "maxMessages",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of messages to return"
+              },
+              {
+                "name": "level",
+                "value": "AUDIT",
+                "type": "query",
+                "description": "Minimum log level"
+              }
+            ]
+          },
+          "docs": "Returns recent log messages from the server."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/monitoring/metrics",
+            "params": [
+              {
+                "name": "scope",
+                "value": "base",
+                "type": "query",
+                "description": "Metrics scope"
+              }
+            ]
+          },
+          "docs": "Returns MicroProfile Metrics data from the server."
+        },
+        {
+          "info": {
+            "name": "Get Health Check Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/monitoring/health"
+          },
+          "docs": "Returns MicroProfile Health check results."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Transfer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/file",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "Path to the file on the server"
+              }
+            ]
+          },
+          "docs": "Downloads a file from the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Upload a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/file",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "Destination path on the server"
+              }
+            ]
+          },
+          "docs": "Uploads a file to the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Delete a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/file",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "Path to the file on the server"
+              }
+            ]
+          },
+          "docs": "Deletes a file from the Liberty server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

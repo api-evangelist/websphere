@@ -1,0 +1,4564 @@
+{
+  "info": {
+    "_postman_id": "8561f17f-0319-4231-a511-84c26c179ce5",
+    "name": "WebSphere Liberty Admin REST API",
+    "description": "RESTful administrative API for WebSphere Liberty servers, providing configuration and runtime management capabilities. The Admin REST Connector enables secure remote access through HTTPS calls or Java clients. Supports server configuration, application management, and feature provisioning.\n\nContact Support:\n Name: IBM Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:21:17.000Z",
+    "updatedAt": "2026-06-05T15:21:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8561f17f-0319-4231-a511-84c26c179ce5"
+  },
+  "item": [
+    {
+      "name": "config",
+      "item": [
+        {
+          "name": "{elementName}",
+          "item": [
+            {
+              "name": "{uid}",
+              "item": [
+                {
+                  "name": "Get a Specific Configuration Element Instance",
+                  "id": "1e80f10a-56eb-4777-8988-c087350992f5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName/:uid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName",
+                        ":uid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eb33ac20-0c4c-479c-9362-95a20cfe592a",
+                          "key": "elementName",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "1df0aa50-b156-4e13-a8c4-f524338f4cf5",
+                          "key": "uid",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the configuration element"
+                        }
+                      ]
+                    },
+                    "description": "Returns a specific configuration element instance by its unique identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "71942292-b1e7-4590-866c-f86cdeacef70",
+                      "name": "Configuration element instance",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-71942292-b1e7-4590-866c-f86cdeacef70"
+                    },
+                    {
+                      "id": "7243cfce-3bac-4d32-8dde-741457912026",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-7243cfce-3bac-4d32-8dde-741457912026"
+                    },
+                    {
+                      "id": "87c7fa4d-1345-4269-8f02-fad62fea41ea",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-87c7fa4d-1345-4269-8f02-fad62fea41ea"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-1e80f10a-56eb-4777-8988-c087350992f5"
+                },
+                {
+                  "name": "Update a Configuration Element Instance",
+                  "id": "8d7ae323-1023-4c99-a4cd-6023b065b0de",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName/:uid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName",
+                        ":uid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ef2ce6a1-7fed-480f-a945-76063d82c3c8",
+                          "key": "elementName",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "e66cd5d5-c75b-4b68-a211-66eba4d0ec66",
+                          "key": "uid",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates a specific configuration element."
+                  },
+                  "response": [
+                    {
+                      "id": "78074c72-91f4-41cc-a27e-dea00d8768c8",
+                      "name": "Configuration element updated",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-78074c72-91f4-41cc-a27e-dea00d8768c8"
+                    },
+                    {
+                      "id": "6abead90-5523-468b-a94c-4c4698d45a23",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-6abead90-5523-468b-a94c-4c4698d45a23"
+                    },
+                    {
+                      "id": "0ca6d79e-96f2-4764-9f90-bdf5d7ef62c4",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-0ca6d79e-96f2-4764-9f90-bdf5d7ef62c4"
+                    },
+                    {
+                      "id": "456c3e30-ea2f-4631-ae4b-169bedc63653",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-456c3e30-ea2f-4631-ae4b-169bedc63653"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-8d7ae323-1023-4c99-a4cd-6023b065b0de"
+                },
+                {
+                  "name": "Delete a Configuration Element Instance",
+                  "id": "25f16b43-a59b-454c-9c1c-96660fad0d93",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName/:uid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName",
+                        ":uid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2b2f5253-b781-4ed1-af2d-227ba80d11fa",
+                          "key": "elementName",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "e82565cb-c202-4d66-8ff6-68469ef32a17",
+                          "key": "uid",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Removes a specific configuration element from the server configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "375710c5-9770-480f-990e-d8f0fa3c5487",
+                      "name": "Configuration element deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-375710c5-9770-480f-990e-d8f0fa3c5487"
+                    },
+                    {
+                      "id": "4a80f815-9170-470a-8651-f757bba2f8af",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-4a80f815-9170-470a-8651-f757bba2f8af"
+                    },
+                    {
+                      "id": "92fcfa64-ad70-4faa-9584-f71b746ccb05",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/config/:elementName/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "config",
+                            ":elementName",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "elementName"
+                            },
+                            {
+                              "key": "uid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-92fcfa64-ad70-4faa-9584-f71b746ccb05"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-25f16b43-a59b-454c-9c1c-96660fad0d93"
+                }
+              ],
+              "id": "555c6832-f0fe-42b3-b754-f40d94bec566",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-555c6832-f0fe-42b3-b754-f40d94bec566"
+            },
+            {
+              "name": "Get a Specific Configuration Element",
+              "id": "846a80b5-f332-4c7a-9dd3-ee630106313a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/config/:elementName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config",
+                    ":elementName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3d8e6efb-eb29-4c9e-9ebf-28d8979765d5",
+                      "key": "elementName",
+                      "value": "<string>",
+                      "description": "(Required) Configuration element name (e.g., httpEndpoint, dataSource, application)"
+                    }
+                  ]
+                },
+                "description": "Returns the configuration for a specific element type."
+              },
+              "response": [
+                {
+                  "id": "7774cef9-5ca3-4e6d-925a-c815e91f4164",
+                  "name": "Configuration element details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "elementName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"uid\": \"<string>\",\n    \"configElementName\": \"<string>\",\n    \"ida01\": \"non\"\n  },\n  {\n    \"uid\": \"<string>\",\n    \"configElementName\": \"<string>\",\n    \"mollit4_9\": true\n  }\n]",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-7774cef9-5ca3-4e6d-925a-c815e91f4164"
+                },
+                {
+                  "id": "13e39d9c-c5b3-4255-b751-619b09975e80",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "elementName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-13e39d9c-c5b3-4255-b751-619b09975e80"
+                },
+                {
+                  "id": "1be13698-30e2-463d-a8d2-04dc63eaa0fd",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "elementName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-1be13698-30e2-463d-a8d2-04dc63eaa0fd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-846a80b5-f332-4c7a-9dd3-ee630106313a"
+            },
+            {
+              "name": "Create a Configuration Element",
+              "id": "2c99fc16-69f4-40b2-8883-9cc94b0c885a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config/:elementName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config",
+                    ":elementName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "673f7f48-14cf-4bfb-9ad6-d5d66769bc44",
+                      "key": "elementName",
+                      "value": "<string>",
+                      "description": "(Required) Configuration element name"
+                    }
+                  ]
+                },
+                "description": "Adds a new configuration element to the server configuration."
+              },
+              "response": [
+                {
+                  "id": "28df3903-3f29-49e3-b095-f345885ed771",
+                  "name": "Configuration element created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "elementName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-28df3903-3f29-49e3-b095-f345885ed771"
+                },
+                {
+                  "id": "3d4003ff-b98b-484f-85e6-01472f9477fe",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "elementName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-3d4003ff-b98b-484f-85e6-01472f9477fe"
+                },
+                {
+                  "id": "8f0c806f-593c-4f0c-8a6e-49834c5723fb",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"uid\": \"<string>\",\n  \"configElementName\": \"<string>\",\n  \"ut_07\": -61995636.443829305\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/config/:elementName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "config",
+                        ":elementName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "elementName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-8f0c806f-593c-4f0c-8a6e-49834c5723fb"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-2c99fc16-69f4-40b2-8883-9cc94b0c885a"
+            }
+          ],
+          "id": "ea76b445-58f7-4ea8-82c9-f55f11d2dd61",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-ea76b445-58f7-4ea8-82c9-f55f11d2dd61"
+        },
+        {
+          "name": "Get Server Configuration",
+          "id": "a0913934-d29a-445e-994d-8340c46bd837",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/config?depth=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "config"
+              ],
+              "query": [
+                {
+                  "description": "Depth of nested configuration elements to include",
+                  "key": "depth",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Returns the current server configuration in JSON format."
+          },
+          "response": [
+            {
+              "id": "021abff6-a94f-42e0-ade7-fc5f14330d43",
+              "name": "Server configuration",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/config?depth=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Depth of nested configuration elements to include",
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"application\": [\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"autoStart\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"INSTALLED\",\n      \"autoStart\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-021abff6-a94f-42e0-ade7-fc5f14330d43"
+            },
+            {
+              "id": "0d7c1563-fb47-47ca-905c-d8df6d7f0613",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/config?depth=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Depth of nested configuration elements to include",
+                      "key": "depth",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-0d7c1563-fb47-47ca-905c-d8df6d7f0613"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-a0913934-d29a-445e-994d-8340c46bd837"
+        },
+        {
+          "name": "Update Server Configuration",
+          "id": "8009f8b6-8d0b-4d6b-ac50-83be4aa580fc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"application\": [\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"autoStart\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"INSTALLED\",\n      \"autoStart\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "config"
+              ]
+            },
+            "description": "Updates the server configuration. Changes may require a server restart."
+          },
+          "response": [
+            {
+              "id": "65449701-5f2a-4458-b7aa-eb95d8c6f167",
+              "name": "Configuration updated",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"application\": [\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"autoStart\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"INSTALLED\",\n      \"autoStart\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"application\": [\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"autoStart\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"INSTALLED\",\n      \"autoStart\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-65449701-5f2a-4458-b7aa-eb95d8c6f167"
+            },
+            {
+              "id": "80c9519a-60dd-45d9-9ca3-04f8f20cab61",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"application\": [\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"autoStart\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"INSTALLED\",\n      \"autoStart\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-80c9519a-60dd-45d9-9ca3-04f8f20cab61"
+            },
+            {
+              "id": "713ebad8-a712-42aa-b350-1103451c617d",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"application\": [\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"autoStart\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"location\": \"<string>\",\n      \"type\": \"eba\",\n      \"contextRoot\": \"<string>\",\n      \"state\": \"INSTALLED\",\n      \"autoStart\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-713ebad8-a712-42aa-b350-1103451c617d"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-8009f8b6-8d0b-4d6b-ac50-83be4aa580fc"
+        }
+      ],
+      "id": "968fe4ca-80e6-4cde-aa90-759ac6a48be4",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-968fe4ca-80e6-4cde-aa90-759ac6a48be4"
+    },
+    {
+      "name": "server",
+      "item": [
+        {
+          "name": "dump",
+          "item": [
+            {
+              "name": "Create a Server Dump",
+              "id": "0386aa32-2b98-4b69-b501-3fc92f955d5d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"include\": [\n    \"heap\",\n    \"system\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/server/dump",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "server",
+                    "dump"
+                  ]
+                },
+                "description": "Creates a server dump for diagnostic purposes."
+              },
+              "response": [
+                {
+                  "id": "5a1cd6c0-fc50-4873-aa5e-78adee2a7a9b",
+                  "name": "Server dump created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"include\": [\n    \"heap\",\n    \"system\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/server/dump",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "server",
+                        "dump"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"dumpFile\": \"<string>\",\n  \"timestamp\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-5a1cd6c0-fc50-4873-aa5e-78adee2a7a9b"
+                },
+                {
+                  "id": "02c7ef47-20f5-4305-919a-c149f62ad93c",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"include\": [\n    \"heap\",\n    \"system\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/server/dump",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "server",
+                        "dump"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-02c7ef47-20f5-4305-919a-c149f62ad93c"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-0386aa32-2b98-4b69-b501-3fc92f955d5d"
+            }
+          ],
+          "id": "2fdcec30-aa91-4644-93f0-ed7b1eb5be5b",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-2fdcec30-aa91-4644-93f0-ed7b1eb5be5b"
+        },
+        {
+          "name": "javadump",
+          "item": [
+            {
+              "name": "Create a Java Dump",
+              "id": "b7d3896c-eba9-4d2f-bafd-114132cecaf0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/server/javadump",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "server",
+                    "javadump"
+                  ]
+                },
+                "description": "Creates a Java core dump for thread analysis."
+              },
+              "response": [
+                {
+                  "id": "6809a8a2-a088-407b-93f5-18333fc0791e",
+                  "name": "Java dump created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/server/javadump",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "server",
+                        "javadump"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"dumpFile\": \"<string>\",\n  \"timestamp\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-6809a8a2-a088-407b-93f5-18333fc0791e"
+                },
+                {
+                  "id": "b9ceeade-7fd3-45ff-89be-c0492d56fa22",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/server/javadump",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "server",
+                        "javadump"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-b9ceeade-7fd3-45ff-89be-c0492d56fa22"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-b7d3896c-eba9-4d2f-bafd-114132cecaf0"
+            }
+          ],
+          "id": "e25277bc-fb4e-4452-ac1a-4562e434026c",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-e25277bc-fb4e-4452-ac1a-4562e434026c"
+        },
+        {
+          "name": "Get Server Information",
+          "id": "1732b013-b968-4eda-99ca-d602a7293055",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/server",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "server"
+              ]
+            },
+            "description": "Returns runtime information about the Liberty server."
+          },
+          "response": [
+            {
+              "id": "9b4db843-d175-495f-97fd-842223131ab5",
+              "name": "Server information",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/server",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "server"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"wlpVersion\": \"<string>\",\n  \"productEdition\": \"<string>\",\n  \"javaVersion\": \"<string>\",\n  \"javaVendor\": \"<string>\",\n  \"serverStatus\": \"STARTED\",\n  \"uptime\": \"<integer>\",\n  \"installDirectory\": \"<string>\",\n  \"serverDirectory\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-9b4db843-d175-495f-97fd-842223131ab5"
+            },
+            {
+              "id": "1d07db25-fb12-4c2e-b127-b45326b4d52f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/server",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "server"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-1d07db25-fb12-4c2e-b127-b45326b4d52f"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-1732b013-b968-4eda-99ca-d602a7293055"
+        }
+      ],
+      "id": "fb68407e-2978-421f-83cb-5e8f55aa009c",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-fb68407e-2978-421f-83cb-5e8f55aa009c"
+    },
+    {
+      "name": "applications",
+      "item": [
+        {
+          "name": "{appName}",
+          "item": [
+            {
+              "name": "start",
+              "item": [
+                {
+                  "name": "Start an Application",
+                  "id": "be1ad34a-7e3d-49ae-9a11-13c7ff08ba65",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:appName/start",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":appName",
+                        "start"
+                      ],
+                      "variable": [
+                        {
+                          "id": "48b5f5fa-8d2c-455a-bc34-52ba212aee81",
+                          "key": "appName",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Starts a deployed application."
+                  },
+                  "response": [
+                    {
+                      "id": "3b02a64c-aa24-4b98-9dc9-d7cc57c142ae",
+                      "name": "Application started",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "start"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"STOPPING\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-3b02a64c-aa24-4b98-9dc9-d7cc57c142ae"
+                    },
+                    {
+                      "id": "cd081c1f-3b2d-49d3-9eff-dd520d3cd203",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "start"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-cd081c1f-3b2d-49d3-9eff-dd520d3cd203"
+                    },
+                    {
+                      "id": "4a11c143-e5c1-43e4-b56a-46970b3c9ed0",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "start"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-4a11c143-e5c1-43e4-b56a-46970b3c9ed0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-be1ad34a-7e3d-49ae-9a11-13c7ff08ba65"
+                }
+              ],
+              "id": "f7faf278-1e33-4e62-a9cf-000e5a63cfbf",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-f7faf278-1e33-4e62-a9cf-000e5a63cfbf"
+            },
+            {
+              "name": "stop",
+              "item": [
+                {
+                  "name": "Stop an Application",
+                  "id": "ddf3863b-ef32-4434-ba00-e62c59b3a97e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:appName/stop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":appName",
+                        "stop"
+                      ],
+                      "variable": [
+                        {
+                          "id": "128c57a6-d197-4593-8b2c-4668883f6759",
+                          "key": "appName",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Stops a running application."
+                  },
+                  "response": [
+                    {
+                      "id": "dfff028e-4f5f-4741-9a2f-083d20d7820b",
+                      "name": "Application stopped",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"STOPPING\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-dfff028e-4f5f-4741-9a2f-083d20d7820b"
+                    },
+                    {
+                      "id": "6fba104d-459c-41a8-a3a8-15995f09bef2",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-6fba104d-459c-41a8-a3a8-15995f09bef2"
+                    },
+                    {
+                      "id": "0857a17b-8c05-40bc-92e8-90a9caf6ea64",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-0857a17b-8c05-40bc-92e8-90a9caf6ea64"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-ddf3863b-ef32-4434-ba00-e62c59b3a97e"
+                }
+              ],
+              "id": "98bb6c93-de0f-4fb0-9712-771859f5effc",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-98bb6c93-de0f-4fb0-9712-771859f5effc"
+            },
+            {
+              "name": "restart",
+              "item": [
+                {
+                  "name": "Restart an Application",
+                  "id": "69f80fae-abb5-46d9-a441-5f3667078690",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:appName/restart",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":appName",
+                        "restart"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c9a2ddef-e557-4812-946d-2617be860135",
+                          "key": "appName",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Restarts a deployed application."
+                  },
+                  "response": [
+                    {
+                      "id": "ee7f3604-80c9-432d-961d-b6289965f993",
+                      "name": "Application restarted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/restart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "restart"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"STOPPING\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-ee7f3604-80c9-432d-961d-b6289965f993"
+                    },
+                    {
+                      "id": "010dfa54-76bc-4094-bfca-ee919c2a7ae1",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/restart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "restart"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-010dfa54-76bc-4094-bfca-ee919c2a7ae1"
+                    },
+                    {
+                      "id": "9b3fca1a-6373-4e00-9e7e-c7a9f6c76cd4",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:appName/restart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":appName",
+                            "restart"
+                          ],
+                          "variable": [
+                            {
+                              "key": "appName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:17.000Z",
+                      "updatedAt": "2026-06-05T15:21:17.000Z",
+                      "uid": "35240-9b3fca1a-6373-4e00-9e7e-c7a9f6c76cd4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-69f80fae-abb5-46d9-a441-5f3667078690"
+                }
+              ],
+              "id": "bff061a3-0dd5-4760-b12b-9676354548af",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-bff061a3-0dd5-4760-b12b-9676354548af"
+            },
+            {
+              "name": "Get Application Details",
+              "id": "8f8182a1-d47b-40ce-9924-0f0803bd5c19",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/applications/:appName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "applications",
+                    ":appName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1c5193a4-8749-4514-84f7-79471b285c87",
+                      "key": "appName",
+                      "value": "<string>",
+                      "description": "(Required) Application name"
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific deployed application."
+              },
+              "response": [
+                {
+                  "id": "53d45f72-bfe9-49ba-89c7-0fdd19707f4e",
+                  "name": "Application details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:appName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":appName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"location\": \"<string>\",\n  \"type\": \"rar\",\n  \"contextRoot\": \"<string>\",\n  \"state\": \"INSTALLED\",\n  \"autoStart\": \"<boolean>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-53d45f72-bfe9-49ba-89c7-0fdd19707f4e"
+                },
+                {
+                  "id": "d098f499-bbbc-48c6-9fe9-3d92aa064b2e",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:appName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":appName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-d098f499-bbbc-48c6-9fe9-3d92aa064b2e"
+                },
+                {
+                  "id": "498fbdf3-17c9-484b-9687-ffba15451662",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:appName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":appName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "appName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-498fbdf3-17c9-484b-9687-ffba15451662"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-8f8182a1-d47b-40ce-9924-0f0803bd5c19"
+            }
+          ],
+          "id": "d76029ea-2b93-4455-be56-2b3dbf692193",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-d76029ea-2b93-4455-be56-2b3dbf692193"
+        },
+        {
+          "name": "List Deployed Applications",
+          "id": "a85b8375-665a-4e52-aa20-e7480007d1ad",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/applications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            },
+            "description": "Returns a list of applications deployed on the Liberty server."
+          },
+          "response": [
+            {
+              "id": "4b3393c4-9cd2-47cc-9a7d-a3d4e256eb70",
+              "name": "List of applications",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/applications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "applications"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"location\": \"<string>\",\n    \"type\": \"rar\",\n    \"contextRoot\": \"<string>\",\n    \"state\": \"STOPPING\",\n    \"autoStart\": \"<boolean>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"location\": \"<string>\",\n    \"type\": \"eba\",\n    \"contextRoot\": \"<string>\",\n    \"state\": \"STARTING\",\n    \"autoStart\": \"<boolean>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-4b3393c4-9cd2-47cc-9a7d-a3d4e256eb70"
+            },
+            {
+              "id": "4b1b4365-6a0d-467e-a7d0-c6e8e7fb1c84",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/applications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "applications"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-4b1b4365-6a0d-467e-a7d0-c6e8e7fb1c84"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-a85b8375-665a-4e52-aa20-e7480007d1ad"
+        }
+      ],
+      "id": "ae3bdb5f-8d54-4b2f-822a-0e6f66fffb96",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-ae3bdb5f-8d54-4b2f-822a-0e6f66fffb96"
+    },
+    {
+      "name": "features",
+      "item": [
+        {
+          "name": "{featureName}",
+          "item": [
+            {
+              "name": "Get Feature Details",
+              "id": "2a4c6377-6eea-49a4-8396-cb82a7a9fa4f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/features/:featureName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "features",
+                    ":featureName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cc8b001a-1d96-4344-a7ff-a8b583ef8ea7",
+                      "key": "featureName",
+                      "value": "<string>",
+                      "description": "(Required) Feature symbolic name"
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific Liberty feature."
+              },
+              "response": [
+                {
+                  "id": "c44c218d-b187-4145-aabb-0f79869bf7f8",
+                  "name": "Feature details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/features/:featureName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "features",
+                        ":featureName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "featureName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"version\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"dependencies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-c44c218d-b187-4145-aabb-0f79869bf7f8"
+                },
+                {
+                  "id": "d72795bb-2fd6-4bca-95da-ca7284c79a17",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/features/:featureName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "features",
+                        ":featureName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "featureName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-d72795bb-2fd6-4bca-95da-ca7284c79a17"
+                },
+                {
+                  "id": "86ff4c09-b392-459a-acde-18f2c976a374",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/features/:featureName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "features",
+                        ":featureName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "featureName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-86ff4c09-b392-459a-acde-18f2c976a374"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-2a4c6377-6eea-49a4-8396-cb82a7a9fa4f"
+            }
+          ],
+          "id": "8da97c9e-05e2-4e37-83ff-f5ea0952c50a",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-8da97c9e-05e2-4e37-83ff-f5ea0952c50a"
+        },
+        {
+          "name": "List Installed Features",
+          "id": "73ef337f-0c1b-4a3d-a464-f9d396f02f95",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/features",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "features"
+              ]
+            },
+            "description": "Returns a list of all Liberty features installed on the server."
+          },
+          "response": [
+            {
+              "id": "a101f810-9716-49ac-ad25-52e05235eedb",
+              "name": "List of installed features",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/features",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "features"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"dependencies\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"dependencies\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-a101f810-9716-49ac-ad25-52e05235eedb"
+            },
+            {
+              "id": "e11ca80e-bf79-4e20-b31e-759bdfcb6233",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/features",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "features"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-e11ca80e-bf79-4e20-b31e-759bdfcb6233"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-73ef337f-0c1b-4a3d-a464-f9d396f02f95"
+        }
+      ],
+      "id": "0d1036e9-caed-4824-9d79-43fe9b4b6a1d",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-0d1036e9-caed-4824-9d79-43fe9b4b6a1d"
+    },
+    {
+      "name": "logging",
+      "item": [
+        {
+          "name": "messages",
+          "item": [
+            {
+              "name": "Get Log Messages",
+              "id": "cfe23035-5808-4362-898b-f92a1a554a09",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logging/messages?maxMessages=100&level=WARNING",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logging",
+                    "messages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of messages to return",
+                      "key": "maxMessages",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Minimum log level",
+                      "key": "level",
+                      "value": "WARNING"
+                    }
+                  ]
+                },
+                "description": "Returns recent log messages from the server."
+              },
+              "response": [
+                {
+                  "id": "ac011acb-7e28-4037-8561-0f79fbadd03f",
+                  "name": "Log messages",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/logging/messages?maxMessages=100&level=WARNING",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "logging",
+                        "messages"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of messages to return",
+                          "key": "maxMessages",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Minimum log level",
+                          "key": "level",
+                          "value": "WARNING"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"datetime\": \"<dateTime>\",\n    \"level\": \"<string>\",\n    \"message\": \"<string>\",\n    \"logger\": \"<string>\",\n    \"thread\": \"<string>\",\n    \"sequence\": \"<string>\"\n  },\n  {\n    \"datetime\": \"<dateTime>\",\n    \"level\": \"<string>\",\n    \"message\": \"<string>\",\n    \"logger\": \"<string>\",\n    \"thread\": \"<string>\",\n    \"sequence\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-ac011acb-7e28-4037-8561-0f79fbadd03f"
+                },
+                {
+                  "id": "245726ff-06b2-4040-836b-ec20970fbd52",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/logging/messages?maxMessages=100&level=WARNING",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "logging",
+                        "messages"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of messages to return",
+                          "key": "maxMessages",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Minimum log level",
+                          "key": "level",
+                          "value": "WARNING"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-245726ff-06b2-4040-836b-ec20970fbd52"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-cfe23035-5808-4362-898b-f92a1a554a09"
+            }
+          ],
+          "id": "39e85013-e6e4-4efe-a806-ccb972662382",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-39e85013-e6e4-4efe-a806-ccb972662382"
+        },
+        {
+          "name": "Get Logging Configuration",
+          "id": "8bbc15a8-f1f2-47fb-8e1a-eb1535ce0fdc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/logging",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logging"
+              ]
+            },
+            "description": "Returns the current logging configuration."
+          },
+          "response": [
+            {
+              "id": "918803d4-c567-48b6-bb21-fcd6137f79df",
+              "name": "Logging configuration",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logging",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logging"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"logDirectory\": \"<string>\",\n  \"consoleLogLevel\": \"WARNING\",\n  \"messageFileName\": \"<string>\",\n  \"traceFileName\": \"<string>\",\n  \"traceSpecification\": \"<string>\",\n  \"maxFileSize\": \"<integer>\",\n  \"maxFiles\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-918803d4-c567-48b6-bb21-fcd6137f79df"
+            },
+            {
+              "id": "08dfeeba-b5ef-48d0-8f21-6ab3e15eb375",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logging",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logging"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-08dfeeba-b5ef-48d0-8f21-6ab3e15eb375"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-8bbc15a8-f1f2-47fb-8e1a-eb1535ce0fdc"
+        },
+        {
+          "name": "Update Logging Configuration",
+          "id": "f74273b2-74b3-45ef-878a-991d1f818ab4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"logDirectory\": \"<string>\",\n  \"consoleLogLevel\": \"WARNING\",\n  \"messageFileName\": \"<string>\",\n  \"traceFileName\": \"<string>\",\n  \"traceSpecification\": \"<string>\",\n  \"maxFileSize\": \"<integer>\",\n  \"maxFiles\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/logging",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logging"
+              ]
+            },
+            "description": "Updates the logging configuration dynamically."
+          },
+          "response": [
+            {
+              "id": "e22878b5-da15-4073-ba30-6cb49daa7fea",
+              "name": "Logging configuration updated",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"logDirectory\": \"<string>\",\n  \"consoleLogLevel\": \"WARNING\",\n  \"messageFileName\": \"<string>\",\n  \"traceFileName\": \"<string>\",\n  \"traceSpecification\": \"<string>\",\n  \"maxFileSize\": \"<integer>\",\n  \"maxFiles\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/logging",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logging"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"logDirectory\": \"<string>\",\n  \"consoleLogLevel\": \"WARNING\",\n  \"messageFileName\": \"<string>\",\n  \"traceFileName\": \"<string>\",\n  \"traceSpecification\": \"<string>\",\n  \"maxFileSize\": \"<integer>\",\n  \"maxFiles\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-e22878b5-da15-4073-ba30-6cb49daa7fea"
+            },
+            {
+              "id": "26ca28d7-9a68-4743-b404-ad0f0126155b",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"logDirectory\": \"<string>\",\n  \"consoleLogLevel\": \"WARNING\",\n  \"messageFileName\": \"<string>\",\n  \"traceFileName\": \"<string>\",\n  \"traceSpecification\": \"<string>\",\n  \"maxFileSize\": \"<integer>\",\n  \"maxFiles\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/logging",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logging"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-26ca28d7-9a68-4743-b404-ad0f0126155b"
+            },
+            {
+              "id": "bff7e074-80e8-42c0-afc8-639d7a9b1960",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"logDirectory\": \"<string>\",\n  \"consoleLogLevel\": \"WARNING\",\n  \"messageFileName\": \"<string>\",\n  \"traceFileName\": \"<string>\",\n  \"traceSpecification\": \"<string>\",\n  \"maxFileSize\": \"<integer>\",\n  \"maxFiles\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/logging",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logging"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-bff7e074-80e8-42c0-afc8-639d7a9b1960"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-f74273b2-74b3-45ef-878a-991d1f818ab4"
+        }
+      ],
+      "id": "6451fe07-daf5-453c-92d8-6711a6491c24",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-6451fe07-daf5-453c-92d8-6711a6491c24"
+    },
+    {
+      "name": "monitoring",
+      "item": [
+        {
+          "name": "metrics",
+          "item": [
+            {
+              "name": "Get Server Metrics",
+              "id": "c1bb1130-b49e-48e5-8ae8-fe585f498579",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/monitoring/metrics?scope=application",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "monitoring",
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "Metrics scope",
+                      "key": "scope",
+                      "value": "application"
+                    }
+                  ]
+                },
+                "description": "Returns MicroProfile Metrics data from the server."
+              },
+              "response": [
+                {
+                  "id": "4a0a66aa-3b93-4f96-ac5a-3e2a0a1b160f",
+                  "name": "Server metrics",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/monitoring/metrics?scope=application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "monitoring",
+                        "metrics"
+                      ],
+                      "query": [
+                        {
+                          "description": "Metrics scope",
+                          "key": "scope",
+                          "value": "application"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"scope\": \"<string>\",\n  \"metrics\": {\n    \"nostrud_c4\": {\n      \"displayName\": \"<string>\",\n      \"description\": \"<string>\",\n      \"unit\": \"<string>\",\n      \"value\": \"<number>\",\n      \"type\": \"histogram\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-4a0a66aa-3b93-4f96-ac5a-3e2a0a1b160f"
+                },
+                {
+                  "id": "046e76a4-da96-4fdb-a564-e443337bc601",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/monitoring/metrics?scope=application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "monitoring",
+                        "metrics"
+                      ],
+                      "query": [
+                        {
+                          "description": "Metrics scope",
+                          "key": "scope",
+                          "value": "application"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-046e76a4-da96-4fdb-a564-e443337bc601"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-c1bb1130-b49e-48e5-8ae8-fe585f498579"
+            }
+          ],
+          "id": "31c2799f-53c1-44ab-b3c7-309ebe377301",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-31c2799f-53c1-44ab-b3c7-309ebe377301"
+        },
+        {
+          "name": "health",
+          "item": [
+            {
+              "name": "Get Health Check Status",
+              "id": "07c07a05-e7ef-4bbf-b418-8c86ca64833e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/monitoring/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "monitoring",
+                    "health"
+                  ]
+                },
+                "description": "Returns MicroProfile Health check results."
+              },
+              "response": [
+                {
+                  "id": "214b49ab-798c-4d1c-9cbe-6ff323cd6404",
+                  "name": "Server is healthy",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/monitoring/health",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "monitoring",
+                        "health"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"DOWN\",\n      \"data\": {\n        \"deserunt_e_0\": -20002088\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"proidentcd7\": 1837092.6554987878\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-214b49ab-798c-4d1c-9cbe-6ff323cd6404"
+                },
+                {
+                  "id": "51b78530-fffd-4bed-9bd0-606af94707d4",
+                  "name": "Server is unhealthy",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/monitoring/health",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "monitoring",
+                        "health"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"DOWN\",\n      \"data\": {\n        \"deserunt_e_0\": -20002088\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"proidentcd7\": 1837092.6554987878\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:17.000Z",
+                  "updatedAt": "2026-06-05T15:21:17.000Z",
+                  "uid": "35240-51b78530-fffd-4bed-9bd0-606af94707d4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-07c07a05-e7ef-4bbf-b418-8c86ca64833e"
+            }
+          ],
+          "id": "82b38d1f-06cf-4309-83d4-601784f74829",
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-82b38d1f-06cf-4309-83d4-601784f74829"
+        }
+      ],
+      "id": "c4381e3b-b72e-4b7c-8b4f-8ad2d9cf5f6a",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-c4381e3b-b72e-4b7c-8b4f-8ad2d9cf5f6a"
+    },
+    {
+      "name": "file",
+      "item": [
+        {
+          "name": "Download a File",
+          "id": "0803eeab-b4d6-4a7c-a37e-665135bbf1cc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/file?path=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "file"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Path to the file on the server",
+                  "key": "path",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Downloads a file from the Liberty server."
+          },
+          "response": [
+            {
+              "id": "43c2e0a6-aa5d-42a6-b6a1-2de9861fb957",
+              "name": "File content",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Path to the file on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<binary>",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-43c2e0a6-aa5d-42a6-b6a1-2de9861fb957"
+            },
+            {
+              "id": "d5248495-e8d7-4f99-bf4e-ade1b30219a4",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Path to the file on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-d5248495-e8d7-4f99-bf4e-ade1b30219a4"
+            },
+            {
+              "id": "f2e169db-52a8-406d-a8b5-e0c02fcb577a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Path to the file on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-f2e169db-52a8-406d-a8b5-e0c02fcb577a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-0803eeab-b4d6-4a7c-a37e-665135bbf1cc"
+        },
+        {
+          "name": "Upload a File",
+          "id": "102ba5d6-9d9f-41f1-b363-f601faf5b1f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/file?path=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "file"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Destination path on the server",
+                  "key": "path",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Uploads a file to the Liberty server."
+          },
+          "response": [
+            {
+              "id": "2ca5194d-b1bf-4df8-ba81-90ad5492ccf9",
+              "name": "File uploaded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Destination path on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-2ca5194d-b1bf-4df8-ba81-90ad5492ccf9"
+            },
+            {
+              "id": "040e7d20-91bc-4128-87b3-b253a40ea4e8",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Destination path on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-040e7d20-91bc-4128-87b3-b253a40ea4e8"
+            },
+            {
+              "id": "adad5a4e-9a73-4960-89ba-93e5e77fd7a7",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Destination path on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-adad5a4e-9a73-4960-89ba-93e5e77fd7a7"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-102ba5d6-9d9f-41f1-b363-f601faf5b1f6"
+        },
+        {
+          "name": "Delete a File",
+          "id": "bf6e2419-b334-4218-a407-73ee70419c15",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/file?path=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "file"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Path to the file on the server",
+                  "key": "path",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Deletes a file from the Liberty server."
+          },
+          "response": [
+            {
+              "id": "c19136b2-e764-417e-8b5b-50be410cc067",
+              "name": "File deleted",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Path to the file on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-c19136b2-e764-417e-8b5b-50be410cc067"
+            },
+            {
+              "id": "12e88e67-5b81-4b50-9d8d-7b2a1b090b2f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Path to the file on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-12e88e67-5b81-4b50-9d8d-7b2a1b090b2f"
+            },
+            {
+              "id": "eaa02973-c351-403c-b4f3-749eb6ee7276",
+              "name": "Resource not found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/file?path=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Path to the file on the server",
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:17.000Z",
+              "updatedAt": "2026-06-05T15:21:17.000Z",
+              "uid": "35240-eaa02973-c351-403c-b4f3-749eb6ee7276"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:17.000Z",
+          "updatedAt": "2026-06-05T15:21:17.000Z",
+          "uid": "35240-bf6e2419-b334-4218-a407-73ee70419c15"
+        }
+      ],
+      "id": "bb7878ac-75a4-4100-a8ab-e520eaa88eca",
+      "createdAt": "2026-06-05T15:21:17.000Z",
+      "updatedAt": "2026-06-05T15:21:17.000Z",
+      "uid": "35240-bb7878ac-75a4-4100-a8ab-e520eaa88eca"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:9443/ibm/api"
+    }
+  ]
+}

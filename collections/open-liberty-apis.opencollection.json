@@ -1,0 +1,352 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Overall Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health"
+          },
+          "docs": "Returns the overall health check status including all readiness and liveness checks."
+        },
+        {
+          "info": {
+            "name": "Get Readiness Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/ready"
+          },
+          "docs": "Returns readiness check results indicating whether the server is ready to accept traffic."
+        },
+        {
+          "info": {
+            "name": "Get Liveness Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/live"
+          },
+          "docs": "Returns liveness check results indicating whether the server is alive and running."
+        },
+        {
+          "info": {
+            "name": "Get Startup Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/started"
+          },
+          "docs": "Returns startup check results indicating whether the server has completed startup."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "scope",
+                "value": "base",
+                "type": "query",
+                "description": "Metrics scope filter"
+              }
+            ]
+          },
+          "docs": "Returns all available metrics in Prometheus or JSON format."
+        },
+        {
+          "info": {
+            "name": "Get Base Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics/base"
+          },
+          "docs": "Returns base metrics defined by the MicroProfile Metrics specification."
+        },
+        {
+          "info": {
+            "name": "Get Vendor Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics/vendor"
+          },
+          "docs": "Returns Liberty-specific vendor metrics."
+        },
+        {
+          "info": {
+            "name": "Get Application Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics/application"
+          },
+          "docs": "Returns application-defined custom metrics."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OpenAPI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Openapi Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/openapi",
+            "params": [
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Output format"
+              }
+            ]
+          },
+          "docs": "Returns the OpenAPI document describing all deployed REST endpoints."
+        },
+        {
+          "info": {
+            "name": "Access the Openapi Ui",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/openapi/ui"
+          },
+          "docs": "Returns the Swagger UI for exploring and testing deployed REST endpoints."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config"
+          },
+          "docs": "Returns the current Open Liberty server configuration."
+        },
+        {
+          "info": {
+            "name": "Get Configuration Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config/:elementName",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Configuration element name"
+              }
+            ]
+          },
+          "docs": "Returns a specific configuration element type."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Batch Job Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/batch/jobinstances",
+            "params": [
+              {
+                "name": "jobName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by job name"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "10",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "sortBy",
+                "value": "jobInstanceId",
+                "type": "query",
+                "description": "Sort field"
+              }
+            ]
+          },
+          "docs": "Returns a list of Jakarta Batch job instances."
+        },
+        {
+          "info": {
+            "name": "Get Batch Job Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/batch/jobinstances/:jobInstanceId",
+            "params": [
+              {
+                "name": "jobInstanceId",
+                "value": "500123",
+                "type": "path",
+                "description": "Job instance identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific batch job instance."
+        },
+        {
+          "info": {
+            "name": "List Job Executions for an Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/batch/jobinstances/:jobInstanceId/jobexecutions",
+            "params": [
+              {
+                "name": "jobInstanceId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of executions for a specific batch job instance."
+        },
+        {
+          "info": {
+            "name": "Get Batch Job Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/batch/jobexecutions/:executionId",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "500123",
+                "type": "path",
+                "description": "Job execution identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific batch job execution."
+        },
+        {
+          "info": {
+            "name": "Stop a Batch Job Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/batch/jobexecutions/:executionId/stop",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops a running batch job execution."
+        },
+        {
+          "info": {
+            "name": "Restart a Batch Job Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/batch/jobexecutions/:executionId/restart",
+            "params": [
+              {
+                "name": "executionId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restarts a failed or stopped batch job execution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

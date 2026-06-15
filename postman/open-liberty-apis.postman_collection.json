@@ -1,0 +1,2905 @@
+{
+  "info": {
+    "_postman_id": "b2845912-93c1-4c59-9225-2e7fd0acdac1",
+    "name": "Open Liberty APIs",
+    "description": "Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.\n\nContact Support:\n Name: Open Liberty Community",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:21:25.000Z",
+    "updatedAt": "2026-06-05T15:21:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b2845912-93c1-4c59-9225-2e7fd0acdac1"
+  },
+  "item": [
+    {
+      "name": "health",
+      "item": [
+        {
+          "name": "ready",
+          "item": [
+            {
+              "name": "Get Readiness Status",
+              "id": "3d8bb5d8-aaf8-424d-9483-dc93971fdf90",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health/ready",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health",
+                    "ready"
+                  ]
+                },
+                "description": "Returns readiness check results indicating whether the server is ready to accept traffic."
+              },
+              "response": [
+                {
+                  "id": "0ea1ce01-b7e7-414d-a980-ce599e13c87b",
+                  "name": "Server is ready",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/ready",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "ready"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-0ea1ce01-b7e7-414d-a980-ce599e13c87b"
+                },
+                {
+                  "id": "ffc0021a-a832-4586-b3f7-48593888790b",
+                  "name": "Server is not ready",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/ready",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "ready"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-ffc0021a-a832-4586-b3f7-48593888790b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-3d8bb5d8-aaf8-424d-9483-dc93971fdf90"
+            }
+          ],
+          "id": "5dc5089d-563b-499f-b77d-5d235c012703",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-5dc5089d-563b-499f-b77d-5d235c012703"
+        },
+        {
+          "name": "live",
+          "item": [
+            {
+              "name": "Get Liveness Status",
+              "id": "bc046fb0-3a6a-418f-a5cc-6b84b86f7dff",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health/live",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health",
+                    "live"
+                  ]
+                },
+                "description": "Returns liveness check results indicating whether the server is alive and running."
+              },
+              "response": [
+                {
+                  "id": "d757defd-0093-498a-a27f-0f2c09eddc1d",
+                  "name": "Server is alive",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/live",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "live"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-d757defd-0093-498a-a27f-0f2c09eddc1d"
+                },
+                {
+                  "id": "50042ed8-4381-48c9-a8c0-d1202903643d",
+                  "name": "Server is not alive",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/live",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "live"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-50042ed8-4381-48c9-a8c0-d1202903643d"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-bc046fb0-3a6a-418f-a5cc-6b84b86f7dff"
+            }
+          ],
+          "id": "129d3146-9a65-472c-a2e4-b5c35fec94b3",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-129d3146-9a65-472c-a2e4-b5c35fec94b3"
+        },
+        {
+          "name": "started",
+          "item": [
+            {
+              "name": "Get Startup Status",
+              "id": "5e92aba7-2561-4ff6-bfa9-540df3018652",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health/started",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health",
+                    "started"
+                  ]
+                },
+                "description": "Returns startup check results indicating whether the server has completed startup."
+              },
+              "response": [
+                {
+                  "id": "d1303677-eaf0-429a-898c-846f6ec98662",
+                  "name": "Server has started",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/started",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "started"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-d1303677-eaf0-429a-898c-846f6ec98662"
+                },
+                {
+                  "id": "8d7d54d2-2a4b-4ef8-8082-9a75362fec56",
+                  "name": "Server has not started",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/health/started",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "health",
+                        "started"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-8d7d54d2-2a4b-4ef8-8082-9a75362fec56"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-5e92aba7-2561-4ff6-bfa9-540df3018652"
+            }
+          ],
+          "id": "dade4670-d466-41d8-9905-6ae75f2dfb6a",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-dade4670-d466-41d8-9905-6ae75f2dfb6a"
+        },
+        {
+          "name": "Get Overall Health Status",
+          "id": "9225d9e2-0337-4b62-a660-a08b25e1b1e3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Returns the overall health check status including all readiness and liveness checks."
+          },
+          "response": [
+            {
+              "id": "8afaf41e-529e-43f0-bfcd-1bf922d59111",
+              "name": "All health checks passed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-8afaf41e-529e-43f0-bfcd-1bf922d59111"
+            },
+            {
+              "id": "39c2b91a-68e5-459f-bf60-ceefbb1148bf",
+              "name": "One or more health checks failed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"UP\",\n  \"checks\": [\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"reprehenderit_c0\": 20427375.56405872,\n        \"proident_6\": 21781359.236761495\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"status\": \"UP\",\n      \"data\": {\n        \"est108\": true,\n        \"utb39\": \"aute laborum culpa\",\n        \"veniamc0\": true\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-39c2b91a-68e5-459f-bf60-ceefbb1148bf"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-9225d9e2-0337-4b62-a660-a08b25e1b1e3"
+        }
+      ],
+      "id": "feff1384-69b0-45c0-afda-73ce10b2b9cd",
+      "createdAt": "2026-06-05T15:21:26.000Z",
+      "updatedAt": "2026-06-05T15:21:26.000Z",
+      "uid": "35240-feff1384-69b0-45c0-afda-73ce10b2b9cd"
+    },
+    {
+      "name": "metrics",
+      "item": [
+        {
+          "name": "base",
+          "item": [
+            {
+              "name": "Get Base Metrics",
+              "id": "452f6888-947d-4fc4-b8e0-64b210d01193",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics/base",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics",
+                    "base"
+                  ]
+                },
+                "description": "Returns base metrics defined by the MicroProfile Metrics specification."
+              },
+              "response": [
+                {
+                  "id": "c468e8d5-e620-4694-b7fe-e5e9a0249667",
+                  "name": "Base metrics data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/base",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        "base"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"occaecat08\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"sintc\": \"<string>\"\n    }\n  },\n  \"nulla88\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"culpaa\": \"<string>\",\n      \"dolore_4\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-c468e8d5-e620-4694-b7fe-e5e9a0249667"
+                },
+                {
+                  "id": "2bd36c3f-e868-4c2d-b8d0-703bf49622fb",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/base",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        "base"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-2bd36c3f-e868-4c2d-b8d0-703bf49622fb"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-452f6888-947d-4fc4-b8e0-64b210d01193"
+            }
+          ],
+          "id": "ee7fc796-278b-4e64-92b3-7dce730aed38",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-ee7fc796-278b-4e64-92b3-7dce730aed38"
+        },
+        {
+          "name": "vendor",
+          "item": [
+            {
+              "name": "Get Vendor Metrics",
+              "id": "13a077eb-f6fb-4f0f-8c1e-89615feb30d3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics/vendor",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics",
+                    "vendor"
+                  ]
+                },
+                "description": "Returns Liberty-specific vendor metrics."
+              },
+              "response": [
+                {
+                  "id": "c362e042-5f9a-4af9-a346-4778aed07e77",
+                  "name": "Vendor metrics data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/vendor",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        "vendor"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"occaecat08\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"sintc\": \"<string>\"\n    }\n  },\n  \"nulla88\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"culpaa\": \"<string>\",\n      \"dolore_4\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-c362e042-5f9a-4af9-a346-4778aed07e77"
+                },
+                {
+                  "id": "082f2a1f-78d3-4a60-bac4-e4e18f1f4828",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/vendor",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        "vendor"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-082f2a1f-78d3-4a60-bac4-e4e18f1f4828"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-13a077eb-f6fb-4f0f-8c1e-89615feb30d3"
+            }
+          ],
+          "id": "2fec7530-a871-4a2a-a40e-d0c3674199c6",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-2fec7530-a871-4a2a-a40e-d0c3674199c6"
+        },
+        {
+          "name": "application",
+          "item": [
+            {
+              "name": "Get Application Metrics",
+              "id": "f45fbcea-c9b6-4191-a022-0308df23b0b0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics/application",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics",
+                    "application"
+                  ]
+                },
+                "description": "Returns application-defined custom metrics."
+              },
+              "response": [
+                {
+                  "id": "c78729b2-46e2-42a1-96e7-56317b7e7d16",
+                  "name": "Application metrics data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        "application"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"occaecat08\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"sintc\": \"<string>\"\n    }\n  },\n  \"nulla88\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"culpaa\": \"<string>\",\n      \"dolore_4\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-c78729b2-46e2-42a1-96e7-56317b7e7d16"
+                },
+                {
+                  "id": "dc9847f8-3422-45e8-be0d-fbcd1984ec15",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        "application"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-dc9847f8-3422-45e8-be0d-fbcd1984ec15"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-f45fbcea-c9b6-4191-a022-0308df23b0b0"
+            }
+          ],
+          "id": "d4dc4b25-ed28-4fcc-9d00-f6d44a1c6d03",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-d4dc4b25-ed28-4fcc-9d00-f6d44a1c6d03"
+        },
+        {
+          "name": "Get All Metrics",
+          "id": "b164b8eb-bf97-43e9-a123-846ebd43c249",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics?scope=vendor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "metrics"
+              ],
+              "query": [
+                {
+                  "description": "Metrics scope filter",
+                  "key": "scope",
+                  "value": "vendor"
+                }
+              ]
+            },
+            "description": "Returns all available metrics in Prometheus or JSON format."
+          },
+          "response": [
+            {
+              "id": "b2197c82-2922-4f8f-895b-7373aff83c2b",
+              "name": "Metrics data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?scope=vendor",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "Metrics scope filter",
+                      "key": "scope",
+                      "value": "vendor"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"occaecat08\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"sintc\": \"<string>\"\n    }\n  },\n  \"nulla88\": {\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"type\": \"histogram\",\n    \"value\": \"<number>\",\n    \"tags\": {\n      \"culpaa\": \"<string>\",\n      \"dolore_4\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-b2197c82-2922-4f8f-895b-7373aff83c2b"
+            },
+            {
+              "id": "fe1f1fbd-a940-429d-9208-58bc19f30cbc",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?scope=vendor",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "Metrics scope filter",
+                      "key": "scope",
+                      "value": "vendor"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-fe1f1fbd-a940-429d-9208-58bc19f30cbc"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-b164b8eb-bf97-43e9-a123-846ebd43c249"
+        }
+      ],
+      "id": "513f1ad0-30a6-490c-ac09-c297ccbae4f2",
+      "createdAt": "2026-06-05T15:21:26.000Z",
+      "updatedAt": "2026-06-05T15:21:26.000Z",
+      "uid": "35240-513f1ad0-30a6-490c-ac09-c297ccbae4f2"
+    },
+    {
+      "name": "openapi",
+      "item": [
+        {
+          "name": "ui",
+          "item": [
+            {
+              "name": "Access the Openapi Ui",
+              "id": "f17f91d8-544a-411c-bce9-1e91cacebbba",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openapi/ui",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openapi",
+                    "ui"
+                  ]
+                },
+                "description": "Returns the Swagger UI for exploring and testing deployed REST endpoints."
+              },
+              "response": [
+                {
+                  "id": "692c0ae8-9bb1-4c29-b083-c712ef0db65f",
+                  "name": "OpenAPI UI HTML page",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/html"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/openapi/ui",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "openapi",
+                        "ui"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/html"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-692c0ae8-9bb1-4c29-b083-c712ef0db65f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-f17f91d8-544a-411c-bce9-1e91cacebbba"
+            }
+          ],
+          "id": "add8d737-477d-4957-b8e9-3007d1821181",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-add8d737-477d-4957-b8e9-3007d1821181"
+        },
+        {
+          "name": "Get Openapi Document",
+          "id": "7fdf3ed7-a7f5-42eb-a09e-09478eda9a75",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/yaml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/openapi?format=yaml",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openapi"
+              ],
+              "query": [
+                {
+                  "description": "Output format",
+                  "key": "format",
+                  "value": "yaml"
+                }
+              ]
+            },
+            "description": "Returns the OpenAPI document describing all deployed REST endpoints."
+          },
+          "response": [
+            {
+              "id": "d991a66f-7c18-4ed6-a85c-6c0b95e7fd52",
+              "name": "OpenAPI document",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/yaml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openapi?format=yaml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openapi"
+                  ],
+                  "query": [
+                    {
+                      "description": "Output format",
+                      "key": "format",
+                      "value": "yaml"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-d991a66f-7c18-4ed6-a85c-6c0b95e7fd52"
+            }
+          ],
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-7fdf3ed7-a7f5-42eb-a09e-09478eda9a75"
+        }
+      ],
+      "id": "d12d0653-40d5-4bd2-9675-435b34907c27",
+      "createdAt": "2026-06-05T15:21:26.000Z",
+      "updatedAt": "2026-06-05T15:21:26.000Z",
+      "uid": "35240-d12d0653-40d5-4bd2-9675-435b34907c27"
+    },
+    {
+      "name": "ibm",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "config",
+              "item": [
+                {
+                  "name": "{elementName}",
+                  "item": [
+                    {
+                      "name": "Get Configuration Element",
+                      "id": "c18c94cf-70dc-4aed-9ad2-3be3678a9707",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ibm/api/config/:elementName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ibm",
+                            "api",
+                            "config",
+                            ":elementName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1938efb9-7201-48dc-9551-7a6e08c3de8d",
+                              "key": "elementName",
+                              "value": "<string>",
+                              "description": "(Required) Configuration element name"
+                            }
+                          ]
+                        },
+                        "description": "Returns a specific configuration element type."
+                      },
+                      "response": [
+                        {
+                          "id": "e605d76a-7335-4ecb-8375-1f8d14a6c6b2",
+                          "name": "Configuration element details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/config/:elementName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "config",
+                                ":elementName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "elementName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"nostrud_fb_\": -89722286,\n    \"do8\": false,\n    \"Ut1\": true,\n    \"Duis_6_f\": \"occaecat dolore qui irure\",\n    \"magnabc\": \"in commodo\"\n  },\n  {\n    \"dolorfa\": \"nostrud exercitation culpa cupidatat\",\n    \"none\": true,\n    \"id_9\": -30425277\n  }\n]",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-e605d76a-7335-4ecb-8375-1f8d14a6c6b2"
+                        },
+                        {
+                          "id": "e1c96359-9555-4e53-98de-bf58a418eabb",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/config/:elementName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "config",
+                                ":elementName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "elementName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-e1c96359-9555-4e53-98de-bf58a418eabb"
+                        },
+                        {
+                          "id": "085938df-d094-493d-9ec5-ac3bb80ea316",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/config/:elementName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "config",
+                                ":elementName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "elementName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-085938df-d094-493d-9ec5-ac3bb80ea316"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:26.000Z",
+                      "updatedAt": "2026-06-05T15:21:26.000Z",
+                      "uid": "35240-c18c94cf-70dc-4aed-9ad2-3be3678a9707"
+                    }
+                  ],
+                  "id": "5f371e8a-7b3f-42f1-9579-a23f30ba676f",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-5f371e8a-7b3f-42f1-9579-a23f30ba676f"
+                },
+                {
+                  "name": "Get Server Configuration",
+                  "id": "10d44a09-2f71-44b8-9c4e-a13a41f83152",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ibm/api/config",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ibm",
+                        "api",
+                        "config"
+                      ]
+                    },
+                    "description": "Returns the current Open Liberty server configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "50e8d6ef-242c-427d-a29c-1cd704a9cdf8",
+                      "name": "Server configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ibm/api/config",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ibm",
+                            "api",
+                            "config"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"featureManager\": {\n    \"feature\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"httpEndpoint\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"httpPort\": \"<integer>\",\n      \"httpsPort\": \"<integer>\"\n    }\n  ],\n  \"adipisicing__\": 72668024.64332801\n}",
+                      "createdAt": "2026-06-05T15:21:26.000Z",
+                      "updatedAt": "2026-06-05T15:21:26.000Z",
+                      "uid": "35240-50e8d6ef-242c-427d-a29c-1cd704a9cdf8"
+                    },
+                    {
+                      "id": "a8db38cf-4844-4d0c-a00d-a5df43de0131",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ibm/api/config",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ibm",
+                            "api",
+                            "config"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:26.000Z",
+                      "updatedAt": "2026-06-05T15:21:26.000Z",
+                      "uid": "35240-a8db38cf-4844-4d0c-a00d-a5df43de0131"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-10d44a09-2f71-44b8-9c4e-a13a41f83152"
+                }
+              ],
+              "id": "1555c9eb-eea6-492c-a675-d51539d4c7ff",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-1555c9eb-eea6-492c-a675-d51539d4c7ff"
+            },
+            {
+              "name": "batch",
+              "item": [
+                {
+                  "name": "jobinstances",
+                  "item": [
+                    {
+                      "name": "{jobInstanceId}",
+                      "item": [
+                        {
+                          "name": "jobexecutions",
+                          "item": [
+                            {
+                              "name": "List Job Executions for an Instance",
+                              "id": "5d99cf53-a4b2-4a3c-a343-8f46097f330d",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId/jobexecutions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobinstances",
+                                    ":jobInstanceId",
+                                    "jobexecutions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "891e4988-7548-496e-9a24-ec4b2997b4dc",
+                                      "key": "jobInstanceId",
+                                      "value": "<integer>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of executions for a specific batch job instance."
+                              },
+                              "response": [
+                                {
+                                  "id": "fd6f0e7c-17e9-459f-877f-26ee25a8b89a",
+                                  "name": "List of job executions",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId/jobexecutions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobinstances",
+                                        ":jobInstanceId",
+                                        "jobexecutions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "jobInstanceId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"executionId\": \"<integer>\",\n    \"jobInstanceId\": \"<integer>\",\n    \"jobName\": \"<string>\",\n    \"batchStatus\": \"ABANDONED\",\n    \"exitStatus\": \"<string>\",\n    \"createTime\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"lastUpdatedTime\": \"<dateTime>\",\n    \"jobParameters\": {\n      \"Uta_\": \"<string>\",\n      \"dolore1b7\": \"<string>\",\n      \"eiusmod_011\": \"<string>\",\n      \"Duisc_\": \"<string>\"\n    },\n    \"stepExecutions\": [\n      {\n        \"stepExecutionId\": \"<integer>\",\n        \"stepName\": \"<string>\",\n        \"batchStatus\": \"<string>\",\n        \"exitStatus\": \"<string>\",\n        \"startTime\": \"<dateTime>\",\n        \"endTime\": \"<dateTime>\",\n        \"readCount\": \"<integer>\",\n        \"writeCount\": \"<integer>\",\n        \"commitCount\": \"<integer>\",\n        \"rollbackCount\": \"<integer>\",\n        \"filterCount\": \"<integer>\",\n        \"processSkipCount\": \"<integer>\",\n        \"readSkipCount\": \"<integer>\",\n        \"writeSkipCount\": \"<integer>\"\n      },\n      {\n        \"stepExecutionId\": \"<integer>\",\n        \"stepName\": \"<string>\",\n        \"batchStatus\": \"<string>\",\n        \"exitStatus\": \"<string>\",\n        \"startTime\": \"<dateTime>\",\n        \"endTime\": \"<dateTime>\",\n        \"readCount\": \"<integer>\",\n        \"writeCount\": \"<integer>\",\n        \"commitCount\": \"<integer>\",\n        \"rollbackCount\": \"<integer>\",\n        \"filterCount\": \"<integer>\",\n        \"processSkipCount\": \"<integer>\",\n        \"readSkipCount\": \"<integer>\",\n        \"writeSkipCount\": \"<integer>\"\n      }\n    ]\n  },\n  {\n    \"executionId\": \"<integer>\",\n    \"jobInstanceId\": \"<integer>\",\n    \"jobName\": \"<string>\",\n    \"batchStatus\": \"COMPLETED\",\n    \"exitStatus\": \"<string>\",\n    \"createTime\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"lastUpdatedTime\": \"<dateTime>\",\n    \"jobParameters\": {\n      \"est_fcd\": \"<string>\"\n    },\n    \"stepExecutions\": [\n      {\n        \"stepExecutionId\": \"<integer>\",\n        \"stepName\": \"<string>\",\n        \"batchStatus\": \"<string>\",\n        \"exitStatus\": \"<string>\",\n        \"startTime\": \"<dateTime>\",\n        \"endTime\": \"<dateTime>\",\n        \"readCount\": \"<integer>\",\n        \"writeCount\": \"<integer>\",\n        \"commitCount\": \"<integer>\",\n        \"rollbackCount\": \"<integer>\",\n        \"filterCount\": \"<integer>\",\n        \"processSkipCount\": \"<integer>\",\n        \"readSkipCount\": \"<integer>\",\n        \"writeSkipCount\": \"<integer>\"\n      },\n      {\n        \"stepExecutionId\": \"<integer>\",\n        \"stepName\": \"<string>\",\n        \"batchStatus\": \"<string>\",\n        \"exitStatus\": \"<string>\",\n        \"startTime\": \"<dateTime>\",\n        \"endTime\": \"<dateTime>\",\n        \"readCount\": \"<integer>\",\n        \"writeCount\": \"<integer>\",\n        \"commitCount\": \"<integer>\",\n        \"rollbackCount\": \"<integer>\",\n        \"filterCount\": \"<integer>\",\n        \"processSkipCount\": \"<integer>\",\n        \"readSkipCount\": \"<integer>\",\n        \"writeSkipCount\": \"<integer>\"\n      }\n    ]\n  }\n]",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-fd6f0e7c-17e9-459f-877f-26ee25a8b89a"
+                                },
+                                {
+                                  "id": "fcd8387c-1d63-4170-84e6-196fd0ce3d18",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId/jobexecutions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobinstances",
+                                        ":jobInstanceId",
+                                        "jobexecutions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "jobInstanceId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-fcd8387c-1d63-4170-84e6-196fd0ce3d18"
+                                },
+                                {
+                                  "id": "029e83d9-5bce-4410-92ba-9b2d90fe16a0",
+                                  "name": "Resource not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId/jobexecutions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobinstances",
+                                        ":jobInstanceId",
+                                        "jobexecutions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "jobInstanceId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-029e83d9-5bce-4410-92ba-9b2d90fe16a0"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-5d99cf53-a4b2-4a3c-a343-8f46097f330d"
+                            }
+                          ],
+                          "id": "82bf2a65-69ca-43f1-b544-cdf13b3a2285",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-82bf2a65-69ca-43f1-b544-cdf13b3a2285"
+                        },
+                        {
+                          "name": "Get Batch Job Instance",
+                          "id": "cda7151d-0266-4ada-af28-887cb47d9a0d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "batch",
+                                "jobinstances",
+                                ":jobInstanceId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0b4a63e2-79aa-4cf7-a9e1-4257e7b74214",
+                                  "key": "jobInstanceId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Job instance identifier"
+                                }
+                              ]
+                            },
+                            "description": "Returns details of a specific batch job instance."
+                          },
+                          "response": [
+                            {
+                              "id": "fd2acb9e-1d33-4435-b513-99240e29f101",
+                              "name": "Job instance details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobinstances",
+                                    ":jobInstanceId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "jobInstanceId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"jobInstanceId\": \"<integer>\",\n  \"jobName\": \"<string>\",\n  \"appName\": \"<string>\",\n  \"submitter\": \"<string>\",\n  \"batchStatus\": \"STARTED\",\n  \"createTime\": \"<dateTime>\",\n  \"lastUpdatedTime\": \"<dateTime>\",\n  \"jobParameters\": {\n    \"ullamco7\": \"<string>\",\n    \"dolor11\": \"<string>\",\n    \"dolor_a9\": \"<string>\",\n    \"cillum64\": \"<string>\"\n  },\n  \"_links\": [\n    {\n      \"rel\": \"<string>\",\n      \"href\": \"<uri>\"\n    },\n    {\n      \"rel\": \"<string>\",\n      \"href\": \"<uri>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-fd2acb9e-1d33-4435-b513-99240e29f101"
+                            },
+                            {
+                              "id": "25b596b8-de13-4477-85ab-0fb79e8f7ed3",
+                              "name": "Authentication required",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobinstances",
+                                    ":jobInstanceId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "jobInstanceId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-25b596b8-de13-4477-85ab-0fb79e8f7ed3"
+                            },
+                            {
+                              "id": "8d1fb4d4-5e97-4713-ab5c-401f2f2b29c2",
+                              "name": "Resource not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobinstances/:jobInstanceId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobinstances",
+                                    ":jobInstanceId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "jobInstanceId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-8d1fb4d4-5e97-4713-ab5c-401f2f2b29c2"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-cda7151d-0266-4ada-af28-887cb47d9a0d"
+                        }
+                      ],
+                      "id": "d27cc1b9-09cd-437f-8f19-d9b2055c97f2",
+                      "createdAt": "2026-06-05T15:21:26.000Z",
+                      "updatedAt": "2026-06-05T15:21:26.000Z",
+                      "uid": "35240-d27cc1b9-09cd-437f-8f19-d9b2055c97f2"
+                    },
+                    {
+                      "name": "List Batch Job Instances",
+                      "id": "e55a79d2-d5f7-43be-a8da-2fc5338a284f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ibm/api/batch/jobinstances?jobName=<string>&page=0&pageSize=50&sortBy=createTime",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ibm",
+                            "api",
+                            "batch",
+                            "jobinstances"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by job name",
+                              "key": "jobName",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "pageSize",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Sort field",
+                              "key": "sortBy",
+                              "value": "createTime"
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of Jakarta Batch job instances."
+                      },
+                      "response": [
+                        {
+                          "id": "7fade4fc-17cf-4740-b0d7-e61981d18510",
+                          "name": "List of job instances",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/batch/jobinstances?jobName=<string>&page=0&pageSize=50&sortBy=createTime",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "batch",
+                                "jobinstances"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by job name",
+                                  "key": "jobName",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "pageSize",
+                                  "value": "50"
+                                },
+                                {
+                                  "description": "Sort field",
+                                  "key": "sortBy",
+                                  "value": "createTime"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"jobInstanceId\": \"<integer>\",\n    \"jobName\": \"<string>\",\n    \"appName\": \"<string>\",\n    \"submitter\": \"<string>\",\n    \"batchStatus\": \"STOPPING\",\n    \"createTime\": \"<dateTime>\",\n    \"lastUpdatedTime\": \"<dateTime>\",\n    \"jobParameters\": {\n      \"ad_2\": \"<string>\"\n    },\n    \"_links\": [\n      {\n        \"rel\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      {\n        \"rel\": \"<string>\",\n        \"href\": \"<uri>\"\n      }\n    ]\n  },\n  {\n    \"jobInstanceId\": \"<integer>\",\n    \"jobName\": \"<string>\",\n    \"appName\": \"<string>\",\n    \"submitter\": \"<string>\",\n    \"batchStatus\": \"COMPLETED\",\n    \"createTime\": \"<dateTime>\",\n    \"lastUpdatedTime\": \"<dateTime>\",\n    \"jobParameters\": {\n      \"enim_\": \"<string>\"\n    },\n    \"_links\": [\n      {\n        \"rel\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      {\n        \"rel\": \"<string>\",\n        \"href\": \"<uri>\"\n      }\n    ]\n  }\n]",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-7fade4fc-17cf-4740-b0d7-e61981d18510"
+                        },
+                        {
+                          "id": "42a716f8-9c12-478a-9f64-918240722994",
+                          "name": "Authentication required",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/batch/jobinstances?jobName=<string>&page=0&pageSize=50&sortBy=createTime",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "batch",
+                                "jobinstances"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by job name",
+                                  "key": "jobName",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "0"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "pageSize",
+                                  "value": "50"
+                                },
+                                {
+                                  "description": "Sort field",
+                                  "key": "sortBy",
+                                  "value": "createTime"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-42a716f8-9c12-478a-9f64-918240722994"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:26.000Z",
+                      "updatedAt": "2026-06-05T15:21:26.000Z",
+                      "uid": "35240-e55a79d2-d5f7-43be-a8da-2fc5338a284f"
+                    }
+                  ],
+                  "id": "22334d72-456a-42dd-8987-e8ae78628a1c",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-22334d72-456a-42dd-8987-e8ae78628a1c"
+                },
+                {
+                  "name": "jobexecutions",
+                  "item": [
+                    {
+                      "name": "{executionId}",
+                      "item": [
+                        {
+                          "name": "stop",
+                          "item": [
+                            {
+                              "name": "Stop a Batch Job Execution",
+                              "id": "d0597659-f87a-42bd-842a-2b2c04807a9f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/stop",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobexecutions",
+                                    ":executionId",
+                                    "stop"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "3ca6b3fa-8fd8-4668-96dc-cb2574c7a69c",
+                                      "key": "executionId",
+                                      "value": "<integer>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Stops a running batch job execution."
+                              },
+                              "response": [
+                                {
+                                  "id": "51cc2e71-c2b4-486a-9ffd-8c71296a2046",
+                                  "name": "Job execution stopped",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/stop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobexecutions",
+                                        ":executionId",
+                                        "stop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "executionId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"executionId\": \"<integer>\",\n  \"jobInstanceId\": \"<integer>\",\n  \"jobName\": \"<string>\",\n  \"batchStatus\": \"STOPPING\",\n  \"exitStatus\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"lastUpdatedTime\": \"<dateTime>\",\n  \"jobParameters\": {\n    \"deserunt_2e_\": \"<string>\",\n    \"adipisicingd_f\": \"<string>\",\n    \"non4\": \"<string>\",\n    \"velit_dfc\": \"<string>\",\n    \"commodo_c8\": \"<string>\"\n  },\n  \"stepExecutions\": [\n    {\n      \"stepExecutionId\": \"<integer>\",\n      \"stepName\": \"<string>\",\n      \"batchStatus\": \"<string>\",\n      \"exitStatus\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"readCount\": \"<integer>\",\n      \"writeCount\": \"<integer>\",\n      \"commitCount\": \"<integer>\",\n      \"rollbackCount\": \"<integer>\",\n      \"filterCount\": \"<integer>\",\n      \"processSkipCount\": \"<integer>\",\n      \"readSkipCount\": \"<integer>\",\n      \"writeSkipCount\": \"<integer>\"\n    },\n    {\n      \"stepExecutionId\": \"<integer>\",\n      \"stepName\": \"<string>\",\n      \"batchStatus\": \"<string>\",\n      \"exitStatus\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"readCount\": \"<integer>\",\n      \"writeCount\": \"<integer>\",\n      \"commitCount\": \"<integer>\",\n      \"rollbackCount\": \"<integer>\",\n      \"filterCount\": \"<integer>\",\n      \"processSkipCount\": \"<integer>\",\n      \"readSkipCount\": \"<integer>\",\n      \"writeSkipCount\": \"<integer>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-51cc2e71-c2b4-486a-9ffd-8c71296a2046"
+                                },
+                                {
+                                  "id": "1ecf94d1-6e60-4186-8c28-696d3a54636a",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/stop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobexecutions",
+                                        ":executionId",
+                                        "stop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "executionId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-1ecf94d1-6e60-4186-8c28-696d3a54636a"
+                                },
+                                {
+                                  "id": "05afce99-0007-4898-a6ed-55dc72892a2e",
+                                  "name": "Resource not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/stop",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobexecutions",
+                                        ":executionId",
+                                        "stop"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "executionId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-05afce99-0007-4898-a6ed-55dc72892a2e"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-d0597659-f87a-42bd-842a-2b2c04807a9f"
+                            }
+                          ],
+                          "id": "3f94fba1-30ae-477f-ac99-9fe7b962c55a",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-3f94fba1-30ae-477f-ac99-9fe7b962c55a"
+                        },
+                        {
+                          "name": "restart",
+                          "item": [
+                            {
+                              "name": "Restart a Batch Job Execution",
+                              "id": "562cdaf7-06c4-46bc-9ca7-a741b18a922c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"jobParameters\": {\n    \"in5e\": \"<string>\",\n    \"ad26\": \"<string>\",\n    \"dolore789\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/restart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobexecutions",
+                                    ":executionId",
+                                    "restart"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "db47d80f-aecd-401f-8664-42529fbab24a",
+                                      "key": "executionId",
+                                      "value": "<integer>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Restarts a failed or stopped batch job execution."
+                              },
+                              "response": [
+                                {
+                                  "id": "be700044-2845-46e8-bb85-44afb8e21317",
+                                  "name": "Job execution restarted",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"jobParameters\": {\n    \"in5e\": \"<string>\",\n    \"ad26\": \"<string>\",\n    \"dolore789\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/restart",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobexecutions",
+                                        ":executionId",
+                                        "restart"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "executionId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"executionId\": \"<integer>\",\n  \"jobInstanceId\": \"<integer>\",\n  \"jobName\": \"<string>\",\n  \"batchStatus\": \"STOPPING\",\n  \"exitStatus\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"lastUpdatedTime\": \"<dateTime>\",\n  \"jobParameters\": {\n    \"deserunt_2e_\": \"<string>\",\n    \"adipisicingd_f\": \"<string>\",\n    \"non4\": \"<string>\",\n    \"velit_dfc\": \"<string>\",\n    \"commodo_c8\": \"<string>\"\n  },\n  \"stepExecutions\": [\n    {\n      \"stepExecutionId\": \"<integer>\",\n      \"stepName\": \"<string>\",\n      \"batchStatus\": \"<string>\",\n      \"exitStatus\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"readCount\": \"<integer>\",\n      \"writeCount\": \"<integer>\",\n      \"commitCount\": \"<integer>\",\n      \"rollbackCount\": \"<integer>\",\n      \"filterCount\": \"<integer>\",\n      \"processSkipCount\": \"<integer>\",\n      \"readSkipCount\": \"<integer>\",\n      \"writeSkipCount\": \"<integer>\"\n    },\n    {\n      \"stepExecutionId\": \"<integer>\",\n      \"stepName\": \"<string>\",\n      \"batchStatus\": \"<string>\",\n      \"exitStatus\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"readCount\": \"<integer>\",\n      \"writeCount\": \"<integer>\",\n      \"commitCount\": \"<integer>\",\n      \"rollbackCount\": \"<integer>\",\n      \"filterCount\": \"<integer>\",\n      \"processSkipCount\": \"<integer>\",\n      \"readSkipCount\": \"<integer>\",\n      \"writeSkipCount\": \"<integer>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-be700044-2845-46e8-bb85-44afb8e21317"
+                                },
+                                {
+                                  "id": "614bebb0-0b55-44f8-931c-d9c333cd9640",
+                                  "name": "Authentication required",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"jobParameters\": {\n    \"in5e\": \"<string>\",\n    \"ad26\": \"<string>\",\n    \"dolore789\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/restart",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobexecutions",
+                                        ":executionId",
+                                        "restart"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "executionId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-614bebb0-0b55-44f8-931c-d9c333cd9640"
+                                },
+                                {
+                                  "id": "7ab89836-227c-4ebb-8b16-59b1c105e1aa",
+                                  "name": "Resource not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"jobParameters\": {\n    \"in5e\": \"<string>\",\n    \"ad26\": \"<string>\",\n    \"dolore789\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId/restart",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ibm",
+                                        "api",
+                                        "batch",
+                                        "jobexecutions",
+                                        ":executionId",
+                                        "restart"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "executionId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:21:26.000Z",
+                                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                                  "uid": "35240-7ab89836-227c-4ebb-8b16-59b1c105e1aa"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-562cdaf7-06c4-46bc-9ca7-a741b18a922c"
+                            }
+                          ],
+                          "id": "c627dfbb-46ea-45e2-aedb-0183da6409cb",
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-c627dfbb-46ea-45e2-aedb-0183da6409cb"
+                        },
+                        {
+                          "name": "Get Batch Job Execution",
+                          "id": "1f05012a-8418-43c7-a882-9078cee292ae",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ibm",
+                                "api",
+                                "batch",
+                                "jobexecutions",
+                                ":executionId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e954195a-be6f-46a1-99ff-38c8d6d89d8d",
+                                  "key": "executionId",
+                                  "value": "<integer>",
+                                  "description": "(Required) Job execution identifier"
+                                }
+                              ]
+                            },
+                            "description": "Returns details of a specific batch job execution."
+                          },
+                          "response": [
+                            {
+                              "id": "aeedbbd2-d355-4521-b69d-b5ae9d5752c3",
+                              "name": "Job execution details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobexecutions",
+                                    ":executionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "executionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"executionId\": \"<integer>\",\n  \"jobInstanceId\": \"<integer>\",\n  \"jobName\": \"<string>\",\n  \"batchStatus\": \"STOPPING\",\n  \"exitStatus\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"lastUpdatedTime\": \"<dateTime>\",\n  \"jobParameters\": {\n    \"deserunt_2e_\": \"<string>\",\n    \"adipisicingd_f\": \"<string>\",\n    \"non4\": \"<string>\",\n    \"velit_dfc\": \"<string>\",\n    \"commodo_c8\": \"<string>\"\n  },\n  \"stepExecutions\": [\n    {\n      \"stepExecutionId\": \"<integer>\",\n      \"stepName\": \"<string>\",\n      \"batchStatus\": \"<string>\",\n      \"exitStatus\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"readCount\": \"<integer>\",\n      \"writeCount\": \"<integer>\",\n      \"commitCount\": \"<integer>\",\n      \"rollbackCount\": \"<integer>\",\n      \"filterCount\": \"<integer>\",\n      \"processSkipCount\": \"<integer>\",\n      \"readSkipCount\": \"<integer>\",\n      \"writeSkipCount\": \"<integer>\"\n    },\n    {\n      \"stepExecutionId\": \"<integer>\",\n      \"stepName\": \"<string>\",\n      \"batchStatus\": \"<string>\",\n      \"exitStatus\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"readCount\": \"<integer>\",\n      \"writeCount\": \"<integer>\",\n      \"commitCount\": \"<integer>\",\n      \"rollbackCount\": \"<integer>\",\n      \"filterCount\": \"<integer>\",\n      \"processSkipCount\": \"<integer>\",\n      \"readSkipCount\": \"<integer>\",\n      \"writeSkipCount\": \"<integer>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-aeedbbd2-d355-4521-b69d-b5ae9d5752c3"
+                            },
+                            {
+                              "id": "1b6dddca-10b0-4f88-b084-e45a13b40dfb",
+                              "name": "Authentication required",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobexecutions",
+                                    ":executionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "executionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-1b6dddca-10b0-4f88-b084-e45a13b40dfb"
+                            },
+                            {
+                              "id": "4df772ce-ad83-481e-8e3b-9999d816dc6f",
+                              "name": "Resource not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ibm/api/batch/jobexecutions/:executionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ibm",
+                                    "api",
+                                    "batch",
+                                    "jobexecutions",
+                                    ":executionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "executionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:21:26.000Z",
+                              "updatedAt": "2026-06-05T15:21:26.000Z",
+                              "uid": "35240-4df772ce-ad83-481e-8e3b-9999d816dc6f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:21:26.000Z",
+                          "updatedAt": "2026-06-05T15:21:26.000Z",
+                          "uid": "35240-1f05012a-8418-43c7-a882-9078cee292ae"
+                        }
+                      ],
+                      "id": "99046291-5efd-449d-a867-8d07acc82ebb",
+                      "createdAt": "2026-06-05T15:21:26.000Z",
+                      "updatedAt": "2026-06-05T15:21:26.000Z",
+                      "uid": "35240-99046291-5efd-449d-a867-8d07acc82ebb"
+                    }
+                  ],
+                  "id": "608c178e-afd6-41ed-bc27-3583c136607e",
+                  "createdAt": "2026-06-05T15:21:26.000Z",
+                  "updatedAt": "2026-06-05T15:21:26.000Z",
+                  "uid": "35240-608c178e-afd6-41ed-bc27-3583c136607e"
+                }
+              ],
+              "id": "34d30812-48b2-4ebb-ab4d-8406635f8942",
+              "createdAt": "2026-06-05T15:21:26.000Z",
+              "updatedAt": "2026-06-05T15:21:26.000Z",
+              "uid": "35240-34d30812-48b2-4ebb-ab4d-8406635f8942"
+            }
+          ],
+          "id": "bb1b7e88-0cca-4844-a9a3-a59c69e3c5e7",
+          "createdAt": "2026-06-05T15:21:26.000Z",
+          "updatedAt": "2026-06-05T15:21:26.000Z",
+          "uid": "35240-bb1b7e88-0cca-4844-a9a3-a59c69e3c5e7"
+        }
+      ],
+      "id": "b4f95576-5956-4065-a717-f19493b47419",
+      "createdAt": "2026-06-05T15:21:26.000Z",
+      "updatedAt": "2026-06-05T15:21:26.000Z",
+      "uid": "35240-b4f95576-5956-4065-a717-f19493b47419"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:9443"
+    }
+  ]
+}

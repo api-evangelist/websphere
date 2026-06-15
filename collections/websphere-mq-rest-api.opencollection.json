@@ -1,0 +1,766 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IBM MQ REST API",
+    "version": "9.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queue Manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Queue Managers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr"
+          },
+          "docs": "Returns a list of queue managers that the REST API can interact with."
+        },
+        {
+          "info": {
+            "name": "Get Queue Manager Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "attributes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific queue manager."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Queues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Queues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/queue",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "Queue name filter with wildcard support"
+              },
+              {
+                "name": "type",
+                "value": "local",
+                "type": "query",
+                "description": "Queue type filter"
+              },
+              {
+                "name": "attributes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of queues on the specified queue manager."
+        },
+        {
+          "info": {
+            "name": "Create a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/queue",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new queue on the specified queue manager."
+        },
+        {
+          "info": {
+            "name": "Get Queue Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/queue/:queueName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "status",
+                "value": "true",
+                "type": "query",
+                "description": "Include queue status information"
+              },
+              {
+                "name": "attributes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific queue."
+        },
+        {
+          "info": {
+            "name": "Update Queue Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/queue/:queueName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates attributes of an existing queue."
+        },
+        {
+          "info": {
+            "name": "Delete a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/queue/:queueName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "purge",
+                "value": "true",
+                "type": "query",
+                "description": "Purge messages before deleting"
+              }
+            ]
+          },
+          "docs": "Deletes a queue from the queue manager."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Browse Messages on a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/messaging/qmgr/:qmgrName/queue/:queueName/message",
+            "headers": [
+              {
+                "name": "ibm-mq-md-messageId",
+                "value": "500123"
+              },
+              {
+                "name": "ibm-mq-md-correlationId",
+                "value": "500123"
+              }
+            ],
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of messages to browse"
+              }
+            ]
+          },
+          "docs": "Non-destructively browses messages on the specified queue."
+        },
+        {
+          "info": {
+            "name": "Send a Message to a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/messaging/qmgr/:qmgrName/queue/:queueName/message",
+            "headers": [
+              {
+                "name": "ibm-mq-md-correlationId",
+                "value": "500123"
+              },
+              {
+                "name": "ibm-mq-md-expiry",
+                "value": "10"
+              },
+              {
+                "name": "ibm-mq-md-persistence",
+                "value": "persistent"
+              },
+              {
+                "name": "ibm-mq-md-replyTo",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to the specified queue on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Receive (destructively Get) a Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibmmq/rest/v2/messaging/qmgr/:qmgrName/queue/:queueName/message",
+            "headers": [
+              {
+                "name": "ibm-mq-md-messageId",
+                "value": "500123"
+              },
+              {
+                "name": "ibm-mq-md-correlationId",
+                "value": "500123"
+              }
+            ],
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "wait",
+                "value": "10",
+                "type": "query",
+                "description": "Wait time in milliseconds for a message"
+              }
+            ]
+          },
+          "docs": "Destructively gets a message from the specified queue."
+        },
+        {
+          "info": {
+            "name": "Publish a Message to a Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/messaging/qmgr/:qmgrName/topic/:topicString/message",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "topicString",
+                "value": "example_value",
+                "type": "path",
+                "description": "Topic string to publish to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes a message to the specified topic string."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Topics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/topic",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "Topic name filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of administrative topic objects on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Create a Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/topic",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new administrative topic object."
+        },
+        {
+          "info": {
+            "name": "Get Topic Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/topic/:topicName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "topicName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Topic object name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific administrative topic object."
+        },
+        {
+          "info": {
+            "name": "Delete a Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/topic/:topicName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "topicName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an administrative topic object."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/subscription",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ]
+          },
+          "docs": "Returns a list of subscriptions on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Get Subscription Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/subscription/:subscriptionId",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path",
+                "description": "Subscription identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific subscription."
+        },
+        {
+          "info": {
+            "name": "Delete a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/subscription/:subscriptionId",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a subscription from the queue manager."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/channel",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "Channel name filter"
+              },
+              {
+                "name": "type",
+                "value": "sender",
+                "type": "query",
+                "description": "Channel type filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of channels on the specified queue manager."
+        },
+        {
+          "info": {
+            "name": "Create a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/channel",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new channel on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Get Channel Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/channel/:channelName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Channel name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific channel."
+        },
+        {
+          "info": {
+            "name": "Delete a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/channel/:channelName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a channel from the queue manager."
+        },
+        {
+          "info": {
+            "name": "Start a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/channel/:channelName/start",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Starts a channel on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Stop a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/admin/qmgr/:qmgrName/channel/:channelName/stop",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops a channel on the queue manager."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate and Get Ltpa Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates the user and returns an LTPA token cookie for subsequent requests."
+        },
+        {
+          "info": {
+            "name": "Logout and Invalidate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibmmq/rest/v2/logout"
+          },
+          "docs": "Invalidates the current LTPA token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

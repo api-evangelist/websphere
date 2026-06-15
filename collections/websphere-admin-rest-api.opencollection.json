@@ -1,0 +1,690 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WebSphere Application Server Admin REST API",
+    "version": "9.0.5"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Access the Api Explorer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/explorer"
+          },
+          "docs": "Returns the API Explorer interface for discovering available REST API endpoints."
+        },
+        {
+          "info": {
+            "name": "List Configuration Resource Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config"
+          },
+          "docs": "Returns a list of available configuration resource types that can be managed through the REST API."
+        },
+        {
+          "info": {
+            "name": "List Resources of a Specific Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Depth of nested resource retrieval"
+              }
+            ]
+          },
+          "docs": "Returns a collection of configuration resources of the specified type."
+        },
+        {
+          "info": {
+            "name": "Create a New Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/config/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new configuration resource of the specified type."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config/:resourceType/:resourceId",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Depth of nested resource retrieval"
+              }
+            ]
+          },
+          "docs": "Returns the configuration details for a specific resource."
+        },
+        {
+          "info": {
+            "name": "Update a Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/config/:resourceType/:resourceId",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing configuration resource."
+        },
+        {
+          "info": {
+            "name": "Delete a Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/config/:resourceType/:resourceId",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a specific configuration resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Deployed Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/applications",
+            "params": [
+              {
+                "name": "status",
+                "value": "started",
+                "type": "query",
+                "description": "Filter by application status"
+              }
+            ]
+          },
+          "docs": "Returns a list of all applications deployed on the server or cell."
+        },
+        {
+          "info": {
+            "name": "Deploy a New Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/applications",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "contextRoot",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "targetServer",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deploys a new application to the server or cluster."
+        },
+        {
+          "info": {
+            "name": "Get Application Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/applications/:appName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific deployed application."
+        },
+        {
+          "info": {
+            "name": "Update Application Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/ibm/api/applications/:appName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of a deployed application."
+        },
+        {
+          "info": {
+            "name": "Uninstall an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/ibm/api/applications/:appName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              }
+            ]
+          },
+          "docs": "Uninstalls and removes a deployed application."
+        },
+        {
+          "info": {
+            "name": "Start an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/applications/:appName/start",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              }
+            ]
+          },
+          "docs": "Starts a deployed application."
+        },
+        {
+          "info": {
+            "name": "Stop an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/applications/:appName/stop",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              }
+            ]
+          },
+          "docs": "Stops a running application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/servers"
+          },
+          "docs": "Returns a list of all servers in the cell."
+        },
+        {
+          "info": {
+            "name": "Get Server Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/servers/:serverName",
+            "params": [
+              {
+                "name": "serverName",
+                "value": "",
+                "type": "path",
+                "description": "Server name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific server."
+        },
+        {
+          "info": {
+            "name": "Start a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/servers/:serverName/start",
+            "params": [
+              {
+                "name": "serverName",
+                "value": "",
+                "type": "path",
+                "description": "Server name"
+              }
+            ]
+          },
+          "docs": "Starts the specified application server."
+        },
+        {
+          "info": {
+            "name": "Stop a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/servers/:serverName/stop",
+            "params": [
+              {
+                "name": "serverName",
+                "value": "",
+                "type": "path",
+                "description": "Server name"
+              }
+            ]
+          },
+          "docs": "Stops the specified application server."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/clusters"
+          },
+          "docs": "Returns a list of all clusters in the cell."
+        },
+        {
+          "info": {
+            "name": "Get Cluster Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/clusters/:clusterName",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific cluster."
+        },
+        {
+          "info": {
+            "name": "Start a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/clusters/:clusterName/start",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Starts all members of the specified cluster."
+        },
+        {
+          "info": {
+            "name": "Stop a Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/clusters/:clusterName/stop",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Stops all members of the specified cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/nodes"
+          },
+          "docs": "Returns a list of all nodes in the cell."
+        },
+        {
+          "info": {
+            "name": "Get Node Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/nodes/:nodeName",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific node."
+        },
+        {
+          "info": {
+            "name": "Synchronize a Node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/nodes/:nodeName/sync",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Triggers configuration synchronization for the specified node."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Performance Monitoring Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/monitoring/performance",
+            "params": [
+              {
+                "name": "module",
+                "value": "threadPool",
+                "type": "query",
+                "description": "Performance module name"
+              }
+            ]
+          },
+          "docs": "Returns performance monitoring information for the server."
+        },
+        {
+          "info": {
+            "name": "Get Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/monitoring/health"
+          },
+          "docs": "Returns the health status of the server."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Security Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/security/users",
+            "params": [
+              {
+                "name": "pattern",
+                "value": "example_value",
+                "type": "query",
+                "description": "Search pattern for user names"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of users to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of users in the security registry."
+        },
+        {
+          "info": {
+            "name": "List Security Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/security/roles"
+          },
+          "docs": "Returns a list of administrative security roles."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/resources/datasources"
+          },
+          "docs": "Returns a list of configured JDBC data sources."
+        },
+        {
+          "info": {
+            "name": "Get Data Source Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/resources/datasources/:dsName",
+            "params": [
+              {
+                "name": "dsName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Data source name"
+              }
+            ]
+          },
+          "docs": "Returns configuration details for a specific data source."
+        },
+        {
+          "info": {
+            "name": "Test Data Source Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/ibm/api/resources/datasources/:dsName/test",
+            "params": [
+              {
+                "name": "dsName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Data source name"
+              }
+            ]
+          },
+          "docs": "Tests the connection for a specific data source."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
