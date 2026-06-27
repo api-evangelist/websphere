@@ -248,36 +248,33 @@ maintainers:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/ibm-websphere/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/websphere-application-deploy-workflow.yml
-        name: WebSphere Deploy and Start Application
-        summary: Deploy an application archive, confirm it installed, and start it.
-      - url: arazzo/websphere-cluster-restart-workflow.yml
-        name: WebSphere Cluster Controlled Restart
-        summary: Find a cluster, stop all its members, and start them again.
-      - url: arazzo/websphere-collective-member-recovery-workflow.yml
-        name: Liberty Collective Member Recovery
-        summary: Find stopped collective members, inspect one, and start it.
-      - url: arazzo/websphere-datasource-connectivity-check-workflow.yml
-        name: WebSphere Data Source Connectivity Check
-        summary: Find a JDBC data source, read its configuration, and test its connection.
-      - url: arazzo/websphere-liberty-app-restart-diagnostic-workflow.yml
-        name: Liberty Application Restart with Diagnostics
-        summary: Restart a Liberty application, capture a server dump, and verify health.
-      - url: arazzo/websphere-liberty-config-update-workflow.yml
-        name: Liberty Server Configuration Update
-        summary: Read the Liberty server configuration, update it, and confirm the server runtime.
-      - url: arazzo/websphere-mq-send-and-verify-workflow.yml
-        name: IBM MQ Send Message and Verify Depth
-        summary: Authenticate, confirm the target queue, send a message, and verify queue depth increased.
-      - url: arazzo/websphere-server-restart-workflow.yml
-        name: WebSphere Server Controlled Restart
-        summary: Find an application server, stop it, and start it again to apply pending changes.
-      - url: arazzo/websphere-vulnerability-remediation-workflow.yml
-        name: WebSphere Automation Vulnerability Remediation
-        summary: Find an open critical vulnerability, inspect it, and apply a fix.
+  - type: Arazzo
+    url: arazzo/websphere-application-deploy-workflow.yml
+    name: WebSphere Deploy and Start Application
+  - type: Arazzo
+    url: arazzo/websphere-cluster-restart-workflow.yml
+    name: WebSphere Cluster Controlled Restart
+  - type: Arazzo
+    url: arazzo/websphere-collective-member-recovery-workflow.yml
+    name: Liberty Collective Member Recovery
+  - type: Arazzo
+    url: arazzo/websphere-datasource-connectivity-check-workflow.yml
+    name: WebSphere Data Source Connectivity Check
+  - type: Arazzo
+    url: arazzo/websphere-liberty-app-restart-diagnostic-workflow.yml
+    name: Liberty Application Restart with Diagnostics
+  - type: Arazzo
+    url: arazzo/websphere-liberty-config-update-workflow.yml
+    name: Liberty Server Configuration Update
+  - type: Arazzo
+    url: arazzo/websphere-mq-send-and-verify-workflow.yml
+    name: IBM MQ Send Message and Verify Depth
+  - type: Arazzo
+    url: arazzo/websphere-server-restart-workflow.yml
+    name: WebSphere Server Controlled Restart
+  - type: Arazzo
+    url: arazzo/websphere-vulnerability-remediation-workflow.yml
+    name: WebSphere Automation Vulnerability Remediation
   - type: Portal
     url: https://developer.ibm.com/wasdev/
   - type: Support
@@ -300,13 +297,13 @@ common:
     url: https://openliberty.io/blog/
   - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/websphere
-  - type: SignUp
+  - type: Signup
     url: https://cloud.ibm.com/registration
   - type: Console
     url: https://www.ibm.com/products/liberty
   - type: GitHubOrganization
     url: https://github.com/WASdev
-  - type: SDK
+  - type: SDKs
     url: https://github.com/WASdev/sample.batch.bonuspayout
   - type: Features
     url: https://www.ibm.com/products/websphere-application-server
