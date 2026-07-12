@@ -246,6 +246,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/websphere-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/websphere-domain-security.yml
+  - type: Authentication
+    url: authentication/websphere-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/ibm-websphere/overview
   - type: Arazzo

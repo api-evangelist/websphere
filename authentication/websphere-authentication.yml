@@ -1,0 +1,40 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/open-liberty-apis.yml, openapi/websphere-admin-rest-api.yml, openapi/websphere-automation-rest-api.yml,
+  openapi/websphere-liberty-admin-rest-api.yml, openapi/websphere-liberty-collective-controller-rest-api.yml,
+  openapi/websphere-liberty-rest-connector-api.yml, openapi/websphere-mq-rest-api.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - cookie
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication
+  sources:
+  - openapi/open-liberty-apis.yml
+  - openapi/websphere-admin-rest-api.yml
+  - openapi/websphere-liberty-admin-rest-api.yml
+  - openapi/websphere-liberty-collective-controller-rest-api.yml
+  - openapi/websphere-liberty-rest-connector-api.yml
+  - openapi/websphere-mq-rest-api.yml
+- name: jwtAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: MicroProfile JWT authentication
+  sources:
+  - openapi/open-liberty-apis.yml
+  - openapi/websphere-automation-rest-api.yml
+- name: ltpaToken
+  type: apiKey
+  in: cookie
+  parameter: LtpaToken2
+  description: LTPA token-based authentication
+  sources:
+  - openapi/websphere-admin-rest-api.yml
+  - openapi/websphere-liberty-admin-rest-api.yml
+  - openapi/websphere-mq-rest-api.yml
