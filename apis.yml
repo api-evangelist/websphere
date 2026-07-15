@@ -246,6 +246,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/websphere-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/websphere-vulnerability-disclosure.yml
   - type: DomainSecurity
