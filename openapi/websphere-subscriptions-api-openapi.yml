@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Subscriptions API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Subscriptions
+  description: Subscription management
+paths:
+  /admin/qmgr/{qmgrName}/subscription:
+    get:
+      operationId: listSubscriptions
+      summary: List Subscriptions
+      description: Returns a list of subscriptions on the queue manager.
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+              examples:
+                Listsubscriptions200Example:
+                  summary: Default listSubscriptions 200 response
+                  x-microcks-default: true
+                  value:
+                    subscription:
+                    - id: abc123
+                      name: Example Title
+                      topicString: example_value
+                      destination: example_value
+                      type: admin
+                      durability: durable
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}/subscription/{subscriptionId}:
+    get:
+      operationId: getSubscription
+      summary: Get Subscription Details
+      description: Returns details of a specific subscription.
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: subscriptionId
+        in: path
+        required: true
+        description: Subscription identifier
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Subscription details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+              examples:
+                Getsubscription200Example:
+                  summary: Default getSubscription 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    topicString: example_value
+                    destination: example_value
+                    type: admin
+                    durability: durable
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSubscription
+      summary: Delete a Subscription
+      description: Deletes a subscription from the queue manager.
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '204':
+          description: Subscription deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Subscription identifier
+          example: abc123
+        name:
+          type: string
+          description: Subscription name
+          example: Example Title
+        topicString:
+          type: string
+          description: Topic string
+          example: example_value
+        destination:
+          type: string
+          description: Destination queue name
+          example: example_value
+        type:
+          type: string
+          enum:
+          - admin
+          - api
+          example: admin
+        durability:
+          type: string
+          enum:
+          - durable
+          - nonDurable
+          example: durable
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

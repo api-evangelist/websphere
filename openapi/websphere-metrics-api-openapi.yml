@@ -1,0 +1,230 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Metrics API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Metrics
+  description: MicroProfile Metrics API
+paths:
+  /metrics:
+    get:
+      operationId: getAllMetrics
+      summary: Get All Metrics
+      description: Returns all available metrics in Prometheus or JSON format.
+      tags:
+      - Metrics
+      parameters:
+      - name: Accept
+        in: header
+        description: Response format
+        schema:
+          type: string
+          enum:
+          - application/json
+          - text/plain
+          default: text/plain
+        example: application/json
+      - name: scope
+        in: query
+        description: Metrics scope filter
+        schema:
+          type: string
+          enum:
+          - base
+          - vendor
+          - application
+        example: base
+      responses:
+        '200':
+          description: Metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Prometheus format metrics
+              examples:
+                Getallmetrics200Example:
+                  summary: Default getAllMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getallmetrics200Example:
+                  summary: Default getAllMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metrics/base:
+    get:
+      operationId: getBaseMetrics
+      summary: Get Base Metrics
+      description: Returns base metrics defined by the MicroProfile Metrics specification.
+      tags:
+      - Metrics
+      responses:
+        '200':
+          description: Base metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Getbasemetrics200Example:
+                  summary: Default getBaseMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getbasemetrics200Example:
+                  summary: Default getBaseMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metrics/vendor:
+    get:
+      operationId: getVendorMetrics
+      summary: Get Vendor Metrics
+      description: Returns Liberty-specific vendor metrics.
+      tags:
+      - Metrics
+      responses:
+        '200':
+          description: Vendor metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Getvendormetrics200Example:
+                  summary: Default getVendorMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getvendormetrics200Example:
+                  summary: Default getVendorMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metrics/application:
+    get:
+      operationId: getApplicationMetrics
+      summary: Get Application Metrics
+      description: Returns application-defined custom metrics.
+      tags:
+      - Metrics
+      responses:
+        '200':
+          description: Application metrics data
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Getapplicationmetrics200Example:
+                  summary: Default getApplicationMetrics 200 response
+                  x-microcks-default: true
+                  value: example_value
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                Getapplicationmetrics200Example:
+                  summary: Default getApplicationMetrics 200 response
+                  x-microcks-default: true
+                  value: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MetricsResponse:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          displayName:
+            type: string
+          description:
+            type: string
+          unit:
+            type: string
+          type:
+            type: string
+            enum:
+            - counter
+            - gauge
+            - timer
+            - histogram
+            - simple_timer
+            - concurrent_gauge
+          value:
+            type: number
+          tags:
+            type: object
+            additionalProperties:
+              type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

@@ -1,0 +1,321 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Vulnerabilities API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Vulnerabilities
+  description: Security vulnerability tracking and remediation
+paths:
+  /vulnerabilities:
+    get:
+      operationId: listVulnerabilities
+      summary: List Vulnerabilities
+      description: Returns a list of known security vulnerabilities affecting managed servers.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - name: severity
+        in: query
+        description: Filter by severity
+        schema:
+          type: string
+          enum:
+          - critical
+          - high
+          - medium
+          - low
+        example: critical
+      - name: status
+        in: query
+        description: Filter by remediation status
+        schema:
+          type: string
+          enum:
+          - open
+          - resolved
+          - in-progress
+          - accepted-risk
+        example: open
+      - name: serverId
+        in: query
+        description: Filter by affected server
+        schema:
+          type: string
+        example: '500123'
+      - name: cveId
+        in: query
+        description: Filter by CVE identifier
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: List of vulnerabilities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vulnerabilities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Vulnerability'
+                  totalCount:
+                    type: integer
+              examples:
+                Listvulnerabilities200Example:
+                  summary: Default listVulnerabilities 200 response
+                  x-microcks-default: true
+                  value:
+                    vulnerabilities:
+                    - id: abc123
+                      cveIds:
+                      - {}
+                      severity: critical
+                      cvssScore: 42.5
+                      description: A sample description.
+                      affectedServers:
+                      - {}
+                      status: open
+                      availableFixes:
+                      - {}
+                      publishedDate: '2026-01-15T10:30:00Z'
+                      discoveredDate: '2026-01-15T10:30:00Z'
+                    totalCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vulnerabilities/{vulnerabilityId}:
+    get:
+      operationId: getVulnerability
+      summary: Get Vulnerability Details
+      description: Returns details of a specific vulnerability.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - name: vulnerabilityId
+        in: path
+        required: true
+        description: Vulnerability identifier
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Vulnerability details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vulnerability'
+              examples:
+                Getvulnerability200Example:
+                  summary: Default getVulnerability 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    cveIds:
+                    - example_value
+                    severity: critical
+                    cvssScore: 42.5
+                    description: A sample description.
+                    affectedServers:
+                    - example_value
+                    status: open
+                    availableFixes:
+                    - example_value
+                    publishedDate: '2026-01-15T10:30:00Z'
+                    discoveredDate: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vulnerabilities/{vulnerabilityId}/resolve:
+    post:
+      operationId: resolveVulnerability
+      summary: Resolve a Vulnerability
+      description: Initiates the resolution of a vulnerability by applying fixes.
+      tags:
+      - Vulnerabilities
+      parameters:
+      - name: vulnerabilityId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - apply-fix
+                  - accept-risk
+                  description: Resolution action
+                fixId:
+                  type: string
+                  description: Specific fix to apply
+                serverIds:
+                  type: array
+                  items:
+                    type: string
+                  description: Target servers for the fix
+            examples:
+              ResolvevulnerabilityRequestExample:
+                summary: Default resolveVulnerability request
+                x-microcks-default: true
+                value:
+                  action: apply-fix
+                  fixId: '500123'
+                  serverIds:
+                  - example_value
+      responses:
+        '202':
+          description: Resolution initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                  status:
+                    type: string
+              examples:
+                Resolvevulnerability202Example:
+                  summary: Default resolveVulnerability 202 response
+                  x-microcks-default: true
+                  value:
+                    taskId: '500123'
+                    status: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Vulnerability:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Vulnerability identifier
+          example: abc123
+        cveIds:
+          type: array
+          items:
+            type: string
+          description: Associated CVE identifiers
+          example: []
+        severity:
+          type: string
+          enum:
+          - critical
+          - high
+          - medium
+          - low
+          example: critical
+        cvssScore:
+          type: number
+          description: CVSS base score
+          example: 42.5
+        description:
+          type: string
+          example: A sample description.
+        affectedServers:
+          type: array
+          items:
+            type: string
+          description: List of affected server IDs
+          example: []
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - in-progress
+          - accepted-risk
+          example: open
+        availableFixes:
+          type: array
+          items:
+            type: string
+          description: List of available fix IDs
+          example: []
+        publishedDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        discoveredDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

@@ -1,0 +1,196 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Nodes API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Nodes
+  description: Node management operations
+paths:
+  /nodes:
+    get:
+      operationId: listNodes
+      summary: List Nodes
+      description: Returns a list of all nodes in the cell.
+      tags:
+      - Nodes
+      responses:
+        '200':
+          description: List of nodes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Node'
+              examples:
+                Listnodes200Example:
+                  summary: Default listNodes 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    hostName: example_value
+                    platformOS: example_value
+                    servers:
+                    - example_value
+                    synchronized: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /nodes/{nodeName}:
+    get:
+      operationId: getNode
+      summary: Get Node Details
+      description: Returns details of a specific node.
+      tags:
+      - Nodes
+      parameters:
+      - $ref: '#/components/parameters/nodeName'
+      responses:
+        '200':
+          description: Node details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+              examples:
+                Getnode200Example:
+                  summary: Default getNode 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    hostName: example_value
+                    platformOS: example_value
+                    servers:
+                    - example_value
+                    synchronized: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /nodes/{nodeName}/sync:
+    post:
+      operationId: syncNode
+      summary: Synchronize a Node
+      description: Triggers configuration synchronization for the specified node.
+      tags:
+      - Nodes
+      parameters:
+      - $ref: '#/components/parameters/nodeName'
+      responses:
+        '200':
+          description: Node synchronization initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                Syncnode200Example:
+                  summary: Default syncNode 200 response
+                  x-microcks-default: true
+                  value:
+                    status: example_value
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    nodeName:
+      name: nodeName
+      in: path
+      required: true
+      description: Node name
+      schema:
+        type: string
+  schemas:
+    Node:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Node name
+          example: Example Title
+        hostName:
+          type: string
+          description: Hostname of the node
+          example: example_value
+        platformOS:
+          type: string
+          description: Operating system platform
+          example: example_value
+        servers:
+          type: array
+          items:
+            type: string
+          example: []
+        synchronized:
+          type: boolean
+          description: Whether the node configuration is synchronized
+          example: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

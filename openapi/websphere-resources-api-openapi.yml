@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Resources API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Resources
+  description: Resource management including data sources and JMS
+paths:
+  /resources/datasources:
+    get:
+      operationId: listDataSources
+      summary: List Data Sources
+      description: Returns a list of configured JDBC data sources.
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: List of data sources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataSource'
+              examples:
+                Listdatasources200Example:
+                  summary: Default listDataSources 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    jndiName: example_value
+                    databaseType: example_value
+                    jdbcProvider: example_value
+                    connectionPool:
+                      minConnections: 10
+                      maxConnections: 10
+                      connectionTimeout: 10
+                      reapTime: 10
+                    status: active
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resources/datasources/{dsName}:
+    get:
+      operationId: getDataSource
+      summary: Get Data Source Details
+      description: Returns configuration details for a specific data source.
+      tags:
+      - Resources
+      parameters:
+      - name: dsName
+        in: path
+        required: true
+        description: Data source name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Data source details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSource'
+              examples:
+                Getdatasource200Example:
+                  summary: Default getDataSource 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    jndiName: example_value
+                    databaseType: example_value
+                    jdbcProvider: example_value
+                    connectionPool:
+                      minConnections: 10
+                      maxConnections: 10
+                      connectionTimeout: 10
+                      reapTime: 10
+                    status: active
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resources/datasources/{dsName}/test:
+    post:
+      operationId: testDataSourceConnection
+      summary: Test Data Source Connection
+      description: Tests the connection for a specific data source.
+      tags:
+      - Resources
+      parameters:
+      - name: dsName
+        in: path
+        required: true
+        description: Data source name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Connection test result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+              examples:
+                Testdatasourceconnection200Example:
+                  summary: Default testDataSourceConnection 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    DataSource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Data source name
+          example: Example Title
+        jndiName:
+          type: string
+          description: JNDI name
+          example: example_value
+        databaseType:
+          type: string
+          description: Database type
+          example: example_value
+        jdbcProvider:
+          type: string
+          description: JDBC provider name
+          example: example_value
+        connectionPool:
+          type: object
+          properties:
+            minConnections:
+              type: integer
+            maxConnections:
+              type: integer
+            connectionTimeout:
+              type: integer
+              description: Timeout in seconds
+            reapTime:
+              type: integer
+              description: Reap time in seconds
+          example: example_value
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          example: active
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

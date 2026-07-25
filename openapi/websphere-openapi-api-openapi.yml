@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications OpenAPI API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: OpenAPI
+  description: MicroProfile OpenAPI documentation endpoints
+paths:
+  /openapi:
+    get:
+      operationId: getOpenApiDocument
+      summary: Get Openapi Document
+      description: Returns the OpenAPI document describing all deployed REST endpoints.
+      tags:
+      - OpenAPI
+      security: []
+      parameters:
+      - name: format
+        in: query
+        description: Output format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+          default: yaml
+        example: json
+      responses:
+        '200':
+          description: OpenAPI document
+          content:
+            application/yaml:
+              schema:
+                type: string
+              examples:
+                Getopenapidocument200Example:
+                  summary: Default getOpenApiDocument 200 response
+                  x-microcks-default: true
+                  value: example_value
+            application/json:
+              schema:
+                type: object
+              examples:
+                Getopenapidocument200Example:
+                  summary: Default getOpenApiDocument 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /openapi/ui:
+    get:
+      operationId: getOpenApiUi
+      summary: Access the Openapi Ui
+      description: Returns the Swagger UI for exploring and testing deployed REST endpoints.
+      tags:
+      - OpenAPI
+      security: []
+      responses:
+        '200':
+          description: OpenAPI UI HTML page
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                Getopenapiui200Example:
+                  summary: Default getOpenApiUi 200 response
+                  x-microcks-default: true
+                  value: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

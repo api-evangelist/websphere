@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Config API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Config
+  description: Server configuration API
+paths:
+  /ibm/api/config:
+    get:
+      operationId: getServerConfig
+      summary: Get Server Configuration
+      description: Returns the current Open Liberty server configuration.
+      tags:
+      - Config
+      responses:
+        '200':
+          description: Server configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerConfig'
+              examples:
+                Getserverconfig200Example:
+                  summary: Default getServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    description: A sample description.
+                    featureManager:
+                      feature:
+                      - example_value
+                    httpEndpoint:
+                    - id: abc123
+                      host: example_value
+                      httpPort: 10
+                      httpsPort: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ibm/api/config/{elementName}:
+    get:
+      operationId: getConfigElement
+      summary: Get Configuration Element
+      description: Returns a specific configuration element type.
+      tags:
+      - Config
+      parameters:
+      - name: elementName
+        in: path
+        required: true
+        description: Configuration element name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Configuration element details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+              examples:
+                Getconfigelement200Example:
+                  summary: Default getConfigElement 200 response
+                  x-microcks-default: true
+                  value:
+                  - {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ServerConfig:
+      type: object
+      properties:
+        description:
+          type: string
+          example: A sample description.
+        featureManager:
+          type: object
+          properties:
+            feature:
+              type: array
+              items:
+                type: string
+          example: example_value
+        httpEndpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              host:
+                type: string
+              httpPort:
+                type: integer
+              httpsPort:
+                type: integer
+          example: []
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

@@ -1,0 +1,533 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Queues API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Queues
+  description: Queue administration and management
+paths:
+  /admin/qmgr/{qmgrName}/queue:
+    get:
+      operationId: listQueues
+      summary: List Queues
+      description: Returns a list of queues on the specified queue manager.
+      tags:
+      - Queues
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: name
+        in: query
+        description: Queue name filter with wildcard support
+        schema:
+          type: string
+        example: Example Title
+      - name: type
+        in: query
+        description: Queue type filter
+        schema:
+          type: string
+          enum:
+          - local
+          - alias
+          - remote
+          - model
+          - cluster
+        example: local
+      - name: attributes
+        in: query
+        description: Comma-separated list of attributes to return
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: List of queues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  queue:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Queue'
+              examples:
+                Listqueues200Example:
+                  summary: Default listQueues 200 response
+                  x-microcks-default: true
+                  value:
+                    queue:
+                    - name: Example Title
+                      type: local
+                      description: A sample description.
+                      maxDepth: 10
+                      maxMessageLength: 10
+                      currentDepth: 10
+                      inhibitPut: true
+                      inhibitGet: true
+                      persistence:
+                        default: persistent
+                      cluster:
+                        name: Example Title
+                        workloadRank: 10
+                        workloadPriority: 10
+                      status:
+                        currentDepth: 10
+                        openInputCount: 10
+                        openOutputCount: 10
+                        lastGetDateTime: '2026-01-15T10:30:00Z'
+                        lastPutDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createQueue
+      summary: Create a Queue
+      description: Creates a new queue on the specified queue manager.
+      tags:
+      - Queues
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueueCreate'
+            examples:
+              CreatequeueRequestExample:
+                summary: Default createQueue request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  type: local
+                  description: A sample description.
+                  maxDepth: 10
+                  maxMessageLength: 10
+                  persistence:
+                    default: persistent
+      responses:
+        '201':
+          description: Queue created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+              examples:
+                Createqueue201Example:
+                  summary: Default createQueue 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: local
+                    description: A sample description.
+                    maxDepth: 10
+                    maxMessageLength: 10
+                    currentDepth: 10
+                    inhibitPut: true
+                    inhibitGet: true
+                    persistence:
+                      default: persistent
+                    cluster:
+                      name: Example Title
+                      workloadRank: 10
+                      workloadPriority: 10
+                    status:
+                      currentDepth: 10
+                      openInputCount: 10
+                      openOutputCount: 10
+                      lastGetDateTime: '2026-01-15T10:30:00Z'
+                      lastPutDateTime: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Queue already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Createqueue409Example:
+                  summary: Default createQueue 409 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                    - type: example_value
+                      msgId: '500123'
+                      explanation: example_value
+                      action: example_value
+                      message: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}/queue/{queueName}:
+    get:
+      operationId: getQueue
+      summary: Get Queue Details
+      description: Returns details of a specific queue.
+      tags:
+      - Queues
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: status
+        in: query
+        description: Include queue status information
+        schema:
+          type: boolean
+          default: false
+        example: true
+      - name: attributes
+        in: query
+        description: Comma-separated list of attributes to return
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Queue details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+              examples:
+                Getqueue200Example:
+                  summary: Default getQueue 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: local
+                    description: A sample description.
+                    maxDepth: 10
+                    maxMessageLength: 10
+                    currentDepth: 10
+                    inhibitPut: true
+                    inhibitGet: true
+                    persistence:
+                      default: persistent
+                    cluster:
+                      name: Example Title
+                      workloadRank: 10
+                      workloadPriority: 10
+                    status:
+                      currentDepth: 10
+                      openInputCount: 10
+                      openOutputCount: 10
+                      lastGetDateTime: '2026-01-15T10:30:00Z'
+                      lastPutDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateQueue
+      summary: Update Queue Attributes
+      description: Updates attributes of an existing queue.
+      tags:
+      - Queues
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueueUpdate'
+            examples:
+              UpdatequeueRequestExample:
+                summary: Default updateQueue request
+                x-microcks-default: true
+                value:
+                  description: A sample description.
+                  maxDepth: 10
+                  maxMessageLength: 10
+                  inhibitPut: true
+                  inhibitGet: true
+      responses:
+        '200':
+          description: Queue updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+              examples:
+                Updatequeue200Example:
+                  summary: Default updateQueue 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: local
+                    description: A sample description.
+                    maxDepth: 10
+                    maxMessageLength: 10
+                    currentDepth: 10
+                    inhibitPut: true
+                    inhibitGet: true
+                    persistence:
+                      default: persistent
+                    cluster:
+                      name: Example Title
+                      workloadRank: 10
+                      workloadPriority: 10
+                    status:
+                      currentDepth: 10
+                      openInputCount: 10
+                      openOutputCount: 10
+                      lastGetDateTime: '2026-01-15T10:30:00Z'
+                      lastPutDateTime: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteQueue
+      summary: Delete a Queue
+      description: Deletes a queue from the queue manager.
+      tags:
+      - Queues
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: purge
+        in: query
+        description: Purge messages before deleting
+        schema:
+          type: boolean
+          default: false
+        example: true
+      responses:
+        '204':
+          description: Queue deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+    queueName:
+      name: queueName
+      in: path
+      required: true
+      description: Queue name
+      schema:
+        type: string
+  schemas:
+    QueueUpdate:
+      type: object
+      properties:
+        description:
+          type: string
+          example: A sample description.
+        maxDepth:
+          type: integer
+          example: 10
+        maxMessageLength:
+          type: integer
+          example: 10
+        inhibitPut:
+          type: boolean
+          example: true
+        inhibitGet:
+          type: boolean
+          example: true
+    QueueCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Queue name
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - local
+          - alias
+          - remote
+          - model
+          default: local
+          example: local
+        description:
+          type: string
+          example: A sample description.
+        maxDepth:
+          type: integer
+          default: 5000
+          example: 10
+        maxMessageLength:
+          type: integer
+          default: 4194304
+          example: 10
+        persistence:
+          type: object
+          properties:
+            default:
+              type: string
+              enum:
+              - persistent
+              - nonPersistent
+          example: example_value
+    Queue:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Queue name
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - local
+          - alias
+          - remote
+          - model
+          - cluster
+          description: Queue type
+          example: local
+        description:
+          type: string
+          example: A sample description.
+        maxDepth:
+          type: integer
+          description: Maximum queue depth
+          example: 10
+        maxMessageLength:
+          type: integer
+          description: Maximum message length in bytes
+          example: 10
+        currentDepth:
+          type: integer
+          description: Current number of messages on the queue
+          example: 10
+        inhibitPut:
+          type: boolean
+          description: Whether put operations are inhibited
+          example: true
+        inhibitGet:
+          type: boolean
+          description: Whether get operations are inhibited
+          example: true
+        persistence:
+          type: object
+          properties:
+            default:
+              type: string
+              enum:
+              - persistent
+              - nonPersistent
+          example: example_value
+        cluster:
+          type: object
+          properties:
+            name:
+              type: string
+            workloadRank:
+              type: integer
+            workloadPriority:
+              type: integer
+          example: example_value
+        status:
+          type: object
+          properties:
+            currentDepth:
+              type: integer
+            openInputCount:
+              type: integer
+            openOutputCount:
+              type: integer
+            lastGetDateTime:
+              type: string
+              format: date-time
+            lastPutDateTime:
+              type: string
+              format: date-time
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

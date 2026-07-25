@@ -1,0 +1,382 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Channels API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Channels
+  description: Channel administration
+paths:
+  /admin/qmgr/{qmgrName}/channel:
+    get:
+      operationId: listChannels
+      summary: List Channels
+      description: Returns a list of channels on the specified queue manager.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: name
+        in: query
+        description: Channel name filter
+        schema:
+          type: string
+        example: Example Title
+      - name: type
+        in: query
+        description: Channel type filter
+        schema:
+          type: string
+          enum:
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+        example: sender
+      responses:
+        '200':
+          description: List of channels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channel:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Channel'
+              examples:
+                Listchannels200Example:
+                  summary: Default listChannels 200 response
+                  x-microcks-default: true
+                  value:
+                    channel:
+                    - name: Example Title
+                      type: sender
+                      description: A sample description.
+                      connectionName: example_value
+                      transmissionQueue: example_value
+                      status:
+                        state: running
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createChannel
+      summary: Create a Channel
+      description: Creates a new channel on the queue manager.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelCreate'
+            examples:
+              CreatechannelRequestExample:
+                summary: Default createChannel request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  type: sender
+                  description: A sample description.
+                  connectionName: example_value
+                  transmissionQueue: example_value
+      responses:
+        '201':
+          description: Channel created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+              examples:
+                Createchannel201Example:
+                  summary: Default createChannel 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: sender
+                    description: A sample description.
+                    connectionName: example_value
+                    transmissionQueue: example_value
+                    status:
+                      state: running
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}/channel/{channelName}:
+    get:
+      operationId: getChannel
+      summary: Get Channel Details
+      description: Returns details of a specific channel.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        description: Channel name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Channel details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+              examples:
+                Getchannel200Example:
+                  summary: Default getChannel 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    type: sender
+                    description: A sample description.
+                    connectionName: example_value
+                    transmissionQueue: example_value
+                    status:
+                      state: running
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteChannel
+      summary: Delete a Channel
+      description: Deletes a channel from the queue manager.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Channel deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}/channel/{channelName}/start:
+    post:
+      operationId: startChannel
+      summary: Start a Channel
+      description: Starts a channel on the queue manager.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Channel started
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}/channel/{channelName}/stop:
+    post:
+      operationId: stopChannel
+      summary: Stop a Channel
+      description: Stops a channel on the queue manager.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: channelName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Channel stopped
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Channel:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Channel name
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+          example: sender
+        description:
+          type: string
+          example: A sample description.
+        connectionName:
+          type: string
+          description: Connection name (host and port)
+          example: example_value
+        transmissionQueue:
+          type: string
+          description: Transmission queue name
+          example: example_value
+        status:
+          type: object
+          properties:
+            state:
+              type: string
+              enum:
+              - running
+              - stopped
+              - retrying
+              - binding
+              - starting
+              - stopping
+          example: example_value
+    ChannelCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+          example: sender
+        description:
+          type: string
+          example: A sample description.
+        connectionName:
+          type: string
+          example: example_value
+        transmissionQueue:
+          type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

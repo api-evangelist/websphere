@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications File Transfer API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: File Transfer
+  description: File upload and download operations
+paths:
+  /file:
+    get:
+      operationId: downloadFile
+      summary: Download a File
+      description: Downloads a file from the Liberty server.
+      tags:
+      - File Transfer
+      parameters:
+      - name: path
+        in: query
+        required: true
+        description: Path to the file on the server
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: File content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Downloadfile200Example:
+                  summary: Default downloadFile 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: uploadFile
+      summary: Upload a File
+      description: Uploads a file to the Liberty server.
+      tags:
+      - File Transfer
+      parameters:
+      - name: path
+        in: query
+        required: true
+        description: Destination path on the server
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              UploadfileRequestExample:
+                summary: Default uploadFile request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '201':
+          description: File uploaded
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteFile
+      summary: Delete a File
+      description: Deletes a file from the Liberty server.
+      tags:
+      - File Transfer
+      parameters:
+      - name: path
+        in: query
+        required: true
+        description: Path to the file on the server
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: File deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /file/upload:
+    post:
+      operationId: uploadFile
+      summary: Upload a File
+      description: Uploads a file to the Liberty server file system.
+      tags:
+      - File Transfer
+      parameters:
+      - name: targetPath
+        in: query
+        required: true
+        description: Target file path on the server
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              UploadfileRequestExample:
+                summary: Default uploadFile request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '201':
+          description: File uploaded successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /file/download:
+    get:
+      operationId: downloadFile
+      summary: Download a File
+      description: Downloads a file from the Liberty server file system.
+      tags:
+      - File Transfer
+      parameters:
+      - name: sourcePath
+        in: query
+        required: true
+        description: Source file path on the server
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: File content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Downloadfile200Example:
+                  summary: Default downloadFile 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /file/delete:
+    delete:
+      operationId: deleteFile
+      summary: Delete a File
+      description: Deletes a file from the Liberty server file system.
+      tags:
+      - File Transfer
+      parameters:
+      - name: path
+        in: query
+        required: true
+        description: File path on the server
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: File deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

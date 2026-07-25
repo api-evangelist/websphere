@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Compliance API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Compliance
+  description: Compliance and configuration drift detection
+paths:
+  /compliance/reports:
+    get:
+      operationId: listComplianceReports
+      summary: List Compliance Reports
+      description: Returns a list of compliance reports.
+      tags:
+      - Compliance
+      responses:
+        '200':
+          description: List of compliance reports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComplianceReport'
+              examples:
+                Listcompliancereports200Example:
+                  summary: Default listComplianceReports 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    generatedDate: '2026-01-15T10:30:00Z'
+                    overallCompliance: 42.5
+                    servers:
+                    - serverId: '500123'
+                      serverName: example_value
+                      complianceScore: 42.5
+                      findings: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /compliance/reports/{reportId}:
+    get:
+      operationId: getComplianceReport
+      summary: Get Compliance Report Details
+      description: Returns a specific compliance report.
+      tags:
+      - Compliance
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Compliance report details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplianceReport'
+              examples:
+                Getcompliancereport200Example:
+                  summary: Default getComplianceReport 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    generatedDate: '2026-01-15T10:30:00Z'
+                    overallCompliance: 42.5
+                    servers:
+                    - serverId: '500123'
+                      serverName: example_value
+                      complianceScore: 42.5
+                      findings:
+                      - {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ComplianceReport:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        generatedDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        overallCompliance:
+          type: number
+          description: Overall compliance percentage
+          example: 42.5
+        servers:
+          type: array
+          items:
+            type: object
+            properties:
+              serverId:
+                type: string
+              serverName:
+                type: string
+              complianceScore:
+                type: number
+              findings:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    rule:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                      - compliant
+                      - non-compliant
+                    description:
+                      type: string
+          example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

@@ -1,0 +1,370 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Scaling API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Scaling
+  description: Scaling policy and auto-scaling management
+paths:
+  /scaling/policies:
+    get:
+      operationId: listScalingPolicies
+      summary: List Scaling Policies
+      description: Returns a list of auto-scaling policies.
+      tags:
+      - Scaling
+      responses:
+        '200':
+          description: List of scaling policies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Listscalingpolicies200Example:
+                  summary: Default listScalingPolicies 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createScalingPolicy
+      summary: Create a Scaling Policy
+      description: Creates a new auto-scaling policy for a cluster.
+      tags:
+      - Scaling
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalingPolicy'
+            examples:
+              CreatescalingpolicyRequestExample:
+                summary: Default createScalingPolicy request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  clusterName: example_value
+                  enabled: true
+                  minMembers: 10
+                  maxMembers: 10
+                  scaleUpTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  scaleDownTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  cooldownPeriod: 10
+      responses:
+        '201':
+          description: Scaling policy created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Createscalingpolicy201Example:
+                  summary: Default createScalingPolicy 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /scaling/policies/{policyName}:
+    get:
+      operationId: getScalingPolicy
+      summary: Get Scaling Policy Details
+      description: Returns details of a specific auto-scaling policy.
+      tags:
+      - Scaling
+      parameters:
+      - name: policyName
+        in: path
+        required: true
+        description: Scaling policy name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Scaling policy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Getscalingpolicy200Example:
+                  summary: Default getScalingPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateScalingPolicy
+      summary: Update a Scaling Policy
+      description: Updates an existing auto-scaling policy.
+      tags:
+      - Scaling
+      parameters:
+      - name: policyName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalingPolicy'
+            examples:
+              UpdatescalingpolicyRequestExample:
+                summary: Default updateScalingPolicy request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  clusterName: example_value
+                  enabled: true
+                  minMembers: 10
+                  maxMembers: 10
+                  scaleUpTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  scaleDownTrigger:
+                    metric: cpuUtilization
+                    threshold: 42.5
+                    duration: 10
+                  cooldownPeriod: 10
+      responses:
+        '200':
+          description: Scaling policy updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicy'
+              examples:
+                Updatescalingpolicy200Example:
+                  summary: Default updateScalingPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    clusterName: example_value
+                    enabled: true
+                    minMembers: 10
+                    maxMembers: 10
+                    scaleUpTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    scaleDownTrigger:
+                      metric: cpuUtilization
+                      threshold: 42.5
+                      duration: 10
+                    cooldownPeriod: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteScalingPolicy
+      summary: Delete a Scaling Policy
+      description: Deletes an auto-scaling policy.
+      tags:
+      - Scaling
+      parameters:
+      - name: policyName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Scaling policy deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    ScalingPolicy:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Policy name
+          example: Example Title
+        clusterName:
+          type: string
+          description: Target cluster
+          example: example_value
+        enabled:
+          type: boolean
+          description: Whether the policy is active
+          example: true
+        minMembers:
+          type: integer
+          description: Minimum number of cluster members
+          example: 10
+        maxMembers:
+          type: integer
+          description: Maximum number of cluster members
+          example: 10
+        scaleUpTrigger:
+          type: object
+          properties:
+            metric:
+              type: string
+              enum:
+              - cpuUtilization
+              - memoryUtilization
+              - responseTime
+            threshold:
+              type: number
+            duration:
+              type: integer
+              description: Duration in seconds before triggering
+          example: example_value
+        scaleDownTrigger:
+          type: object
+          properties:
+            metric:
+              type: string
+              enum:
+              - cpuUtilization
+              - memoryUtilization
+              - responseTime
+            threshold:
+              type: number
+            duration:
+              type: integer
+          example: example_value
+        cooldownPeriod:
+          type: integer
+          description: Cooldown period in seconds between scaling events
+          example: 10
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

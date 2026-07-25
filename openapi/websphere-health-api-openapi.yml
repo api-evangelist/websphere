@@ -1,0 +1,362 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Health API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Health
+  description: MicroProfile Health Check API
+paths:
+  /health:
+    get:
+      operationId: getOverallHealth
+      summary: Get Overall Health Status
+      description: Returns the overall health check status including all readiness and liveness checks.
+      tags:
+      - Health
+      security: []
+      responses:
+        '200':
+          description: All health checks passed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getoverallhealth200Example:
+                  summary: Default getOverallHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+        '503':
+          description: One or more health checks failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getoverallhealth503Example:
+                  summary: Default getOverallHealth 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /health/ready:
+    get:
+      operationId: getReadiness
+      summary: Get Readiness Status
+      description: Returns readiness check results indicating whether the server is ready to accept traffic.
+      tags:
+      - Health
+      security: []
+      responses:
+        '200':
+          description: Server is ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getreadiness200Example:
+                  summary: Default getReadiness 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+        '503':
+          description: Server is not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getreadiness503Example:
+                  summary: Default getReadiness 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /health/live:
+    get:
+      operationId: getLiveness
+      summary: Get Liveness Status
+      description: Returns liveness check results indicating whether the server is alive and running.
+      tags:
+      - Health
+      security: []
+      responses:
+        '200':
+          description: Server is alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getliveness200Example:
+                  summary: Default getLiveness 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+        '503':
+          description: Server is not alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getliveness503Example:
+                  summary: Default getLiveness 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /health/started:
+    get:
+      operationId: getStarted
+      summary: Get Startup Status
+      description: Returns startup check results indicating whether the server has completed startup.
+      tags:
+      - Health
+      security: []
+      responses:
+        '200':
+          description: Server has started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getstarted200Example:
+                  summary: Default getStarted 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+        '503':
+          description: Server has not started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              examples:
+                Getstarted503Example:
+                  summary: Default getStarted 503 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /health/servers/{serverId}:
+    get:
+      operationId: getServerHealth
+      summary: Get Server Health Status
+      description: Returns health information for a specific managed server.
+      tags:
+      - Health
+      parameters:
+      - $ref: '#/components/parameters/serverId'
+      responses:
+        '200':
+          description: Server health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerHealth'
+              examples:
+                Getserverhealth200Example:
+                  summary: Default getServerHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    serverId: '500123'
+                    serverName: example_value
+                    status: healthy
+                    uptime: 10
+                    cpuUsage: 42.5
+                    memoryUsage: 42.5
+                    openVulnerabilities: 10
+                    lastHealthCheck: '2026-01-15T10:30:00Z'
+                    checks:
+                    - name: Example Title
+                      status: pass
+                      message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
+  schemas:
+    ServerHealth:
+      type: object
+      properties:
+        serverId:
+          type: string
+          example: '500123'
+        serverName:
+          type: string
+          example: example_value
+        status:
+          type: string
+          enum:
+          - healthy
+          - warning
+          - critical
+          example: healthy
+        uptime:
+          type: integer
+          description: Uptime in seconds
+          example: 10
+        cpuUsage:
+          type: number
+          description: CPU usage percentage
+          example: 42.5
+        memoryUsage:
+          type: number
+          description: Memory usage percentage
+          example: 42.5
+        openVulnerabilities:
+          type: integer
+          example: 10
+        lastHealthCheck:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                - pass
+                - warn
+                - fail
+              message:
+                type: string
+          example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    HealthCheckResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - UP
+          - DOWN
+          example: UP
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Health check name
+              status:
+                type: string
+                enum:
+                - UP
+                - DOWN
+              data:
+                type: object
+                additionalProperties: true
+                description: Additional health check data
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

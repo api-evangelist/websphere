@@ -1,0 +1,329 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Members API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Members
+  description: Collective member management
+paths:
+  /members:
+    get:
+      operationId: listMembers
+      summary: List Collective Members
+      description: Returns a list of all servers that are members of this collective.
+      tags:
+      - Members
+      parameters:
+      - name: status
+        in: query
+        description: Filter by member status
+        schema:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - UNKNOWN
+        example: STARTED
+      - name: hostName
+        in: query
+        description: Filter by hostname
+        schema:
+          type: string
+        example: example_value
+      - name: clusterName
+        in: query
+        description: Filter by cluster membership
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: List of collective members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CollectiveMember'
+              examples:
+                Listmembers200Example:
+                  summary: Default listMembers 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    hostName: example_value
+                    userDir: example_value
+                    status: STARTED
+                    clusterName: example_value
+                    httpsPort: 10
+                    wlpVersion: example_value
+                    javaVersion: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /members/{memberName}:
+    get:
+      operationId: getMember
+      summary: Get Member Details
+      description: Returns details of a specific collective member.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/memberName'
+      responses:
+        '200':
+          description: Member details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectiveMember'
+              examples:
+                Getmember200Example:
+                  summary: Default getMember 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    hostName: example_value
+                    userDir: example_value
+                    status: STARTED
+                    clusterName: example_value
+                    httpsPort: 10
+                    wlpVersion: example_value
+                    javaVersion: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /members/{memberName}/start:
+    post:
+      operationId: startMember
+      summary: Start a Collective Member
+      description: Starts a stopped collective member server.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/memberName'
+      responses:
+        '200':
+          description: Member start initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberStatus'
+              examples:
+                Startmember200Example:
+                  summary: Default startMember 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: STARTED
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /members/{memberName}/stop:
+    post:
+      operationId: stopMember
+      summary: Stop a Collective Member
+      description: Stops a running collective member server.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/memberName'
+      responses:
+        '200':
+          description: Member stop initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberStatus'
+              examples:
+                Stopmember200Example:
+                  summary: Default stopMember 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: STARTED
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /members/{memberName}/transfer:
+    post:
+      operationId: transferFiles
+      summary: Transfer Files to a Member
+      description: Transfers configuration or application files to a collective member.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/memberName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sourcePath:
+                  type: string
+                  description: Source file path on the controller
+                targetPath:
+                  type: string
+                  description: Target file path on the member
+              required:
+              - sourcePath
+              - targetPath
+            examples:
+              TransferfilesRequestExample:
+                summary: Default transferFiles request
+                x-microcks-default: true
+                value:
+                  sourcePath: example_value
+                  targetPath: example_value
+      responses:
+        '200':
+          description: File transfer initiated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MemberStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        message:
+          type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    CollectiveMember:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Member server name
+          example: Example Title
+        hostName:
+          type: string
+          description: Host where the member is located
+          example: example_value
+        userDir:
+          type: string
+          description: User directory path
+          example: example_value
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - UNKNOWN
+          description: Member status
+          example: STARTED
+        clusterName:
+          type: string
+          description: Cluster the member belongs to
+          example: example_value
+        httpsPort:
+          type: integer
+          description: HTTPS port
+          example: 10
+        wlpVersion:
+          type: string
+          description: Liberty version
+          example: example_value
+        javaVersion:
+          type: string
+          description: Java version
+          example: example_value
+  parameters:
+    memberName:
+      name: memberName
+      in: path
+      required: true
+      description: Collective member server name
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

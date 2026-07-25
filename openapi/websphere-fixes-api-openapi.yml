@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Fixes API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Fixes
+  description: Fix management and automated patching
+paths:
+  /fixes:
+    get:
+      operationId: listFixes
+      summary: List Available Fixes
+      description: Returns a list of available fixes and patches.
+      tags:
+      - Fixes
+      parameters:
+      - name: serverId
+        in: query
+        description: Filter by applicable server
+        schema:
+          type: string
+        example: '500123'
+      - name: type
+        in: query
+        description: Filter by fix type
+        schema:
+          type: string
+          enum:
+          - security
+          - ifix
+          - fixpack
+        example: security
+      responses:
+        '200':
+          description: List of fixes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fixes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Fix'
+                  totalCount:
+                    type: integer
+              examples:
+                Listfixes200Example:
+                  summary: Default listFixes 200 response
+                  x-microcks-default: true
+                  value:
+                    fixes:
+                    - id: abc123
+                      name: Example Title
+                      type: security
+                      description: A sample description.
+                      resolvedCVEs:
+                      - {}
+                      applicableVersions:
+                      - {}
+                      downloadURL: https://www.example.com
+                      releaseDate: '2026-01-15T10:30:00Z'
+                      size: 10
+                    totalCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /fixes/{fixId}:
+    get:
+      operationId: getFix
+      summary: Get Fix Details
+      description: Returns details of a specific fix.
+      tags:
+      - Fixes
+      parameters:
+      - name: fixId
+        in: path
+        required: true
+        description: Fix identifier
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Fix details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fix'
+              examples:
+                Getfix200Example:
+                  summary: Default getFix 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    type: security
+                    description: A sample description.
+                    resolvedCVEs:
+                    - example_value
+                    applicableVersions:
+                    - example_value
+                    downloadURL: https://www.example.com
+                    releaseDate: '2026-01-15T10:30:00Z'
+                    size: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /fixes/{fixId}/apply:
+    post:
+      operationId: applyFix
+      summary: Apply a Fix
+      description: Applies a fix to one or more managed servers.
+      tags:
+      - Fixes
+      parameters:
+      - name: fixId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - serverIds
+              properties:
+                serverIds:
+                  type: array
+                  items:
+                    type: string
+                  description: Target servers
+                schedule:
+                  type: string
+                  format: date-time
+                  description: Scheduled time for applying the fix
+                restartAfterApply:
+                  type: boolean
+                  default: true
+                  description: Whether to restart servers after applying the fix
+            examples:
+              ApplyfixRequestExample:
+                summary: Default applyFix request
+                x-microcks-default: true
+                value:
+                  serverIds:
+                  - example_value
+                  schedule: '2026-01-15T10:30:00Z'
+                  restartAfterApply: true
+      responses:
+        '202':
+          description: Fix application initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                  status:
+                    type: string
+              examples:
+                Applyfix202Example:
+                  summary: Default applyFix 202 response
+                  x-microcks-default: true
+                  value:
+                    taskId: '500123'
+                    status: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Fix:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Fix identifier
+          example: abc123
+        name:
+          type: string
+          description: Fix name
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - security
+          - ifix
+          - fixpack
+          example: security
+        description:
+          type: string
+          example: A sample description.
+        resolvedCVEs:
+          type: array
+          items:
+            type: string
+          description: CVEs resolved by this fix
+          example: []
+        applicableVersions:
+          type: array
+          items:
+            type: string
+          description: WebSphere versions this fix applies to
+          example: []
+        downloadURL:
+          type: string
+          format: uri
+          example: https://www.example.com
+        releaseDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        size:
+          type: integer
+          description: Fix size in bytes
+          example: 10
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

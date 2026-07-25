@@ -1,0 +1,125 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Authentication API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Authentication
+  description: Authentication and authorization
+paths:
+  /login:
+    post:
+      operationId: login
+      summary: Authenticate and Get Ltpa Token
+      description: Authenticates the user and returns an LTPA token cookie for subsequent requests.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+            examples:
+              LoginRequestExample:
+                summary: Default login request
+                x-microcks-default: true
+                value:
+                  username: example_value
+                  password: example_value
+      responses:
+        '200':
+          description: Authentication successful
+          headers:
+            Set-Cookie:
+              description: LTPA token cookie
+              schema:
+                type: string
+        '401':
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Login401Example:
+                  summary: Default login 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                    - type: example_value
+                      msgId: '500123'
+                      explanation: example_value
+                      action: example_value
+                      message: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /logout:
+    post:
+      operationId: logout
+      summary: Logout and Invalidate Token
+      description: Invalidates the current LTPA token.
+      tags:
+      - Authentication
+      responses:
+        '204':
+          description: Logout successful
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

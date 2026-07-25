@@ -1,0 +1,558 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Batch API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Batch
+  description: Jakarta Batch job management
+paths:
+  /ibm/api/batch/jobinstances:
+    get:
+      operationId: listBatchJobInstances
+      summary: List Batch Job Instances
+      description: Returns a list of Jakarta Batch job instances.
+      tags:
+      - Batch
+      parameters:
+      - name: jobName
+        in: query
+        description: Filter by job name
+        schema:
+          type: string
+        example: example_value
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 50
+        example: 10
+      - name: sortBy
+        in: query
+        description: Sort field
+        schema:
+          type: string
+          enum:
+          - jobInstanceId
+          - createTime
+          - instanceState
+        example: jobInstanceId
+      responses:
+        '200':
+          description: List of job instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchJobInstance'
+              examples:
+                Listbatchjobinstances200Example:
+                  summary: Default listBatchJobInstances 200 response
+                  x-microcks-default: true
+                  value:
+                  - jobInstanceId: '500123'
+                    jobName: example_value
+                    appName: example_value
+                    submitter: example_value
+                    batchStatus: STARTING
+                    createTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    _links:
+                    - rel: example_value
+                      href: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ibm/api/batch/jobinstances/{jobInstanceId}:
+    get:
+      operationId: getBatchJobInstance
+      summary: Get Batch Job Instance
+      description: Returns details of a specific batch job instance.
+      tags:
+      - Batch
+      parameters:
+      - name: jobInstanceId
+        in: path
+        required: true
+        description: Job instance identifier
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '200':
+          description: Job instance details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobInstance'
+              examples:
+                Getbatchjobinstance200Example:
+                  summary: Default getBatchJobInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    appName: example_value
+                    submitter: example_value
+                    batchStatus: STARTING
+                    createTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    _links:
+                    - rel: example_value
+                      href: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ibm/api/batch/jobinstances/{jobInstanceId}/jobexecutions:
+    get:
+      operationId: listBatchJobExecutions
+      summary: List Job Executions for an Instance
+      description: Returns a list of executions for a specific batch job instance.
+      tags:
+      - Batch
+      parameters:
+      - name: jobInstanceId
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '200':
+          description: List of job executions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Listbatchjobexecutions200Example:
+                  summary: Default listBatchJobExecutions 200 response
+                  x-microcks-default: true
+                  value:
+                  - executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ibm/api/batch/jobexecutions/{executionId}:
+    get:
+      operationId: getBatchJobExecution
+      summary: Get Batch Job Execution
+      description: Returns details of a specific batch job execution.
+      tags:
+      - Batch
+      parameters:
+      - name: executionId
+        in: path
+        required: true
+        description: Job execution identifier
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '200':
+          description: Job execution details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Getbatchjobexecution200Example:
+                  summary: Default getBatchJobExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ibm/api/batch/jobexecutions/{executionId}/stop:
+    put:
+      operationId: stopBatchJobExecution
+      summary: Stop a Batch Job Execution
+      description: Stops a running batch job execution.
+      tags:
+      - Batch
+      parameters:
+      - name: executionId
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '200':
+          description: Job execution stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Stopbatchjobexecution200Example:
+                  summary: Default stopBatchJobExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ibm/api/batch/jobexecutions/{executionId}/restart:
+    put:
+      operationId: restartBatchJobExecution
+      summary: Restart a Batch Job Execution
+      description: Restarts a failed or stopped batch job execution.
+      tags:
+      - Batch
+      parameters:
+      - name: executionId
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jobParameters:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Job parameters for the restart
+            examples:
+              RestartbatchjobexecutionRequestExample:
+                summary: Default restartBatchJobExecution request
+                x-microcks-default: true
+                value:
+                  jobParameters: example_value
+      responses:
+        '200':
+          description: Job execution restarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJobExecution'
+              examples:
+                Restartbatchjobexecution200Example:
+                  summary: Default restartBatchJobExecution 200 response
+                  x-microcks-default: true
+                  value:
+                    executionId: '500123'
+                    jobInstanceId: '500123'
+                    jobName: example_value
+                    batchStatus: STARTING
+                    exitStatus: example_value
+                    createTime: '2026-01-15T10:30:00Z'
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    lastUpdatedTime: '2026-01-15T10:30:00Z'
+                    jobParameters: example_value
+                    stepExecutions:
+                    - stepExecutionId: '500123'
+                      stepName: example_value
+                      batchStatus: example_value
+                      exitStatus: example_value
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      readCount: 10
+                      writeCount: 10
+                      commitCount: 10
+                      rollbackCount: 10
+                      filterCount: 10
+                      processSkipCount: 10
+                      readSkipCount: 10
+                      writeSkipCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    BatchJobInstance:
+      type: object
+      properties:
+        jobInstanceId:
+          type: integer
+          example: '500123'
+        jobName:
+          type: string
+          example: example_value
+        appName:
+          type: string
+          example: example_value
+        submitter:
+          type: string
+          example: example_value
+        batchStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - STOPPING
+          - STOPPED
+          - FAILED
+          - COMPLETED
+          - ABANDONED
+          example: STARTING
+        createTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        lastUpdatedTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        jobParameters:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        _links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+                format: uri
+          example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    BatchJobExecution:
+      type: object
+      properties:
+        executionId:
+          type: integer
+          example: '500123'
+        jobInstanceId:
+          type: integer
+          example: '500123'
+        jobName:
+          type: string
+          example: example_value
+        batchStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - STOPPING
+          - STOPPED
+          - FAILED
+          - COMPLETED
+          - ABANDONED
+          example: STARTING
+        exitStatus:
+          type: string
+          example: example_value
+        createTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        startTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        endTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        lastUpdatedTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        jobParameters:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        stepExecutions:
+          type: array
+          items:
+            type: object
+            properties:
+              stepExecutionId:
+                type: integer
+              stepName:
+                type: string
+              batchStatus:
+                type: string
+              exitStatus:
+                type: string
+              startTime:
+                type: string
+                format: date-time
+              endTime:
+                type: string
+                format: date-time
+              readCount:
+                type: integer
+              writeCount:
+                type: integer
+              commitCount:
+                type: integer
+              rollbackCount:
+                type: integer
+              filterCount:
+                type: integer
+              processSkipCount:
+                type: integer
+              readSkipCount:
+                type: integer
+              writeSkipCount:
+                type: integer
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

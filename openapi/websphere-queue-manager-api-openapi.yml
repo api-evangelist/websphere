@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Queue Manager API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Queue Manager
+  description: Queue manager administration
+paths:
+  /admin/qmgr:
+    get:
+      operationId: listQueueManagers
+      summary: List Queue Managers
+      description: Returns a list of queue managers that the REST API can interact with.
+      tags:
+      - Queue Manager
+      responses:
+        '200':
+          description: List of queue managers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  qmgr:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QueueManager'
+              examples:
+                Listqueuemanagers200Example:
+                  summary: Default listQueueManagers 200 response
+                  x-microcks-default: true
+                  value:
+                    qmgr:
+                    - name: Example Title
+                      state: running
+                      version: example_value
+                      platform: example_value
+                      commandLevel: 10
+                      connectionCount: 10
+                      description: A sample description.
+                      maximumMessageLength: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}:
+    get:
+      operationId: getQueueManager
+      summary: Get Queue Manager Details
+      description: Returns details of a specific queue manager.
+      tags:
+      - Queue Manager
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: attributes
+        in: query
+        description: Comma-separated list of attributes to return
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Queue manager details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueManager'
+              examples:
+                Getqueuemanager200Example:
+                  summary: Default getQueueManager 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    state: running
+                    version: example_value
+                    platform: example_value
+                    commandLevel: 10
+                    connectionCount: 10
+                    description: A sample description.
+                    maximumMessageLength: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+    QueueManager:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Queue manager name
+          example: Example Title
+        state:
+          type: string
+          enum:
+          - running
+          - ended
+          description: Queue manager state
+          example: running
+        version:
+          type: string
+          description: MQ version
+          example: example_value
+        platform:
+          type: string
+          description: Platform type
+          example: example_value
+        commandLevel:
+          type: integer
+          description: Command level
+          example: 10
+        connectionCount:
+          type: integer
+          description: Number of active connections
+          example: 10
+        description:
+          type: string
+          example: A sample description.
+        maximumMessageLength:
+          type: integer
+          description: Maximum message length in bytes
+          example: 10
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

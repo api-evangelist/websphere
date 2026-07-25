@@ -1,0 +1,506 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Applications
+  description: Application deployment and lifecycle management
+paths:
+  /applications:
+    get:
+      operationId: listApplications
+      summary: List Deployed Applications
+      description: Returns a list of all applications deployed on the server or cell.
+      tags:
+      - Applications
+      parameters:
+      - name: status
+        in: query
+        description: Filter by application status
+        schema:
+          type: string
+          enum:
+          - started
+          - stopped
+          - unknown
+        example: started
+      responses:
+        '200':
+          description: List of deployed applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+              examples:
+                Listapplications200Example:
+                  summary: Default listApplications 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    status: started
+                    contextRoot: example_value
+                    targetServer: example_value
+                    deployedModules:
+                    - name: Example Title
+                      type: web
+                      uri: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: deployApplication
+      summary: Deploy a New Application
+      description: Deploys a new application to the server or cluster.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The application archive (EAR, WAR, or JAR)
+                name:
+                  type: string
+                  description: Application name
+                contextRoot:
+                  type: string
+                  description: Context root for web modules
+                targetServer:
+                  type: string
+                  description: Target server or cluster name
+              required:
+              - file
+              - name
+            examples:
+              DeployapplicationRequestExample:
+                summary: Default deployApplication request
+                x-microcks-default: true
+                value:
+                  file: example_value
+                  name: Example Title
+                  contextRoot: example_value
+                  targetServer: example_value
+      responses:
+        '201':
+          description: Application deployed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+              examples:
+                Deployapplication201Example:
+                  summary: Default deployApplication 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: started
+                    contextRoot: example_value
+                    targetServer: example_value
+                    deployedModules:
+                    - name: Example Title
+                      type: web
+                      uri: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Application already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Deployapplication409Example:
+                  summary: Default deployApplication 409 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    details: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications/{appName}:
+    get:
+      operationId: getApplication
+      summary: Get Application Details
+      description: Returns details of a specific deployed application.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+              examples:
+                Getapplication200Example:
+                  summary: Default getApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: started
+                    contextRoot: example_value
+                    targetServer: example_value
+                    deployedModules:
+                    - name: Example Title
+                      type: web
+                      uri: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateApplication
+      summary: Update Application Configuration
+      description: Updates the configuration of a deployed application.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+            examples:
+              UpdateapplicationRequestExample:
+                summary: Default updateApplication request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  status: started
+                  contextRoot: example_value
+                  targetServer: example_value
+                  deployedModules:
+                  - name: Example Title
+                    type: web
+                    uri: example_value
+                  lastModified: '2026-01-15T10:30:00Z'
+      responses:
+        '200':
+          description: Application updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+              examples:
+                Updateapplication200Example:
+                  summary: Default updateApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: started
+                    contextRoot: example_value
+                    targetServer: example_value
+                    deployedModules:
+                    - name: Example Title
+                      type: web
+                      uri: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: uninstallApplication
+      summary: Uninstall an Application
+      description: Uninstalls and removes a deployed application.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      responses:
+        '204':
+          description: Application uninstalled
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications/{appName}/start:
+    post:
+      operationId: startApplication
+      summary: Start an Application
+      description: Starts a deployed application.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Application started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatus'
+              examples:
+                Startapplication200Example:
+                  summary: Default startApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: started
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Application is already started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Startapplication409Example:
+                  summary: Default startApplication 409 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    details: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications/{appName}/stop:
+    post:
+      operationId: stopApplication
+      summary: Stop an Application
+      description: Stops a running application.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Application stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatus'
+              examples:
+                Stopapplication200Example:
+                  summary: Default stopApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: started
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications/{appName}/restart:
+    post:
+      operationId: restartApplication
+      summary: Restart an Application
+      description: Restarts a deployed application.
+      tags:
+      - Applications
+      parameters:
+      - name: appName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Application restarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibertyApplicationStatus'
+              examples:
+                Restartapplication200Example:
+                  summary: Default restartApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    state: STARTED
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Application:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application name
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - started
+          - stopped
+          - unknown
+          description: Current application status
+          example: started
+        contextRoot:
+          type: string
+          description: Context root for web modules
+          example: example_value
+        targetServer:
+          type: string
+          description: Target server or cluster
+          example: example_value
+        deployedModules:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+                enum:
+                - web
+                - ejb
+                - connector
+              uri:
+                type: string
+          example: []
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+          example: '2026-01-15T10:30:00Z'
+    LibertyApplicationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        state:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        message:
+          type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    ApplicationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        message:
+          type: string
+          example: example_value
+  parameters:
+    appName:
+      name: appName
+      in: path
+      required: true
+      description: Application name
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

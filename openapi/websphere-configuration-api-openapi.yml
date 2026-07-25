@@ -1,0 +1,774 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Configuration API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Configuration
+  description: Server configuration management
+paths:
+  /explorer:
+    get:
+      operationId: getApiExplorer
+      summary: Access the Api Explorer
+      description: Returns the API Explorer interface for discovering available REST API endpoints.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: API Explorer HTML interface
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                Getapiexplorer200Example:
+                  summary: Default getApiExplorer 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /config:
+    get:
+      operationId: listConfigResources
+      summary: List Configuration Resource Types
+      description: Returns a list of available configuration resource types that can be managed through the REST API.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: List of configuration resource types
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resourceTypes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ResourceType'
+              examples:
+                Listconfigresources200Example:
+                  summary: Default listConfigResources 200 response
+                  x-microcks-default: true
+                  value:
+                    resourceTypes:
+                    - name: Example Title
+                      description: A sample description.
+                      href: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateServerConfig
+      summary: Update Server Configuration
+      description: Updates the server configuration. Changes may require a server restart.
+      tags:
+      - Configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerConfig'
+            examples:
+              UpdateserverconfigRequestExample:
+                summary: Default updateServerConfig request
+                x-microcks-default: true
+                value:
+                  description: A sample description.
+                  featureManager:
+                    feature:
+                    - example_value
+                  httpEndpoint:
+                  - id: abc123
+                    host: example_value
+                    httpPort: 10
+                    httpsPort: 10
+                  application:
+                  - name: Example Title
+                    location: example_value
+                    type: war
+                    contextRoot: example_value
+                    state: STARTED
+                    autoStart: true
+      responses:
+        '200':
+          description: Configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerConfig'
+              examples:
+                Updateserverconfig200Example:
+                  summary: Default updateServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    description: A sample description.
+                    featureManager:
+                      feature:
+                      - example_value
+                    httpEndpoint:
+                    - id: abc123
+                      host: example_value
+                      httpPort: 10
+                      httpsPort: 10
+                    application:
+                    - name: Example Title
+                      location: example_value
+                      type: war
+                      contextRoot: example_value
+                      state: STARTED
+                      autoStart: true
+        '400':
+          $ref: '#/components/responses/BadRequest_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /config/{resourceType}:
+    get:
+      operationId: getConfigResources
+      summary: List Resources of a Specific Type
+      description: Returns a collection of configuration resources of the specified type.
+      tags:
+      - Configuration
+      parameters:
+      - $ref: '#/components/parameters/resourceType'
+      - $ref: '#/components/parameters/depth'
+      responses:
+        '200':
+          description: Collection of configuration resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigResource'
+              examples:
+                Getconfigresources200Example:
+                  summary: Default getConfigResources 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    type: example_value
+                    name: Example Title
+                    attributes: example_value
+                    links:
+                    - rel: example_value
+                      href: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createConfigResource
+      summary: Create a New Configuration Resource
+      description: Creates a new configuration resource of the specified type.
+      tags:
+      - Configuration
+      parameters:
+      - $ref: '#/components/parameters/resourceType'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigResource'
+            examples:
+              CreateconfigresourceRequestExample:
+                summary: Default createConfigResource request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  type: example_value
+                  name: Example Title
+                  attributes: example_value
+                  links:
+                  - rel: example_value
+                    href: https://www.example.com
+      responses:
+        '201':
+          description: Configuration resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResource'
+              examples:
+                Createconfigresource201Example:
+                  summary: Default createConfigResource 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: example_value
+                    name: Example Title
+                    attributes: example_value
+                    links:
+                    - rel: example_value
+                      href: https://www.example.com
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /config/{resourceType}/{resourceId}:
+    get:
+      operationId: getConfigResource
+      summary: Get a Specific Configuration Resource
+      description: Returns the configuration details for a specific resource.
+      tags:
+      - Configuration
+      parameters:
+      - $ref: '#/components/parameters/resourceType'
+      - $ref: '#/components/parameters/resourceId'
+      - $ref: '#/components/parameters/depth'
+      responses:
+        '200':
+          description: Configuration resource details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResource'
+              examples:
+                Getconfigresource200Example:
+                  summary: Default getConfigResource 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: example_value
+                    name: Example Title
+                    attributes: example_value
+                    links:
+                    - rel: example_value
+                      href: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateConfigResource
+      summary: Update a Configuration Resource
+      description: Updates an existing configuration resource.
+      tags:
+      - Configuration
+      parameters:
+      - $ref: '#/components/parameters/resourceType'
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigResource'
+            examples:
+              UpdateconfigresourceRequestExample:
+                summary: Default updateConfigResource request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  type: example_value
+                  name: Example Title
+                  attributes: example_value
+                  links:
+                  - rel: example_value
+                    href: https://www.example.com
+      responses:
+        '200':
+          description: Configuration resource updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResource'
+              examples:
+                Updateconfigresource200Example:
+                  summary: Default updateConfigResource 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: example_value
+                    name: Example Title
+                    attributes: example_value
+                    links:
+                    - rel: example_value
+                      href: https://www.example.com
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteConfigResource
+      summary: Delete a Configuration Resource
+      description: Deletes a specific configuration resource.
+      tags:
+      - Configuration
+      parameters:
+      - $ref: '#/components/parameters/resourceType'
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '204':
+          description: Configuration resource deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /config/{elementName}:
+    get:
+      operationId: getConfigElement
+      summary: Get a Specific Configuration Element
+      description: Returns the configuration for a specific element type.
+      tags:
+      - Configuration
+      parameters:
+      - name: elementName
+        in: path
+        required: true
+        description: Configuration element name (e.g., httpEndpoint, dataSource, application)
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Configuration element details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Getconfigelement200Example:
+                  summary: Default getConfigElement 200 response
+                  x-microcks-default: true
+                  value:
+                  - uid: '500123'
+                    configElementName: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createConfigElement
+      summary: Create a Configuration Element
+      description: Adds a new configuration element to the server configuration.
+      tags:
+      - Configuration
+      parameters:
+      - name: elementName
+        in: path
+        required: true
+        description: Configuration element name
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigElement'
+            examples:
+              CreateconfigelementRequestExample:
+                summary: Default createConfigElement request
+                x-microcks-default: true
+                value:
+                  uid: '500123'
+                  configElementName: example_value
+      responses:
+        '201':
+          description: Configuration element created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Createconfigelement201Example:
+                  summary: Default createConfigElement 201 response
+                  x-microcks-default: true
+                  value:
+                    uid: '500123'
+                    configElementName: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /config/{elementName}/{uid}:
+    get:
+      operationId: getConfigElementById
+      summary: Get a Specific Configuration Element Instance
+      description: Returns a specific configuration element instance by its unique identifier.
+      tags:
+      - Configuration
+      parameters:
+      - name: elementName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: uid
+        in: path
+        required: true
+        description: Unique identifier of the configuration element
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Configuration element instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Getconfigelementbyid200Example:
+                  summary: Default getConfigElementById 200 response
+                  x-microcks-default: true
+                  value:
+                    uid: '500123'
+                    configElementName: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateConfigElement
+      summary: Update a Configuration Element Instance
+      description: Updates a specific configuration element.
+      tags:
+      - Configuration
+      parameters:
+      - name: elementName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigElement'
+            examples:
+              UpdateconfigelementRequestExample:
+                summary: Default updateConfigElement request
+                x-microcks-default: true
+                value:
+                  uid: '500123'
+                  configElementName: example_value
+      responses:
+        '200':
+          description: Configuration element updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigElement'
+              examples:
+                Updateconfigelement200Example:
+                  summary: Default updateConfigElement 200 response
+                  x-microcks-default: true
+                  value:
+                    uid: '500123'
+                    configElementName: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteConfigElement
+      summary: Delete a Configuration Element Instance
+      description: Removes a specific configuration element from the server configuration.
+      tags:
+      - Configuration
+      parameters:
+      - name: elementName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '204':
+          description: Configuration element deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest_2:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    LibertyApplication:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application name
+          example: Example Title
+        location:
+          type: string
+          description: Application file location
+          example: example_value
+        type:
+          type: string
+          enum:
+          - war
+          - ear
+          - eba
+          - rar
+          description: Application type
+          example: war
+        contextRoot:
+          type: string
+          description: Context root for web application
+          example: example_value
+        state:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - INSTALLED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        autoStart:
+          type: boolean
+          description: Whether the application starts automatically
+          example: true
+    ConfigElement:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier
+          example: '500123'
+        configElementName:
+          type: string
+          description: Configuration element type name
+          example: example_value
+      additionalProperties: true
+    ServerConfig:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Server description
+          example: A sample description.
+        featureManager:
+          type: object
+          properties:
+            feature:
+              type: array
+              items:
+                type: string
+              description: List of enabled features
+          example: example_value
+        httpEndpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              host:
+                type: string
+              httpPort:
+                type: integer
+              httpsPort:
+                type: integer
+          example: []
+        application:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibertyApplication'
+          example: []
+      additionalProperties: true
+    ResourceType:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        href:
+          type: string
+          format: uri
+          example: https://www.example.com
+    ConfigResource:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Resource identifier
+          example: abc123
+        type:
+          type: string
+          description: Resource type
+          example: example_value
+        name:
+          type: string
+          description: Resource display name
+          example: Example Title
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Resource attributes
+          example: example_value
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+                format: uri
+          example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  parameters:
+    depth:
+      name: depth
+      in: query
+      description: Depth of nested resource retrieval
+      schema:
+        type: integer
+        default: 1
+        minimum: 0
+        maximum: 10
+    resourceType:
+      name: resourceType
+      in: path
+      required: true
+      description: The type of configuration resource
+      schema:
+        type: string
+    resourceId:
+      name: resourceId
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

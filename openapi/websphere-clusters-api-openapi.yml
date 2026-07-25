@@ -1,0 +1,525 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Clusters API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Clusters
+  description: Cluster management operations
+paths:
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: List Clusters
+      description: Returns a list of all clusters in the cell.
+      tags:
+      - Clusters
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cluster'
+              examples:
+                Listclusters200Example:
+                  summary: Default listClusters 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    status: running
+                    members:
+                    - serverName: example_value
+                      nodeName: example_value
+                      status: example_value
+                      weight: 10
+                    preferLocal: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCluster
+      summary: Create a Cluster
+      description: Creates a new cluster in the collective.
+      tags:
+      - Clusters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Cluster name
+                description:
+                  type: string
+            examples:
+              CreateclusterRequestExample:
+                summary: Default createCluster request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+      responses:
+        '201':
+          description: Cluster created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectiveCluster'
+              examples:
+                Createcluster201Example:
+                  summary: Default createCluster 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    description: A sample description.
+                    memberCount: 10
+                    membersStarted: 10
+                    members:
+                    - example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Cluster already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_2'
+              examples:
+                Createcluster409Example:
+                  summary: Default createCluster 409 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterName}:
+    get:
+      operationId: getCluster
+      summary: Get Cluster Details
+      description: Returns details of a specific cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+              examples:
+                Getcluster200Example:
+                  summary: Default getCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: running
+                    members:
+                    - serverName: example_value
+                      nodeName: example_value
+                      status: example_value
+                      weight: 10
+                    preferLocal: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCluster
+      summary: Delete a Cluster
+      description: Deletes a cluster from the collective.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      responses:
+        '204':
+          description: Cluster deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterName}/start:
+    post:
+      operationId: startCluster
+      summary: Start a Cluster
+      description: Starts all members of the specified cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+              examples:
+                Startcluster200Example:
+                  summary: Default startCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: example_value
+                    membersStarted: 10
+                    membersTotal: 10
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterName}/stop:
+    post:
+      operationId: stopCluster
+      summary: Stop a Cluster
+      description: Stops all members of the specified cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: Cluster stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+              examples:
+                Stopcluster200Example:
+                  summary: Default stopCluster 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: example_value
+                    membersStarted: 10
+                    membersTotal: 10
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterName}/members:
+    get:
+      operationId: listClusterMembers
+      summary: List Cluster Members
+      description: Returns a list of members in the specified cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      responses:
+        '200':
+          description: List of cluster members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CollectiveMember'
+              examples:
+                Listclustermembers200Example:
+                  summary: Default listClusterMembers 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    hostName: example_value
+                    userDir: example_value
+                    status: STARTED
+                    clusterName: example_value
+                    httpsPort: 10
+                    wlpVersion: example_value
+                    javaVersion: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: addClusterMember
+      summary: Add a Member to a Cluster
+      description: Adds an existing collective member to the specified cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - memberName
+              properties:
+                memberName:
+                  type: string
+                  description: Name of the collective member to add
+            examples:
+              AddclustermemberRequestExample:
+                summary: Default addClusterMember request
+                x-microcks-default: true
+                value:
+                  memberName: example_value
+      responses:
+        '200':
+          description: Member added to cluster
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterName}/members/{memberName}:
+    delete:
+      operationId: removeClusterMember
+      summary: Remove a Member From a Cluster
+      description: Removes a member from the specified cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterName'
+      - $ref: '#/components/parameters/memberName'
+      responses:
+        '204':
+          description: Member removed from cluster
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ClusterStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          example: example_value
+        membersStarted:
+          type: integer
+          example: 10
+        membersTotal:
+          type: integer
+          example: 10
+        message:
+          type: string
+          example: example_value
+    Error_2:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    Cluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cluster name
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - running
+          - stopped
+          - partial
+          example: running
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              serverName:
+                type: string
+              nodeName:
+                type: string
+              status:
+                type: string
+              weight:
+                type: integer
+          example: []
+        preferLocal:
+          type: boolean
+          description: Whether to prefer local routing
+          example: true
+    CollectiveMember:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Member server name
+          example: Example Title
+        hostName:
+          type: string
+          description: Host where the member is located
+          example: example_value
+        userDir:
+          type: string
+          description: User directory path
+          example: example_value
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - UNKNOWN
+          description: Member status
+          example: STARTED
+        clusterName:
+          type: string
+          description: Cluster the member belongs to
+          example: example_value
+        httpsPort:
+          type: integer
+          description: HTTPS port
+          example: 10
+        wlpVersion:
+          type: string
+          description: Liberty version
+          example: example_value
+        javaVersion:
+          type: string
+          description: Java version
+          example: example_value
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    CollectiveCluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cluster name
+          example: Example Title
+        description:
+          type: string
+          description: Cluster description
+          example: A sample description.
+        memberCount:
+          type: integer
+          description: Number of members in the cluster
+          example: 10
+        membersStarted:
+          type: integer
+          description: Number of started members
+          example: 10
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member server names
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+  parameters:
+    memberName:
+      name: memberName
+      in: path
+      required: true
+      description: Collective member server name
+      schema:
+        type: string
+    clusterName:
+      name: clusterName
+      in: path
+      required: true
+      description: Cluster name
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

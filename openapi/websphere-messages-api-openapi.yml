@@ -1,0 +1,376 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Messages API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Messages
+  description: Message operations - send and receive
+paths:
+  /messaging/qmgr/{qmgrName}/queue/{queueName}/message:
+    post:
+      operationId: sendMessage
+      summary: Send a Message to a Queue
+      description: Sends a message to the specified queue on the queue manager.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: ibm-mq-md-correlationId
+        in: header
+        description: Correlation ID for the message
+        schema:
+          type: string
+        example: '500123'
+      - name: ibm-mq-md-expiry
+        in: header
+        description: Message expiry in tenths of a second
+        schema:
+          type: integer
+        example: 10
+      - name: ibm-mq-md-persistence
+        in: header
+        description: Message persistence
+        schema:
+          type: string
+          enum:
+          - persistent
+          - nonPersistent
+        example: persistent
+      - name: ibm-mq-md-replyTo
+        in: header
+        description: Reply-to queue name
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              SendmessageRequestExample:
+                summary: Default sendMessage request
+                x-microcks-default: true
+                value: example_value
+          application/json:
+            schema:
+              type: object
+            examples:
+              SendmessageRequestExample:
+                summary: Default sendMessage request
+                x-microcks-default: true
+                value: {}
+          application/xml:
+            schema:
+              type: string
+            examples:
+              SendmessageRequestExample:
+                summary: Default sendMessage request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '201':
+          description: Message sent
+          headers:
+            ibm-mq-md-messageId:
+              description: Message ID of the sent message
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: browseMessages
+      summary: Browse Messages on a Queue
+      description: Non-destructively browses messages on the specified queue.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: limit
+        in: query
+        description: Maximum number of messages to browse
+        schema:
+          type: integer
+          default: 10
+        example: 10
+      - name: ibm-mq-md-messageId
+        in: header
+        description: Filter by message ID
+        schema:
+          type: string
+        example: '500123'
+      - name: ibm-mq-md-correlationId
+        in: header
+        description: Filter by correlation ID
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Messages browsed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+              examples:
+                Browsemessages200Example:
+                  summary: Default browseMessages 200 response
+                  x-microcks-default: true
+                  value:
+                  - messageId: '500123'
+                    correlationId: '500123'
+                    putDateTime: '2026-01-15T10:30:00Z'
+                    persistence: persistent
+                    replyToQueue: example_value
+                    replyToQueueManager: example_value
+                    expiry: 10
+                    body: example_value
+                    format: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: receiveMessage
+      summary: Receive (destructively Get) a Message
+      description: Destructively gets a message from the specified queue.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - $ref: '#/components/parameters/queueName'
+      - name: wait
+        in: query
+        description: Wait time in milliseconds for a message
+        schema:
+          type: integer
+        example: 10
+      - name: ibm-mq-md-messageId
+        in: header
+        description: Filter by message ID
+        schema:
+          type: string
+        example: '500123'
+      - name: ibm-mq-md-correlationId
+        in: header
+        description: Filter by correlation ID
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Message received
+          headers:
+            ibm-mq-md-messageId:
+              schema:
+                type: string
+            ibm-mq-md-correlationId:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Receivemessage200Example:
+                  summary: Default receiveMessage 200 response
+                  x-microcks-default: true
+                  value: example_value
+            application/json:
+              schema:
+                type: object
+              examples:
+                Receivemessage200Example:
+                  summary: Default receiveMessage 200 response
+                  x-microcks-default: true
+                  value: {}
+        '204':
+          description: No message available
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /messaging/qmgr/{qmgrName}/topic/{topicString}/message:
+    post:
+      operationId: publishMessage
+      summary: Publish a Message to a Topic
+      description: Publishes a message to the specified topic string.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: topicString
+        in: path
+        required: true
+        description: Topic string to publish to
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              PublishmessageRequestExample:
+                summary: Default publishMessage request
+                x-microcks-default: true
+                value: example_value
+          application/json:
+            schema:
+              type: object
+            examples:
+              PublishmessageRequestExample:
+                summary: Default publishMessage request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '201':
+          description: Message published
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Message identifier
+          example: '500123'
+        correlationId:
+          type: string
+          description: Correlation identifier
+          example: '500123'
+        putDateTime:
+          type: string
+          format: date-time
+          description: Time the message was put
+          example: '2026-01-15T10:30:00Z'
+        persistence:
+          type: string
+          enum:
+          - persistent
+          - nonPersistent
+          example: persistent
+        replyToQueue:
+          type: string
+          description: Reply-to queue name
+          example: example_value
+        replyToQueueManager:
+          type: string
+          description: Reply-to queue manager name
+          example: example_value
+        expiry:
+          type: integer
+          description: Message expiry in tenths of a second
+          example: 10
+        body:
+          description: Message body content
+          example: example_value
+        format:
+          type: string
+          description: Message format
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+    queueName:
+      name: queueName
+      in: path
+      required: true
+      description: Queue name
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

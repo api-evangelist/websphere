@@ -1,0 +1,152 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Repositories API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Repositories
+  description: Shared configuration repository management
+paths:
+  /repository/config:
+    get:
+      operationId: listSharedConfigs
+      summary: List Shared Configurations
+      description: Returns a list of shared configurations in the collective repository.
+      tags:
+      - Repositories
+      responses:
+        '200':
+          description: List of shared configurations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedConfig'
+              examples:
+                Listsharedconfigs200Example:
+                  summary: Default listSharedConfigs 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    description: A sample description.
+                    content: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSharedConfig
+      summary: Create a Shared Configuration
+      description: Creates a new shared configuration in the repository.
+      tags:
+      - Repositories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedConfig'
+            examples:
+              CreatesharedconfigRequestExample:
+                summary: Default createSharedConfig request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  content: example_value
+                  lastModified: '2026-01-15T10:30:00Z'
+      responses:
+        '201':
+          description: Shared configuration created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedConfig'
+              examples:
+                Createsharedconfig201Example:
+                  summary: Default createSharedConfig 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    description: A sample description.
+                    content: example_value
+                    lastModified: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    SharedConfig:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Configuration name
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        content:
+          type: string
+          description: Configuration XML content
+          example: example_value
+        lastModified:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

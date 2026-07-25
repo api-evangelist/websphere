@@ -1,0 +1,503 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Servers API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Servers
+  description: Server configuration and management
+paths:
+  /servers:
+    get:
+      operationId: listServers
+      summary: List Servers
+      description: Returns a list of all servers in the cell.
+      tags:
+      - Servers
+      responses:
+        '200':
+          description: List of servers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Server'
+              examples:
+                Listservers200Example:
+                  summary: Default listServers 200 response
+                  x-microcks-default: true
+                  value:
+                  - name: Example Title
+                    nodeName: example_value
+                    clusterName: example_value
+                    status: STARTED
+                    serverType: APPLICATION_SERVER
+                    pid: '500123'
+                    ports:
+                    - name: Example Title
+                      port: 10
+                      host: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: registerServer
+      summary: Register a Server
+      description: Registers a new server with WebSphere Automation for monitoring and management.
+      tags:
+      - Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - type
+              - connectionInfo
+              properties:
+                name:
+                  type: string
+                  description: Server name
+                type:
+                  type: string
+                  enum:
+                  - was-traditional
+                  - liberty
+                connectionInfo:
+                  type: object
+                  required:
+                  - host
+                  - port
+                  properties:
+                    host:
+                      type: string
+                    port:
+                      type: integer
+                    protocol:
+                      type: string
+                      enum:
+                      - https
+                      - http
+                      default: https
+                credentials:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+                      format: password
+            examples:
+              RegisterserverRequestExample:
+                summary: Default registerServer request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  type: was-traditional
+                  connectionInfo:
+                    host: example_value
+                    port: 10
+                    protocol: https
+                  credentials:
+                    username: example_value
+                    password: example_value
+      responses:
+        '201':
+          description: Server registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedServer'
+              examples:
+                Registerserver201Example:
+                  summary: Default registerServer 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    type: was-traditional
+                    version: example_value
+                    host: example_value
+                    port: 10
+                    status: active
+                    vulnerabilityCount: 10
+                    lastScanDate: '2026-01-15T10:30:00Z'
+                    registeredDate: '2026-01-15T10:30:00Z'
+                    installedFixes:
+                    - example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servers/{serverName}:
+    get:
+      operationId: getServer
+      summary: Get Server Details
+      description: Returns details of a specific server.
+      tags:
+      - Servers
+      parameters:
+      - $ref: '#/components/parameters/serverName'
+      responses:
+        '200':
+          description: Server details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+              examples:
+                Getserver200Example:
+                  summary: Default getServer 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    nodeName: example_value
+                    clusterName: example_value
+                    status: STARTED
+                    serverType: APPLICATION_SERVER
+                    pid: '500123'
+                    ports:
+                    - name: Example Title
+                      port: 10
+                      host: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servers/{serverName}/start:
+    post:
+      operationId: startServer
+      summary: Start a Server
+      description: Starts the specified application server.
+      tags:
+      - Servers
+      parameters:
+      - $ref: '#/components/parameters/serverName'
+      responses:
+        '200':
+          description: Server started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerStatus'
+              examples:
+                Startserver200Example:
+                  summary: Default startServer 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: STARTED
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servers/{serverName}/stop:
+    post:
+      operationId: stopServer
+      summary: Stop a Server
+      description: Stops the specified application server.
+      tags:
+      - Servers
+      parameters:
+      - $ref: '#/components/parameters/serverName'
+      responses:
+        '200':
+          description: Server stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerStatus'
+              examples:
+                Stopserver200Example:
+                  summary: Default stopServer 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    status: STARTED
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servers/{serverId}:
+    get:
+      operationId: getManagedServer
+      summary: Get Managed Server Details
+      description: Returns details of a specific managed server.
+      tags:
+      - Servers
+      parameters:
+      - $ref: '#/components/parameters/serverId'
+      responses:
+        '200':
+          description: Server details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedServer'
+              examples:
+                Getmanagedserver200Example:
+                  summary: Default getManagedServer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    type: was-traditional
+                    version: example_value
+                    host: example_value
+                    port: 10
+                    status: active
+                    vulnerabilityCount: 10
+                    lastScanDate: '2026-01-15T10:30:00Z'
+                    registeredDate: '2026-01-15T10:30:00Z'
+                    installedFixes:
+                    - example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deregisterServer
+      summary: Deregister a Server
+      description: Removes a server from WebSphere Automation management.
+      tags:
+      - Servers
+      parameters:
+      - $ref: '#/components/parameters/serverId'
+      responses:
+        '204':
+          description: Server deregistered
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+  parameters:
+    serverName:
+      name: serverName
+      in: path
+      required: true
+      description: Server name
+      schema:
+        type: string
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
+  schemas:
+    Error_2:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    ManagedServer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique server identifier
+          example: abc123
+        name:
+          type: string
+          description: Server name
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - was-traditional
+          - liberty
+          example: was-traditional
+        version:
+          type: string
+          description: WebSphere version
+          example: example_value
+        host:
+          type: string
+          description: Server hostname
+          example: example_value
+        port:
+          type: integer
+          description: Server port
+          example: 10
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+          example: active
+        vulnerabilityCount:
+          type: integer
+          description: Number of open vulnerabilities
+          example: 10
+        lastScanDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        registeredDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        installedFixes:
+          type: array
+          items:
+            type: string
+          description: List of installed fix IDs
+          example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    Server:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Server name
+          example: Example Title
+        nodeName:
+          type: string
+          description: Node where the server resides
+          example: example_value
+        clusterName:
+          type: string
+          description: Cluster membership
+          example: example_value
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          - UNKNOWN
+          example: STARTED
+        serverType:
+          type: string
+          enum:
+          - APPLICATION_SERVER
+          - WEB_SERVER
+          - PROXY_SERVER
+          - GENERIC_SERVER
+          example: APPLICATION_SERVER
+        pid:
+          type: integer
+          description: Process ID
+          example: '500123'
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              port:
+                type: integer
+              host:
+                type: string
+          example: []
+    ServerStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        message:
+          type: string
+          example: example_value
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

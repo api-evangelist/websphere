@@ -1,35 +1,22 @@
 openapi: 3.1.0
 info:
-  title: WebSphere Liberty REST Connector API
-  description: >-
-    Secure REST-based JMX connector for remote administration of Liberty servers.
-    Provides file transfer and JMX MBean access through HTTPS endpoints, requiring
-    TLS for confidential communication. Supports MBean operations, attribute
-    access, and notification subscriptions.
-  version: 2.0.0
+  title: Open Liberty APIs Applications MBeans API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
   license:
-    name: IBM International License Agreement
-    url: https://www.ibm.com/legal/terms
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
   contact:
-    name: IBM Support
-    url: https://www.ibm.com/mysupport
-externalDocs:
-  description: REST Connector Feature Documentation
-  url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+    name: Open Liberty Community
+    url: https://openliberty.io/
 servers:
-- url: https://localhost:9443/IBMJMXConnectorREST/api
-  description: Default Liberty JMX REST Connector
+- url: https://localhost:9443
+  description: Default Open Liberty Server
 security:
 - basicAuth: []
 tags:
 - name: MBeans
   description: JMX MBean operations and attribute access
-- name: Notifications
-  description: JMX notification subscription management
-- name: File Transfer
-  description: File upload and download operations
-- name: Connectors
-  description: JMX connector management
 paths:
   /mbeans:
     get:
@@ -305,260 +292,26 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /notifications:
-    get:
-      operationId: listNotificationSubscriptions
-      summary: List Notification Subscriptions
-      description: Returns a list of active notification subscriptions.
-      tags:
-      - Notifications
-      responses:
-        '200':
-          description: List of notification subscriptions
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NotificationSubscription'
-              examples:
-                Listnotificationsubscriptions200Example:
-                  summary: Default listNotificationSubscriptions 200 response
-                  x-microcks-default: true
-                  value:
-                  - id: abc123
-                    objectName: example_value
-                    filters:
-                    - example_value
-                    created: '2026-01-15T10:30:00Z'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-    post:
-      operationId: createNotificationSubscription
-      summary: Create a Notification Subscription
-      description: Subscribes to notifications from a specific MBean.
-      tags:
-      - Notifications
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-              - objectName
-              properties:
-                objectName:
-                  type: string
-                  description: ObjectName of the MBean to subscribe to
-                filters:
-                  type: array
-                  items:
-                    type: string
-                  description: Notification type filters
-            examples:
-              CreatenotificationsubscriptionRequestExample:
-                summary: Default createNotificationSubscription request
-                x-microcks-default: true
-                value:
-                  objectName: example_value
-                  filters:
-                  - example_value
-      responses:
-        '201':
-          description: Notification subscription created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotificationSubscription'
-              examples:
-                Createnotificationsubscription201Example:
-                  summary: Default createNotificationSubscription 201 response
-                  x-microcks-default: true
-                  value:
-                    id: abc123
-                    objectName: example_value
-                    filters:
-                    - example_value
-                    created: '2026-01-15T10:30:00Z'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /notifications/{subscriptionId}:
-    get:
-      operationId: getNotifications
-      summary: Get Pending Notifications
-      description: Returns pending notifications for a subscription.
-      tags:
-      - Notifications
-      parameters:
-      - name: subscriptionId
-        in: path
-        required: true
-        description: Subscription identifier
-        schema:
-          type: string
-        example: '500123'
-      responses:
-        '200':
-          description: Pending notifications
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Notification'
-              examples:
-                Getnotifications200Example:
-                  summary: Default getNotifications 200 response
-                  x-microcks-default: true
-                  value:
-                  - type: example_value
-                    source: example_value
-                    message: example_value
-                    sequenceNumber: 10
-                    timestamp: 10
-                    userData: example_value
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-    delete:
-      operationId: deleteNotificationSubscription
-      summary: Delete a Notification Subscription
-      description: Unsubscribes from notifications.
-      tags:
-      - Notifications
-      parameters:
-      - name: subscriptionId
-        in: path
-        required: true
-        schema:
-          type: string
-        example: '500123'
-      responses:
-        '204':
-          description: Subscription deleted
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /file/upload:
-    post:
-      operationId: uploadFile
-      summary: Upload a File
-      description: Uploads a file to the Liberty server file system.
-      tags:
-      - File Transfer
-      parameters:
-      - name: targetPath
-        in: query
-        required: true
-        description: Target file path on the server
-        schema:
-          type: string
-        example: example_value
-      requestBody:
-        required: true
-        content:
-          application/octet-stream:
-            schema:
-              type: string
-              format: binary
-            examples:
-              UploadfileRequestExample:
-                summary: Default uploadFile request
-                x-microcks-default: true
-                value: example_value
-      responses:
-        '201':
-          description: File uploaded successfully
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /file/download:
-    get:
-      operationId: downloadFile
-      summary: Download a File
-      description: Downloads a file from the Liberty server file system.
-      tags:
-      - File Transfer
-      parameters:
-      - name: sourcePath
-        in: query
-        required: true
-        description: Source file path on the server
-        schema:
-          type: string
-        example: example_value
-      responses:
-        '200':
-          description: File content
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-              examples:
-                Downloadfile200Example:
-                  summary: Default downloadFile 200 response
-                  x-microcks-default: true
-                  value: example_value
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /file/delete:
-    delete:
-      operationId: deleteFile
-      summary: Delete a File
-      description: Deletes a file from the Liberty server file system.
-      tags:
-      - File Transfer
-      parameters:
-      - name: path
-        in: query
-        required: true
-        description: File path on the server
-        schema:
-          type: string
-        example: example_value
-      responses:
-        '204':
-          description: File deleted
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: HTTP Basic authentication with administrator role
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     objectName:
       name: objectName
@@ -568,26 +321,6 @@ components:
       schema:
         type: string
   schemas:
-    MBeanInfo:
-      type: object
-      properties:
-        objectName:
-          type: string
-          description: JMX ObjectName
-          example: example_value
-        className:
-          type: string
-          description: MBean implementation class
-          example: example_value
-        description:
-          type: string
-          description: MBean description
-          example: A sample description.
-        URL:
-          type: string
-          format: uri
-          description: URL for accessing this MBean's details
-          example: https://www.example.com
     MBeanDetail:
       type: object
       properties:
@@ -660,57 +393,26 @@ components:
                 items:
                   type: string
           example: []
-    AttributeValue:
+    MBeanInfo:
       type: object
       properties:
-        name:
-          type: string
-          example: Example Title
-        value:
-          example: example_value
-        type:
-          type: string
-          example: example_value
-    NotificationSubscription:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
         objectName:
           type: string
+          description: JMX ObjectName
           example: example_value
-        filters:
-          type: array
-          items:
-            type: string
-          example: []
-        created:
+        className:
           type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-    Notification:
-      type: object
-      properties:
-        type:
+          description: MBean implementation class
+          example: example_value
+        description:
           type: string
-          example: example_value
-        source:
+          description: MBean description
+          example: A sample description.
+        URL:
           type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        sequenceNumber:
-          type: integer
-          example: 10
-        timestamp:
-          type: integer
-          example: 10
-        userData:
-          type: object
-          additionalProperties: true
-          example: example_value
+          format: uri
+          description: URL for accessing this MBean's details
+          example: https://www.example.com
     Error:
       type: object
       properties:
@@ -723,22 +425,27 @@ components:
       required:
       - code
       - message
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    AttributeValue:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        value:
+          example: example_value
+        type:
+          type: string
+          example: example_value
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

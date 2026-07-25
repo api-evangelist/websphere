@@ -1,0 +1,259 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Monitoring API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Monitoring
+  description: Performance monitoring and health checks
+paths:
+  /monitoring/performance:
+    get:
+      operationId: getPerformanceData
+      summary: Get Performance Monitoring Data
+      description: Returns performance monitoring information for the server.
+      tags:
+      - Monitoring
+      parameters:
+      - name: module
+        in: query
+        description: Performance module name
+        schema:
+          type: string
+          enum:
+          - threadPool
+          - webApplication
+          - jvm
+          - connectionPool
+          - servlet
+          - session
+        example: threadPool
+      responses:
+        '200':
+          description: Performance data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerformanceData'
+              examples:
+                Getperformancedata200Example:
+                  summary: Default getPerformanceData 200 response
+                  x-microcks-default: true
+                  value:
+                    module: example_value
+                    timestamp: '2026-01-15T10:30:00Z'
+                    metrics:
+                    - name: Example Title
+                      value: 42.5
+                      unit: example_value
+                      type: counter
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /monitoring/health:
+    get:
+      operationId: getHealthStatus
+      summary: Get Health Status
+      description: Returns the health status of the server.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Server health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+              examples:
+                Gethealthstatus200Example:
+                  summary: Default getHealthStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    status: UP
+                    serverName: example_value
+                    uptime: 10
+                    checks:
+                    - name: Example Title
+                      status: UP
+                      data: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /monitoring/metrics:
+    get:
+      operationId: getMetrics
+      summary: Get Server Metrics
+      description: Returns MicroProfile Metrics data from the server.
+      tags:
+      - Monitoring
+      parameters:
+      - name: scope
+        in: query
+        description: Metrics scope
+        schema:
+          type: string
+          enum:
+          - base
+          - vendor
+          - application
+        example: base
+      responses:
+        '200':
+          description: Server metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+              examples:
+                Getmetrics200Example:
+                  summary: Default getMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    scope: example_value
+                    metrics: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - UP
+          - DOWN
+          - DEGRADED
+          example: UP
+        serverName:
+          type: string
+          example: example_value
+        uptime:
+          type: integer
+          description: Server uptime in milliseconds
+          example: 10
+        checks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                - UP
+                - DOWN
+              data:
+                type: object
+                additionalProperties: true
+          example: []
+    Metrics:
+      type: object
+      properties:
+        scope:
+          type: string
+          example: example_value
+        metrics:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              displayName:
+                type: string
+              description:
+                type: string
+              unit:
+                type: string
+              value:
+                type: number
+              type:
+                type: string
+                enum:
+                - counter
+                - gauge
+                - timer
+                - histogram
+          example: example_value
+    PerformanceData:
+      type: object
+      properties:
+        module:
+          type: string
+          description: Performance module name
+          example: example_value
+        timestamp:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        metrics:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: number
+              unit:
+                type: string
+              type:
+                type: string
+                enum:
+                - counter
+                - gauge
+                - average
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html

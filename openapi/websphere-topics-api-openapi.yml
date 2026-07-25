@@ -1,0 +1,303 @@
+openapi: 3.1.0
+info:
+  title: Open Liberty APIs Applications Topics API
+  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  version: 24.0.0
+  license:
+    name: Eclipse Public License 1.0
+    url: https://www.eclipse.org/legal/epl-v10.html
+  contact:
+    name: Open Liberty Community
+    url: https://openliberty.io/
+servers:
+- url: https://localhost:9443
+  description: Default Open Liberty Server
+security:
+- basicAuth: []
+tags:
+- name: Topics
+  description: Topic administration for publish/subscribe
+paths:
+  /admin/qmgr/{qmgrName}/topic:
+    get:
+      operationId: listTopics
+      summary: List Topics
+      description: Returns a list of administrative topic objects on the queue manager.
+      tags:
+      - Topics
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: name
+        in: query
+        description: Topic name filter
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: List of topics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topic:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+              examples:
+                Listtopics200Example:
+                  summary: Default listTopics 200 response
+                  x-microcks-default: true
+                  value:
+                    topic:
+                    - name: Example Title
+                      topicString: example_value
+                      description: A sample description.
+                      type: local
+                      durableSubscriptions: allowed
+                      publish: allowed
+                      subscribe: allowed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTopic
+      summary: Create a Topic
+      description: Creates a new administrative topic object.
+      tags:
+      - Topics
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopicCreate'
+            examples:
+              CreatetopicRequestExample:
+                summary: Default createTopic request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  topicString: example_value
+                  description: A sample description.
+                  type: local
+      responses:
+        '201':
+          description: Topic created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+              examples:
+                Createtopic201Example:
+                  summary: Default createTopic 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    topicString: example_value
+                    description: A sample description.
+                    type: local
+                    durableSubscriptions: allowed
+                    publish: allowed
+                    subscribe: allowed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /admin/qmgr/{qmgrName}/topic/{topicName}:
+    get:
+      operationId: getTopic
+      summary: Get Topic Details
+      description: Returns details of a specific administrative topic object.
+      tags:
+      - Topics
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: topicName
+        in: path
+        required: true
+        description: Topic object name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Topic details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+              examples:
+                Gettopic200Example:
+                  summary: Default getTopic 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    topicString: example_value
+                    description: A sample description.
+                    type: local
+                    durableSubscriptions: allowed
+                    publish: allowed
+                    subscribe: allowed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTopic
+      summary: Delete a Topic
+      description: Deletes an administrative topic object.
+      tags:
+      - Topics
+      parameters:
+      - $ref: '#/components/parameters/qmgrName'
+      - name: topicName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Topic deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+  schemas:
+    Topic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Administrative topic object name
+          example: Example Title
+        topicString:
+          type: string
+          description: Topic string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        type:
+          type: string
+          enum:
+          - local
+          - cluster
+          example: local
+        durableSubscriptions:
+          type: string
+          enum:
+          - allowed
+          - inhibited
+          example: allowed
+        publish:
+          type: string
+          enum:
+          - allowed
+          - inhibited
+          example: allowed
+        subscribe:
+          type: string
+          enum:
+          - allowed
+          - inhibited
+          example: allowed
+    TopicCreate:
+      type: object
+      required:
+      - name
+      - topicString
+      properties:
+        name:
+          type: string
+          example: Example Title
+        topicString:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        type:
+          type: string
+          enum:
+          - local
+          - cluster
+          default: local
+          example: local
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: MicroProfile JWT authentication
+externalDocs:
+  description: Open Liberty API Reference
+  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
