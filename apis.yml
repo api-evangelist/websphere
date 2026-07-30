@@ -3,6 +3,19 @@ name: IBM WebSphere
 description: >-
   IBM WebSphere is a family of enterprise software products that provide middleware and application server capabilities
   for building, deploying, and managing enterprise applications.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f4/01_8-bar-positive.svg
 url: https://raw.githubusercontent.com/api-evangelist/websphere/refs/heads/main/apis.yml
 tags:
@@ -17,231 +30,2681 @@ modified: '2026-05-19'
 specificationVersion: '0.18'
 type: Index
 apis:
-  - aid: websphere:websphere-admin-rest-api
-    name: WebSphere Application Server Admin API
-    description: >-
-      REST API for administrative operations on WebSphere Application Server including deployment, configuration, and
-      monitoring. Starting with version 9.0.0.1, Swagger documentation can be discovered and exposed for deployed
-      RESTful endpoints.
-    image: https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f4/01_8-bar-positive.svg
-    baseURL: https://localhost:9443/ibm/api
-    humanURL: https://www.ibm.com/docs/en/was
-    tags:
-      - Administration
-      - Configuration
-      - Deployment
-      - Monitoring
-    properties:
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
-      - type: OpenAPI
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-openapi-specification
-      - type: OpenAPI
-        url: openapi/websphere-admin-rest-api.yml
-      - type: Authentication
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
-      - type: GettingStarted
-        url: https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
-      - type: APIReference
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
-      - type: JSONSchema
-        url: json-schema/application.json
-      - type: JSONSchema
-        url: json-schema/server.json
-      - type: JSONSchema
-        url: json-schema/cluster.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:websphere-liberty-admin-rest-api
-    name: WebSphere Liberty Admin REST API
-    description: >-
-      RESTful administrative API for WebSphere Liberty servers, providing configuration and runtime management
-      capabilities. The Admin REST Connector enables secure remote access through HTTPS calls or Java clients.
-    baseURL: https://localhost:9443/ibm/api
-    humanURL: https://www.ibm.com/docs/en/was-liberty
-    tags:
-      - Administration
-      - Configuration
-      - Liberty
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
-      - type: OpenAPI
-        url: openapi/websphere-liberty-admin-rest-api.yml
-      - type: GettingStarted
-        url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
-      - type: APIReference
-        url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
-      - type: JSONSchema
-        url: json-schema/application.json
-      - type: JSONSchema
-        url: json-schema/server.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:websphere-liberty-rest-connector-api
-    name: WebSphere Liberty REST Connector API
-    description: >-
-      Secure REST-based JMX connector for remote administration of Liberty servers. Provides file transfer and JMX MBean
-      access through HTTPS endpoints, requiring TLS for confidential communication.
-    baseURL: https://localhost:9443/IBMJMXConnectorREST/api
-    humanURL: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
-    tags:
-      - JMX
-      - Liberty
-      - Remote Administration
-      - REST Connector
-    properties:
-      - type: Documentation
-        url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
-      - type: OpenAPI
-        url: openapi/websphere-liberty-rest-connector-api.yml
-      - type: APIReference
-        url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
-      - type: Documentation
-        url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:websphere-mq-rest-api
-    name: WebSphere MQ REST API
-    description: >-
-      REST API for IBM MQ messaging operations including sending and receiving messages, queue management, and
-      monitoring. Supports both administration and messaging endpoints for point-to-point and publish-subscribe
-      patterns.
-    baseURL: https://localhost:9443/ibmmq/rest/v2
-    humanURL: https://www.ibm.com/docs/en/ibm-mq
-    tags:
-      - Integration
-      - Messaging
-      - Publish Subscribe
-      - Queue Management
-    properties:
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
-      - type: OpenAPI
-        url: openapi/websphere-mq-rest-api.yml
-      - type: APIReference
-        url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
-      - type: Authentication
-        url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
-      - type: GettingStarted
-        url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
-      - type: JSONSchema
-        url: json-schema/message-queue.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:websphere-jmx-api
-    name: WebSphere Application Server JMX API
-    description: >-
-      Java Management Extensions (JMX) API for programmatic management and monitoring of WebSphere Application Server.
-      Provides MBean access for server configuration, performance monitoring, and resource management.
-    baseURL: service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
-    humanURL: https://www.ibm.com/docs/en/was
-    tags:
-      - JMX
-      - Management
-      - MBeans
-      - Monitoring
-    properties:
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-using-jmx
-      - type: APIReference
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=reference-javadoc
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-jmx-examples
-      - type: JSONSchema
-        url: json-schema/server.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:websphere-liberty-collective-controller-rest-api
-    name: WebSphere Liberty Collective Controller REST API
-    description: >-
-      API for managing Liberty collective environments, including member management, scaling, and centralized
-      administration. Supports subscription-based notifications for API changes across collective members.
-    baseURL: https://localhost:9443/ibm/api/collective
-    humanURL: https://www.ibm.com/docs/en/was-liberty
-    tags:
-      - Clustering
-      - Collective
-      - Liberty
-      - Management
-    properties:
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
-      - type: OpenAPI
-        url: openapi/websphere-liberty-collective-controller-rest-api.yml
-      - type: APIReference
-        url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
-      - type: JSONSchema
-        url: json-schema/cluster.json
-      - type: JSONSchema
-        url: json-schema/server.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:websphere-automation-rest-api
-    name: WebSphere Automation REST API
-    description: >-
-      API for WebSphere Automation capabilities including vulnerability management, automated patching, and health
-      monitoring. Accessible through the Swagger UI on OpenShift Container Platform deployments.
-    baseURL: https://automation-api.example.com/v1
-    humanURL: https://www.ibm.com/docs/en/ws-automation
-    tags:
-      - Automation
-      - Health Monitoring
-      - Patching
-      - Vulnerability Management
-    properties:
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/ws-automation?topic=apis
-      - type: OpenAPI
-        url: openapi/websphere-automation-rest-api.yml
-      - type: APIReference
-        url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
-      - type: Documentation
-        url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
-      - type: JSONSchema
-        url: json-schema/server.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
-  - aid: websphere:open-liberty-apis
-    name: Open Liberty APIs
-    description: >-
-      Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile
-      APIs. Includes APIs for security, admin connectors, batch processing, messaging, and more.
-    baseURL: https://localhost:9443/ibm/api
-    humanURL: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
-    tags:
-      - Cloud Native
-      - Jakarta EE
-      - MicroProfile
-      - Open Liberty
-    properties:
-      - type: Documentation
-        url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
-      - type: OpenAPI
-        url: openapi/open-liberty-apis.yml
-      - type: APIReference
-        url: https://openliberty.io/docs/latest/documentation-openapi.html
-      - type: GettingStarted
-        url: https://openliberty.io/guides/rest-intro.html
-      - type: Documentation
-        url: https://openliberty.io/docs/latest/microprofile.html
-      - type: Blog
-        url: https://openliberty.io/blog/
-      - type: JSONSchema
-        url: json-schema/application.json
-      - type: JSONSchema
-        url: json-schema/server.json
-      - type: JSONLD
-        url: json-ld/context.jsonld
+- aid: websphere:websphere-jmx-api
+  name: WebSphere Application Server JMX API
+  description: >-
+    Java Management Extensions (JMX) API for programmatic management and monitoring of WebSphere Application
+    Server. Provides MBean access for server configuration, performance monitoring, and resource management.
+  baseURL: service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
+  humanURL: https://www.ibm.com/docs/en/was
+  tags:
+  - JMX
+  - Management
+  - MBeans
+  - Monitoring
+  properties:
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-using-jmx
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=reference-javadoc
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-jmx-examples
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+- aid: websphere:websphere-applications-api
+  name: IBM WebSphere Applications API
+  description: Application deployment and lifecycle management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-applications-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-authentication-api
+  name: IBM WebSphere Authentication API
+  description: Authentication and authorization
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-batch-api
+  name: IBM WebSphere Batch API
+  description: Jakarta Batch job management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-batch-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-channels-api
+  name: IBM WebSphere Channels API
+  description: Channel administration
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-channels-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-clusters-api
+  name: IBM WebSphere Clusters API
+  description: Cluster management operations
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-clusters-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-compliance-api
+  name: IBM WebSphere Compliance API
+  description: Compliance and configuration drift detection
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Compliance
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-compliance-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-config-api
+  name: IBM WebSphere Config API
+  description: Server configuration API
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Config
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-config-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-configuration-api
+  name: IBM WebSphere Configuration API
+  description: Server configuration management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-controller-api
+  name: IBM WebSphere Controller API
+  description: Collective controller operations
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Controller
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-controller-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-features-api
+  name: IBM WebSphere Features API
+  description: Liberty feature management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Features
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-features-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-file-transfer-api
+  name: IBM WebSphere File Transfer API
+  description: File upload and download operations
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - File Transfer
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-file-transfer-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-fixes-api
+  name: IBM WebSphere Fixes API
+  description: Fix management and automated patching
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Fixes
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-fixes-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-health-api
+  name: IBM WebSphere Health API
+  description: MicroProfile Health Check API
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-health-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-hosts-api
+  name: IBM WebSphere Hosts API
+  description: Host management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Hosts
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-hosts-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-logging-api
+  name: IBM WebSphere Logging API
+  description: Log access and configuration
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Logging
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-logging-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-mbeans-api
+  name: IBM WebSphere MBeans API
+  description: JMX MBean operations and attribute access
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - MBeans
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-mbeans-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-members-api
+  name: IBM WebSphere Members API
+  description: Collective member management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-members-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-messages-api
+  name: IBM WebSphere Messages API
+  description: Message operations - send and receive
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-messages-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-metrics-api
+  name: IBM WebSphere Metrics API
+  description: MicroProfile Metrics API
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-monitoring-api
+  name: IBM WebSphere Monitoring API
+  description: Performance monitoring and health checks
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-nodes-api
+  name: IBM WebSphere Nodes API
+  description: Node management operations
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-notifications-api
+  name: IBM WebSphere Notifications API
+  description: Alert and notification management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-openapi-api
+  name: IBM WebSphere OpenAPI API
+  description: MicroProfile OpenAPI documentation endpoints
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - OpenAPI
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-openapi-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-queue-manager-api
+  name: IBM WebSphere Queue Manager API
+  description: Queue manager administration
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Queue Manager
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-queue-manager-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-queues-api
+  name: IBM WebSphere Queues API
+  description: Queue administration and management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Queues
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-queues-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-repositories-api
+  name: IBM WebSphere Repositories API
+  description: Shared configuration repository management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Repositories
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-repositories-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-resources-api
+  name: IBM WebSphere Resources API
+  description: Resource management including data sources and JMS
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-scaling-api
+  name: IBM WebSphere Scaling API
+  description: Scaling policy and auto-scaling management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Scaling
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-scaling-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-security-api
+  name: IBM WebSphere Security API
+  description: Security configuration and management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-security-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-server-api
+  name: IBM WebSphere Server API
+  description: Server runtime management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Server
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-server-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-servers-api
+  name: IBM WebSphere Servers API
+  description: Server configuration and management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-servers-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-subscriptions-api
+  name: IBM WebSphere Subscriptions API
+  description: Subscription management
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-topics-api
+  name: IBM WebSphere Topics API
+  description: Topic administration for publish/subscribe
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Topics
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-topics-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
+- aid: websphere:websphere-vulnerabilities-api
+  name: IBM WebSphere Vulnerabilities API
+  description: Security vulnerability tracking and remediation
+  humanURL: https://www.ibm.com/docs/en/was
+  baseURL: https://localhost:9443/ibm/api
+  tags:
+  - Vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/websphere-vulnerabilities-api-openapi.yml
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=overview-administrative-rest-api
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/was/9.0.5?topic=api-authentication-authorization
+  - type: GettingStarted
+    url: >-
+      https://www.ibm.com/docs/en/was-nd/9.0.5?topic=specifications-discovering-rest-api-documentation
+  - type: APIReference
+    url: >-
+      https://www.ibm.com/docs/en/was/9.0.5?topic=javadoc-apis-application-programming-interfaces
+  - type: JSONSchema
+    url: json-schema/application.json
+  - type: JSONSchema
+    url: json-schema/server.json
+  - type: JSONSchema
+    url: json-schema/cluster.json
+  - type: JSONLD
+    url: json-ld/context.jsonld
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-admin-rest-api
+  - type: GettingStarted
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-getting-started
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=center-setting-up-admin
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/configuring-jmx-connection.html
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/core?topic=features-admin-rest-connector-20
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-introduction
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference
+  - type: Authentication
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-authentication
+  - type: GettingStarted
+    url: https://developer.ibm.com/tutorials/mq-develop-mq-rest-api/
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=mq-messaging-using-rest-api
+  - type: JSONSchema
+    url: json-schema/message-queue.json
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=api-collective-reference
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/was-liberty/base?topic=deploying-applications-in-liberty
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=apis
+  - type: APIReference
+    url: https://www.ibm.com/docs/en/ws-automation?topic=reference-rest-api
+  - type: Documentation
+    url: https://www.ibm.com/docs/en/ws-automation?topic=viewing-rest-api
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  - type: APIReference
+    url: https://openliberty.io/docs/latest/documentation-openapi.html
+  - type: GettingStarted
+    url: https://openliberty.io/guides/rest-intro.html
+  - type: Documentation
+    url: https://openliberty.io/docs/latest/microprofile.html
+  - type: Blog
+    url: https://openliberty.io/blog/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
