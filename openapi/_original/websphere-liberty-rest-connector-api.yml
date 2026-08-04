@@ -1,0 +1,744 @@
+openapi: 3.1.0
+info:
+  title: WebSphere Liberty REST Connector API
+  description: >-
+    Secure REST-based JMX connector for remote administration of Liberty servers.
+    Provides file transfer and JMX MBean access through HTTPS endpoints, requiring
+    TLS for confidential communication. Supports MBean operations, attribute
+    access, and notification subscriptions.
+  version: 2.0.0
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  contact:
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+externalDocs:
+  description: REST Connector Feature Documentation
+  url: https://openliberty.io/docs/latest/reference/feature/restConnector-2.0.html
+servers:
+- url: https://localhost:9443/IBMJMXConnectorREST/api
+  description: Default Liberty JMX REST Connector
+security:
+- basicAuth: []
+tags:
+- name: MBeans
+  description: JMX MBean operations and attribute access
+- name: Notifications
+  description: JMX notification subscription management
+- name: File Transfer
+  description: File upload and download operations
+- name: Connectors
+  description: JMX connector management
+paths:
+  /mbeans:
+    get:
+      operationId: listMBeans
+      summary: List Registered Mbeans
+      description: Returns a list of all MBeans registered in the MBean server.
+      tags:
+      - MBeans
+      parameters:
+      - name: objectName
+        in: query
+        description: ObjectName pattern to filter MBeans
+        schema:
+          type: string
+        example: example_value
+      - name: className
+        in: query
+        description: Filter by MBean class name
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: List of registered MBeans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MBeanInfo'
+              examples:
+                Listmbeans200Example:
+                  summary: Default listMBeans 200 response
+                  x-microcks-default: true
+                  value:
+                  - objectName: example_value
+                    className: example_value
+                    description: A sample description.
+                    URL: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /mbeans/{objectName}:
+    get:
+      operationId: getMBeanInfo
+      summary: Get Mbean Information
+      description: Returns metadata about a specific MBean including attributes, operations, and notifications.
+      tags:
+      - MBeans
+      parameters:
+      - $ref: '#/components/parameters/objectName'
+      responses:
+        '200':
+          description: MBean metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MBeanDetail'
+              examples:
+                Getmbeaninfo200Example:
+                  summary: Default getMBeanInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    objectName: example_value
+                    className: example_value
+                    description: A sample description.
+                    attributes:
+                    - name: Example Title
+                      type: example_value
+                      description: A sample description.
+                      readable: true
+                      writable: true
+                    operations:
+                    - name: Example Title
+                      description: A sample description.
+                      returnType: example_value
+                      parameters:
+                      - {}
+                      impact: ACTION
+                    notifications:
+                    - name: Example Title
+                      description: A sample description.
+                      notifTypes:
+                      - {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /mbeans/{objectName}/attributes:
+    get:
+      operationId: getMBeanAttributes
+      summary: Get Mbean Attributes
+      description: Returns the current values of all readable attributes for the specified MBean.
+      tags:
+      - MBeans
+      parameters:
+      - $ref: '#/components/parameters/objectName'
+      responses:
+        '200':
+          description: MBean attribute values
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              examples:
+                Getmbeanattributes200Example:
+                  summary: Default getMBeanAttributes 200 response
+                  x-microcks-default: true
+                  value: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /mbeans/{objectName}/attributes/{attributeName}:
+    get:
+      operationId: getMBeanAttribute
+      summary: Get a Specific Mbean Attribute
+      description: Returns the value of a specific attribute for the specified MBean.
+      tags:
+      - MBeans
+      parameters:
+      - $ref: '#/components/parameters/objectName'
+      - name: attributeName
+        in: path
+        required: true
+        description: Name of the MBean attribute
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Attribute value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeValue'
+              examples:
+                Getmbeanattribute200Example:
+                  summary: Default getMBeanAttribute 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    value: example_value
+                    type: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setMBeanAttribute
+      summary: Set a Specific Mbean Attribute
+      description: Sets the value of a writable attribute for the specified MBean.
+      tags:
+      - MBeans
+      parameters:
+      - $ref: '#/components/parameters/objectName'
+      - name: attributeName
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeValue'
+            examples:
+              SetmbeanattributeRequestExample:
+                summary: Default setMBeanAttribute request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  value: example_value
+                  type: example_value
+      responses:
+        '200':
+          description: Attribute value updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeValue'
+              examples:
+                Setmbeanattribute200Example:
+                  summary: Default setMBeanAttribute 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    value: example_value
+                    type: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /mbeans/{objectName}/operations/{operationName}:
+    post:
+      operationId: invokeMBeanOperation
+      summary: Invoke an Mbean Operation
+      description: Invokes an operation on the specified MBean with optional parameters.
+      tags:
+      - MBeans
+      parameters:
+      - $ref: '#/components/parameters/objectName'
+      - name: operationName
+        in: path
+        required: true
+        description: Name of the MBean operation to invoke
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                params:
+                  type: array
+                  items: {}
+                  description: Operation parameters
+                signature:
+                  type: array
+                  items:
+                    type: string
+                  description: Parameter type signatures
+            examples:
+              InvokembeanoperationRequestExample:
+                summary: Default invokeMBeanOperation request
+                x-microcks-default: true
+                value:
+                  params: []
+                  signature:
+                  - example_value
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value: {}
+              examples:
+                Invokembeanoperation200Example:
+                  summary: Default invokeMBeanOperation 200 response
+                  x-microcks-default: true
+                  value:
+                    value: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /notifications:
+    get:
+      operationId: listNotificationSubscriptions
+      summary: List Notification Subscriptions
+      description: Returns a list of active notification subscriptions.
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: List of notification subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationSubscription'
+              examples:
+                Listnotificationsubscriptions200Example:
+                  summary: Default listNotificationSubscriptions 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    objectName: example_value
+                    filters:
+                    - example_value
+                    created: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createNotificationSubscription
+      summary: Create a Notification Subscription
+      description: Subscribes to notifications from a specific MBean.
+      tags:
+      - Notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - objectName
+              properties:
+                objectName:
+                  type: string
+                  description: ObjectName of the MBean to subscribe to
+                filters:
+                  type: array
+                  items:
+                    type: string
+                  description: Notification type filters
+            examples:
+              CreatenotificationsubscriptionRequestExample:
+                summary: Default createNotificationSubscription request
+                x-microcks-default: true
+                value:
+                  objectName: example_value
+                  filters:
+                  - example_value
+      responses:
+        '201':
+          description: Notification subscription created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationSubscription'
+              examples:
+                Createnotificationsubscription201Example:
+                  summary: Default createNotificationSubscription 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    objectName: example_value
+                    filters:
+                    - example_value
+                    created: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /notifications/{subscriptionId}:
+    get:
+      operationId: getNotifications
+      summary: Get Pending Notifications
+      description: Returns pending notifications for a subscription.
+      tags:
+      - Notifications
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        description: Subscription identifier
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Pending notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+              examples:
+                Getnotifications200Example:
+                  summary: Default getNotifications 200 response
+                  x-microcks-default: true
+                  value:
+                  - type: example_value
+                    source: example_value
+                    message: example_value
+                    sequenceNumber: 10
+                    timestamp: 10
+                    userData: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteNotificationSubscription
+      summary: Delete a Notification Subscription
+      description: Unsubscribes from notifications.
+      tags:
+      - Notifications
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '204':
+          description: Subscription deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /file/upload:
+    post:
+      operationId: uploadFile
+      summary: Upload a File
+      description: Uploads a file to the Liberty server file system.
+      tags:
+      - File Transfer
+      parameters:
+      - name: targetPath
+        in: query
+        required: true
+        description: Target file path on the server
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              UploadfileRequestExample:
+                summary: Default uploadFile request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '201':
+          description: File uploaded successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /file/download:
+    get:
+      operationId: downloadFile
+      summary: Download a File
+      description: Downloads a file from the Liberty server file system.
+      tags:
+      - File Transfer
+      parameters:
+      - name: sourcePath
+        in: query
+        required: true
+        description: Source file path on the server
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: File content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Downloadfile200Example:
+                  summary: Default downloadFile 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /file/delete:
+    delete:
+      operationId: deleteFile
+      summary: Delete a File
+      description: Deletes a file from the Liberty server file system.
+      tags:
+      - File Transfer
+      parameters:
+      - name: path
+        in: query
+        required: true
+        description: File path on the server
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: File deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication with administrator role
+  parameters:
+    objectName:
+      name: objectName
+      in: path
+      required: true
+      description: JMX ObjectName (URL-encoded)
+      schema:
+        type: string
+  schemas:
+    MBeanInfo:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: JMX ObjectName
+          example: example_value
+        className:
+          type: string
+          description: MBean implementation class
+          example: example_value
+        description:
+          type: string
+          description: MBean description
+          example: A sample description.
+        URL:
+          type: string
+          format: uri
+          description: URL for accessing this MBean's details
+          example: https://www.example.com
+    MBeanDetail:
+      type: object
+      properties:
+        objectName:
+          type: string
+          example: example_value
+        className:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        attributes:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              description:
+                type: string
+              readable:
+                type: boolean
+              writable:
+                type: boolean
+          example: []
+        operations:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              returnType:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                    description:
+                      type: string
+              impact:
+                type: string
+                enum:
+                - ACTION
+                - ACTION_INFO
+                - INFO
+                - UNKNOWN
+          example: []
+        notifications:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              notifTypes:
+                type: array
+                items:
+                  type: string
+          example: []
+    AttributeValue:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        value:
+          example: example_value
+        type:
+          type: string
+          example: example_value
+    NotificationSubscription:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        objectName:
+          type: string
+          example: example_value
+        filters:
+          type: array
+          items:
+            type: string
+          example: []
+        created:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    Notification:
+      type: object
+      properties:
+        type:
+          type: string
+          example: example_value
+        source:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        sequenceNumber:
+          type: integer
+          example: 10
+        timestamp:
+          type: integer
+          example: 10
+        userData:
+          type: object
+          additionalProperties: true
+          example: example_value
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
