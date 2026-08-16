@@ -13,16 +13,18 @@
       "feed_url": "https://openliberty.io/docs/latest/microprofile.html",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     },
     {
       "source": "https://cloud.ibm.com/status",
       "feed_url": "https://cloud.ibm.com/status",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
   "post_count": 30,
-  "fetched": "2026-08-06T14:08:46Z"
+  "fetched": "2026-08-15T12:11:08Z"
 }
