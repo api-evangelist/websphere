@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Health API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Overall Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health"
+          },
+          "docs": "Returns the overall health check status including all readiness and liveness checks."
+        },
+        {
+          "info": {
+            "name": "Get Readiness Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/ready"
+          },
+          "docs": "Returns readiness check results indicating whether the server is ready to accept traffic."
+        },
+        {
+          "info": {
+            "name": "Get Liveness Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/live"
+          },
+          "docs": "Returns liveness check results indicating whether the server is alive and running."
+        },
+        {
+          "info": {
+            "name": "Get Startup Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/started"
+          },
+          "docs": "Returns startup check results indicating whether the server has completed startup."
+        },
+        {
+          "info": {
+            "name": "Get Server Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/health/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Managed server identifier"
+              }
+            ]
+          },
+          "docs": "Returns health information for a specific managed server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Server API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/server"
+          },
+          "docs": "Returns runtime information about the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Create a Server Dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/server/dump",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a server dump for diagnostic purposes."
+        },
+        {
+          "info": {
+            "name": "Create a Java Dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/server/javadump"
+          },
+          "docs": "Creates a Java core dump for thread analysis."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

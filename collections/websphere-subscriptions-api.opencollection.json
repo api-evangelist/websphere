@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Subscriptions API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/subscription",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ]
+          },
+          "docs": "Returns a list of subscriptions on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Get Subscription Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/subscription/:subscriptionId",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path",
+                "description": "Subscription identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific subscription."
+        },
+        {
+          "info": {
+            "name": "Delete a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/subscription/:subscriptionId",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a subscription from the queue manager."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

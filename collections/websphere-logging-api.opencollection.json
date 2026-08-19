@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Logging API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Logging Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/logging"
+          },
+          "docs": "Returns the current logging configuration."
+        },
+        {
+          "info": {
+            "name": "Update Logging Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/logging",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the logging configuration dynamically."
+        },
+        {
+          "info": {
+            "name": "Get Log Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/logging/messages",
+            "params": [
+              {
+                "name": "maxMessages",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of messages to return"
+              },
+              {
+                "name": "level",
+                "value": "AUDIT",
+                "type": "query",
+                "description": "Minimum log level"
+              }
+            ]
+          },
+          "docs": "Returns recent log messages from the server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

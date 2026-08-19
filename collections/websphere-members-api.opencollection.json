@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Members API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Collective Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/members",
+            "params": [
+              {
+                "name": "status",
+                "value": "STARTED",
+                "type": "query",
+                "description": "Filter by member status"
+              },
+              {
+                "name": "hostName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by hostname"
+              },
+              {
+                "name": "clusterName",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by cluster membership"
+              }
+            ]
+          },
+          "docs": "Returns a list of all servers that are members of this collective."
+        },
+        {
+          "info": {
+            "name": "Get Member Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/members/:memberName",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific collective member."
+        },
+        {
+          "info": {
+            "name": "Start a Collective Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/members/:memberName/start",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Starts a stopped collective member server."
+        },
+        {
+          "info": {
+            "name": "Stop a Collective Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/members/:memberName/stop",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ]
+          },
+          "docs": "Stops a running collective member server."
+        },
+        {
+          "info": {
+            "name": "Transfer Files to a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/members/:memberName/transfer",
+            "params": [
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Collective member server name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfers configuration or application files to a collective member."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

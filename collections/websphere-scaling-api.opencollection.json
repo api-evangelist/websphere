@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Scaling API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scaling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scaling Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/scaling/policies"
+          },
+          "docs": "Returns a list of auto-scaling policies."
+        },
+        {
+          "info": {
+            "name": "Create a Scaling Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/scaling/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new auto-scaling policy for a cluster."
+        },
+        {
+          "info": {
+            "name": "Get Scaling Policy Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/scaling/policies/:policyName",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Scaling policy name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific auto-scaling policy."
+        },
+        {
+          "info": {
+            "name": "Update a Scaling Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/scaling/policies/:policyName",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing auto-scaling policy."
+        },
+        {
+          "info": {
+            "name": "Delete a Scaling Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/scaling/policies/:policyName",
+            "params": [
+              {
+                "name": "policyName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an auto-scaling policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

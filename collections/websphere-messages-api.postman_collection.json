@@ -1,0 +1,1512 @@
+{
+  "item": [
+    {
+      "id": "02a9b093-b564-42a1-9c67-a81dba19cf6d",
+      "name": "Messages",
+      "description": {
+        "content": "Message operations - send and receive",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d874851-fa96-4362-9cf3-1dd7c7360b56",
+          "name": "Send a Message to a Queue",
+          "request": {
+            "name": "Send a Message to a Queue",
+            "description": {
+              "content": "Sends a message to the specified queue on the queue manager.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                "qmgr",
+                ":qmgrName",
+                "queue",
+                ":queueName",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "qmgrName",
+                  "description": "(Required) Queue manager name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) Queue name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Correlation ID for the message",
+                "key": "ibm-mq-md-correlationId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Message expiry in tenths of a second",
+                "key": "ibm-mq-md-expiry",
+                "value": "<integer>"
+              },
+              {
+                "disabled": false,
+                "description": "Message persistence",
+                "key": "ibm-mq-md-persistence",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Reply-to queue name",
+                "key": "ibm-mq-md-replyTo",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c5dacb5-9fc5-48a0-a5c4-a18cd5dc1ec0",
+              "name": "Message sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID for the message",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message expiry in tenths of a second",
+                    "key": "ibm-mq-md-expiry",
+                    "value": "10"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message persistence",
+                    "key": "ibm-mq-md-persistence",
+                    "value": "persistent"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Reply-to queue name",
+                    "key": "ibm-mq-md-replyTo",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Message ID of the sent message",
+                  "key": "ibm-mq-md-messageId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2ecc58a-3a23-4636-8c22-e97ec9a2cb62",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID for the message",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message expiry in tenths of a second",
+                    "key": "ibm-mq-md-expiry",
+                    "value": "10"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message persistence",
+                    "key": "ibm-mq-md-persistence",
+                    "value": "persistent"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Reply-to queue name",
+                    "key": "ibm-mq-md-replyTo",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f678837-3994-4fd1-8a7f-6d6fae200187",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID for the message",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message expiry in tenths of a second",
+                    "key": "ibm-mq-md-expiry",
+                    "value": "10"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message persistence",
+                    "key": "ibm-mq-md-persistence",
+                    "value": "persistent"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Reply-to queue name",
+                    "key": "ibm-mq-md-replyTo",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82656356-83fb-42d7-9dd8-80149b7b2306",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID for the message",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message expiry in tenths of a second",
+                    "key": "ibm-mq-md-expiry",
+                    "value": "10"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Message persistence",
+                    "key": "ibm-mq-md-persistence",
+                    "value": "persistent"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Reply-to queue name",
+                    "key": "ibm-mq-md-replyTo",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfde86c4-bdfb-41e7-864d-213e93533785",
+          "name": "Browse Messages on a Queue",
+          "request": {
+            "name": "Browse Messages on a Queue",
+            "description": {
+              "content": "Non-destructively browses messages on the specified queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                "qmgr",
+                ":qmgrName",
+                "queue",
+                ":queueName",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of messages to browse"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "qmgrName",
+                  "description": "(Required) Queue manager name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) Queue name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Filter by message ID",
+                "key": "ibm-mq-md-messageId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Filter by correlation ID",
+                "key": "ibm-mq-md-correlationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7828135-311a-442e-8a3f-d342415290eb",
+              "name": "Messages browsed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"messageId\": \"500123\",\n    \"correlationId\": \"500123\",\n    \"putDateTime\": \"2026-01-15T10:30:00Z\",\n    \"persistence\": \"persistent\",\n    \"replyToQueue\": \"example_value\",\n    \"replyToQueueManager\": \"example_value\",\n    \"expiry\": 10,\n    \"body\": \"example_value\",\n    \"format\": \"example_value\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55e534ca-b3ef-4410-8274-1245e5d7f1e1",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e68eb006-03aa-4c9d-b911-3180a0b2cd8d",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62767b1c-675b-4393-9eea-359389d8972f",
+          "name": "Receive (destructively Get) a Message",
+          "request": {
+            "name": "Receive (destructively Get) a Message",
+            "description": {
+              "content": "Destructively gets a message from the specified queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                "qmgr",
+                ":qmgrName",
+                "queue",
+                ":queueName",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wait",
+                  "value": "<integer>",
+                  "description": "Wait time in milliseconds for a message"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "qmgrName",
+                  "description": "(Required) Queue manager name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "queueName",
+                  "description": "(Required) Queue name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Filter by message ID",
+                "key": "ibm-mq-md-messageId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Filter by correlation ID",
+                "key": "ibm-mq-md-correlationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf02fedb-eea8-4a62-8cac-a2b208ec0a59",
+              "name": "Message received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wait",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "ibm-mq-md-messageId",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "ibm-mq-md-correlationId",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00c23380-dd02-4e66-966b-f62826eb6463",
+              "name": "No message available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wait",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85c7dc86-f562-4690-904a-7ff99f5eb733",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wait",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2956843-0aa0-4121-84e1-933be4dc05d0",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "queue",
+                    ":queueName",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wait",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "queueName",
+                      "description": "(Required) Queue name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by message ID",
+                    "key": "ibm-mq-md-messageId",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Filter by correlation ID",
+                    "key": "ibm-mq-md-correlationId",
+                    "value": "500123"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1963d3d5-afcd-4231-80bf-a4de998f706f",
+          "name": "Publish a Message to a Topic",
+          "request": {
+            "name": "Publish a Message to a Topic",
+            "description": {
+              "content": "Publishes a message to the specified topic string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                "qmgr",
+                ":qmgrName",
+                "topic",
+                ":topicString",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "qmgrName",
+                  "description": "(Required) Queue manager name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "topicString",
+                  "description": "(Required) Topic string to publish to"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eff3b34e-e703-4358-859b-e1c8777aadfd",
+              "name": "Message published",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "topic",
+                    ":topicString",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "topicString",
+                      "description": "(Required) Topic string to publish to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b740585-d0d3-45e9-97cb-9b3455e37d56",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "topic",
+                    ":topicString",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "topicString",
+                      "description": "(Required) Topic string to publish to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ea7e196-3596-4609-8c9c-002d07205ff7",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    "qmgr",
+                    ":qmgrName",
+                    "topic",
+                    ":topicString",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "qmgrName",
+                      "description": "(Required) Queue manager name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "topicString",
+                      "description": "(Required) Topic string to publish to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "78b19805-1a9e-4a43-8e18-234885005524",
+    "name": "Open Liberty APIs Applications Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.\n\nContact Support:\n Name: Open Liberty Community",
+      "type": "text/plain"
+    }
+  }
+}

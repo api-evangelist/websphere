@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Nodes API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/nodes"
+          },
+          "docs": "Returns a list of all nodes in the cell."
+        },
+        {
+          "info": {
+            "name": "Get Node Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/nodes/:nodeName",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific node."
+        },
+        {
+          "info": {
+            "name": "Synchronize a Node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/nodes/:nodeName/sync",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Node name"
+              }
+            ]
+          },
+          "docs": "Triggers configuration synchronization for the specified node."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

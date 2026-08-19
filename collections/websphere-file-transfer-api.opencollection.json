@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications File Transfer API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File Transfer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/file",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "Path to the file on the server"
+              }
+            ]
+          },
+          "docs": "Downloads a file from the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Upload a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/file",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "Destination path on the server"
+              }
+            ]
+          },
+          "docs": "Uploads a file to the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Delete a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/file",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "Path to the file on the server"
+              }
+            ]
+          },
+          "docs": "Deletes a file from the Liberty server."
+        },
+        {
+          "info": {
+            "name": "Upload a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/file/upload",
+            "params": [
+              {
+                "name": "targetPath",
+                "value": "example_value",
+                "type": "query",
+                "description": "Target file path on the server"
+              }
+            ]
+          },
+          "docs": "Uploads a file to the Liberty server file system."
+        },
+        {
+          "info": {
+            "name": "Download a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/file/download",
+            "params": [
+              {
+                "name": "sourcePath",
+                "value": "example_value",
+                "type": "query",
+                "description": "Source file path on the server"
+              }
+            ]
+          },
+          "docs": "Downloads a file from the Liberty server file system."
+        },
+        {
+          "info": {
+            "name": "Delete a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/file/delete",
+            "params": [
+              {
+                "name": "path",
+                "value": "example_value",
+                "type": "query",
+                "description": "File path on the server"
+              }
+            ]
+          },
+          "docs": "Deletes a file from the Liberty server file system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Fixes API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fixes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Fixes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/fixes",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter by applicable server"
+              },
+              {
+                "name": "type",
+                "value": "security",
+                "type": "query",
+                "description": "Filter by fix type"
+              }
+            ]
+          },
+          "docs": "Returns a list of available fixes and patches."
+        },
+        {
+          "info": {
+            "name": "Get Fix Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/fixes/:fixId",
+            "params": [
+              {
+                "name": "fixId",
+                "value": "500123",
+                "type": "path",
+                "description": "Fix identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific fix."
+        },
+        {
+          "info": {
+            "name": "Apply a Fix",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/fixes/:fixId/apply",
+            "params": [
+              {
+                "name": "fixId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies a fix to one or more managed servers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

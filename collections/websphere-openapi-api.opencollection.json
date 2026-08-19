@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications OpenAPI API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OpenAPI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Openapi Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/openapi",
+            "params": [
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Output format"
+              }
+            ]
+          },
+          "docs": "Returns the OpenAPI document describing all deployed REST endpoints."
+        },
+        {
+          "info": {
+            "name": "Access the Openapi Ui",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/openapi/ui"
+          },
+          "docs": "Returns the Swagger UI for exploring and testing deployed REST endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

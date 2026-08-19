@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Notifications API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/notifications",
+            "params": [
+              {
+                "name": "type",
+                "value": "vulnerability",
+                "type": "query",
+                "description": "Filter by notification type"
+              },
+              {
+                "name": "read",
+                "value": "true",
+                "type": "query",
+                "description": "Filter by read status"
+              }
+            ]
+          },
+          "docs": "Returns a list of notifications and alerts."
+        },
+        {
+          "info": {
+            "name": "Create a Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/notifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes to notifications from a specific MBean."
+        },
+        {
+          "info": {
+            "name": "Mark Notification as Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/notifications/:notificationId/read",
+            "params": [
+              {
+                "name": "notificationId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Marks a notification as read."
+        },
+        {
+          "info": {
+            "name": "Get Pending Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/notifications/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path",
+                "description": "Subscription identifier"
+              }
+            ]
+          },
+          "docs": "Returns pending notifications for a subscription."
+        },
+        {
+          "info": {
+            "name": "Delete a Notification Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/notifications/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unsubscribes from notifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

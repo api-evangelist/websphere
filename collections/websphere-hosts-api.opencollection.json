@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Hosts API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/hosts"
+          },
+          "docs": "Returns a list of hosts registered in the collective."
+        },
+        {
+          "info": {
+            "name": "Get Host Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/hosts/:hostName",
+            "params": [
+              {
+                "name": "hostName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Hostname"
+              }
+            ]
+          },
+          "docs": "Returns details about a specific host in the collective."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

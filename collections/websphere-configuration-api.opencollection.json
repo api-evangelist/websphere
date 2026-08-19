@@ -1,0 +1,311 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Configuration API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Access the Api Explorer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/explorer"
+          },
+          "docs": "Returns the API Explorer interface for discovering available REST API endpoints."
+        },
+        {
+          "info": {
+            "name": "List Configuration Resource Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/config"
+          },
+          "docs": "Returns a list of available configuration resource types that can be managed through the REST API."
+        },
+        {
+          "info": {
+            "name": "Update Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the server configuration. Changes may require a server restart."
+        },
+        {
+          "info": {
+            "name": "List Resources of a Specific Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/config/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Depth of nested resource retrieval"
+              }
+            ]
+          },
+          "docs": "Returns a collection of configuration resources of the specified type."
+        },
+        {
+          "info": {
+            "name": "Create a New Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/config/:resourceType",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new configuration resource of the specified type."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/config/:resourceType/:resourceId",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Depth of nested resource retrieval"
+              }
+            ]
+          },
+          "docs": "Returns the configuration details for a specific resource."
+        },
+        {
+          "info": {
+            "name": "Update a Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/config/:resourceType/:resourceId",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing configuration resource."
+        },
+        {
+          "info": {
+            "name": "Delete a Configuration Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/config/:resourceType/:resourceId",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "path",
+                "description": "The type of configuration resource"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes a specific configuration resource."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Configuration Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/config/:elementName",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Configuration element name (e.g., httpEndpoint, dataSource, application)"
+              }
+            ]
+          },
+          "docs": "Returns the configuration for a specific element type."
+        },
+        {
+          "info": {
+            "name": "Create a Configuration Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/config/:elementName",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Configuration element name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new configuration element to the server configuration."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Configuration Element Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/config/:elementName/:uid",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "500123",
+                "type": "path",
+                "description": "Unique identifier of the configuration element"
+              }
+            ]
+          },
+          "docs": "Returns a specific configuration element instance by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Configuration Element Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/config/:elementName/:uid",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific configuration element."
+        },
+        {
+          "info": {
+            "name": "Delete a Configuration Element Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/config/:elementName/:uid",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a specific configuration element from the server configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

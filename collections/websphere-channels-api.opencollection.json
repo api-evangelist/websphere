@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Channels API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/channel",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "Channel name filter"
+              },
+              {
+                "name": "type",
+                "value": "sender",
+                "type": "query",
+                "description": "Channel type filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of channels on the specified queue manager."
+        },
+        {
+          "info": {
+            "name": "Create a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/channel",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new channel on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Get Channel Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/channel/:channelName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Channel name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific channel."
+        },
+        {
+          "info": {
+            "name": "Delete a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/channel/:channelName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a channel from the queue manager."
+        },
+        {
+          "info": {
+            "name": "Start a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/channel/:channelName/start",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Starts a channel on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Stop a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/channel/:channelName/stop",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "channelName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops a channel on the queue manager."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

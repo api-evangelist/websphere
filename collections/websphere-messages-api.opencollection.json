@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Messages API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Browse Messages on a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/messaging/qmgr/:qmgrName/queue/:queueName/message",
+            "headers": [
+              {
+                "name": "ibm-mq-md-messageId",
+                "value": "500123"
+              },
+              {
+                "name": "ibm-mq-md-correlationId",
+                "value": "500123"
+              }
+            ],
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of messages to browse"
+              }
+            ]
+          },
+          "docs": "Non-destructively browses messages on the specified queue."
+        },
+        {
+          "info": {
+            "name": "Send a Message to a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/messaging/qmgr/:qmgrName/queue/:queueName/message",
+            "headers": [
+              {
+                "name": "ibm-mq-md-correlationId",
+                "value": "500123"
+              },
+              {
+                "name": "ibm-mq-md-expiry",
+                "value": "10"
+              },
+              {
+                "name": "ibm-mq-md-persistence",
+                "value": "persistent"
+              },
+              {
+                "name": "ibm-mq-md-replyTo",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to the specified queue on the queue manager."
+        },
+        {
+          "info": {
+            "name": "Receive (destructively Get) a Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/messaging/qmgr/:qmgrName/queue/:queueName/message",
+            "headers": [
+              {
+                "name": "ibm-mq-md-messageId",
+                "value": "500123"
+              },
+              {
+                "name": "ibm-mq-md-correlationId",
+                "value": "500123"
+              }
+            ],
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "wait",
+                "value": "10",
+                "type": "query",
+                "description": "Wait time in milliseconds for a message"
+              }
+            ]
+          },
+          "docs": "Destructively gets a message from the specified queue."
+        },
+        {
+          "info": {
+            "name": "Publish a Message to a Topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/messaging/qmgr/:qmgrName/topic/:topicString/message",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "topicString",
+                "value": "example_value",
+                "type": "path",
+                "description": "Topic string to publish to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes a message to the specified topic string."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

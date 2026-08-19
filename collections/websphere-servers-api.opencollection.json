@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Servers API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/servers"
+          },
+          "docs": "Returns a list of all servers in the cell."
+        },
+        {
+          "info": {
+            "name": "Register a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/servers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new server with WebSphere Automation for monitoring and management."
+        },
+        {
+          "info": {
+            "name": "Get Server Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/servers/:serverName",
+            "params": [
+              {
+                "name": "serverName",
+                "value": "",
+                "type": "path",
+                "description": "Server name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific server."
+        },
+        {
+          "info": {
+            "name": "Start a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/servers/:serverName/start",
+            "params": [
+              {
+                "name": "serverName",
+                "value": "",
+                "type": "path",
+                "description": "Server name"
+              }
+            ]
+          },
+          "docs": "Starts the specified application server."
+        },
+        {
+          "info": {
+            "name": "Stop a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/servers/:serverName/stop",
+            "params": [
+              {
+                "name": "serverName",
+                "value": "",
+                "type": "path",
+                "description": "Server name"
+              }
+            ]
+          },
+          "docs": "Stops the specified application server."
+        },
+        {
+          "info": {
+            "name": "Get Managed Server Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Managed server identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific managed server."
+        },
+        {
+          "info": {
+            "name": "Deregister a Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Managed server identifier"
+              }
+            ]
+          },
+          "docs": "Removes a server from WebSphere Automation management."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

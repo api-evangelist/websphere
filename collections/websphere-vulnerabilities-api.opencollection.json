@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Vulnerabilities API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vulnerabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/vulnerabilities",
+            "params": [
+              {
+                "name": "severity",
+                "value": "critical",
+                "type": "query",
+                "description": "Filter by severity"
+              },
+              {
+                "name": "status",
+                "value": "open",
+                "type": "query",
+                "description": "Filter by remediation status"
+              },
+              {
+                "name": "serverId",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter by affected server"
+              },
+              {
+                "name": "cveId",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter by CVE identifier"
+              }
+            ]
+          },
+          "docs": "Returns a list of known security vulnerabilities affecting managed servers."
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/vulnerabilities/:vulnerabilityId",
+            "params": [
+              {
+                "name": "vulnerabilityId",
+                "value": "500123",
+                "type": "path",
+                "description": "Vulnerability identifier"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific vulnerability."
+        },
+        {
+          "info": {
+            "name": "Resolve a Vulnerability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/vulnerabilities/:vulnerabilityId/resolve",
+            "params": [
+              {
+                "name": "vulnerabilityId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the resolution of a vulnerability by applying fixes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

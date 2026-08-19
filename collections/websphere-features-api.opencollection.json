@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Features API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Installed Features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/features"
+          },
+          "docs": "Returns a list of all Liberty features installed on the server."
+        },
+        {
+          "info": {
+            "name": "Get Feature Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/features/:featureName",
+            "params": [
+              {
+                "name": "featureName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Feature symbolic name"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific Liberty feature."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1080 @@
+{
+  "item": [
+    {
+      "id": "54e7f58d-72f5-409e-b9ad-4faa4e410920",
+      "name": "Scaling",
+      "description": {
+        "content": "Scaling policy and auto-scaling management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f32b1a6-92cc-4bd6-afe8-27a8f502cfe4",
+          "name": "List Scaling Policies",
+          "request": {
+            "name": "List Scaling Policies",
+            "description": {
+              "content": "Returns a list of auto-scaling policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scaling",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b7e7fff-761a-49e1-8feb-dab8a0312ed7",
+              "name": "List of scaling policies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Example Title\",\n    \"clusterName\": \"example_value\",\n    \"enabled\": true,\n    \"minMembers\": 10,\n    \"maxMembers\": 10,\n    \"scaleUpTrigger\": {\n      \"metric\": \"cpuUtilization\",\n      \"threshold\": 42.5,\n      \"duration\": 10\n    },\n    \"scaleDownTrigger\": {\n      \"metric\": \"cpuUtilization\",\n      \"threshold\": 42.5,\n      \"duration\": 10\n    },\n    \"cooldownPeriod\": 10\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4be8c1e-34e1-4151-9532-e7a64952a410",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9ba6ab6-2e0f-4d2b-ae1f-5d5d484d130b",
+          "name": "Create a Scaling Policy",
+          "request": {
+            "name": "Create a Scaling Policy",
+            "description": {
+              "content": "Creates a new auto-scaling policy for a cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scaling",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"clusterName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"minMembers\": \"<integer>\",\n  \"maxMembers\": \"<integer>\",\n  \"scaleUpTrigger\": {\n    \"metric\": \"<string>\",\n    \"threshold\": \"<number>\",\n    \"duration\": \"<integer>\"\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"<string>\",\n    \"threshold\": \"<number>\",\n    \"duration\": \"<integer>\"\n  },\n  \"cooldownPeriod\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "620d27ef-c1d0-4975-92d0-24921eb86aee",
+              "name": "Scaling policy created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdab7847-1338-4390-9cc6-e581195449a6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b54f56c-e7f5-4be7-b328-2352d6cbcc38",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52f06e11-ea0a-4cc1-b0bd-6d4e58835b0c",
+          "name": "Get Scaling Policy Details",
+          "request": {
+            "name": "Get Scaling Policy Details",
+            "description": {
+              "content": "Returns details of a specific auto-scaling policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scaling",
+                "policies",
+                ":policyName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyName",
+                  "description": "(Required) Scaling policy name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f832abd1-78e3-4809-9bb8-0e181d6a56e1",
+              "name": "Scaling policy details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) Scaling policy name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8db5d93a-2ef8-40d6-b244-547030942ca9",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) Scaling policy name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33901ada-7ba0-4e93-bc79-5207f1b5b484",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) Scaling policy name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b26a9b1f-b324-4e6d-88e3-9f8b498c7e73",
+          "name": "Update a Scaling Policy",
+          "request": {
+            "name": "Update a Scaling Policy",
+            "description": {
+              "content": "Updates an existing auto-scaling policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scaling",
+                "policies",
+                ":policyName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"clusterName\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"minMembers\": \"<integer>\",\n  \"maxMembers\": \"<integer>\",\n  \"scaleUpTrigger\": {\n    \"metric\": \"<string>\",\n    \"threshold\": \"<number>\",\n    \"duration\": \"<integer>\"\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"<string>\",\n    \"threshold\": \"<number>\",\n    \"duration\": \"<integer>\"\n  },\n  \"cooldownPeriod\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6b0e9479-539f-452d-a591-eb3162655816",
+              "name": "Scaling policy updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9155a50-b56f-4cc4-b13b-c3d971d34b74",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a21e6620-5888-4776-a12f-20b3a6334182",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4257fed8-9c60-4131-b9d7-42a15ea18b6f",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"clusterName\": \"example_value\",\n  \"enabled\": true,\n  \"minMembers\": 10,\n  \"maxMembers\": 10,\n  \"scaleUpTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"scaleDownTrigger\": {\n    \"metric\": \"cpuUtilization\",\n    \"threshold\": 42.5,\n    \"duration\": 10\n  },\n  \"cooldownPeriod\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d69e8f77-1fb6-4c56-a7e4-f02d0a748c0b",
+          "name": "Delete a Scaling Policy",
+          "request": {
+            "name": "Delete a Scaling Policy",
+            "description": {
+              "content": "Deletes an auto-scaling policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scaling",
+                "policies",
+                ":policyName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyName",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab04cea3-b619-4179-870b-c4f250acbfd2",
+              "name": "Scaling policy deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5dfe9923-ac1f-4905-8c9b-2c775cff9531",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44fc1370-1aec-4010-8351-e1e43356c986",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scaling",
+                    "policies",
+                    ":policyName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyName",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a9ba1d9-89af-4899-ada7-8999f57ceb4f",
+    "name": "Open Liberty APIs Applications Scaling API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.\n\nContact Support:\n Name: Open Liberty Community",
+      "type": "text/plain"
+    }
+  }
+}

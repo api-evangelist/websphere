@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Security API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Security Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/security/users",
+            "params": [
+              {
+                "name": "pattern",
+                "value": "example_value",
+                "type": "query",
+                "description": "Search pattern for user names"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of users to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of users in the security registry."
+        },
+        {
+          "info": {
+            "name": "List Security Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/security/roles"
+          },
+          "docs": "Returns a list of administrative security roles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

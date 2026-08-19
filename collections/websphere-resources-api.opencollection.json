@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Resources API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/resources/datasources"
+          },
+          "docs": "Returns a list of configured JDBC data sources."
+        },
+        {
+          "info": {
+            "name": "Get Data Source Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/resources/datasources/:dsName",
+            "params": [
+              {
+                "name": "dsName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Data source name"
+              }
+            ]
+          },
+          "docs": "Returns configuration details for a specific data source."
+        },
+        {
+          "info": {
+            "name": "Test Data Source Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/resources/datasources/:dsName/test",
+            "params": [
+              {
+                "name": "dsName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Data source name"
+              }
+            ]
+          },
+          "docs": "Tests the connection for a specific data source."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

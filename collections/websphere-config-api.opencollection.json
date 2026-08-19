@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Config API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config"
+          },
+          "docs": "Returns the current Open Liberty server configuration."
+        },
+        {
+          "info": {
+            "name": "Get Configuration Element",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/ibm/api/config/:elementName",
+            "params": [
+              {
+                "name": "elementName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Configuration element name"
+              }
+            ]
+          },
+          "docs": "Returns a specific configuration element type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

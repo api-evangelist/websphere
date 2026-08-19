@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Metrics API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "scope",
+                "value": "base",
+                "type": "query",
+                "description": "Metrics scope filter"
+              }
+            ]
+          },
+          "docs": "Returns all available metrics in Prometheus or JSON format."
+        },
+        {
+          "info": {
+            "name": "Get Base Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics/base"
+          },
+          "docs": "Returns base metrics defined by the MicroProfile Metrics specification."
+        },
+        {
+          "info": {
+            "name": "Get Vendor Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics/vendor"
+          },
+          "docs": "Returns Liberty-specific vendor metrics."
+        },
+        {
+          "info": {
+            "name": "Get Application Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/metrics/application"
+          },
+          "docs": "Returns application-defined custom metrics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

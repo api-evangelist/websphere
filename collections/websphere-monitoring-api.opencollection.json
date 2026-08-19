@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Monitoring API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Performance Monitoring Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/monitoring/performance",
+            "params": [
+              {
+                "name": "module",
+                "value": "threadPool",
+                "type": "query",
+                "description": "Performance module name"
+              }
+            ]
+          },
+          "docs": "Returns performance monitoring information for the server."
+        },
+        {
+          "info": {
+            "name": "Get Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/monitoring/health"
+          },
+          "docs": "Returns the health status of the server."
+        },
+        {
+          "info": {
+            "name": "Get Server Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/monitoring/metrics",
+            "params": [
+              {
+                "name": "scope",
+                "value": "base",
+                "type": "query",
+                "description": "Metrics scope"
+              }
+            ]
+          },
+          "docs": "Returns MicroProfile Metrics data from the server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

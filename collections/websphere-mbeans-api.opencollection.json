@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications MBeans API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MBeans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Registered Mbeans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/mbeans",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "example_value",
+                "type": "query",
+                "description": "ObjectName pattern to filter MBeans"
+              },
+              {
+                "name": "className",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by MBean class name"
+              }
+            ]
+          },
+          "docs": "Returns a list of all MBeans registered in the MBean server."
+        },
+        {
+          "info": {
+            "name": "Get Mbean Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/mbeans/:objectName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              }
+            ]
+          },
+          "docs": "Returns metadata about a specific MBean including attributes, operations, and notifications."
+        },
+        {
+          "info": {
+            "name": "Get Mbean Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/mbeans/:objectName/attributes",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              }
+            ]
+          },
+          "docs": "Returns the current values of all readable attributes for the specified MBean."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Mbean Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/mbeans/:objectName/attributes/:attributeName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              },
+              {
+                "name": "attributeName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Name of the MBean attribute"
+              }
+            ]
+          },
+          "docs": "Returns the value of a specific attribute for the specified MBean."
+        },
+        {
+          "info": {
+            "name": "Set a Specific Mbean Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://localhost:9443/mbeans/:objectName/attributes/:attributeName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              },
+              {
+                "name": "attributeName",
+                "value": "example_value",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the value of a writable attribute for the specified MBean."
+        },
+        {
+          "info": {
+            "name": "Invoke an Mbean Operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/mbeans/:objectName/operations/:operationName",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName (URL-encoded)"
+              },
+              {
+                "name": "operationName",
+                "value": "example_value",
+                "type": "path",
+                "description": "Name of the MBean operation to invoke"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invokes an operation on the specified MBean with optional parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

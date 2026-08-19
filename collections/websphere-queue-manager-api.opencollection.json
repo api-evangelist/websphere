@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Queue Manager API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queue Manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Queue Managers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr"
+          },
+          "docs": "Returns a list of queue managers that the REST API can interact with."
+        },
+        {
+          "info": {
+            "name": "Get Queue Manager Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "attributes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific queue manager."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

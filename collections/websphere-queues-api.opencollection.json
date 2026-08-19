@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Open Liberty APIs Applications Queues API",
+    "version": "24.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Queues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/queue",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "Queue name filter with wildcard support"
+              },
+              {
+                "name": "type",
+                "value": "local",
+                "type": "query",
+                "description": "Queue type filter"
+              },
+              {
+                "name": "attributes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of queues on the specified queue manager."
+        },
+        {
+          "info": {
+            "name": "Create a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/queue",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new queue on the specified queue manager."
+        },
+        {
+          "info": {
+            "name": "Get Queue Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/queue/:queueName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "status",
+                "value": "true",
+                "type": "query",
+                "description": "Include queue status information"
+              },
+              {
+                "name": "attributes",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific queue."
+        },
+        {
+          "info": {
+            "name": "Update Queue Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/queue/:queueName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates attributes of an existing queue."
+        },
+        {
+          "info": {
+            "name": "Delete a Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:9443/admin/qmgr/:qmgrName/queue/:queueName",
+            "params": [
+              {
+                "name": "qmgrName",
+                "value": "",
+                "type": "path",
+                "description": "Queue manager name"
+              },
+              {
+                "name": "queueName",
+                "value": "",
+                "type": "path",
+                "description": "Queue name"
+              },
+              {
+                "name": "purge",
+                "value": "true",
+                "type": "query",
+                "description": "Purge messages before deleting"
+              }
+            ]
+          },
+          "docs": "Deletes a queue from the queue manager."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
