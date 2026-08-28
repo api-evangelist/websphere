@@ -12,8 +12,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: websphereAdminApi
-  url: ../openapi/websphere-admin-rest-api.yml
+- name: clustersApi
+  url: ../openapi/websphere-clusters-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: restart-cluster

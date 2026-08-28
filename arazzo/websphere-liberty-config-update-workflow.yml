@@ -11,8 +11,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: libertyAdminApi
-  url: ../openapi/websphere-liberty-admin-rest-api.yml
+- name: configApi
+  url: ../openapi/websphere-config-api-openapi.yml
+  type: openapi
+- name: configurationApi
+  url: ../openapi/websphere-configuration-api-openapi.yml
+  type: openapi
+- name: serverApi
+  url: ../openapi/websphere-server-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: update-server-config

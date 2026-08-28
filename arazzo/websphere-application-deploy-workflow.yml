@@ -11,8 +11,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: websphereAdminApi
-  url: ../openapi/websphere-admin-rest-api.yml
+- name: applicationsApi
+  url: ../openapi/websphere-applications-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: deploy-and-start-application

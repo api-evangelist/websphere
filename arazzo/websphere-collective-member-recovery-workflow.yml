@@ -11,8 +11,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: collectiveControllerApi
-  url: ../openapi/websphere-liberty-collective-controller-rest-api.yml
+- name: membersApi
+  url: ../openapi/websphere-members-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: recover-collective-member

@@ -11,8 +11,14 @@ info:
     be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: mqApi
-  url: ../openapi/websphere-mq-rest-api.yml
+- name: authenticationApi
+  url: ../openapi/websphere-authentication-api-openapi.yml
+  type: openapi
+- name: messagesApi
+  url: ../openapi/websphere-messages-api-openapi.yml
+  type: openapi
+- name: queuesApi
+  url: ../openapi/websphere-queues-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: send-message-and-verify

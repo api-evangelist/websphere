@@ -10,8 +10,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: websphereAdminApi
-  url: ../openapi/websphere-admin-rest-api.yml
+- name: resourcesApi
+  url: ../openapi/websphere-resources-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: check-datasource-connectivity
