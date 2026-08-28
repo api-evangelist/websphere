@@ -3,6 +3,18 @@ name: IBM WebSphere
 description: >-
   IBM WebSphere is a family of enterprise software products that provide middleware and application server capabilities
   for building, deploying, and managing enterprise applications.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -2726,6 +2738,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: CapabilityMap
+    url: capabilities/websphere-capability-edges.yml
+    name: IBM WebSphere Business Capability Map
   - type: AgenticAccess
     url: agentic-access/websphere-agentic-access.yml
   - type: VulnerabilityDisclosure

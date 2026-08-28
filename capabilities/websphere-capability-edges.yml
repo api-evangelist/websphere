@@ -1,0 +1,65 @@
+slug: websphere
+provider: IBM WebSphere
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Vulnerabilities
+  spec_file: websphere-vulnerabilities-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.75
+  evidence: GET /vulnerabilities  listVulnerabilities  List Vulnerabilities; POST /vulnerabilities/{vulnerabilityId}/resolve  resolveVulnerability
+  reason: Operations list, inspect and resolve vulnerabilities — vulnerability scanning/remediation surface,
+    mapping to Vulnerability Management. Context is thin (Open Liberty runtime) but the object is plainly
+    a security vulnerability.
+- tag: Applications
+  spec_file: websphere-applications-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.72
+  evidence: POST /applications  'Deploy a New Application'; DELETE /applications/{appName}  'Uninstall
+    an Application'; POST /applications/{appName}/restart
+  reason: Deploy, update, start/stop and uninstall deployed applications on an application server — application
+    lifecycle administration, i.e. IT Application Management.
+- tag: Security
+  spec_file: websphere-security-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: GET /security/users listUsers — List Security Users; GET /security/roles listRoles — List
+    Security Roles
+  reason: Enumerates security users and roles of the server registry — identity and access management,
+    albeit read-only.
+- tag: Clusters
+  spec_file: websphere-clusters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /clusters  'Create a Cluster'; POST /clusters/{clusterName}/members  'Add a Member to
+    a Cluster'
+  reason: Lifecycle and membership management of server clusters (collective) — compute infrastructure
+    management for the middleware estate.
+- tag: Monitoring
+  spec_file: websphere-monitoring-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: GET /monitoring/performance  getPerformanceData  Get Performance Monitoring Data
+  reason: Performance, health and server metrics retrieval for the running middleware — day-to-day IT
+    operations monitoring. Clearly infrastructure monitoring rather than any business monitoring domain.
