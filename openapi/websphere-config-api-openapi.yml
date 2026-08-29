@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Open Liberty APIs Applications Config API
+  title: Open Liberty Config API
   description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
   version: 24.0.0
   license:
@@ -104,6 +104,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     ServerConfig:
       type: object
       properties:
@@ -133,18 +145,6 @@ components:
                 type: integer
           example: []
       additionalProperties: true
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
   securitySchemes:
     basicAuth:
       type: http

@@ -1,19 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Open Liberty APIs Applications Servers API
-  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
-  version: 24.0.0
-  license:
-    name: Eclipse Public License 1.0
-    url: https://www.eclipse.org/legal/epl-v10.html
+  title: Websphere Servers API
   contact:
-    name: Open Liberty Community
-    url: https://openliberty.io/
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  version: '1.0'
+  description: 'Operations tagged Servers across 2 of this provider''s published API definitions: websphere-admin-rest-api.yml, websphere-automation-rest-api.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://localhost:9443
-  description: Default Open Liberty Server
-security:
-- basicAuth: []
+- url: https://localhost:9443/ibm/api
+  description: Default WebSphere Admin API Server
+- url: https://automation-api.example.com/v1
+  description: WebSphere Automation API Server
 tags:
 - name: Servers
   description: Server configuration and management
@@ -54,6 +54,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - basicAuth: []
     post:
       operationId: registerServer
       summary: Register a Server
@@ -148,6 +150,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /servers/{serverName}:
     get:
       operationId: getServer
@@ -186,6 +193,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /servers/{serverName}/start:
     post:
       operationId: startServer
@@ -217,6 +229,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /servers/{serverName}/stop:
     post:
       operationId: stopServer
@@ -248,6 +265,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /servers/{serverId}:
     get:
       operationId: getManagedServer
@@ -288,6 +310,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
     delete:
       operationId: deregisterServer
       summary: Deregister a Server
@@ -306,42 +330,93 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://automation-api.example.com/v1
+      description: WebSphere Automation API Server
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-  parameters:
-    serverName:
-      name: serverName
-      in: path
-      required: true
-      description: Server name
-      schema:
-        type: string
-    serverId:
-      name: serverId
-      in: path
-      required: true
-      description: Managed server identifier
-      schema:
-        type: string
   schemas:
+    ServerStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        message:
+          type: string
+          example: example_value
+    Server:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Server name
+          example: Example Title
+        nodeName:
+          type: string
+          description: Node where the server resides
+          example: example_value
+        clusterName:
+          type: string
+          description: Cluster membership
+          example: example_value
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          - UNKNOWN
+          example: STARTED
+        serverType:
+          type: string
+          enum:
+          - APPLICATION_SERVER
+          - WEB_SERVER
+          - PROXY_SERVER
+          - GENERIC_SERVER
+          example: APPLICATION_SERVER
+        pid:
+          type: integer
+          description: Process ID
+          example: '500123'
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              port:
+                type: integer
+              host:
+                type: string
+          example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     Error_2:
       type: object
       properties:
@@ -408,96 +483,55 @@ components:
             type: string
           description: List of installed fix IDs
           example: []
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
-    Server:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Server name
-          example: Example Title
-        nodeName:
-          type: string
-          description: Node where the server resides
-          example: example_value
-        clusterName:
-          type: string
-          description: Cluster membership
-          example: example_value
-        status:
-          type: string
-          enum:
-          - STARTED
-          - STOPPED
-          - STARTING
-          - STOPPING
-          - UNKNOWN
-          example: STARTED
-        serverType:
-          type: string
-          enum:
-          - APPLICATION_SERVER
-          - WEB_SERVER
-          - PROXY_SERVER
-          - GENERIC_SERVER
-          example: APPLICATION_SERVER
-        pid:
-          type: integer
-          description: Process ID
-          example: '500123'
-        ports:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              port:
-                type: integer
-              host:
-                type: string
-          example: []
-    ServerStatus:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        status:
-          type: string
-          enum:
-          - STARTED
-          - STOPPED
-          - STARTING
-          - STOPPING
-          example: STARTED
-        message:
-          type: string
-          example: example_value
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+  parameters:
+    serverName:
+      name: serverName
+      in: path
+      required: true
+      description: Server name
+      schema:
+        type: string
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic authentication
-    jwtAuth:
+      description: HTTP Basic authentication using WebSphere administrative credentials
+    ltpaToken:
+      type: apiKey
+      in: cookie
+      name: LtpaToken2
+      description: LTPA token-based authentication
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: MicroProfile JWT authentication
-externalDocs:
-  description: Open Liberty API Reference
-  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+      description: JWT Bearer token authentication
+x-refined-from:
+- websphere-admin-rest-api.yml
+- websphere-automation-rest-api.yml

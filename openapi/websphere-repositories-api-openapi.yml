@@ -1,17 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Open Liberty APIs Applications Repositories API
-  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
+  title: WebSphere Liberty Collective Controller REST Repositories API
+  description: API for managing Liberty collective environments, including member management, scaling, centralized administration, and cluster operations. Supports subscription-based notifications for API changes across collective members. The collective controller coordinates multiple Liberty servers for centralized management and workload distribution.
   version: 24.0.0
   license:
-    name: Eclipse Public License 1.0
-    url: https://www.eclipse.org/legal/epl-v10.html
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
   contact:
-    name: Open Liberty Community
-    url: https://openliberty.io/
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
 servers:
-- url: https://localhost:9443
-  description: Default Open Liberty Server
+- url: https://localhost:9443/ibm/api/collective
+  description: Default Liberty Collective Controller
 security:
 - basicAuth: []
 tags:
@@ -94,14 +94,14 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    BadRequest:
-      description: Bad request
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
@@ -141,12 +141,7 @@ components:
     basicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic authentication
-    jwtAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: MicroProfile JWT authentication
+      description: HTTP Basic authentication with administrator role
 externalDocs:
-  description: Open Liberty API Reference
-  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  description: Liberty Collective REST API Documentation
+  url: https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-collective-rest-api

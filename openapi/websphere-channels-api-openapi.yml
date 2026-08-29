@@ -1,19 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Open Liberty APIs Applications Channels API
-  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
-  version: 24.0.0
+  title: IBM MQ REST Channels API
+  description: 'REST API for IBM MQ messaging operations including sending and receiving messages, queue management, topic management, and monitoring. Supports both administration and messaging endpoints for point-to-point and publish-subscribe patterns. The API provides two main categories: the administrative REST API for managing MQ objects and the messaging REST API for sending and receiving messages.'
+  version: 9.3.0
   license:
-    name: Eclipse Public License 1.0
-    url: https://www.eclipse.org/legal/epl-v10.html
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
   contact:
-    name: Open Liberty Community
-    url: https://openliberty.io/
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
 servers:
-- url: https://localhost:9443
-  description: Default Open Liberty Server
+- url: https://localhost:9443/ibmmq/rest/v2
+  description: IBM MQ REST API v2 Server
 security:
 - basicAuth: []
+- tokenAuth: []
 tags:
 - name: Channels
   description: Channel administration
@@ -247,26 +248,56 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+    ChannelCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+          example: sender
+        description:
+          type: string
+          example: A sample description.
+        connectionName:
+          type: string
+          example: example_value
+        transmissionQueue:
+          type: string
+          example: example_value
     Channel:
       type: object
       properties:
@@ -310,55 +341,25 @@ components:
               - starting
               - stopping
           example: example_value
-    ChannelCreate:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          example: Example Title
-        type:
-          type: string
-          enum:
-          - sender
-          - receiver
-          - server
-          - requester
-          - serverConnection
-          - clusterSender
-          - clusterReceiver
-          - amqp
-          example: sender
-        description:
-          type: string
-          example: A sample description.
-        connectionName:
-          type: string
-          example: example_value
-        transmissionQueue:
-          type: string
-          example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              msgId:
-                type: string
-              explanation:
-                type: string
-              action:
-                type: string
-              message:
-                type: string
-          example: []
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     qmgrName:
       name: qmgrName
@@ -372,11 +373,11 @@ components:
       type: http
       scheme: basic
       description: HTTP Basic authentication
-    jwtAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: MicroProfile JWT authentication
+    tokenAuth:
+      type: apiKey
+      in: cookie
+      name: LtpaToken2
+      description: LTPA token authentication
 externalDocs:
-  description: Open Liberty API Reference
-  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+  description: IBM MQ REST API Documentation
+  url: https://www.ibm.com/docs/en/ibm-mq/9.3?topic=api-rest-reference

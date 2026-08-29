@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Open Liberty APIs Applications OpenAPI API
+  title: Open Liberty Open API
   description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
   version: 24.0.0
   license:

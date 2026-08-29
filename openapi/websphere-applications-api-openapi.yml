@@ -1,17 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Open Liberty APIs Applications API
-  description: Open Liberty provides application programming interfaces that extend and complement Jakarta EE and MicroProfile APIs. Includes APIs for security, admin connectors, batch processing, messaging, health checking, metrics, OpenAPI documentation, and more. Open Liberty is the open-source foundation for WebSphere Liberty.
-  version: 24.0.0
-  license:
-    name: Eclipse Public License 1.0
-    url: https://www.eclipse.org/legal/epl-v10.html
+  title: Websphere Applications API
   contact:
-    name: Open Liberty Community
-    url: https://openliberty.io/
+    name: IBM Support
+    url: https://www.ibm.com/mysupport
+  license:
+    name: IBM International License Agreement
+    url: https://www.ibm.com/legal/terms
+  version: '1.0'
+  description: 'Operations tagged Applications across 2 of this provider''s published API definitions: websphere-admin-rest-api.yml, websphere-liberty-admin-rest-api.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://localhost:9443
-  description: Default Open Liberty Server
+- url: https://localhost:9443/ibm/api
+  description: Default WebSphere Admin API Server
 security:
 - basicAuth: []
 tags:
@@ -144,6 +144,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /applications/{appName}:
     get:
       operationId: getApplication
@@ -257,6 +260,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /applications/{appName}/start:
     post:
       operationId: startApplication
@@ -302,6 +308,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /applications/{appName}/stop:
     post:
       operationId: stopApplication
@@ -333,6 +342,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default WebSphere Admin API Server
   /applications/{appName}/restart:
     post:
       operationId: restartApplication
@@ -369,27 +381,26 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://localhost:9443/ibm/api
+      description: Default Liberty Admin API Server
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     Application:
       type: object
       properties:
@@ -434,38 +445,6 @@ components:
           format: date-time
           description: Last modification timestamp
           example: '2026-01-15T10:30:00Z'
-    LibertyApplicationStatus:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        state:
-          type: string
-          enum:
-          - STARTED
-          - STOPPED
-          - STARTING
-          - STOPPING
-          example: STARTED
-        message:
-          type: string
-          example: example_value
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     ApplicationStatus:
       type: object
       properties:
@@ -483,6 +462,79 @@ components:
         message:
           type: string
           example: example_value
+    LibertyApplicationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        state:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        message:
+          type: string
+          example: example_value
+    LibertyApplication:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application name
+          example: Example Title
+        location:
+          type: string
+          description: Application file location
+          example: example_value
+        type:
+          type: string
+          enum:
+          - war
+          - ear
+          - eba
+          - rar
+          description: Application type
+          example: war
+        contextRoot:
+          type: string
+          description: Context root for web application
+          example: example_value
+        state:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - INSTALLED
+          - STARTING
+          - STOPPING
+          example: STARTED
+        autoStart:
+          type: boolean
+          description: Whether the application starts automatically
+          example: true
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     appName:
       name: appName
@@ -495,12 +547,12 @@ components:
     basicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic authentication
-    jwtAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: MicroProfile JWT authentication
-externalDocs:
-  description: Open Liberty API Reference
-  url: https://openliberty.io/docs/latest/reference/api/open-liberty-apis.html
+      description: HTTP Basic authentication using WebSphere administrative credentials
+    ltpaToken:
+      type: apiKey
+      in: cookie
+      name: LtpaToken2
+      description: LTPA token-based authentication
+x-refined-from:
+- websphere-admin-rest-api.yml
+- websphere-liberty-admin-rest-api.yml
