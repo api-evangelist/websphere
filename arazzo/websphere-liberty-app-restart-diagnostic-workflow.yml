@@ -11,8 +11,14 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: libertyAdminApi
-  url: ../openapi/websphere-liberty-admin-rest-api.yml
+- name: applicationsApi
+  url: ../openapi/websphere-applications-api-openapi.yml
+  type: openapi
+- name: monitoringApi
+  url: ../openapi/websphere-monitoring-api-openapi.yml
+  type: openapi
+- name: serverApi
+  url: ../openapi/websphere-server-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: restart-application-with-diagnostics
@@ -77,7 +83,7 @@ workflows:
     description: >-
       Run the MicroProfile Health check to confirm the server is reporting UP
       after the application restart.
-    operationId: getHealth
+    operationId: getHealthStatus
     successCriteria:
     - condition: $statusCode == 200
     outputs:
