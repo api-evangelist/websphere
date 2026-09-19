@@ -1645,6 +1645,8 @@ apis:
   humanURL: https://www.ibm.com/docs/en/was
   baseURL: https://localhost:9443/ibm/api
   tags:
+  - Node
+  tags_raw:
   - Nodes
   properties:
   - type: OpenAPI
@@ -2271,6 +2273,8 @@ apis:
   humanURL: https://www.ibm.com/docs/en/was
   baseURL: https://localhost:9443/ibm/api
   tags:
+  - Servers
+  tags_raw:
   - Server
   properties:
   - type: OpenAPI
@@ -2507,6 +2511,8 @@ apis:
   humanURL: https://www.ibm.com/docs/en/was
   baseURL: https://localhost:9443/ibm/api
   tags:
+  - Topic
+  tags_raw:
   - Topics
   properties:
   - type: OpenAPI
@@ -2663,6 +2669,8 @@ apis:
   humanURL: https://www.ibm.com/docs/en/was
   baseURL: service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
   tags:
+  - OpenAPI
+  tags_raw:
   - Open API
   properties:
   - type: OpenAPI
