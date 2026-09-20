@@ -1,51 +1,24 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: IBM WebSphere
-providerId: websphere
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
-tags:
-  - Application Server
-  - Cloud Native
-  - Enterprise Java
-  - J2EE
-  - Contact Sales
-description: IBM WebSphere is a family of Jakarta EE application servers (WebSphere Application Server,
-  WebSphere Liberty, WebSphere Hybrid Edition) sold under IBM commercial license. Programmatic surfaces
-  (admin REST, JMX, JAX-RS / MicroProfile hosting) ship inside the product and run inside the customer's
-  deployment — there is no public, self-serve API plan or per-call price. Acquisition is via IBM Passport
-  Advantage, IBM Cloud Paks, or IBM sales.
-notes: ibm.com pricing pages 403'd on automated fetch. No self-serve developer plans. Scaffold reduced
-  to one Contact Sales plan.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.ibm.com/products/websphere-hybrid-edition/pricing
 sources:
-  - https://www.ibm.com/products/websphere-application-server
+- https://www.ibm.com/products/websphere-hybrid-edition/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: Single indicative starting price; page notes prices may vary by country and exclude taxes.
+plan_count: 1
+currency: USD
 plans:
-  - id: websphere-contact-sales
-    name: Contact Sales
-    type: enterprise
-    description: IBM WebSphere license + support, available through Passport Advantage or as part of
-      Cloud Pak for Applications. Sized per PVU / VPC / Container core.
-    entries:
-      - label: WebSphere License
-        name: websphere_license
-        type: flat
-        metric: varies
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: see IBM Passport Advantage / Cloud Pak pricing
-        userMultiplied: false
-    elements:
-      - name: IBM Software Support
-      - name: WebSphere Software License
-      - name: Admin REST / JMX APIs (bundled)
-      - name: IBM Account Team
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Standard subscription
+  price_text: Starting at USD 759.00
+  price: 759
+  currency: USD
+  period: none
+  included_quota: 'Three deployment options: WebSphere Network Deployment (1 VPC of WAS ND), WebSphere
+    Base (4 VPCs), Liberty Core (8 VPCs)'

@@ -2747,6 +2747,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Plans
+    url: plans/websphere-plans-pricing.yml
   - type: Website
     url: https://www.ibm.com/
   - type: CapabilityMap
