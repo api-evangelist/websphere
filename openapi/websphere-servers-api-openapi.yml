@@ -336,24 +336,26 @@ paths:
     - url: https://automation-api.example.com/v1
       description: WebSphere Automation API Server
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
   schemas:
-    ServerStatus:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        status:
-          type: string
-          enum:
-          - STARTED
-          - STOPPED
-          - STARTING
-          - STOPPING
-          example: STARTED
-        message:
-          type: string
-          example: example_value
     Server:
       type: object
       properties:
@@ -417,18 +419,23 @@ components:
       required:
       - code
       - message
-    Error_2:
+    ServerStatus:
       type: object
       properties:
-        code:
+        name:
           type: string
-          example: example_value
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+          - STARTING
+          - STOPPING
+          example: STARTED
         message:
           type: string
           example: example_value
-      required:
-      - code
-      - message
     ManagedServer:
       type: object
       properties:
@@ -483,25 +490,18 @@ components:
             type: string
           description: List of installed fix IDs
           example: []
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
+    Error_2:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
   parameters:
     serverName:
       name: serverName

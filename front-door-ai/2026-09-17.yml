@@ -1,0 +1,44 @@
+# Front Door AI Index — websphere — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: websphere
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.ibm.com
+  final_host: www.ibm.com
+  ownership: shared
+  owner: ibm
+  shares_host_with:
+  - ibm
+  - ibm-api-connect
+  - ibm-app-connect
+  - ibm-db2
+  - ibm-mq
+  - ibm-quantum
+  - ibm-translate
+  - ibm-watson
+  - instana
+  - international-business-machines
+  - netezza
+  - openpages
+  - qradar
+  - streamsets
+  - turbonomic
+  - web-methods
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 24
+  density: null
+  words: 710
+  tiers:
+    agentic: 3
+    core: 21
+    model: 0
+  ambiguous: 6
+  top_terms:
+    AI: 21
+    agent: 4
+    AI agent: 3
+    automation: 2

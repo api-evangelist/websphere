@@ -354,40 +354,26 @@ paths:
     - url: https://localhost:9443/ibm/api/collective
       description: Default Liberty Collective Controller
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
   schemas:
-    ClusterStatus:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        status:
-          type: string
-          example: example_value
-        membersStarted:
-          type: integer
-          example: 10
-        membersTotal:
-          type: integer
-          example: 10
-        message:
-          type: string
-          example: example_value
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     Cluster:
       type: object
       properties:
@@ -420,12 +406,30 @@ components:
           type: boolean
           description: Whether to prefer local routing
           example: true
-    ClusterStatus_2:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    ClusterStatus:
       type: object
       properties:
         name:
           type: string
           example: Example Title
+        status:
+          type: string
+          example: example_value
         membersStarted:
           type: integer
           example: 10
@@ -435,43 +439,6 @@ components:
         message:
           type: string
           example: example_value
-    Error_2:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
-    CollectiveCluster:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Cluster name
-          example: Example Title
-        description:
-          type: string
-          description: Cluster description
-          example: A sample description.
-        memberCount:
-          type: integer
-          description: Number of members in the cluster
-          example: 10
-        membersStarted:
-          type: integer
-          description: Number of started members
-          example: 10
-        members:
-          type: array
-          items:
-            type: string
-          description: List of member server names
-          example: []
     CollectiveMember:
       type: object
       properties:
@@ -511,6 +478,58 @@ components:
           type: string
           description: Java version
           example: example_value
+    Error_2:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    CollectiveCluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cluster name
+          example: Example Title
+        description:
+          type: string
+          description: Cluster description
+          example: A sample description.
+        memberCount:
+          type: integer
+          description: Number of members in the cluster
+          example: 10
+        membersStarted:
+          type: integer
+          description: Number of started members
+          example: 10
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member server names
+          example: []
+    ClusterStatus_2:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        membersStarted:
+          type: integer
+          example: 10
+        membersTotal:
+          type: integer
+          example: 10
+        message:
+          type: string
+          example: example_value
   parameters:
     clusterName:
       name: clusterName
@@ -526,25 +545,6 @@ components:
       description: Collective member server name
       schema:
         type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
   securitySchemes:
     basicAuth:
       type: http

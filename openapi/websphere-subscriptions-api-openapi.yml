@@ -126,25 +126,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              msgId:
-                type: string
-              explanation:
-                type: string
-              action:
-                type: string
-              message:
-                type: string
-          example: []
     Subscription:
       type: object
       properties:
@@ -176,6 +157,25 @@ components:
           - durable
           - nonDurable
           example: durable
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
   responses:
     NotFound:
       description: Resource not found

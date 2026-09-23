@@ -45,7 +45,9 @@
     "websphere-subscriptions-api-openapi.yml",
     "websphere-topics-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -64,7 +66,9 @@
     "tag 'Monitoring' spans 2 source specs (websphere-admin-rest-api.yml, websphere-liberty-admin-rest-api.yml): per-path servers applied",
     "tag 'Servers' spans 2 source specs (websphere-admin-rest-api.yml, websphere-automation-rest-api.yml): per-path servers applied",
     "tag 'Notifications' spans 2 source specs (websphere-automation-rest-api.yml, websphere-liberty-rest-connector-api.yml): per-path servers applied",
-    "tag 'File Transfer' spans 2 source specs (websphere-liberty-admin-rest-api.yml, websphere-liberty-rest-connector-api.yml): per-path servers applied"
+    "tag 'File Transfer' spans 2 source specs (websphere-liberty-admin-rest-api.yml, websphere-liberty-rest-connector-api.yml): per-path servers applied",
+    "superseded outputs removed: websphere-open-api-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 35 total)"
   ],
   "skipped": [
     "websphere-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -89,7 +93,7 @@
     "websphere-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "websphere-nodes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "websphere-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "websphere-openapi-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "websphere-open-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "websphere-queue-manager-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "websphere-queues-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "websphere-repositories-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -335,81 +335,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              msgId:
-                type: string
-              explanation:
-                type: string
-              action:
-                type: string
-              message:
-                type: string
-          example: []
-    QueueUpdate:
-      type: object
-      properties:
-        description:
-          type: string
-          example: A sample description.
-        maxDepth:
-          type: integer
-          example: 10
-        maxMessageLength:
-          type: integer
-          example: 10
-        inhibitPut:
-          type: boolean
-          example: true
-        inhibitGet:
-          type: boolean
-          example: true
-    QueueCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Queue name
-          example: Example Title
-        type:
-          type: string
-          enum:
-          - local
-          - alias
-          - remote
-          - model
-          default: local
-          example: local
-        description:
-          type: string
-          example: A sample description.
-        maxDepth:
-          type: integer
-          default: 5000
-          example: 10
-        maxMessageLength:
-          type: integer
-          default: 4194304
-          example: 10
-        persistence:
-          type: object
-          properties:
-            default:
-              type: string
-              enum:
-              - persistent
-              - nonPersistent
-          example: example_value
     Queue:
       type: object
       properties:
@@ -485,15 +410,84 @@ components:
               type: string
               format: date-time
           example: example_value
+    QueueUpdate:
+      type: object
+      properties:
+        description:
+          type: string
+          example: A sample description.
+        maxDepth:
+          type: integer
+          example: 10
+        maxMessageLength:
+          type: integer
+          example: 10
+        inhibitPut:
+          type: boolean
+          example: true
+        inhibitGet:
+          type: boolean
+          example: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
+    QueueCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Queue name
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - local
+          - alias
+          - remote
+          - model
+          default: local
+          example: local
+        description:
+          type: string
+          example: A sample description.
+        maxDepth:
+          type: integer
+          default: 5000
+          example: 10
+        maxMessageLength:
+          type: integer
+          default: 4194304
+          example: 10
+        persistence:
+          type: object
+          properties:
+            default:
+              type: string
+              enum:
+              - persistent
+              - nonPersistent
+          example: example_value
   responses:
     NotFound:
       description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
       content:
         application/json:
           schema:
@@ -504,19 +498,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    queueName:
-      name: queueName
-      in: path
-      required: true
-      description: Queue name
-      schema:
-        type: string
     qmgrName:
       name: qmgrName
       in: path
       required: true
       description: Queue manager name
+      schema:
+        type: string
+    queueName:
+      name: queueName
+      in: path
+      required: true
+      description: Queue name
       schema:
         type: string
   securitySchemes:

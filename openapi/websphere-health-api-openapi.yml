@@ -274,6 +274,34 @@ components:
                 additionalProperties: true
                 description: Additional health check data
           example: []
+    OverallHealth:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - healthy
+          - warning
+          - critical
+          example: healthy
+        totalServers:
+          type: integer
+          example: 10
+        activeServers:
+          type: integer
+          example: 10
+        inactiveServers:
+          type: integer
+          example: 10
+        openVulnerabilities:
+          type: integer
+          example: 10
+        criticalVulnerabilities:
+          type: integer
+          example: 10
+        pendingFixes:
+          type: integer
+          example: 10
     Error:
       type: object
       properties:
@@ -337,42 +365,6 @@ components:
               message:
                 type: string
           example: []
-    OverallHealth:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - healthy
-          - warning
-          - critical
-          example: healthy
-        totalServers:
-          type: integer
-          example: 10
-        activeServers:
-          type: integer
-          example: 10
-        inactiveServers:
-          type: integer
-          example: 10
-        openVulnerabilities:
-          type: integer
-          example: 10
-        criticalVulnerabilities:
-          type: integer
-          example: 10
-        pendingFixes:
-          type: integer
-          example: 10
-  parameters:
-    serverId:
-      name: serverId
-      in: path
-      required: true
-      description: Managed server identifier
-      schema:
-        type: string
   responses:
     NotFound:
       description: Resource not found
@@ -386,6 +378,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

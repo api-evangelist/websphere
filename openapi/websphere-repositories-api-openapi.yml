@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: WebSphere Liberty Collective Controller REST Repositories API
+  title: WebSphere Liberty Collective Controller REST Repositories…
   description: API for managing Liberty collective environments, including member management, scaling, centralized administration, and cluster operations. Supports subscription-based notifications for API changes across collective members. The collective controller coordinates multiple Liberty servers for centralized management and workload distribution.
   version: 24.0.0
   license:
@@ -94,14 +94,14 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    Unauthorized:
-      description: Authentication required
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:

@@ -15,7 +15,7 @@ servers:
 security:
 - basicAuth: []
 tags:
-- name: OpenAPI
+- name: Open API
   description: MicroProfile OpenAPI documentation endpoints
 paths:
   /openapi:
@@ -24,7 +24,7 @@ paths:
       summary: Get Openapi Document
       description: Returns the OpenAPI document describing all deployed REST endpoints.
       tags:
-      - OpenAPI
+      - Open API
       security: []
       parameters:
       - name: format
@@ -66,7 +66,7 @@ paths:
       summary: Access the Openapi Ui
       description: Returns the Swagger UI for exploring and testing deployed REST endpoints.
       tags:
-      - OpenAPI
+      - Open API
       security: []
       responses:
         '200':

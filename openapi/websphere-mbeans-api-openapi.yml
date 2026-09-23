@@ -293,6 +293,25 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -306,37 +325,6 @@ components:
       required:
       - code
       - message
-    AttributeValue:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        value:
-          example: example_value
-        type:
-          type: string
-          example: example_value
-    MBeanInfo:
-      type: object
-      properties:
-        objectName:
-          type: string
-          description: JMX ObjectName
-          example: example_value
-        className:
-          type: string
-          description: MBean implementation class
-          example: example_value
-        description:
-          type: string
-          description: MBean description
-          example: A sample description.
-        URL:
-          type: string
-          format: uri
-          description: URL for accessing this MBean's details
-          example: https://www.example.com
     MBeanDetail:
       type: object
       properties:
@@ -409,6 +397,37 @@ components:
                 items:
                   type: string
           example: []
+    AttributeValue:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        value:
+          example: example_value
+        type:
+          type: string
+          example: example_value
+    MBeanInfo:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: JMX ObjectName
+          example: example_value
+        className:
+          type: string
+          description: MBean implementation class
+          example: example_value
+        description:
+          type: string
+          description: MBean description
+          example: A sample description.
+        URL:
+          type: string
+          format: uri
+          description: URL for accessing this MBean's details
+          example: https://www.example.com
   parameters:
     objectName:
       name: objectName
@@ -417,25 +436,6 @@ components:
       description: JMX ObjectName (URL-encoded)
       schema:
         type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

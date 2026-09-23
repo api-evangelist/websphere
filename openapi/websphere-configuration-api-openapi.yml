@@ -577,6 +577,61 @@ paths:
     - url: https://localhost:9443/ibm/api
       description: Default Liberty Admin API Server
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest_2:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    depth:
+      name: depth
+      in: query
+      description: Depth of nested resource retrieval
+      schema:
+        type: integer
+        default: 1
+        minimum: 0
+        maximum: 10
+    resourceType:
+      name: resourceType
+      in: path
+      required: true
+      description: The type of configuration resource
+      schema:
+        type: string
+    resourceId:
+      name: resourceId
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
   schemas:
     ConfigResource:
       type: object
@@ -722,61 +777,6 @@ components:
             $ref: '#/components/schemas/LibertyApplication'
           example: []
       additionalProperties: true
-  parameters:
-    resourceId:
-      name: resourceId
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
-    resourceType:
-      name: resourceType
-      in: path
-      required: true
-      description: The type of configuration resource
-      schema:
-        type: string
-    depth:
-      name: depth
-      in: query
-      description: Depth of nested resource retrieval
-      schema:
-        type: integer
-        default: 1
-        minimum: 0
-        maximum: 10
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest_2:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

@@ -141,13 +141,6 @@ paths:
     - url: https://localhost:9443/ibm/api
       description: Default Liberty Admin API Server
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     HealthStatus:
       type: object
@@ -182,21 +175,6 @@ components:
                 type: object
                 additionalProperties: true
           example: []
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     PerformanceData:
       type: object
       properties:
@@ -226,6 +204,21 @@ components:
                 - gauge
                 - average
           example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     Metrics:
       type: object
       properties:
@@ -278,6 +271,13 @@ components:
                 type: object
                 additionalProperties: true
           example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
