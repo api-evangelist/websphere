@@ -248,9 +248,17 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
@@ -261,8 +269,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -287,36 +295,6 @@ components:
               message:
                 type: string
           example: []
-    ChannelCreate:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          example: Example Title
-        type:
-          type: string
-          enum:
-          - sender
-          - receiver
-          - server
-          - requester
-          - serverConnection
-          - clusterSender
-          - clusterReceiver
-          - amqp
-          example: sender
-        description:
-          type: string
-          example: A sample description.
-        connectionName:
-          type: string
-          example: example_value
-        transmissionQueue:
-          type: string
-          example: example_value
     Channel:
       type: object
       properties:
@@ -360,14 +338,36 @@ components:
               - starting
               - stopping
           example: example_value
-  parameters:
-    qmgrName:
-      name: qmgrName
-      in: path
-      required: true
-      description: Queue manager name
-      schema:
-        type: string
+    ChannelCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - sender
+          - receiver
+          - server
+          - requester
+          - serverConnection
+          - clusterSender
+          - clusterReceiver
+          - amqp
+          example: sender
+        description:
+          type: string
+          example: A sample description.
+        connectionName:
+          type: string
+          example: example_value
+        transmissionQueue:
+          type: string
+          example: example_value
   securitySchemes:
     basicAuth:
       type: http

@@ -120,7 +120,7 @@ paths:
       description: Default Liberty Admin API Server
   /file/upload:
     post:
-      operationId: uploadFile
+      operationId: postFileUpload
       summary: Upload a File
       description: Uploads a file to the Liberty server file system.
       tags:
@@ -155,12 +155,14 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: uploadFile
     servers:
     - url: https://localhost:9443/IBMJMXConnectorREST/api
       description: Default Liberty JMX REST Connector
   /file/download:
     get:
-      operationId: downloadFile
+      operationId: getFileDownload
       summary: Download a File
       description: Downloads a file from the Liberty server file system.
       tags:
@@ -193,12 +195,14 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: downloadFile
     servers:
     - url: https://localhost:9443/IBMJMXConnectorREST/api
       description: Default Liberty JMX REST Connector
   /file/delete:
     delete:
-      operationId: deleteFile
+      operationId: deleteFileDelete
       summary: Delete a File
       description: Deletes a file from the Liberty server file system.
       tags:
@@ -221,13 +225,15 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteFile
     servers:
     - url: https://localhost:9443/IBMJMXConnectorREST/api
       description: Default Liberty JMX REST Connector
 components:
   responses:
-    BadRequest:
-      description: Bad request
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
@@ -238,8 +244,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:

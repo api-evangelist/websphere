@@ -354,26 +354,25 @@ paths:
     - url: https://localhost:9443/ibm/api/collective
       description: Default Liberty Collective Controller
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
   schemas:
+    ClusterStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          example: example_value
+        membersStarted:
+          type: integer
+          example: 10
+        membersTotal:
+          type: integer
+          example: 10
+        message:
+          type: string
+          example: example_value
     Cluster:
       type: object
       properties:
@@ -421,15 +420,12 @@ components:
       required:
       - code
       - message
-    ClusterStatus:
+    ClusterStatus_2:
       type: object
       properties:
         name:
           type: string
           example: Example Title
-        status:
-          type: string
-          example: example_value
         membersStarted:
           type: integer
           example: 10
@@ -515,21 +511,25 @@ components:
             type: string
           description: List of member server names
           example: []
-    ClusterStatus_2:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        membersStarted:
-          type: integer
-          example: 10
-        membersTotal:
-          type: integer
-          example: 10
-        message:
-          type: string
-          example: example_value
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
   parameters:
     clusterName:
       name: clusterName

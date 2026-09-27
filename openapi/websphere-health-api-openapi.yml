@@ -274,6 +274,18 @@ components:
                 additionalProperties: true
                 description: Additional health check data
           example: []
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     OverallHealth:
       type: object
       properties:
@@ -302,18 +314,6 @@ components:
         pendingFixes:
           type: integer
           example: 10
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     ServerHealth:
       type: object
       properties:
@@ -366,14 +366,14 @@ components:
                 type: string
           example: []
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

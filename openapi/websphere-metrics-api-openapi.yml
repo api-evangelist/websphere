@@ -170,6 +170,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     MetricsResponse:
       type: object
       additionalProperties:
@@ -196,18 +208,6 @@ components:
             type: object
             additionalProperties:
               type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
   responses:
     Unauthorized:
       description: Authentication required

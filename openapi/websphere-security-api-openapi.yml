@@ -96,7 +96,32 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    User:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: '500123'
+        displayName:
+          type: string
+          example: example_value
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        groups:
+          type: array
+          items:
+            type: string
+          example: []
     SecurityRole:
       type: object
       properties:
@@ -131,31 +156,6 @@ components:
       required:
       - code
       - message
-    User:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: '500123'
-        displayName:
-          type: string
-          example: example_value
-        email:
-          type: string
-          format: email
-          example: user@example.com
-        groups:
-          type: array
-          items:
-            type: string
-          example: []
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
