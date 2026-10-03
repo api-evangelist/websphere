@@ -96,13 +96,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     User:
       type: object
@@ -117,25 +110,6 @@ components:
           type: string
           format: email
           example: user@example.com
-        groups:
-          type: array
-          items:
-            type: string
-          example: []
-    SecurityRole:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        description:
-          type: string
-          example: A sample description.
-        users:
-          type: array
-          items:
-            type: string
-          example: []
         groups:
           type: array
           items:
@@ -156,6 +130,32 @@ components:
       required:
       - code
       - message
+    SecurityRole:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        users:
+          type: array
+          items:
+            type: string
+          example: []
+        groups:
+          type: array
+          items:
+            type: string
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

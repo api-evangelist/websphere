@@ -384,70 +384,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    BatchJobInstance:
+    Error:
       type: object
       properties:
-        jobInstanceId:
-          type: integer
-          example: '500123'
-        jobName:
+        code:
           type: string
           example: example_value
-        appName:
+        message:
           type: string
           example: example_value
-        submitter:
-          type: string
-          example: example_value
-        batchStatus:
-          type: string
-          enum:
-          - STARTING
-          - STARTED
-          - STOPPING
-          - STOPPED
-          - FAILED
-          - COMPLETED
-          - ABANDONED
-          example: STARTING
-        createTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        lastUpdatedTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        jobParameters:
-          type: object
-          additionalProperties:
-            type: string
-          example: example_value
-        _links:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-                format: uri
-          example: []
+      required:
+      - code
+      - message
     BatchJobExecution:
       type: object
       properties:
@@ -531,18 +480,69 @@ components:
               writeSkipCount:
                 type: integer
           example: []
-    Error:
+    BatchJobInstance:
       type: object
       properties:
-        code:
+        jobInstanceId:
+          type: integer
+          example: '500123'
+        jobName:
           type: string
           example: example_value
-        message:
+        appName:
           type: string
           example: example_value
-      required:
-      - code
-      - message
+        submitter:
+          type: string
+          example: example_value
+        batchStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - STOPPING
+          - STOPPED
+          - FAILED
+          - COMPLETED
+          - ABANDONED
+          example: STARTING
+        createTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        lastUpdatedTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        jobParameters:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        _links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+                format: uri
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

@@ -365,6 +365,14 @@ components:
               message:
                 type: string
           example: []
+  parameters:
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Authentication required
@@ -378,14 +386,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    serverId:
-      name: serverId
-      in: path
-      required: true
-      description: Managed server identifier
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

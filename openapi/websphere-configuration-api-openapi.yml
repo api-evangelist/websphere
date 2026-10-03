@@ -577,31 +577,22 @@ paths:
     - url: https://localhost:9443/ibm/api
       description: Default Liberty Admin API Server
 components:
-  parameters:
-    resourceType:
-      name: resourceType
-      in: path
-      required: true
-      description: The type of configuration resource
-      schema:
-        type: string
-    depth:
-      name: depth
-      in: query
-      description: Depth of nested resource retrieval
-      schema:
-        type: integer
-        default: 1
-        minimum: 0
-        maximum: 10
-    resourceId:
-      name: resourceId
-      in: path
-      required: true
-      description: The unique identifier of the resource
-      schema:
-        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     ConfigResource:
       type: object
       properties:
@@ -646,69 +637,6 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
-    ServerConfig:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Server description
-          example: A sample description.
-        featureManager:
-          type: object
-          properties:
-            feature:
-              type: array
-              items:
-                type: string
-              description: List of enabled features
-          example: example_value
-        httpEndpoint:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              host:
-                type: string
-              httpPort:
-                type: integer
-              httpsPort:
-                type: integer
-          example: []
-        application:
-          type: array
-          items:
-            $ref: '#/components/schemas/LibertyApplication'
-          example: []
-      additionalProperties: true
-    ConfigElement:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier
-          example: '500123'
-        configElementName:
-          type: string
-          description: Configuration element type name
-          example: example_value
-      additionalProperties: true
     LibertyApplication:
       type: object
       properties:
@@ -746,7 +674,85 @@ components:
           type: boolean
           description: Whether the application starts automatically
           example: true
+    ConfigElement:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier
+          example: '500123'
+        configElementName:
+          type: string
+          description: Configuration element type name
+          example: example_value
+      additionalProperties: true
+    ServerConfig:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Server description
+          example: A sample description.
+        featureManager:
+          type: object
+          properties:
+            feature:
+              type: array
+              items:
+                type: string
+              description: List of enabled features
+          example: example_value
+        httpEndpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              host:
+                type: string
+              httpPort:
+                type: integer
+              httpsPort:
+                type: integer
+          example: []
+        application:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibertyApplication'
+          example: []
+      additionalProperties: true
+  parameters:
+    resourceId:
+      name: resourceId
+      in: path
+      required: true
+      description: The unique identifier of the resource
+      schema:
+        type: string
+    depth:
+      name: depth
+      in: query
+      description: Depth of nested resource retrieval
+      schema:
+        type: integer
+        default: 1
+        minimum: 0
+        maximum: 10
+    resourceType:
+      name: resourceType
+      in: path
+      required: true
+      description: The type of configuration resource
+      schema:
+        type: string
   responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication required
       content:
@@ -755,12 +761,6 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Insufficient permissions
       content:
         application/json:
           schema:

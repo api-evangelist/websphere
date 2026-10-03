@@ -385,51 +385,7 @@ paths:
     - url: https://localhost:9443/ibm/api
       description: Default Liberty Admin API Server
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    appName:
-      name: appName
-      in: path
-      required: true
-      description: Application name
-      schema:
-        type: string
   schemas:
-    ApplicationStatus:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        status:
-          type: string
-          enum:
-          - started
-          - stopped
-          - starting
-          - stopping
-          example: started
-        message:
-          type: string
-          example: example_value
     Error:
       type: object
       properties:
@@ -489,6 +445,23 @@ components:
           format: date-time
           description: Last modification timestamp
           example: '2026-01-15T10:30:00Z'
+    ApplicationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        message:
+          type: string
+          example: example_value
     LibertyApplicationStatus:
       type: object
       properties:
@@ -543,6 +516,33 @@ components:
           type: boolean
           description: Whether the application starts automatically
           example: true
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    appName:
+      name: appName
+      in: path
+      required: true
+      description: Application name
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

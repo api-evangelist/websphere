@@ -232,6 +232,12 @@ paths:
       description: Default Liberty JMX REST Connector
 components:
   responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication required
       content:
@@ -240,12 +246,6 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
       content:
         application/json:
           schema:

@@ -267,40 +267,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    qmgrName:
-      name: qmgrName
-      in: path
-      required: true
-      description: Queue manager name
-      schema:
-        type: string
-    queueName:
-      name: queueName
-      in: path
-      required: true
-      description: Queue name
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -362,6 +328,40 @@ components:
           type: string
           description: Message format
           example: example_value
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+    queueName:
+      name: queueName
+      in: path
+      required: true
+      description: Queue name
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

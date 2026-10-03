@@ -334,22 +334,26 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    qmgrName:
-      name: qmgrName
-      in: path
-      required: true
-      description: Queue manager name
-      schema:
-        type: string
-    queueName:
-      name: queueName
-      in: path
-      required: true
-      description: Queue name
-      schema:
-        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
     Queue:
       type: object
       properties:
@@ -463,25 +467,6 @@ components:
               - persistent
               - nonPersistent
           example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              msgId:
-                type: string
-              explanation:
-                type: string
-              action:
-                type: string
-              message:
-                type: string
-          example: []
     QueueUpdate:
       type: object
       properties:
@@ -519,6 +504,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    qmgrName:
+      name: qmgrName
+      in: path
+      required: true
+      description: Queue manager name
+      schema:
+        type: string
+    queueName:
+      name: queueName
+      in: path
+      required: true
+      description: Queue name
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

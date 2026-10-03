@@ -218,34 +218,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    memberName:
-      name: memberName
-      in: path
-      required: true
-      description: Collective member server name
-      schema:
-        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     CollectiveMember:
       type: object
       properties:
@@ -285,18 +270,6 @@ components:
           type: string
           description: Java version
           example: example_value
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     MemberStatus:
       type: object
       properties:
@@ -314,6 +287,33 @@ components:
         message:
           type: string
           example: example_value
+  parameters:
+    memberName:
+      name: memberName
+      in: path
+      required: true
+      description: Collective member server name
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
