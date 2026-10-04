@@ -152,6 +152,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -168,28 +181,6 @@ components:
       required:
       - code
       - message
-    LogMessage:
-      type: object
-      properties:
-        datetime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        level:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        logger:
-          type: string
-          example: example_value
-        thread:
-          type: string
-          example: example_value
-        sequence:
-          type: string
-          example: example_value
     LoggingConfig:
       type: object
       properties:
@@ -226,19 +217,28 @@ components:
           type: integer
           description: Maximum number of log files
           example: 10
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    LogMessage:
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        level:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        logger:
+          type: string
+          example: example_value
+        thread:
+          type: string
+          example: example_value
+        sequence:
+          type: string
+          example: example_value
   securitySchemes:
     basicAuth:
       type: http

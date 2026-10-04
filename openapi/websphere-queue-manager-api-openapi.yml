@@ -101,6 +101,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              msgId:
+                type: string
+              explanation:
+                type: string
+              action:
+                type: string
+              message:
+                type: string
+          example: []
     QueueManager:
       type: object
       properties:
@@ -138,25 +157,6 @@ components:
           type: integer
           description: Maximum message length in bytes
           example: 10
-    Error:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              msgId:
-                type: string
-              explanation:
-                type: string
-              action:
-                type: string
-              message:
-                type: string
-          example: []
   responses:
     Unauthorized:
       description: Authentication required

@@ -274,18 +274,6 @@ components:
                 additionalProperties: true
                 description: Additional health check data
           example: []
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     OverallHealth:
       type: object
       properties:
@@ -314,6 +302,18 @@ components:
         pendingFixes:
           type: integer
           example: 10
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     ServerHealth:
       type: object
       properties:

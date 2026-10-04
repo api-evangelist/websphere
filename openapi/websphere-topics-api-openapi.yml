@@ -182,6 +182,25 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -202,6 +221,28 @@ components:
               message:
                 type: string
           example: []
+    TopicCreate:
+      type: object
+      required:
+      - name
+      - topicString
+      properties:
+        name:
+          type: string
+          example: Example Title
+        topicString:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        type:
+          type: string
+          enum:
+          - local
+          - cluster
+          default: local
+          example: local
     Topic:
       type: object
       properties:
@@ -240,47 +281,6 @@ components:
           - allowed
           - inhibited
           example: allowed
-    TopicCreate:
-      type: object
-      required:
-      - name
-      - topicString
-      properties:
-        name:
-          type: string
-          example: Example Title
-        topicString:
-          type: string
-          example: example_value
-        description:
-          type: string
-          example: A sample description.
-        type:
-          type: string
-          enum:
-          - local
-          - cluster
-          default: local
-          example: local
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     qmgrName:
       name: qmgrName

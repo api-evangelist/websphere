@@ -2669,8 +2669,6 @@ apis:
   humanURL: https://www.ibm.com/docs/en/was
   baseURL: service:jmx:rmi:///jndi/rmi://localhost:2809/jmxrmi
   tags:
-  - OpenAPI
-  tags_raw:
   - Open API
   properties:
   - type: OpenAPI

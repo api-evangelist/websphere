@@ -355,21 +355,6 @@ paths:
       description: Default Liberty Collective Controller
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     ClusterStatus:
       type: object
       properties:
@@ -420,6 +405,36 @@ components:
           type: boolean
           description: Whether to prefer local routing
           example: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    ClusterStatus_2:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        membersStarted:
+          type: integer
+          example: 10
+        membersTotal:
+          type: integer
+          example: 10
+        message:
+          type: string
+          example: example_value
     Error_2:
       type: object
       properties:
@@ -432,6 +447,31 @@ components:
       required:
       - code
       - message
+    CollectiveCluster:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Cluster name
+          example: Example Title
+        description:
+          type: string
+          description: Cluster description
+          example: A sample description.
+        memberCount:
+          type: integer
+          description: Number of members in the cluster
+          example: 10
+        membersStarted:
+          type: integer
+          description: Number of started members
+          example: 10
+        members:
+          type: array
+          items:
+            type: string
+          description: List of member server names
+          example: []
     CollectiveMember:
       type: object
       properties:
@@ -471,46 +511,21 @@ components:
           type: string
           description: Java version
           example: example_value
-    ClusterStatus_2:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        membersStarted:
-          type: integer
-          example: 10
-        membersTotal:
-          type: integer
-          example: 10
-        message:
-          type: string
-          example: example_value
-    CollectiveCluster:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Cluster name
-          example: Example Title
-        description:
-          type: string
-          description: Cluster description
-          example: A sample description.
-        memberCount:
-          type: integer
-          description: Number of members in the cluster
-          example: 10
-        membersStarted:
-          type: integer
-          description: Number of started members
-          example: 10
-        members:
-          type: array
-          items:
-            type: string
-          description: List of member server names
-          example: []
+  parameters:
+    clusterName:
+      name: clusterName
+      in: path
+      required: true
+      description: Cluster name
+      schema:
+        type: string
+    memberName:
+      name: memberName
+      in: path
+      required: true
+      description: Collective member server name
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Authentication required
@@ -530,21 +545,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error_2'
-  parameters:
-    clusterName:
-      name: clusterName
-      in: path
-      required: true
-      description: Cluster name
-      schema:
-        type: string
-    memberName:
-      name: memberName
-      in: path
-      required: true
-      description: Collective member server name
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

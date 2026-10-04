@@ -91,6 +91,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -129,19 +142,6 @@ components:
             type: string
           description: Members on this host
           example: []
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
