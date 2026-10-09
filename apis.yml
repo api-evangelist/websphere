@@ -2745,6 +2745,10 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: RateLimits
+    url: rate-limits/websphere-rate-limits.yml
+  - type: FinOps
+    url: finops/websphere-finops.yml
   - type: Plans
     url: plans/websphere-plans-pricing.yml
   - type: Website
