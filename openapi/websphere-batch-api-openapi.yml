@@ -385,6 +385,68 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
+    BatchJobInstance:
+      type: object
+      properties:
+        jobInstanceId:
+          type: integer
+          example: '500123'
+        jobName:
+          type: string
+          example: example_value
+        appName:
+          type: string
+          example: example_value
+        submitter:
+          type: string
+          example: example_value
+        batchStatus:
+          type: string
+          enum:
+          - STARTING
+          - STARTED
+          - STOPPING
+          - STOPPED
+          - FAILED
+          - COMPLETED
+          - ABANDONED
+          example: STARTING
+        createTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        lastUpdatedTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        jobParameters:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        _links:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+                format: uri
+          example: []
     BatchJobExecution:
       type: object
       properties:
@@ -468,77 +530,15 @@ components:
               writeSkipCount:
                 type: integer
           example: []
-    BatchJobInstance:
-      type: object
-      properties:
-        jobInstanceId:
-          type: integer
-          example: '500123'
-        jobName:
-          type: string
-          example: example_value
-        appName:
-          type: string
-          example: example_value
-        submitter:
-          type: string
-          example: example_value
-        batchStatus:
-          type: string
-          enum:
-          - STARTING
-          - STARTED
-          - STOPPING
-          - STOPPED
-          - FAILED
-          - COMPLETED
-          - ABANDONED
-          example: STARTING
-        createTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        lastUpdatedTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        jobParameters:
-          type: object
-          additionalProperties:
-            type: string
-          example: example_value
-        _links:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-                format: uri
-          example: []
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
   responses:
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:

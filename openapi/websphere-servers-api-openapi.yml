@@ -336,7 +336,37 @@ paths:
     - url: https://automation-api.example.com/v1
       description: WebSphere Automation API Server
 components:
+  parameters:
+    serverName:
+      name: serverName
+      in: path
+      required: true
+      description: Server name
+      schema:
+        type: string
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Managed server identifier
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+        details:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
     Server:
       type: object
       properties:
@@ -385,21 +415,6 @@ components:
               host:
                 type: string
           example: []
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-        details:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     ServerStatus:
       type: object
       properties:
@@ -483,30 +498,15 @@ components:
             type: string
           description: List of installed fix IDs
           example: []
-  parameters:
-    serverName:
-      name: serverName
-      in: path
-      required: true
-      description: Server name
-      schema:
-        type: string
-    serverId:
-      name: serverId
-      in: path
-      required: true
-      description: Managed server identifier
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:

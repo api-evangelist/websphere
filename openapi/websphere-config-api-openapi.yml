@@ -104,18 +104,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example_value
-        message:
-          type: string
-          example: example_value
-      required:
-      - code
-      - message
     ServerConfig:
       type: object
       properties:
@@ -145,6 +133,18 @@ components:
                 type: integer
           example: []
       additionalProperties: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example_value
+        message:
+          type: string
+          example: example_value
+      required:
+      - code
+      - message
   securitySchemes:
     basicAuth:
       type: http
