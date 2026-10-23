@@ -1,0 +1,25 @@
+generated: '2026-10-22'
+method: searched
+checked:
+- chef-software/integrations/chef-software-integration-edges.yml
+source:
+- chef-software/integrations/chef-software-integration-edges.yml
+edges:
+- partner_name: Chef Software (chef-supermarket)
+  partner: chef-software
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: chef-supermarket
+  evidence: https://supermarket.chef.io/cookbooks/application_wlp
+  mirror_of: chef-software/integrations/chef-software-integration-edges.yml
+  apps:
+  - application_wlp
+  - wlp
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: configuration-management content listing (Chef cookbook)
